@@ -1,45 +1,51 @@
+# Logs
+logs/
 *.log
-node_modules/
-dist/
-.env
-.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules
+client/node_modules/
+server/node_modules/
+
+# Build directories
+client/dist/
+server/build/
+dist-ssr/
+
+# Local Environment files
+server/.env
+client/.env
+*.local
+
+# Miscellaneous
+*.log
 build/
 coverage/
-.vscode/
-.idea/
 .nyc_output/
+*.pid
+*.swp
+*.tmp
+*.bak
+*.backup
+.sass-cache/
+*.lock
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
 *.sublime-workspace
 *.sublime-project
 
 # OS-specific files
 Thumbs.db
 .DS_Store
-
-# Log files
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Dependencies
-client/node_modules/
-server/node_modules/
-
-# Vite build files
-client/dist/
-
-# Environment variables
-server/.env
-client/.env
-
-# Debug files
-*.pid
-
-# Miscellaneous
-*.swp
-*.tmp
-*.bak
-*.backup
-*.sass-cache/
-*.lock
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
