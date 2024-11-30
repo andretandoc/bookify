@@ -168,8 +168,8 @@ footer a:hover {
                          /* Buttoooonnnnss */
 /******************************************************************/
 
-/* Big Double Button --Landing Page Style */
-.double-square-btn {
+/* Big Red Buttons --Landing Page Style */
+.double-red-btn {
     display: inline-block;
     width: 440px; 
     height: 154px; 
@@ -187,10 +187,27 @@ footer a:hover {
     transition: all 0.2s ease; 
 }
 /* Pressing Effect */
-.double-square-btn:active {
+.double-red-btn:active {
     box-shadow: 0px 0px 0px #9e0918; /* Removes shadow on press */
     transform: translateY(4px); /* Moves the button down */
 }
+
+/*Smol sign in button   WORK IN PROGRESS WILL BE FIXED SOON!*/
+.small-btn{
+    display: inline-block;
+    width: 156; 
+    height: 39px; 
+    position: relative;
+    background-color: rgba(198, 22, 39, 1);
+    border: transparent;
+    color: white;
+    font-size: 15px;
+    font:'Lato';
+    font-weight: 100;
+
+}
+
+
 
 /**/
 
