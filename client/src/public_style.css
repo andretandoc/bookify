@@ -90,8 +90,8 @@ header nav a::before {
     content: '';
     position: absolute;
     bottom: 5%; 
-    left: 0;
-    width: 100%;
+    left: 12%;
+    width: 75%;
     height: 80%; 
     background-color: #c61627; 
     transform: scaleY(0); /* Initially hidden */
@@ -138,4 +138,62 @@ footer a {
 
 footer a:hover {
     color: #c61627; 
+}
+
+
+/* Responsive Styling for Small Screens */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Stack header elements */
+        align-items: flex-start;
+        padding: 10px 20px;
+    }
+
+    header .logo {
+        justify-content: center; /* Center logo */
+        padding-left: 0;
+    }
+
+    header .logo img {
+        height: 50px; /* Reduce logo size */
+    }
+
+    header .logo .tool-name {
+        font-size: 20px; /* Smaller font size */
+    }
+
+    header nav a {
+        padding: 15px 10px; /* Reduce padding for smaller screens */
+        font-size: 12px; /* Smaller font size for links */
+    }
+
+    footer {
+        flex-direction: column; /* Stack footer links */
+        text-align: center;
+        padding: 15px;
+    }
+
+    footer a {
+        font-size: 10px; /* Reduce footer link size */
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+    header .logo img {
+        height: 40px; /* Further reduce logo size */
+    }
+
+    header nav a {
+        font-size: 10px; /* Smaller font size for very small screens */
+        padding: 10px 5px; /* Compact padding */
+    }
+
+    footer {
+        padding: 10px;
+    }
+
+    footer a {
+        font-size: 9px; /* Very small footer link size */
+    }
 }
