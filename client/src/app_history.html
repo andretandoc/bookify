@@ -16,7 +16,7 @@
                 align-items: center;
                 position: relative;
                 max-width: 100%;
-                top: 10%; /* Position at the middle vertically */
+                top: 10%; 
             }
 
             .title {
@@ -60,8 +60,8 @@
             input[type="text"]:focus {
                 color: white;
                 font-size: medium;
-                outline: none; /* Removes default outline */
-                transition: background-color 0.5s ease; /* Smooth transition */
+                outline: none; 
+                transition: background-color 0.5s ease; 
             }
 
             input[type=date] {
@@ -102,7 +102,6 @@
         </style>
     </head>
 
-
     <body>
         <div class="form" id="form">
             <h1 class="title">Appointment History</h1>
@@ -121,22 +120,20 @@
             </form>
         </div>
 
-    
+
         <script>
             const form = document.getElementById('appointmentForm');
             const formContainer = document.getElementById('form');
 
             form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission behavior
+                event.preventDefault(); 
 
-                // Example appointments (in a real app, fetch these from a server)
                 const appointments = [
                     "Meeting with Dr. Smith on 2023-12-01",
                     "Checkup on 2023-12-15",
                     "Consultation on 2024-01-10"
                 ];
 
-                // Clear the formContainer and display appointments
                 formContainer.innerHTML = `
                     <h1>Your Appointments:</h1>
                     <ul>
@@ -145,10 +142,9 @@
                     <button class="go-back" id="goBackButton">Go Back</button>
                 `;
 
-                // Add functionality to the "Go Back" button
                 const goBackButton = document.getElementById('goBackButton');
                 goBackButton.addEventListener('click', function() {
-                    location.reload(); // Reload the page to reset the form
+                    location.reload();
                 });
             });
         </script>
