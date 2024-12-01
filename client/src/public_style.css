@@ -1,5 +1,6 @@
-/*Importing Arvo*/
+/*Importing Arvo & all its weights*/
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 
 
 body, html {
@@ -11,10 +12,25 @@ body, html {
 }
 
 body {
-    /* Background image and styling */
-    background: url('McGill-Background.jpeg') no-repeat center center fixed;
+
+    background: url('client/src/McGill-Background.jpeg') no-repeat center center fixed;
     background-size: cover;
     position: relative;
+    min-height: 100vh; 
+    margin: 0; 
+    padding: 0 15px; 
+    display: flex; 
+    flex-direction: column; 
+    box-sizing: border-box; 
+}
+/* Content Wrapper to align the main content */
+.content-wrapper {
+    flex: 1; /* Ensures the wrapper expands to fill available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
 }
 
 /* Add a black transparent filter over the image */
@@ -25,15 +41,21 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Black filter with 60% transparency */
+    background-color: rgba(0, 0, 0, 0.74); 
     z-index: -1; /* Keep the overlay behind all other content */
 }
+
+/******************************************************************/
+                         /* Header Stuff */
+/******************************************************************/
 
 /* Header Styling */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: auto;
+    margin-left: auto;
     padding: 10px 30px;
     width: 90%;
     position: relative;
@@ -69,9 +91,9 @@ header .logo img {
 
 /* Tool Name Styling */
 header .logo .tool-name {
-    font-family: 'Arvo'; /* Apply Arvo font */
-    font-size: 25px; /* Adjust size as needed */
-    color: white; /* White text to match the header */
+    font-family: 'Arvo'; 
+    font-size: 25px; 
+    color: white; 
     font-weight: 100;
 }
 
@@ -81,6 +103,7 @@ header nav a {
     color: white; 
     font-size: 14px; 
     position: relative; 
+    margin-right: 1px;
     padding: 35px;
     transition: color 0.3s ease; 
 }
@@ -89,12 +112,12 @@ header nav a {
 header nav a::before {
     content: '';
     position: absolute;
-    bottom: 5%; 
+    bottom: 7%; 
     left: 12%;
     width: 75%;
     height: 80%; 
     background-color: #c61627; 
-    transform: scaleY(0); /* Initially hidden */
+    transform: scaleY(0); 
     transform-origin: bottom; /* Animation starts from the bottom */
     transition: transform 0.3s ease; 
     z-index: -1; 
@@ -105,11 +128,33 @@ header nav a:hover::before,
 header nav a:focus::before {
     transform: scaleY(1); 
 }
+
+/*Profile Icon Styling*/
+header .profile-icon {
+    font-size: 23px;
+    padding-right: 18px; 
+    color: #9e0918; /* Icon color */
+    cursor: pointer; /* Makes the icon clickable */
+    transition: color 0.3s ease; /* Add smooth hover effect */
+}
+
+/* Hover Effect for Profile Icon */
+header .profile-icon:hover {
+    color: white; /* Change color on hover */
+}
+
+
+/******************************************************************/
+                         /* Footer Stuff */
+/******************************************************************/
+
 /* Footer Styling */
 footer {
     display: flex;
     justify-content: center; 
     align-items: center;
+    margin-right: auto;
+    margin-left: auto;
     padding: 10px 30px; 
     width: 90%; 
     position: relative;
@@ -140,60 +185,62 @@ footer a:hover {
     color: #c61627; 
 }
 
+/******************************************************************/
+                         /* Buttoooonnnnss */
+/******************************************************************/
 
-/* Responsive Styling for Small Screens */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column; /* Stack header elements */
-        align-items: flex-start;
-        padding: 10px 20px;
-    }
-
-    header .logo {
-        justify-content: center; /* Center logo */
-        padding-left: 0;
-    }
-
-    header .logo img {
-        height: 50px; /* Reduce logo size */
-    }
-
-    header .logo .tool-name {
-        font-size: 20px; /* Smaller font size */
-    }
-
-    header nav a {
-        padding: 15px 10px; /* Reduce padding for smaller screens */
-        font-size: 12px; /* Smaller font size for links */
-    }
-
-    footer {
-        flex-direction: column; /* Stack footer links */
-        text-align: center;
-        padding: 15px;
-    }
-
-    footer a {
-        font-size: 10px; /* Reduce footer link size */
-    }
+/* Big Red Buttons --Landing Page Style */
+.double-red-btn {
+    display: inline-block;
+    width: 440px; 
+    height: 154px; 
+    position: relative;
+    background-color: rgba(198, 22, 39, 0.9);
+    border: transparent;
+    box-shadow: -10px -10px 1px rgba(158, 9, 24, 0.8); /* Shadow for the 3D effect with back square color */
+    color: white;
+    font-size: 19.7px;
+    font:'Lato';
+    font-weight: 500;
+    text-align: center;
+    line-height: 50px; 
+    cursor: pointer;
+    transition: all 0.2s ease; 
+}
+/*hovver*/
+.double-red-btn:hover{
+    background-color: rgba(198, 22, 39, 1);
+}
+/* Pressing Effect */
+.double-red-btn:active {
+    box-shadow: 0px 0px 0px #9e0918; /* Removes shadow on press */
+    transform: translateY(4px); /* Moves the button down */
 }
 
-/* Extra Small Screens */
-@media (max-width: 480px) {
-    header .logo img {
-        height: 40px; /* Further reduce logo size */
-    }
-
-    header nav a {
-        font-size: 10px; /* Smaller font size for very small screens */
-        padding: 10px 5px; /* Compact padding */
-    }
-
-    footer {
-        padding: 10px;
-    }
-
-    footer a {
-        font-size: 9px; /* Very small footer link size */
-    }
+/*Smol button*/
+.small-btn{
+    display: inline-block;
+    width: 150px; 
+    height: 31px; 
+    position: relative;
+    background-color: rgba(198, 22, 39, 1);
+    border: transparent;
+    color: white;
+    font-size: 17px;
+    font-family:'Lato';
+    font-weight: 300;
+    border-radius: 6px;
 }
+/*Smol button effects*/
+.small-btn:hover{
+    background-color: #9e0918;
+}
+.small-btn:active{
+    background-color: white;
+    color: #c61627;
+}
+
+
+/****************************************************************************************************/
+            /* TODO : Adjustments for phones w tablets w hek DEF NEED HELP :) */
+/****************************************************************************************************/
