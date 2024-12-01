@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <link rel="stylesheet" href="public_style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Appointment History</title>
+
+        <style>
+            
+            .form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                max-width: 100%;
+                top: 10%; /* Position at the middle vertically */
+            }
+
+            .title {
+                padding-bottom: 10px;
+            }
+
+            label {
+                font-weight: bold;
+                margin-bottom: 10px; 
+                flex-direction: row;
+            }
+
+            .input {
+                flex-direction: row;
+            }
+
+            .input-text, .input-date {
+                display: flex;
+                flex-direction: column; 
+                gap: 4px; 
+                padding-bottom: 10px;
+                width: 45%
+            }
+
+            input[type="text"] {
+                color: white;
+                appearance: none;
+                border: none;
+                outline: none;
+                border-bottom: .2em solid #c61627;
+                background: rgba(0, 0, 0, 0.0);
+                padding: .4em;
+                width: 300px; 
+            }
+
+            input[type="text"]::placeholder {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #D3D3D3;
+            }
+
+            input[type="text"]:focus {
+                color: white;
+                font-size: medium;
+                outline: none; /* Removes default outline */
+                transition: background-color 0.5s ease; /* Smooth transition */
+            }
+
+            input[type=date] {
+                font-weight: bolder;
+                margin-bottom: 15px;
+                width: 125px;
+                border: .2em solid #c61627;
+                padding: .8em .9em;
+                border-radius: 8em;
+                color: #c61627;
+                background: #c4bcbc;
+                &::-webkit-datetime-edit-text {color: #c61627; padding: 0 0.3em;}
+                &::-webkit-calendar-picker-indicator {cursor: pointer; background-size: 15px;}
+            }
+
+            button {
+                margin-top: 10px;
+                background: #c61627;
+                color: white;
+                padding: 10px 13px;
+                border-radius: 10px;
+                cursor: pointer;
+                font-weight: bold;
+                border: none;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+
+            button:hover {
+                background-color: #9b0f1f;
+                transform: translateY(-3px);
+            }
+
+            button:active {
+                background-color: #8a0e18;
+                transform: translateY(1px); 
+            }
+
+        </style>
+    </head>
+
+
+    <body>
+        <div class="form" id="form">
+            <h1 class="title">Appointment History</h1>
+            <form id="appointmentForm" action="" method=""> 
+                <div class="input-text">
+                    <label for="fname">First name:</label> <input type="text" id="fname" name="fname" placeholder="Enter first name"> <br>
+                    <label for="lname">Last name:</label> <input type="text" id="lname" name="lname"placeholder="Enter last name"> <br>
+                    <label for="email">Email:</label> <input type="text" id="email" name="email" placeholder="Enter email"> <br>
+                </div>
+                <div class="input-date">
+                    <label for="start-date">Start Date:</label> <input type="date" id="start-date" name="start-date">
+                    <label for="end-date">End Date:</label> <input type="date" id="end-date" name="end-date">
+                </div>
+
+                <button type="submit">Get Appointments</button>
+            </form>
+        </div>
+
+    
+        <script>
+            const form = document.getElementById('appointmentForm');
+            const formContainer = document.getElementById('form');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission behavior
+
+                // Example appointments (in a real app, fetch these from a server)
+                const appointments = [
+                    "Meeting with Dr. Smith on 2023-12-01",
+                    "Checkup on 2023-12-15",
+                    "Consultation on 2024-01-10"
+                ];
+
+                // Clear the formContainer and display appointments
+                formContainer.innerHTML = `
+                    <h1>Your Appointments:</h1>
+                    <ul>
+                        ${appointments.map(appointment => `<li>${appointment}</li>`).join('')}
+                    </ul>
+                    <button class="go-back" id="goBackButton">Go Back</button>
+                `;
+
+                // Add functionality to the "Go Back" button
+                const goBackButton = document.getElementById('goBackButton');
+                goBackButton.addEventListener('click', function() {
+                    location.reload(); // Reload the page to reset the form
+                });
+            });
+        </script>
+
+    </body>
+</html>
