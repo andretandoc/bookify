@@ -1,13 +1,13 @@
-<!--THIS IS JUST A SKELETON IT WILL LOOK BETTER SOON-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bookify!</title>
+  <title>Bookify! Simplify Your Academic Scheduling</title>
   <!-- Link to the CSS file -->
   <link rel="stylesheet" href="public.css">
+  <!-- Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -16,27 +16,32 @@
         <span class="tool-name">Bookify</span>
     </div>
     <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="#home">History</a>
+        <a href="#about">Bookings</a>
+        <a href="#services">Sign In</a>
+        <!-- Profile Icon -->
+        <i class="fa-solid fa-user profile-icon"></i>
     </nav>
   </header>
 
   <!-- Main Content -->
-  <div class="content-wrapper">
-    <h1>Simplifying Academic Scheduling and Meetings</h1>
-    <p>
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo interdum bibendum non id risus."
-    </p>
-    <div class="buttons">
+  <div class="content-wrapper" style="display: flex; flex-direction: row; justify-content: space-between; gap: 80px; align-items: center;">
+    <div class="left-section" style="flex: 1; display: flex; flex-direction: column; gap: 50px; text-align: left;margin-left: 10%;font-family: 'Lato';font-size: 25px;">
+      <h1>Simplifying <br> Academic Scheduling<br> & Meetings</h1>
+      <p style="font-family: 'Lato'; font-size: 20px; font-weight: 300;">
+        Take control of your academic journey—effortlessly schedule meetings and connect with the McGill community. Manage your appointments with confidence and stay focused on achieving your goals.
+      </p>
+      <button class="small-btn">
+        Sign In
+      </button>
+    </div>
+
+    <div class="right-section" style="flex: 1; display: flex; flex-direction: column; gap: 80px; align-items: center;">
       <button class="double-red-btn">
         Schedule Appointment <br> with a McGill Professor
       </button>
       <button class="double-red-btn">
         Manage Scheduled and <br> Completed Appointments
-      </button>
-      <button class="small-btn">
-          Sign In
       </button>
     </div>
   </div>

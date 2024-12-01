@@ -1,5 +1,6 @@
-/*Importing Arvo*/
+/*Importing Arvo & all its weights*/
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 
 
 body, html {
@@ -53,6 +54,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: auto;
+    margin-left: auto;
     padding: 10px 30px;
     width: 90%;
     position: relative;
@@ -100,6 +103,7 @@ header nav a {
     color: white; 
     font-size: 14px; 
     position: relative; 
+    margin-right: 1px;
     padding: 35px;
     transition: color 0.3s ease; 
 }
@@ -108,7 +112,7 @@ header nav a {
 header nav a::before {
     content: '';
     position: absolute;
-    bottom: 5%; 
+    bottom: 7%; 
     left: 12%;
     width: 75%;
     height: 80%; 
@@ -125,6 +129,21 @@ header nav a:focus::before {
     transform: scaleY(1); 
 }
 
+/*Profile Icon Styling*/
+header .profile-icon {
+    font-size: 23px;
+    padding-right: 18px; 
+    color: #9e0918; /* Icon color */
+    cursor: pointer; /* Makes the icon clickable */
+    transition: color 0.3s ease; /* Add smooth hover effect */
+}
+
+/* Hover Effect for Profile Icon */
+header .profile-icon:hover {
+    color: white; /* Change color on hover */
+}
+
+
 /******************************************************************/
                          /* Footer Stuff */
 /******************************************************************/
@@ -134,6 +153,8 @@ footer {
     display: flex;
     justify-content: center; 
     align-items: center;
+    margin-right: auto;
+    margin-left: auto;
     padding: 10px 30px; 
     width: 90%; 
     position: relative;
@@ -186,89 +207,40 @@ footer a:hover {
     cursor: pointer;
     transition: all 0.2s ease; 
 }
+/*hovver*/
+.double-red-btn:hover{
+    background-color: rgba(198, 22, 39, 1);
+}
 /* Pressing Effect */
 .double-red-btn:active {
     box-shadow: 0px 0px 0px #9e0918; /* Removes shadow on press */
     transform: translateY(4px); /* Moves the button down */
 }
 
-/*Smol sign in button   WORK IN PROGRESS WILL BE FIXED SOON!*/
+/*Smol button*/
 .small-btn{
     display: inline-block;
-    width: 156; 
-    height: 39px; 
+    width: 150px; 
+    height: 31px; 
     position: relative;
     background-color: rgba(198, 22, 39, 1);
     border: transparent;
     color: white;
-    font-size: 15px;
-    font:'Lato';
-    font-weight: 100;
-
+    font-size: 17px;
+    font-family:'Lato';
+    font-weight: 300;
+    border-radius: 6px;
+}
+/*Smol button effects*/
+.small-btn:hover{
+    background-color: #9e0918;
+}
+.small-btn:active{
+    background-color: white;
+    color: #c61627;
 }
 
 
-
-/**/
-
-/******************************************************************/
-            /* Adjustments for phones w tablets w hek */
-/******************************************************************/
-
-/* Responsive Styling for Small Screens */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column; /* Stack header elements */
-        align-items: flex-start;
-        padding: 10px 20px;
-    }
-
-    header .logo {
-        justify-content: center; /* Center logo */
-        padding-left: 0;
-    }
-
-    header .logo img {
-        height: 50px; /* Reduce logo size */
-    }
-
-    header .logo .tool-name {
-        font-size: 20px; /* Smaller font size */
-    }
-
-    header nav a {
-        padding: 15px 10px; /* Reduce padding for smaller screens */
-        font-size: 12px; /* Smaller font size for links */
-    }
-
-    footer {
-        flex-direction: column; /* Stack footer links */
-        text-align: center;
-        padding: 15px;
-    }
-
-    footer a {
-        font-size: 10px; /* Reduce footer link size */
-    }
-}
-
-/* Extra Small Screens */
-@media (max-width: 480px) {
-    header .logo img {
-        height: 40px; /* Further reduce logo size */
-    }
-
-    header nav a {
-        font-size: 10px; /* Smaller font size for very small screens */
-        padding: 10px 5px; /* Compact padding */
-    }
-
-    footer {
-        padding: 10px;
-    }
-
-    footer a {
-        font-size: 9px; /* Very small footer link size */
-    }
-}
-
+/****************************************************************************************************/
+            /* TODO : Adjustments for phones w tablets w hek DEF NEED HELP :) */
+/****************************************************************************************************/
