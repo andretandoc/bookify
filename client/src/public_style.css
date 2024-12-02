@@ -6,6 +6,12 @@ body, html {
     height: 100%;
     background: url('McGill-Background.jpeg') no-repeat center center fixed;
     background-size: cover;
+
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    
 }
 
 body { 
@@ -31,13 +37,13 @@ body {
 /* Add a black transparent filter over the image */
 body::before {
     content: '';
-    position: absolute;
+    position: absolute; /* Cover the entire page */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; /* Ensure it stretches beyond the viewport */
     background-color: rgba(0, 0, 0, 0.74); 
-    z-index: 0 ; 
+    z-index: 0; /* Keep it below other content */
 }
 
 /******************************************************************/
@@ -159,7 +165,7 @@ footer {
     padding: 10px 30px; 
     width: 90%; 
     position: relative;
-    z-index: 3;
+    z-index: 0;
 }
 
 footer::before {
@@ -171,6 +177,7 @@ footer::before {
     width: 95%; 
     height: 1px; 
     background-color: #c61627; 
+    
 }
 
 

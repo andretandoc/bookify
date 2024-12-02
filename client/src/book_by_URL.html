@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Schedule Appointment</title>
-        <link rel="stylesheet" href="public_style.css">
-        <link href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-        <link href = "https://fonts.googleapis.com/css2?family=Arvo&family=Lato:wght@100;300;400;500&display=swap" rel="stylesheet">
+        <meta charse = "utf-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+        <title> Schedule an Appointment </title>
+        <link rel = "stylesheet" href = "public_style.css">
+        <link href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel = "stylesheet">
+        <link href = "https://fonts.googleapis.com/css2?family=Arvo&family=Lato:wght@100;300;400;500&display=swap" rel = "stylesheet">
      
         <style>
             body {
@@ -97,7 +97,6 @@
             footer {
                 text-align: center;
                 padding: 10px;
-                background-color: #f1f1f1;
                 position: relative;
                 bottom: 0;
                 width: 100%;
@@ -142,88 +141,89 @@
             }
         </style>
     </head>
+
     <body>
         <header>
-            <div class="logo">
-                <img src="Bookify.jpeg" alt="Logo">
-                <span class="tool-name">Bookify</span>
+            <div class = "logo">
+                <img src = "Bookify.jpeg" alt = "Logo">
+                <span class = "tool-name"> Bookify </span>
             </div>
 
             <nav>
-                <div class="hover-effect">
-                    <a href="#about"> View History </a>
+                <div class = "hover-effect">
+                    <a href = "app_history.html"> View History </a>
                 </div>
-                <div class="hover-effect">
-                    <a href="#services"> Sign Up </a>
+                <div class = "hover-effect">
+                    <a href = "#services"> Sign Up </a>
                 </div>
-                <i class="fa-solid fa-user profile-icon"></i>
+                <i class = "fa-solid fa-user profile-icon"></i>
               </nav>
         </header>
 
-        <div class="container">
+        <div class = "container">
             <!-- Name and Email Form -->
-            <div id="name-email-form">
+            <div id = "name-email-form">
                 <h3>Enter Your Details</h3>
-                <form id="details-form">
-                    <label for="full-name">Full Name:</label>
-                    <input type="text" id="full-name" name="full-name" required>
+                <form id = "details-form">
+                    <label for = "full-name"> Full Name: </label>
+                    <input type = "text" id = "full-name" name = "full-name" required>
                     
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for = "email"> Email: </label>
+                    <input type = "email" id = "email" name = "email" required>
                     
-                    <button type="button" id="submit-details">Next</button>
+                    <button type = "small-btn" id = "submit-details"> Next </button>
                 </form>
             </div>
 
             <!-- SSA Registration -->
-            <div id="ssa-check" class="hidden">
-                <h4>Are you registered with SSA?</h4>
-                <select id="ssa-status">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+            <div id="ssa-check" class = "hidden">
+                <h4> Are you registered with SSA? </h4>
+                <select id = "ssa-status">
+                    <option value = "" disabled selected> Select an option </option>
+                    <option value = "yes"> Yes </option>
+                    <option value = "no"> No </option>
                 </select>
-                <button type="button" id="proceed-ssa">Next</button>
+                <button type = "small-btn" id = "proceed-ssa"> Next </button>
             </div>
 
             <!-- Accommodation Options -->
-            <div id="accommodation-options" class="hidden">
-                <h4>Select the kind of accommodation you need:</h4>
-                <select id="accommodation-type">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="disability">Disability</option>
-                    <option value="hearing">Hearing Problems</option>
-                    <option value="other">Other</option>
+            <div id = "accommodation-options" class = "hidden">
+                <h4> Select the kind of accommodation you need: </h4>
+                <select id = "accommodation-type">
+                    <option value = "" disabled selected> Select an option </option>
+                    <option value = "disability"> Disability </option>
+                    <option value = "hearing"> Hearing Problems </option>
+                    <option value = "other"> Other </option>
                 </select>
-                <button type="button" id="proceed-calendar">Proceed to Calendar</button>
+                <button type = "small-btn" id = "proceed-calendar"> Proceed to Calendar </button>
             </div>
 
             <!-- Calendar -->
-            <div id="calendar-section" class="hidden">
-                <h3>Schedule Your Meeting</h3>
-                <div class="schedule-container">
+            <div id = "calendar-section" class = "hidden">
+                <h3> Schedule Your Meeting </h3>
+                <div class = "schedule-container">
                     <!-- Left Side: Meeting Information -->
-                    <div id="meeting-info" class="info-panel">
-                        <h3>Meeting Information</h3>
-                        <p><strong>Host:</strong> Dr. John Doe</p>
-                        <p><strong>Length:</strong> 30 minutes</p>
-                        <p><strong>Location:</strong> Room 305, McGill University</p>
+                    <div id = "meeting-info" class = "info-panel">
+                        <h3> Meeting Information </h3>
+                        <p><strong> Host: </strong> Dr. John Doe </p>
+                        <p><strong> Length: </strong> 30 minutes</p>
+                        <p><strong> Location: </strong> Room 305, McGill University </p>
                     </div>
             
                     <!-- Right Side: Calendar and Time Selection -->
-                    <div id="date-time-panel">
-                        <h4>Select a Date</h4>
-                        <div id="calendar"></div>
+                    <div id = "date-time-panel">
+                        <h4> Select a Date </h4>
+                        <div id = "calendar"></div>
             
-                        <div id="time-selection" class="hidden">
-                            <h4>Select a Time</h4>
-                            <select id="time-dropdown">
-                                <option value="" disabled selected>Select a time</option>
-                                <option value="09:00 AM">09:00 AM</option>
-                                <option value="10:00 AM">10:00 AM</option>
-                                <option value="11:00 AM">11:00 AM</option>
-                                <option value="02:00 PM">02:00 PM</option>
-                                <option value="03:00 PM">03:00 PM</option>
+                        <div id = "time-selection" class = "hidden">
+                            <h4> Select a Time </h4>
+                            <select id = "time-dropdown">
+                                <option value = "" disabled selected> Select a time </option>
+                                <option value = "09:00 AM"> 09:00 AM </option>
+                                <option value = "10:00 AM"> 10:00 AM </option>
+                                <option value = "11:00 AM"> 11:00 AM </option>
+                                <option value = "02:00 PM"> 02:00 PM </option>
+                                <option value = "03:00 PM"> 03:00 PM </option>
                             </select>
                         </div>
                     </div>
@@ -334,9 +334,14 @@
                     }
                 }
                 function selectDate(day, month, year) {
-                    alert(`You selected: ${day}/${month + 1}/${year}`);
+                    const timeSelection = document.getElementById("time-selection");
                     timeSelection.classList.add("visible");
+                    timeSelection.classList.remove("hidden");
+
+                    // Optionally, display the selected date
+                    console.log(`Selected Date: ${day}/${month + 1}/${year}`);
                 }
+                
 
                 // Step 3: Handle time selection
                 timeDropdown.addEventListener("change", () => {
