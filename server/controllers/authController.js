@@ -7,6 +7,14 @@ const registerMember = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Validate email
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(mcgill\.ca|mail\.mcgill\.ca)$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        message: "Invalid email. Please use a McGill email address.",
+      });
+    }
+
     // Check if member already exists in db
     const existingMember = await Member.findOne({ email });
     if (existingMember) {
