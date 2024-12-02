@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const appointmentSchema = new mongoose.Schema({
+const AppointmentSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
@@ -10,4 +10,4 @@ const appointmentSchema = new mongoose.Schema({
   notes: { type: String }, // Optional notes about the meeting
 });
 
-module.exports = mongoose.model("Appointment", appointmentSchema);
+module.exports = mongoose.model("Appointment", AppointmentSchema);
