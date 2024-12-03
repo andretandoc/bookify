@@ -1,52 +1,53 @@
-/*Importing Arvo & all its weights*/
-@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
-
-
 body, html {
     margin: 0;
     padding: 0;
     font-family: 'Lato', sans-serif;
     color: white;
     height: 100%;
+    background: url('McGill-Background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    
 }
 
-body {
-
-    background: url('client/src/McGill-Background.jpeg') no-repeat center center fixed;
-    background-size: cover;
+body { 
     position: relative;
     min-height: 100vh; 
     margin: 0; 
-    padding: 0 15px; 
+    padding: 0 1px; 
     display: flex; 
     flex-direction: column; 
     box-sizing: border-box; 
 }
 /* Content Wrapper to align the main content */
 .content-wrapper {
-    flex: 1; /* Ensures the wrapper expands to fill available space */
+    flex: 1; 
     display: flex;
     flex-direction: column;
     justify-content: center; 
     align-items: center; 
     text-align: center; 
+    z-index: 2;
 }
 
 /* Add a black transparent filter over the image */
 body::before {
     content: '';
-    position: absolute;
+    position: absolute; /* Cover the entire page */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; /* Ensure it stretches beyond the viewport */
     background-color: rgba(0, 0, 0, 0.74); 
-    z-index: -1; /* Keep the overlay behind all other content */
+    z-index: 0; /* Keep it below other content */
 }
 
 /******************************************************************/
-                         /* Header Stuff */
+                         /* Header Section */
 /******************************************************************/
 
 /* Header Styling */
@@ -59,18 +60,15 @@ header {
     padding: 10px 30px;
     width: 90%;
     position: relative;
-    
+    z-index: 3;    
 }
+
 header::after {
     content: '';
     position: absolute;
     bottom: 0;
-
-    /* Center the line */
     left: 50%; 
     transform: translateX(-50%);
-
-    /* Shortened line width */ 
     width: 95%; 
     height: 1px; 
     background-color: #c61627; 
@@ -85,7 +83,7 @@ header .logo {
 }
 
 header .logo img {
-    height: 60px; /* Small logo size */
+    height: 60px;
     width: auto;
 }
 
@@ -97,58 +95,67 @@ header .logo .tool-name {
     font-weight: 100;
 }
 
+/* Hover Effect Container */
+.hover-effect {
+    position: relative; 
+    display: inline-block; 
+    overflow: hidden;
+}
+
 /* Navigation Links Styling */
-header nav a {
+.hover-effect a {
     text-decoration: none;
     color: white; 
-    font-size: 14px; 
+    font-size: 14px;
+    padding: 15px 20px;
     position: relative; 
-    margin-right: 1px;
-    padding: 35px;
+    z-index: 2; 
     transition: color 0.3s ease; 
 }
 
-/* Add the red box rising from the bottom */
-header nav a::before {
+/* The Red Hover Effect */
+.hover-effect::before {
     content: '';
     position: absolute;
-    bottom: 7%; 
-    left: 12%;
-    width: 75%;
-    height: 80%; 
+    bottom: 0; /* Align with the bottom */
+    left: 0; /* Cover the full width */
+    width: 100%; /* Full width of the container */
+    height: 100%; 
     background-color: #c61627; 
     transform: scaleY(0); 
-    transform-origin: bottom; /* Animation starts from the bottom */
+    transform-origin: bottom; 
     transition: transform 0.3s ease; 
-    z-index: -1; 
+    z-index: 1; 
 }
 
-/* Show the red box on hover or focus */
-header nav a:hover::before,
-header nav a:focus::before {
+/* Hover or Focus Effect */
+.hover-effect:hover::before,
+.hover-effect:focus::before {
     transform: scaleY(1); 
+    height: 10000%
 }
 
-/*Profile Icon Styling*/
+.hover-effect:hover a {
+    color: white; 
+}
+
 header .profile-icon {
     font-size: 23px;
     padding-right: 18px; 
-    color: #9e0918; /* Icon color */
-    cursor: pointer; /* Makes the icon clickable */
-    transition: color 0.3s ease; /* Add smooth hover effect */
+    margin-left: 30px;
+    color: #c61627; 
+    cursor: pointer; 
+    transition: color 0.3s ease; 
 }
 
-/* Hover Effect for Profile Icon */
 header .profile-icon:hover {
-    color: white; /* Change color on hover */
+    color: #9e0918;
 }
 
-
 /******************************************************************/
-                         /* Footer Stuff */
+                         /* Footer Section */
 /******************************************************************/
 
-/* Footer Styling */
 footer {
     display: flex;
     justify-content: center; 
@@ -158,9 +165,9 @@ footer {
     padding: 10px 30px; 
     width: 90%; 
     position: relative;
+    z-index: 0;
 }
 
-/* Red Line at the Top of Footer */
 footer::before {
     content: '';
     position: absolute;
@@ -170,14 +177,15 @@ footer::before {
     width: 95%; 
     height: 1px; 
     background-color: #c61627; 
+    
 }
 
-/* Footer Links Styling */
+
 footer a {
     color: white; 
-    text-decoration: underline; 
+    text-decoration: none; 
     font-size: 12px; 
-    margin: 2%; /* Space between links */
+    margin: 2%; 
     transition: color 0.3s ease; 
 }
 
@@ -186,10 +194,10 @@ footer a:hover {
 }
 
 /******************************************************************/
-                         /* Buttoooonnnnss */
+                         /* Buttons */
 /******************************************************************/
 
-/* Big Red Buttons --Landing Page Style */
+/* Large Buttons Styling*/
 .double-red-btn {
     display: inline-block;
     width: 440px; 
@@ -197,27 +205,28 @@ footer a:hover {
     position: relative;
     background-color: rgba(198, 22, 39, 0.9);
     border: transparent;
-    box-shadow: -10px -10px 1px rgba(158, 9, 24, 0.8); /* Shadow for the 3D effect with back square color */
-    color: white;
+    box-shadow: -10px -10px 1px rgba(158, 9, 24, 0.8); 
+    color: white; 
     font-size: 19.7px;
-    font:'Lato';
+    font-family: 'Lato', sans-serif; 
     font-weight: 500;
     text-align: center;
     line-height: 50px; 
     cursor: pointer;
     transition: all 0.2s ease; 
 }
-/*hovver*/
+
 .double-red-btn:hover{
-    background-color: rgba(198, 22, 39, 1);
-}
-/* Pressing Effect */
-.double-red-btn:active {
-    box-shadow: 0px 0px 0px #9e0918; /* Removes shadow on press */
-    transform: translateY(4px); /* Moves the button down */
+    background-color: #9e0918;
 }
 
-/*Smol button*/
+.double-red-btn:active {
+    box-shadow: 0px 0px 0px #9e0918; 
+    transform: translateY(4px); 
+    color: white; 
+}
+
+/* Small Button Styling */
 .small-btn{
     display: inline-block;
     width: 150px; 
@@ -231,16 +240,12 @@ footer a:hover {
     font-weight: 300;
     border-radius: 6px;
 }
-/*Smol button effects*/
+
 .small-btn:hover{
     background-color: #9e0918;
 }
 .small-btn:active{
-    background-color: white;
-    color: #c61627;
+    background-color: #9e0918;
+    color: white;
 }
 
-
-/****************************************************************************************************/
-            /* TODO : Adjustments for phones w tablets w hek DEF NEED HELP :) */
-/****************************************************************************************************/
