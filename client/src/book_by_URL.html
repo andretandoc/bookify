@@ -249,7 +249,8 @@
                 const proceedCalendarButton = document.getElementById("proceed-calendar");
 
                 // Step 1: Email validation and SSA check
-                submitDetailsButton.addEventListener("click", () => {
+                submitDetailsButton.addEventListener("click", (event) => {
+                    event.preventDefault(); // Prevent form submission
                     const email = document.getElementById("email").value.trim().toLowerCase();
 
                     if (!email) {
@@ -267,7 +268,8 @@
                 });
 
                 // Step 2: SSA status check
-                proceedSsaButton.addEventListener("click", () => {
+                proceedSsaButton.addEventListener("click", (event) => {
+                    event.preventDefault(); // Prevent form submission
                     const ssaStatus = document.getElementById("ssa-status").value;
 
                     if (!ssaStatus) {
@@ -285,13 +287,13 @@
                 });
 
                 // Step 3: Accommodation options
-                proceedCalendarButton.addEventListener("click", () => {
+                proceedCalendarButton.addEventListener("click", (event) => {
+                    event.preventDefault(); // Prevent form submission
                     accommodationOptions.classList.add("hidden");
                     showCalendar();
                 });
 
-                // Step 4: Generate calendar
-                // Step 1: Show the calendar and populate dates
+                // Step 4: Show the calendar and populate dates
                 function showCalendar() {
                     calendarSection.classList.remove("hidden");
                     generateCalendar(new Date());
@@ -333,24 +335,20 @@
                         calendar.appendChild(dateCell);
                     }
                 }
+
                 function selectDate(day, month, year) {
-                    const timeSelection = document.getElementById("time-selection");
                     timeSelection.classList.add("visible");
                     timeSelection.classList.remove("hidden");
-
-                    // Optionally, display the selected date
                     console.log(`Selected Date: ${day}/${month + 1}/${year}`);
                 }
-                
 
-                // Step 3: Handle time selection
+                // Step 5: Handle time selection
                 timeDropdown.addEventListener("change", () => {
                     const selectedTime = timeDropdown.value;
                     alert(`You selected time: ${selectedTime}`);
-                    // Proceed to finalize or confirm booking
                 });
-
             });
+
         </script>
     </body>
 </html>
