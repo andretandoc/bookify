@@ -610,6 +610,13 @@ input[type=date] {
   text-align: center;
 }
 
+.error-message {
+  color: #9e0918;
+  font-size: large;
+  margin-bottom: 0px;
+  font-weight: 900;
+}
+
 
 /******************************************************************/
                        /* Login Section */

@@ -7,6 +7,7 @@ function ApptForm() {
   const [endDate, setEndDate] = useState("");
   const [message, setMessage] = useState("");
   const [appointments, setAppointments] = useState([]);
+  const [view, setView] = useState("form"); // Tracks the current view (form or list)
 
   const handleAppt = async (event) => {
     event.preventDefault();
@@ -17,7 +18,7 @@ function ApptForm() {
 
     if (!email) {
       setMessage(
-        "Please provide an email to search for appointments."
+        "Please provide an email to search for appointments!"
       );
       return;
     }
@@ -40,12 +41,18 @@ function ApptForm() {
         setMessage("No appointments found");
       } else {
         setAppointments(response.data.appointments); // Save appointments in state
+        setView("list"); // Switch to the list view
       }
     } catch (error) {
       setMessage(
-        error.response?.data?.message || "Failed to retrieve appointments"
+        error.response?.data?.message || "Failed to retrieve appointments!"
       );
     }
+  };
+
+  const handleGoBack = () => {
+    setView("form"); // Switch back to the form view
+    setAppointments([]); // Reset appointments
   };
 
   //   console.log("Appointments State:", appointments);
@@ -53,7 +60,8 @@ function ApptForm() {
   return (
     <div className="appt-box">
       <h1 className="title">Appointment History</h1>
-      <form onSubmit={handleAppt}>
+      {view === "form" && (
+        <form onSubmit={handleAppt}>
         <div className="input-text">
           <input
             type="text"
@@ -86,10 +94,12 @@ function ApptForm() {
         <button className="btn" type="submit">
           Get Appointments
         </button>
+        {message && <p className="error-message">{message}</p>}
       </form>
-      {message && <p className="error-message">{message}</p>}
+      )}
+      
 
-      {appointments.length > 0 && (
+      {view === "list" && appointments.length > 0 && (
         <div className="appointments-list">
           <h2>Appointments:</h2>
           {appointments.map((appointment, index) => (
@@ -118,6 +128,7 @@ function ApptForm() {
               <hr />
             </div>
           ))}
+            <button className="btn" onClick={handleGoBack}> Go Back </button>
         </div>
       )}
     </div>
