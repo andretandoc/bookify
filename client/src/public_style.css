@@ -249,3 +249,8 @@ footer a:hover {
     color: white;
 }
 
+/* Remove focus outline for all buttons */
+button:focus {
+    outline: none;
+
+}
