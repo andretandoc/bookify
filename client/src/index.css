@@ -598,12 +598,12 @@ input[type=date] {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: max-content;
   border-radius: 20px;
-  margin: 80px auto;
+  margin: 53px auto;
   max-height: min-content;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 40px;
 }
 
 .title {
