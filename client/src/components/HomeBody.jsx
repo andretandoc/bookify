@@ -28,7 +28,9 @@ export default function HomeBody() {
           </Link>
         </button>
         <button className="double-red-btn">
-          Manage Scheduled and <br /> Completed Appointments
+          <Link to="/ApptForm" style={style.doubleBtn}>
+            Manage Scheduled and <br /> Completed Appointments
+          </Link>
         </button>
       </div>
     </div>
