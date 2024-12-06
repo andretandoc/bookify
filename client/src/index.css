@@ -355,7 +355,7 @@ button:focus {
   align-items: center; 
   text-align: center; 
   z-index: 1;
-  margin: 50px auto;
+  margin: 0px auto;
   gap: 80px
 }
 
@@ -519,7 +519,7 @@ button:focus {
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 5% auto;
+  margin: 6% auto;
   width: max-content;
   padding: 30px 50px;
   border-radius: 20px;
@@ -598,7 +598,7 @@ input[type=date] {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: max-content;
   border-radius: 20px;
-  margin: 40px auto;
+  margin: 2px auto;
   max-height:min-content;
   padding-left: 50px;
   padding-right: 50px;
