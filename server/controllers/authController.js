@@ -5,13 +5,20 @@ const jwt = require("jsonwebtoken");
 // Register a new member
 const registerMember = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, confirmPassword } = req.body;
 
     // Validate email
     const emailRegex = /^[a-zA-Z0-9._%+-]+@(mcgill\.ca|mail\.mcgill\.ca)$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({
         message: "Invalid email. Please use a McGill email address.",
+      });
+    }
+
+    // Validate password and confirmation
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        message: "Passwords do not match.",
       });
     }
 
@@ -31,6 +38,7 @@ const registerMember = async (req, res) => {
 
     res.status(201).json({ message: "Member registered successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -38,28 +46,30 @@ const registerMember = async (req, res) => {
 // Login member
 const loginMember = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
 
     // Find the member by email
     const member = await Member.findOne({ email });
     if (!member) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Invalid email or password." });
     }
 
     // Compare provided password with hashed password in db
     const isMatch = await bcrypt.compare(password, member.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Invalid email or password." });
     }
 
     // Generate JWT token if password is correct
     console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    const tokenExpiry = rememberMe ? "7d" : "1h";
     const token = jwt.sign({ id: member._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: tokenExpiry,
     });
 
     res.json({ token });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
