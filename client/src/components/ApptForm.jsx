@@ -4,8 +4,6 @@ import axios from "axios";
 
 function ApptForm() {
   const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [message, setMessage] = useState("");
@@ -18,9 +16,9 @@ function ApptForm() {
     setAppointments([]);
     setMessage("");
 
-    if (!firstName && !lastName && !email && !startDate && !endDate) {
+    if (!email) {
       setMessage(
-        "Please provide at least one filter to search for appointments."
+        "Please provide an email to search for appointments."
       );
       return;
     }
@@ -30,8 +28,6 @@ function ApptForm() {
         "http://localhost:5000/api/appointments",
         {
           params: {
-            firstName,
-            lastName,
             email,
             startDate,
             endDate,
@@ -42,7 +38,7 @@ function ApptForm() {
       if (response.data.length === 0) {
         setMessage("No appointments found");
       } else {
-        setAppointments(response.data); // Save appointments in state
+        setAppointments(response.data.appointments); // Save appointments in state
       }
     } catch (error) {
       setMessage(
@@ -56,26 +52,6 @@ function ApptForm() {
       <h1 className="title">Appointment History</h1>
       <form onSubmit={handleAppt}>
         <div className="input-text">
-          <input
-            type="text"
-            id="fname"
-            name="fname"
-            placeholder="Enter first name"
-            required
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />{" "}
-          <br />
-          <input
-            type="text"
-            id="lname"
-            name="lname"
-            placeholder="Enter last name"
-            required
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />{" "}
-          <br />
           <input
             type="text"
             id="email"
@@ -117,7 +93,7 @@ function ApptForm() {
         <div className="appointments-list">
           <h2>Appointments:</h2>
           {appointments.map((appointment, index) => (
-            <div key={appointment._id} className="appointment">
+            <div key={appointment._id || index} className="appointment">
               <h3>Appointment {index + 1}</h3>
               <p>
                 <strong>First Name:</strong> {appointment.firstName}

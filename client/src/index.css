@@ -355,7 +355,7 @@ button:focus {
   align-items: center; 
   text-align: center; 
   z-index: 1;
-  margin: 0px auto;
+  margin: 40px auto;
   gap: 80px
 }
 
@@ -552,7 +552,7 @@ input[type="text"], input[type="password"] {
   outline: none;
   border: .1px solid white;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   padding: 20px;
   width: 300px; 
 }
@@ -567,20 +567,20 @@ input:focus {
   color: white;
   font-size: larger;
   outline: none;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   transition: background-color 0.5s ease; 
 }
 
 input[type=date] {
   font-weight: bolder;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   width: 125px;
-  border: .2em solid #c61627;
+  border: .1em solid white;
   padding: .8em .9em;
   border-radius: 8em;
-  color: #c61627;
-  background: #d0d0d0;
-  &::-webkit-datetime-edit-text {color: #c61627; padding: 0 0.3em;}
+  color: rgb(160, 160, 160);
+  background: rgba(255, 255, 255, 0.1);
+  &::-webkit-datetime-edit-text {color: rgb(160, 160, 160); padding: 0 0.3em;}
   &::-webkit-calendar-picker-indicator {cursor: pointer; background-size: 15px;}
 }
 
@@ -598,12 +598,12 @@ input[type=date] {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: max-content;
   border-radius: 20px;
-  margin: 2px auto;
-  max-height:min-content;
+  margin: 80px auto;
+  max-height: min-content;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 }
 
 .title {
