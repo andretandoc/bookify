@@ -7,14 +7,12 @@ import RegisterForm from "./components/RegisterForm";
 import ApptForm from "./components/ApptForm";
 import BookingForm from "./components/BookingForm";
 
-
 function App() {
-
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path="/App" element={<HomeBody />} />
+        <Route path="/" element={<HomeBody />} />
         <Route path="/ApptForm" element={<ApptForm />} />
         <Route path="/BookingForm" element={<BookingForm />} />
         <Route path="/LoginForm" element={<LoginForm />} />
@@ -26,4 +24,3 @@ function App() {
 }
 
 export default App;
-
