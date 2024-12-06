@@ -11,23 +11,31 @@ function ApptForm() {
   const [message, setMessage] = useState("");
 
   const handleAppt = async () => {
+    event.preventDefault();
+
     try {
-      const response = await axios.post("http://localhost:5000/api/...", {
-        firstname,
-        lastname,
-        email,
-        startdate,
-        enddate,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/appointments",
+        {
+          firstname,
+          lastname,
+          email,
+          startdate,
+          enddate,
+        }
+      );
+      setMessage(
+        response.data.message || "Appointments retrieved successfully"
+      );
     } catch (error) {
-      setMessage(error.response.data.message || "Appointments failed");
+      setMessage(error.response?.data?.message || "Appointments failed");
     }
   };
 
   return (
-    <div class="appt-box">
-      <h1 class="title">Appointment History</h1>
-      <div class="input-text">
+    <div className="appt-box">
+      <h1 className="title">Appointment History</h1>
+      <div className="input-text">
         <input
           type="text"
           id="fname"
@@ -59,8 +67,8 @@ function ApptForm() {
         />{" "}
         <br />
       </div>
-      <div class="input-date">
-        <label for="start-date">Start Date:</label>{" "}
+      <div className="input-date">
+        <label htmlFor="start-date">Start Date:</label>{" "}
         <input
           type="date"
           id="start-date"
@@ -69,7 +77,7 @@ function ApptForm() {
           value={startdate}
           onChange={(e) => setStartDate(e.target.value)}
         />
-        <label for="end-date">End Date:</label>{" "}
+        <label htmlFor="end-date">End Date:</label>{" "}
         <input
           type="date"
           id="end-date"
@@ -79,10 +87,10 @@ function ApptForm() {
           onChange={(e) => setEndDate(e.target.value)}
         />
       </div>
-      <button class="btn" type="submit" onClick={handleAppt()}>
+      <button className="btn" type="submit" onClick={handleAppt}>
         Get Appointments
       </button>
-      {message && { message }}
+      {message && <p>{message}</p>}
     </div>
   );
 }
