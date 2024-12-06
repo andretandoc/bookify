@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -39,10 +38,13 @@ function ApptForm() {
         }
       );
 
+      // console.log("API Response:", response.data);
+
       if (response.data.length === 0) {
         setMessage("No appointments found");
       } else {
-        setAppointments(response.data); // Save appointments in state
+        setAppointments(response.data.appointments); // Save appointments in state
+        // console.log("Appointments set:", response.data);
       }
     } catch (error) {
       setMessage(
@@ -50,6 +52,8 @@ function ApptForm() {
       );
     }
   };
+
+  //   console.log("Appointments State:", appointments);
 
   return (
     <div className="appt-box">
@@ -61,53 +65,48 @@ function ApptForm() {
             id="fname"
             name="fname"
             placeholder="Enter first name"
-            required
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-          />{" "}
+          />
           <br />
           <input
             type="text"
             id="lname"
             name="lname"
             placeholder="Enter last name"
-            required
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-          />{" "}
+          />
           <br />
           <input
             type="text"
             id="email"
             name="email"
             placeholder="Enter email"
-            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />{" "}
+          />
           <br />
         </div>
         <div className="input-date">
-          <label htmlFor="start-date">Start Date:</label>{" "}
+          <label htmlFor="start-date">Start Date:</label>
           <input
             type="date"
             id="start-date"
             name="start-date"
-            required
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
           />
-          <label htmlFor="end-date">End Date:</label>{" "}
+          <label htmlFor="end-date">End Date:</label>
           <input
             type="date"
             id="end-date"
             name="end-date"
-            required
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
           />
         </div>
-        <button className="btn" type="submit" onClick={handleAppt}>
+        <button className="btn" type="submit">
           Get Appointments
         </button>
       </form>
@@ -117,7 +116,7 @@ function ApptForm() {
         <div className="appointments-list">
           <h2>Appointments:</h2>
           {appointments.map((appointment, index) => (
-            <div key={appointment._id} className="appointment">
+            <div key={appointment._id || index} className="appointment">
               <h3>Appointment {index + 1}</h3>
               <p>
                 <strong>First Name:</strong> {appointment.firstName}
