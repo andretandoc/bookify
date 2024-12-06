@@ -1,23 +1,32 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
-import ApiTest from "./components/ApiTest";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import HomeBody from "./components/HomeBody";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+import ApptForm from "./components/ApptForm";
+import BookingForm from "./components/BookingForm";
 
-// i added examples of routing using react router dom
+
+
 
 function App() {
+
   return (
     <Router>
-      <nav>
-        <Link to="/apitest">API Test Page</Link>
-      </nav>
+      <Header />
       <Routes>
-        {/* Add a route for the API Test component */}
-        <Route path="/" element={<h1>Welcome to Bookify</h1>} />
-        <Route path="/apitest" element={<ApiTest />} />
-        {/* Other routes... */}
+        <Route path="/App" element={<HomeBody />} />
+        <Route path="/ApptForm" element={<ApptForm />} />
+        <Route path="/BookingForm" element={<BookingForm />} />
+        <Route path="/LoginForm" element={<LoginForm />} />
+        <Route path="/RegisterForm" element={<RegisterForm />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }
 
 export default App;
+
