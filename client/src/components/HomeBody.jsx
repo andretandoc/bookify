@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 
-
 export default function HomeBody() {
     return (
     <div class = "content-wrapper">
@@ -44,5 +43,6 @@ const style = {
             cursor: "pointer",
             display: "block", 
             width: "100%", 
+            fontWeight: "bold"
         }    
 };
