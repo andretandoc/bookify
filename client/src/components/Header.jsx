@@ -13,8 +13,10 @@ function Header() {
     <div class="header">
       <header>
         <div class="logo">
-          <img src={image} alt="Logo"></img>
-          <span class="tool-name">&nbsp;&nbsp;Bookify</span>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <img src={image} alt="Logo"></img>
+            <span class="tool-name">&nbsp;&nbsp;Bookify</span>
+          </Link>
         </div>
         <nav className={`navbar  ${showNavbar ? "active" : ""}`}>
           <div className="nav-item">

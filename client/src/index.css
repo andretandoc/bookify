@@ -1,43 +1,44 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css);
 @import url(https://fonts.googleapis.com/css2?family=Arvo&family=Lato:wght@100;300;400;500&display=swap);
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   color: white;
   height: 100%;
-  background: url('McGill-Background.jpeg') no-repeat center center fixed;
+  background: url("McGill-Background.jpeg") no-repeat center center fixed;
   background-size: cover;
-  background-color: rgba(0, 0, 0, 0.75); 
+  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
 }
 
-body { 
+body {
   position: relative;
-  min-height: 100vh; 
-  margin: 0; 
-  padding: 0 1px; 
-  display: flex; 
-  flex-direction: column; 
-  box-sizing: border-box; 
+  min-height: 100vh;
+  margin: 0;
+  padding: 0 1px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 /* Add a black transparent filter over the image */
 body::before {
-  content: '';
+  content: "";
   position: absolute; /* Cover the entire page */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%; /* Ensure it stretches beyond the viewport */
-  background-color: rgba(0, 0, 0, 0.75); 
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 0; /* Keep it below other content */
 }
 
 /******************************************************************/
-                       /* Header Section */
+/* Header Section */
 /******************************************************************/
 
 /* Header Styling */
@@ -50,18 +51,18 @@ header {
   padding: 10px 30px;
   width: 90%;
   position: relative;
-  z-index: 1;    
+  z-index: 1;
 }
 
 header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
-  left: 50%; 
+  left: 50%;
   transform: translateX(-50%);
-  width: 95%; 
-  height: 3px; 
-  background-color: #c61627; 
+  width: 95%;
+  height: 3px;
+  background-color: #c61627;
 }
 
 /* Logo Styling */
@@ -79,26 +80,25 @@ header .logo img {
 
 /* Tool Name Styling */
 header .logo .tool-name {
-  font-family: 'Arvo'; 
-  font-size: 25px; 
-  color: white; 
+  font-family: "Arvo";
+  font-size: 25px;
+  color: white;
   font-weight: 100;
+  text-decoration: none;
 }
-
 
 header .profile-icon {
   font-size: 23px;
-  padding-right: 18px; 
+  padding-right: 18px;
   margin-left: 30px;
-  color: #c61627; 
-  cursor: pointer; 
-  transition: color 0.3s ease; 
+  color: #c61627;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 header .profile-icon:hover {
   color: #9e0918;
 }
-
 
 .hamburger {
   display: none;
@@ -111,52 +111,51 @@ header .profile-icon:hover {
 }
 
 .nav-item {
-  position: relative; 
-  display: inline-block; 
+  position: relative;
+  display: inline-block;
   overflow: hidden;
 }
 
 .nav-item a {
   text-decoration: none;
-  color: white; 
+  color: white;
   font-size: 16px;
   padding: 15px 20px;
-  position: relative; 
-  z-index: 2; 
+  position: relative;
+  z-index: 2;
   transition: color 0.3s ease;
   font-weight: bold;
 }
 
 .nav-item a:hover {
-  color:#c61627;
+  color: #c61627;
   font-size: larger;
 }
 
 .nav-item:active {
-  transform: translateY(1px); 
+  transform: translateY(1px);
 }
 
 .nav-item::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0; /* Align with the bottom */
   left: 0; /* Cover the full width */
   width: 100%; /* Full width of the container */
-  height: 100%; 
-  transform: scaleY(0); 
-  transform-origin: bottom; 
-  transition: transform 0.3s ease; 
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
   z-index: 2;
 }
 
 /* Hover or Focus Effect */
 .nav-item:hover::before,
 .nav-item:focus::before {
-  transform: scaleY(1); 
+  transform: scaleY(1);
   height: 10000%;
-  font-weight:bolder
+  font-weight: bolder;
 }
-
 
 @media (max-width: 800px) {
   .hamburger {
@@ -164,7 +163,7 @@ header .profile-icon:hover {
     background: transparent;
     border: none;
     font-size: 30px;
-    color:white;
+    color: white;
     cursor: pointer;
     right: 0;
     z-index: 3;
@@ -173,18 +172,18 @@ header .profile-icon:hover {
   .hamburger:hover {
     font-size: 35px;
   }
-  
+
   .hamburger:active {
-    transform: translateY(1px); 
+    transform: translateY(1px);
   }
 
   .navbar.active {
     position: fixed;
     margin: 0;
-    right:0;
+    right: 0;
     top: 0px;
     background-color: black;
-    width:0px;
+    width: 0px;
     height: max-content;
     transition: all 0.3s ease-in-out;
     z-index: 3;
@@ -211,105 +210,105 @@ header .profile-icon:hover {
 }
 
 /******************************************************************/
-                       /* Footer Section */
+/* Footer Section */
 /******************************************************************/
 
 footer {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   margin: 0 auto;
   position: absolute;
-  width: 100%; 
+  width: 100%;
   height: max-content;
   z-index: 1;
   bottom: 0;
 }
 
 footer::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  width: 100%; 
-  height: 3px; 
-  background-color: #c61627; 
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 3px;
+  background-color: #c61627;
 }
 
 footer a {
-  color: white; 
-  text-decoration: none; 
-  font-size: 15px; 
-  margin: 2%; 
-  transition: color 0.3s ease; 
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  margin: 2%;
+  transition: color 0.3s ease;
   font-weight: bolder;
 }
 
 footer a:hover {
-  color: #c61627; 
+  color: #c61627;
 }
 
 footer a:active {
-  transform: translateY(1px); 
+  transform: translateY(1px);
 }
 
 /******************************************************************/
-                       /* Buttons */
+/* Buttons */
 /******************************************************************/
 
 /* Large Buttons Styling*/
 .double-red-btn {
   display: inline-block;
-  width: 440px; 
-  height: 154px; 
+  width: 440px;
+  height: 154px;
   position: relative;
   background-color: rgba(198, 22, 39, 0.9);
   border: transparent;
-  box-shadow: -10px -10px 1px rgba(158, 9, 24, 0.8); 
-  color: white; 
+  box-shadow: -10px -10px 1px rgba(158, 9, 24, 0.8);
+  color: white;
   font-size: 19.7px;
-  font-family: 'Lato', sans-serif; 
+  font-family: "Lato", sans-serif;
   font-weight: 500;
   text-align: center;
-  line-height: 50px; 
+  line-height: 50px;
   cursor: pointer;
-  transition: all 0.2s ease; 
+  transition: all 0.2s ease;
 }
 
-.double-red-btn:hover{
+.double-red-btn:hover {
   background-color: #9e0918;
 }
 
 .double-red-btn:active {
-  box-shadow: 0px 0px 0px #9e0918; 
-  transform: translateY(4px); 
-  color: white; 
+  box-shadow: 0px 0px 0px #9e0918;
+  transform: translateY(4px);
+  color: white;
 }
 
-.small-btn{
+.small-btn {
   display: inline-block;
-  width: 150px; 
-  height: 31px; 
+  width: 150px;
+  height: 31px;
   position: relative;
   background-color: rgba(198, 22, 39, 1);
   border: transparent;
   color: white;
   font-size: 17px;
-  font-family:'Lato';
+  font-family: "Lato";
   font-weight: 300;
   border-radius: 6px;
   font-weight: bold;
-  margin-bottom: 20px ;
+  margin-bottom: 20px;
 }
 
-.small-btn:hover{
+.small-btn:hover {
   background-color: #9e0918;
 }
-.small-btn:active{
+.small-btn:active {
   background-color: #9e0918;
   color: white;
-  transform: translateY(1px); 
+  transform: translateY(1px);
 }
 
 .btn {
@@ -336,7 +335,7 @@ footer a:active {
 
 .btn:active {
   background-color: #8a0e18;
-  transform: translateY(1px); 
+  transform: translateY(1px);
 }
 
 button:focus {
@@ -344,62 +343,61 @@ button:focus {
 }
 
 /******************************************************************/
-                       /* Home Page CSS */
+/* Home Page CSS */
 /******************************************************************/
 
 /* Content Wrapper to align the main content */
 .content-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; 
-  align-items: center; 
-  text-align: center; 
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
   z-index: 1;
   margin: 40px auto;
-  gap: 80px
+  gap: 80px;
 }
 
 .home-title {
-    z-index: 0; 
-    max-width: 80%;
-    font-size: 40px;
+  z-index: 0;
+  max-width: 80%;
+  font-size: 40px;
 }
 
 .home-p {
-    z-index: 0;
-    font-family: 'Lato'; 
-    font-size: 20px; 
-    font-weight: 300;
-    max-width: 80%;
+  z-index: 0;
+  font-family: "Lato";
+  font-size: 20px;
+  font-weight: 300;
+  max-width: 80%;
 }
 
 .left-section {
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 50px; 
-    text-align: left;
-    margin-left: 10%;
-    font-family: 'Lato';
-    font-size: 25px;
-    margin-top: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  text-align: left;
+  margin-left: 10%;
+  font-family: "Lato";
+  font-size: 25px;
+  margin-top: 40px;
 }
 
 .right-section {
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 80px; 
-    align-items: center;
-    margin-right: 4%;
-    margin-top: -20px;
-    margin-bottom: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  align-items: center;
+  margin-right: 4%;
+  margin-top: -20px;
+  margin-bottom: 20px;
 }
 
 /******************************************************************/
-                       /* Book Meeting Page CSS */
+/* Book Meeting Page CSS */
 /******************************************************************/
-
 
 .container {
   max-width: 80%;
@@ -412,7 +410,8 @@ button:focus {
   position: relative;
 }
 
-.booking-input, .accommodation {
+.booking-input,
+.accommodation {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -510,7 +509,7 @@ button:focus {
 }
 
 /******************************************************************/
-                       /* Karl general CSS */
+/* Karl general CSS */
 /******************************************************************/
 
 .glass-container {
@@ -530,7 +529,7 @@ button:focus {
 }
 
 label {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
   flex-direction: row;
 }
 
@@ -538,28 +537,30 @@ label {
   flex-direction: row;
 }
 
-.input-text, .input-date {
+.input-text,
+.input-date {
   display: flex;
-  flex-direction: column; 
-  gap: 8px; 
+  flex-direction: column;
+  gap: 8px;
   width: 45%;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"],
+input[type="password"] {
   color: white;
   appearance: none;
   border: none;
   outline: none;
-  border: .1px solid white;
+  border: 0.1px solid white;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.1);
   padding: 20px;
-  width: 300px; 
+  width: 300px;
 }
 
 input::placeholder {
   color: rgb(160, 160, 160);
-  background: rgba(0, 0, 0, 0.0);
+  background: rgba(0, 0, 0, 0);
   font-size: large;
 }
 
@@ -568,27 +569,30 @@ input:focus {
   font-size: larger;
   outline: none;
   background: rgba(255, 255, 255, 0.1);
-  transition: background-color 0.5s ease; 
+  transition: background-color 0.5s ease;
 }
 
-input[type=date] {
+input[type="date"] {
   font-weight: bolder;
   margin-bottom: 20px;
   width: 125px;
-  border: .1em solid white;
-  padding: .8em .9em;
+  border: 0.1em solid white;
+  padding: 0.8em 0.9em;
   border-radius: 8em;
   color: rgb(160, 160, 160);
   background: rgba(255, 255, 255, 0.1);
-  &::-webkit-datetime-edit-text {color: rgb(160, 160, 160); padding: 0 0.3em;}
-  &::-webkit-calendar-picker-indicator {cursor: pointer; background-size: 15px;}
+  &::-webkit-datetime-edit-text {
+    color: rgb(160, 160, 160);
+    padding: 0 0.3em;
+  }
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    background-size: 15px;
+  }
 }
 
-
-
-
 /******************************************************************/
-                       /* Appt History Section */
+/* Appt History Section */
 /******************************************************************/
 
 .appt-box {
@@ -617,9 +621,8 @@ input[type=date] {
   font-weight: 900;
 }
 
-
 /******************************************************************/
-                       /* Login Section */
+/* Login Section */
 /******************************************************************/
 
 .lr-box {
@@ -639,9 +642,9 @@ input[type=date] {
   margin-top: -5px;
 }
 
-.options a  {
+.options a {
   text-decoration: none;
-  color:#c61627;
+  color: #c61627;
   font-weight: bold;
   margin-left: auto;
   margin-top: -9px;
@@ -658,9 +661,8 @@ input[type=date] {
 }
 
 /******************************************************************/
-                       /* Login & Register Section */
+/* Login & Register Section */
 /******************************************************************/
-
 
 p {
   font-size: 15px;
@@ -690,9 +692,8 @@ p a:active {
 
 .input-text {
   display: flex;
-  flex-direction: column; 
-  gap: 8px; 
+  flex-direction: column;
+  gap: 8px;
   width: 45%;
   padding-top: 20px;
 }
-
