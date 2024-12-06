@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -35,6 +34,8 @@ function ApptForm() {
         }
       );
 
+      // console.log("API Response:", response.data);
+
       if (response.data.length === 0) {
         setMessage("No appointments found");
       } else {
@@ -47,6 +48,8 @@ function ApptForm() {
     }
   };
 
+  //   console.log("Appointments State:", appointments);
+
   return (
     <div className="appt-box">
       <h1 className="title">Appointment History</h1>
@@ -57,33 +60,30 @@ function ApptForm() {
             id="email"
             name="email"
             placeholder="Enter email"
-            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />{" "}
+          />
           <br />
         </div>
         <div className="input-date">
-          <label htmlFor="start-date">Start Date:</label>{" "}
+          <label htmlFor="start-date">Start Date:</label>
           <input
             type="date"
             id="start-date"
             name="start-date"
-            required
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
           />
-          <label htmlFor="end-date">End Date:</label>{" "}
+          <label htmlFor="end-date">End Date:</label>
           <input
             type="date"
             id="end-date"
             name="end-date"
-            required
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
           />
         </div>
-        <button className="btn" type="submit" onClick={handleAppt}>
+        <button className="btn" type="submit">
           Get Appointments
         </button>
       </form>
@@ -93,6 +93,7 @@ function ApptForm() {
         <div className="appointments-list">
           <h2>Appointments:</h2>
           {appointments.map((appointment, index) => (
+            <div key={appointment._id || index} className="appointment">
             <div key={appointment._id || index} className="appointment">
               <h3>Appointment {index + 1}</h3>
               <p>
