@@ -94,7 +94,6 @@ function ApptForm() {
           <h2>Appointments:</h2>
           {appointments.map((appointment, index) => (
             <div key={appointment._id || index} className="appointment">
-            <div key={appointment._id || index} className="appointment">
               <h3>Appointment {index + 1}</h3>
               <p>
                 <strong>First Name:</strong> {appointment.firstName}
