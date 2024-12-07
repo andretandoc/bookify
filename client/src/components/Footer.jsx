@@ -1,7 +1,7 @@
 
 function Footer() {
     return(
-        <div class="footer">
+        <div className="footer">
             <footer>
                 <a href="#privacy">Privacy Policy</a>
                 <a href="#terms">Terms of Service</a>

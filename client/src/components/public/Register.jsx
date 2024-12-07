@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-function RegisterForm() {
+function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -74,7 +74,7 @@ function RegisterForm() {
         <div>
           <p>
             Already have an account?{" "}
-            <Link to="/LoginForm">&nbsp;&nbsp;Login</Link>
+            <Link to="/Login">&nbsp;&nbsp;Login</Link>
           </p>
         </div>
       </form>
@@ -82,4 +82,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default Register;

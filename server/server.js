@@ -30,3 +30,11 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+// Login authentication : 
+app.use('/login', (req, res) => {
+  res.send({
+    token: 'test123'
+  });
+});

@@ -15,7 +15,7 @@ export default function HomeBody() {
           confidence and stay focused on achieving your goals.{" "}
         </p>
         <button className="small-btn">
-          <Link to="/LoginForm" style={style.btn}>
+          <Link to="/Login" style={style.btn}>
             Sign In
           </Link>
         </button>

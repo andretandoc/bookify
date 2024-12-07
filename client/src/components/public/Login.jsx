@@ -1,8 +1,21 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import PropTypes from 'prop-types';
 
-function LoginForm() {
+
+async function loginUser(credentials) {
+    return fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    })
+        .then(data => data.json())
+}
+
+function Login( { setToken } ) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -10,6 +23,12 @@ function LoginForm() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+
+    const token = await loginUser({
+        email,
+        password
+      });
+      setToken(token);
 
     try {
       const response = await axios.post(
@@ -76,7 +95,7 @@ function LoginForm() {
           <div>
             <p>
               Don't have an account?{" "}
-              <Link to="/RegisterForm">&nbsp;Register</Link>
+              <Link to="/Register">&nbsp;Register</Link>
             </p>
           </div>
         </form>
@@ -85,4 +104,6 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+
+
+export default Login;
