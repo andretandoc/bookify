@@ -1,7 +1,6 @@
 function MemberPage() {
     return (
         <>
-
          <div className="appointments-list">
             <h2>Appointments:</h2>
             <div className="appointment">

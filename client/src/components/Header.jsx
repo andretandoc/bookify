@@ -23,8 +23,8 @@ function Header() {
           <div className="logo">
             <Link to="/" style={{ textDecoration: "none" }}>
               <img src={image} alt="Logo" />
-              <span className="tool-name">&nbsp;&nbsp;Bookify</span>
             </Link>
+            <span className="tool-name">&nbsp;&nbsp;Bookify</span>
           </div>
           <nav className={`navbar ${showNavbar ? "active" : ""}`}>
             {isAuthenticated ? (

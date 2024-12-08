@@ -1,21 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
+import MemberPage from "../private/MemberPage";
 
 
-async function loginUser(credentials) {
-    return fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-        .then(data => data.json())
-}
 
-function Login( { setToken } ) {
+
+function Login() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -24,11 +17,6 @@ function Login( { setToken } ) {
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    const token = await loginUser({
-        email,
-        password
-      });
-      setToken(token);
 
     try {
       const response = await axios.post(
@@ -39,8 +27,10 @@ function Login( { setToken } ) {
           rememberMe,
         }
       );
+
       // const token = response.data.token;
       setMessage(`Login successful!`);
+      
     } catch (error) {
       setMessage(
         error.response?.data?.message || "Login failed. Please try again."
