@@ -9,7 +9,7 @@ import ApptForm from "./components/public/ApptForm";
 import BookingForm from "./components/public/BookingForm";
 import PrivateRoute from "./public-routes/publicRoutes";
 import PublicRoute from "./public-routes/publicRoutes";
-
+import CreateBooking from "./components/private/createBooking";
 import MemberPage from "./components/private/MemberPage";
 
 
@@ -30,6 +30,7 @@ function App() {
 
             <Route element={<PrivateRoute />}>
                 <Route path ="/MemberPage" element={<PrivateRoute><MemberPage/> </PrivateRoute>} />
+                <Route path="/CreateBooking" element={<PrivateRoute><CreateBooking/></PrivateRoute>}/>
             </Route>
             
             <Route path="*" element={<h1>Page not found</h1>} />

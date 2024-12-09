@@ -685,7 +685,7 @@ input[type="date"] {
 }
 
 /******************************************************************/
-/* Login & Register Section */
+                /* Login & Register Section */
 /******************************************************************/
 
 p {
@@ -726,7 +726,7 @@ p a:active {
                         /* Layered Boxes*/
 /******************************************************************/
 /*For Calendars*/
-big-red-box {
+.cal-box {
   display: inline-block;
   width: 1000px; 
   height: 500px; 
@@ -745,7 +745,7 @@ big-red-box {
 }
 
 /*To center big red box*/
-.big-red-box-wrapper {
+.cal-box-wrapper {
   position: absolute;
   left: 50%; 
   transform: translateX(-50%); 
@@ -756,7 +756,7 @@ big-red-box {
 }
 
 /*For Forms*/
-.med-red-box {
+.form-box {
   display: inline-block;
   width: 500px; 
   height: 600px; 
@@ -799,3 +799,4 @@ big-red-box {
   justify-content: center;
   align-items: center;
 }
+
