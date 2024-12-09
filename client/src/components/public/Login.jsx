@@ -39,9 +39,9 @@ function Login() {
   };
 
   return (
-    <main>
-      <div className="glass-container">
-        <h1 className="title">Login</h1>
+    <main className="form-box-wrapper">
+      <div className="form-box">
+        <h1 className="title">Welcome Back</h1>
         <form id="login_form" action="" method="">
           <div className="input-text">
             <input
