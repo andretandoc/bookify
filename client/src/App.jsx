@@ -30,7 +30,7 @@ function App() {
 
             <Route element={<PrivateRoute />}>
                 <Route path ="/MemberPage" element={<PrivateRoute><MemberPage/> </PrivateRoute>} />
-                <Route path="/CreateBooking" element={<PrivateRoute><CreateBooking/></PrivateRoute>}/>
+                <Route path="/CreateBooking" element={<CreateBooking />} />
             </Route>
             
             <Route path="*" element={<h1>Page not found</h1>} />

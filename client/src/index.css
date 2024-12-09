@@ -211,9 +211,11 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 30px;
   position: absolute;
-  width: 100%;
+  width: 90%;
   height: max-content;
   z-index: 1;
   bottom: 0;
@@ -226,7 +228,7 @@ footer::before {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  height: 3px;
+  height: 1px;
   background-color: #c61627;
 }
 
@@ -300,7 +302,9 @@ footer a:active {
 }
 
 .double-btn:hover{
-  background-color: #9e0918;
+  background-color: #c61627;
+  color:#fff;
+  border: #333;
 }
 
 .double-btn:active {
@@ -598,11 +602,10 @@ input:focus {
 
 input[type="date"] {
   font-weight: bolder;
-  margin-bottom: 20px;
   width: 125px;
+  height: min-content;
   border: 0.1em solid white;
   padding: 0.8em 0.9em;
-  border-radius: 8em;
   color: rgb(160, 160, 160);
   background: rgba(255, 255, 255, 0.1);
   &::-webkit-datetime-edit-text {
@@ -728,7 +731,7 @@ p a:active {
 /*For Calendars*/
 .cal-box {
   display: inline-block;
-  width: 1000px; 
+  width: 1200px; 
   height: 500px; 
   position: relative;
   background-color: white;
@@ -742,17 +745,6 @@ p a:active {
   line-height: 50px; 
   cursor: pointer;
   transition: all 0.2s ease; 
-}
-
-/*To center big red box*/
-.cal-box-wrapper {
-  position: absolute;
-  left: 50%; 
-  transform: translateX(-50%); 
-  bottom: 10%; 
-  display: flex;
-  justify-content: center; 
-  width: 100%; 
 }
 
 /*For Forms*/
@@ -778,15 +770,20 @@ p a:active {
                 /* Private page Background */
 /*******************************************************/
 /* Styles specific to the createBooking page */
+
+body.private-page{
+  background: none;
+}
+
 .private-page {
   min-height: 100vh;
-  background: white; 
+  background: white !important; 
   display: flex;
   flex-direction: column;
   z-index: 1;
 }
 .private-page::before {
-  content: none; 
+  content: none !important; 
 }
 
 /*******************************************************/
@@ -800,3 +797,53 @@ p a:active {
   align-items: center;
 }
 
+/*Page formatting*/
+.cal-box-wrapper {
+  position: absolute;
+  left: 50%; 
+  transform: translateX(-50%); 
+  bottom: 15%; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 0px; 
+  padding-top: 50px;
+  width: 100%; 
+}
+
+
+/* Styles for the form row */
+.form-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 25px; 
+  margin-bottom: 25px; 
+}
+
+.form-row label {
+  display: flex;
+  flex-direction: column; 
+  font-size: 14px;
+  font-weight: bold;
+  color:#c61627; 
+}
+
+.form-input {
+  margin-top: 5px; 
+  padding: 8px; 
+  font-size: 12px;
+  color: rgb(160, 160, 160);
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  width: 150px;
+  height: 35px; 
+}
+
+input[type="time"] {
+  width: 100px; 
+  height: min-content;
+  font-size: 12px; /* Font size */
+  background-color: #f9f9f9; /* Light background */
+  color: #333; /* Text color */
+}
