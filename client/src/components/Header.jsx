@@ -59,10 +59,10 @@ function Header() {
                   <Link to="/">Home</Link>
                 </div>
                 <div className="nav-item">
-                  <Link to="/ApptForm">Get History</Link>
+                  <Link to="/ApptForm">History</Link>
                 </div>
                 <div className="nav-item">
-                  <Link to="/BookingForm">Book Meeting</Link>
+                  <Link to="/BookingForm">Booking</Link>
                 </div>
                 <div className="nav-item">
                   <Link to="/Login">Login</Link>
