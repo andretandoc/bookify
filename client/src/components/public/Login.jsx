@@ -78,7 +78,7 @@ function Login() {
               Forgot Password?
             </a>
           </div>
-          <button className="btn" type="submit" onClick={handleLogin}>
+          <button className="small-btn" type="submit" onClick={handleLogin}>
             Log In
           </button>
           {message && <p className="error-message">{message}</p>}

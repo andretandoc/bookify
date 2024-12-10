@@ -575,29 +575,34 @@ label {
 
 input[type="text"],
 input[type="password"] {
-  color: white;
-  appearance: none;
-  border: none;
-  outline: none;
-  border: 0.1px solid white;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  width: 300px;
+  color: #333; 
+  appearance: none; 
+  border: 1px solid grey;
+  outline: none; 
+  border-radius: 10px; 
+  background: #f9f9f9; 
+  padding: 10px; 
+  width: 250px; 
+  box-sizing: border-box; 
+}
+
+input::placeholder {
+  color: rgb(160, 160, 160); /* Light grey placeholder text */
+  font-size: medium; /* Consistent font size for placeholder text */
+}
+
+input:focus {
+  color: #333; /* Text color on focus */
+  background: white; /* White background for focus state */
+  border-color: #c61627; /* Red border on focus */
+  box-shadow: 0 0 5px rgba(198, 22, 39, 0.5); /* Subtle shadow effect */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
 }
 
 input::placeholder {
   color: rgb(160, 160, 160);
   background: rgba(0, 0, 0, 0);
   font-size: large;
-}
-
-input:focus {
-  color: white;
-  font-size: larger;
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  transition: background-color 0.5s ease;
 }
 
 input[type="date"] {
@@ -659,13 +664,23 @@ input[type="date"] {
 
 .options {
   display: flex;
-  align-items: center;
-  margin-top: 15px;
-  margin-bottom: 12px;
+  align-items: center; 
+  justify-content: flex-start; 
+  margin-top: 15px; 
+  margin-bottom: 15px; 
+}
+
+.options input[type="checkbox"] {
+  margin-right: 1px; 
+}
+
+.options label {
+  font-size: 18px; /* Controls the font size of "Remember me" */
+  color: #c61627; /* Changes the color to dark grey for better readability */
 }
 
 .options input {
-  margin-right: 6px;
+  margin-right: 40px;
   margin-top: -5px;
 }
 
@@ -720,7 +735,7 @@ p a:active {
 .input-text {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 3px;
   width: 45%;
   padding-top: 20px;
 }
@@ -749,21 +764,34 @@ p a:active {
 
 /*For Forms*/
 .form-box {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   width: 500px; 
-  height: 600px; 
+  height: 500px; 
   position: relative;
+  align-items: center;
   background-color: white;
-  border: 3px solid #c61627;
   box-shadow: -10px -10px 1px rgba(198, 22, 39); 
-  color: white;
+  color: #c61627;
   font-size: 19.7px;
   font:'Lato';
   font-weight: 500;
   text-align: center;
-  line-height: 50px; 
+  line-height: 30px; 
   cursor: pointer;
   transition: all 0.2s ease; 
+}
+.form-box-wrapper {
+  position: relative;
+  left: 50%; 
+  transform: translateX(-50%); 
+  bottom: 15%; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 0px; 
+  padding-top: 170px;
+  width: 100%; 
 }
 
 /*******************************************************/
