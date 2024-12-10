@@ -2,15 +2,53 @@
 
 /* for backend the form here will have the following elements */
 /*Class;Type;Professor; Date Range;Time Range */
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
-import axios from "axios";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css"; // Import calendar styles
 
 const CreateBooking = () => {
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]); // Start and End Dates
+  const [timeRange, setTimeRange] = useState({
+    startTime: "",
+    endTime: "",
+  });
+
+  // Update Date Range Based on Calendar Selection
+  const handleCalendarChange = (range) => {
+    setDateRange(range);
+  };
+
+  // Update Date Inputs
+  const handleDateInputChange = (event) => {
+    const { name, value } = event.target;
+    const newDate = new Date(value);
+
+    if (name === "start-date") {
+      setDateRange((prev) => [newDate, prev[1]]);
+    } else if (name === "end-date") {
+      setDateRange((prev) => [prev[0], newDate]);
+    }
+  };
+
+  // Update Time Range
+  const handleTimeChange = (event) => {
+    const { name, value } = event.target;
+    setTimeRange((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Date Range:", dateRange);
+    console.log("Time Range:", timeRange);
+  };
+
   return (
     <div className="cal-box-wrapper">
       {/* Form Row */}
-      <form className="form-row">
+      <form className="form-row" onSubmit={handleSubmit}>
         {/* Class Dropdown */}
         <label htmlFor="class">
           Class:
@@ -47,34 +85,66 @@ const CreateBooking = () => {
         {/* Date Range */}
         <label htmlFor="start-date">
           Start Date:
-          <input type="date" id="start-date" name="start-date" className="form-input" />
+          <input
+            type="date"
+            id="start-date"
+            name="start-date"
+            className="form-input"
+            value={dateRange[0]?.toISOString().split("T")[0] || ""}
+            onChange={handleDateInputChange}
+          />
         </label>
 
         <label htmlFor="end-date">
           End Date:
-          <input type="date" id="end-date" name="end-date" className="form-input" />
+          <input
+            type="date"
+            id="end-date"
+            name="end-date"
+            className="form-input"
+            value={dateRange[1]?.toISOString().split("T")[0] || ""}
+            onChange={handleDateInputChange}
+          />
         </label>
 
         {/* Time Range */}
         <label htmlFor="start-time">
           Start Time:
-          <input type="time" id="start-time" name="start-time" className="form-input" />
+          <input
+            type="time"
+            id="start-time"
+            name="startTime"
+            className="form-input"
+            value={timeRange.startTime}
+            onChange={handleTimeChange}
+          />
         </label>
 
         <label htmlFor="end-time">
           End Time:
-          <input type="time" id="end-time" name="end-time" className="form-input" />
+          <input
+            type="time"
+            id="end-time"
+            name="endTime"
+            className="form-input"
+            value={timeRange.endTime}
+            onChange={handleTimeChange}
+          />
         </label>
 
         {/* Book Button */}
-        <button type="submit" className="double-btn" >
+        <button type="submit" className="double-btn">
           Book
         </button>
       </form>
 
       {/* Calendar Box */}
       <div className="cal-box">
-        <p style={{ color: "red" }}>Calendar will go here.</p>
+        <Calendar
+          selectRange={true}
+          onChange={handleCalendarChange}
+          value={dateRange}
+        />
       </div>
     </div>
   );
