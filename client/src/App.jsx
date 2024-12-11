@@ -17,7 +17,15 @@ import PublicRoute from "./public-routes/publicRoutes";
 import CreateBooking from "./components/private/createBooking";
 import MemberPage from "./components/private/MemberPage";
 
+import { useEffect } from "react";
+
 function App() {
+  // Clear token on app initialization
+  useEffect(() => {
+    localStorage.removeItem("token");
+    console.log("Token cleared on app initialization");
+  }, []); // might have to remove this later
+
   return (
     <Router>
       <Header />
