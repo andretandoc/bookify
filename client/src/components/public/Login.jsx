@@ -1,22 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import MemberPage from "../private/MemberPage";
 
-
-
-
 function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
 
     try {
       const response = await axios.post(
@@ -28,9 +24,12 @@ function Login() {
         }
       );
 
-      // const token = response.data.token;
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+      //localStorage.setItem("loggedIn", true);
+
       setMessage(`Login successful!`);
-      
+      navigate("/MemberPage");
     } catch (error) {
       setMessage(
         error.response?.data?.message || "Login failed. Please try again."
@@ -84,8 +83,7 @@ function Login() {
           {message && <p className="error-message">{message}</p>}
           <div>
             <p>
-              Don't have an account?{" "}
-              <Link to="/Register">&nbsp;Register</Link>
+              Don't have an account? <Link to="/Register">&nbsp;Register</Link>
             </p>
           </div>
         </form>
@@ -93,7 +91,5 @@ function Login() {
     </main>
   );
 }
-
-
 
 export default Login;

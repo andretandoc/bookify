@@ -1,8 +1,17 @@
-import { Outlet, Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
-    const LoggedIn = window.localStorage.getItem("loggedIn")
-    return LoggedIn==="true" ? <Outlet/> : <Navigate to={"/"} />
-}
+  const token = localStorage.getItem("token");
 
-export default PrivateRoute
+  // If no token, redirect to login
+  if (!token) {
+    console.log("No token found. Redirecting to /Login");
+    return <Navigate to="/Login" />;
+  }
+
+  // If token exists, allow access to private route
+  console.log("Token found:", token);
+  return <Outlet />;
+};
+
+export default PrivateRoute;
