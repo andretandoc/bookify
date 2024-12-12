@@ -201,6 +201,16 @@ header .profile-icon:hover {
   .navbar:not(.active) {
     display: none;
   }
+
+  .nav-item::before {
+    background-color: black;
+    width:100%;
+  }
+
+  .nav-item a:hover {
+    color:#c61627;
+
+  }
 }
 
 /******************************************************************/
@@ -332,6 +342,7 @@ footer a:active {
 
 .small-btn:hover {
   background-color: #9e0918;
+  cursor: pointer
 }
 .small-btn:active {
   background-color: #9e0918;
@@ -545,38 +556,11 @@ button:focus {
 /* Karl general CSS */
 /******************************************************************/
 
-.glass-container {
-  position: relative;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 6% auto;
-  width: max-content;
-  padding: 30px 50px;
-  border-radius: 20px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
 
 label {
   margin-bottom: 10px;
-  flex-direction: row;
 }
 
-.input {
-  flex-direction: row;
-}
-
-.input-text,
-.input-date {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 45%;
-}
 
 input[type="text"],
 input[type="password"] {
@@ -610,23 +594,6 @@ input::placeholder {
   font-size: large;
 }
 
-input[type="date"] {
-  font-weight: bolder;
-  width: 125px;
-  height: min-content;
-  border: 0.1em solid white;
-  padding: 0.8em 0.9em;
-  color: rgb(160, 160, 160);
-  background: rgba(255, 255, 255);
-  &::-webkit-datetime-edit-text {
-    color: rgb(160, 160, 160);
-    padding: 0 0.3em;
-  }
-  &::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    background-size: 15px;
-  }
-}
 .register-form input[type="text"],
 .register-form input[type="password"] {
   width: 120%;
@@ -638,26 +605,51 @@ input[type="date"] {
 /* Appt History Section */
 /******************************************************************/
 
-.appt-box {
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: max-content;
-  border-radius: 20px;
-  margin: 53px auto;
-  max-height: min-content;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 20px;
-  padding-bottom: 40px;
+.appt_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 62%;
 }
 
-.title {
-  text-align: center;
-  margin-bottom: -1px;
-  margin-top: 45px;
-  font-family: "Arvo";
+.input-date {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.from-day { 
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+}
+
+.to-day { 
+  display: flex;
+  gap: 29px;
+  margin-bottom: 20px; 
+}
+
+input[type="date"] {
+  font-weight: bolder;
+  outline: none; 
+  border-radius: 10px; 
+  background: #f9f9f9; 
+  padding: 10px; 
+  width: 150px; 
+  box-sizing: border-box; 
+  height: min-content;
+  border: 1px solid grey;
+  color: rgb(160, 160, 160);
+  &::-webkit-datetime-edit-text {
+    color: rgb(160, 160, 160);
+    padding: 0 0.3em;
+  }
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    background-size: 15px;
+  }
 }
 
 .error-message {
@@ -667,14 +659,13 @@ input[type="date"] {
   font-weight: 900;
 }
 
+.appt_form .small-btn {
+  margin: 0 auto;
+}
+
 /******************************************************************/
 /* Login Section */
 /******************************************************************/
-
-.lr-box {
-  text-align: center;
-  margin: 0 auto;
-}
 
 .options {
   display: flex;
@@ -686,7 +677,12 @@ input[type="date"] {
 }
 
 .options input[type="checkbox"] {
-  margin-right: 3px; }
+  margin-right: 3px; 
+}
+
+.options input[type="checkbox"]:hover {
+  cursor: pointer;
+}
 
 .options label {
   font-size: 16px; /* Controls the font size of "Remember me" */
@@ -747,7 +743,7 @@ p a:active {
 
 .input-text {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 3px;
   width: 100%;
   padding-top: 20px;
@@ -773,7 +769,6 @@ p a:active {
   font-weight: 500;
   text-align: center;
   line-height: 50px; 
-  cursor: pointer;
   transition: all 0.2s ease; 
 }
 
@@ -793,7 +788,6 @@ p a:active {
   font-weight: 500;
   text-align: center;
   line-height: 30px; 
-  cursor: pointer;
   transition: all 0.2s ease; 
 }
 .form-box-wrapper {

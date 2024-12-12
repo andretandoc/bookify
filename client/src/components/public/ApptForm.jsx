@@ -59,82 +59,89 @@ function ApptForm() {
 
   return (
     <main className="form-box-wrapper">
-      <div className="form-box">
-      <h1 className="title">Appointment History</h1>
-      {view === "form" && (
-        <form onSubmit={handleAppt}>
-        <div className="input-text">
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-        </div>
-        <div className="input-date">
-          <label htmlFor="start-date">Start Date:</label>
-          <input
-            type="date"
-            id="start-date"
-            name="start-date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-          <label htmlFor="end-date">End Date:</label>
-          <input
-            type="date"
-            id="end-date"
-            name="end-date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-        </div>
-        <button className="small-btn" type="submit">
-          View History
-        </button>
-        {message && <p className="error-message">{message}</p>}
-      </form>
-      )}
-      
-
-      {view === "list" && appointments.length > 0 && (
-        <div className="appointments-list">
-          <h2>Appointments:</h2>
-          {appointments.map((appointment, index) => (
-            <div key={appointment._id || index} className="appointment">
-              <h3>Appointment {index + 1}</h3>
-              <p>
-                <strong>First Name:</strong> {appointment.firstName}
-              </p>
-              <p>
-                <strong>Last Name:</strong> {appointment.lastName}
-              </p>
-              <p>
-                <strong>Email:</strong> {appointment.email}
-              </p>
-              <p>
-                <strong>Start Date:</strong>{" "}
-                {new Date(appointment.startDate).toLocaleString()}
-              </p>
-              <p>
-                <strong>End Date:</strong>{" "}
-                {new Date(appointment.endDate).toLocaleString()}
-              </p>
-              <p>
-                <strong>Status:</strong> {appointment.status}
-              </p>
-              <hr />
+        <div className="form-box">
+          <h1 className="title">Appointment History</h1>
+          
+          {/* Form View */}
+          {view === "form" && (
+            <form className="appt_form" onSubmit={handleAppt}>
+              <div className="input-text">
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <br />
+              </div>
+              <div className="input-date">
+                <div className="from-day">
+                  <label htmlFor="start-date">Start Date:</label>
+                  <input
+                    type="date"
+                    id="start-date"
+                    name="start-date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                  />
+                </div>
+                <div className="to-day">
+                  <label htmlFor="end-date">End Date:</label>
+                  <input
+                    type="date"
+                    id="end-date"
+                    name="end-date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                  />
+                </div>
+              </div>
+              <button className="small-btn" type="submit">
+                View History
+              </button>
+              {message && <p className="error-message">{message}</p>}
+            </form>
+          )}
+          
+          {/* List View */}
+          {view === "list" && appointments.length > 0 && (
+            <div className="appointments-list">
+              <h2>Appointments:</h2>
+              {appointments.map((appointment, index) => (
+                <div key={appointment._id || index} className="appointment">
+                  <h3>Appointment {index + 1}</h3>
+                  <p>
+                    <strong>First Name:</strong> {appointment.firstName}
+                  </p>
+                  <p>
+                    <strong>Last Name:</strong> {appointment.lastName}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {appointment.email}
+                  </p>
+                  <p>
+                    <strong>Start Date:</strong> {new Date(appointment.startDate).toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>End Date:</strong> {new Date(appointment.endDate).toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>Status:</strong> {appointment.status}
+                  </p>
+                  <hr />
+                </div>
+              ))}
+              <button className="btn" onClick={handleGoBack}>
+                Go Back
+              </button>
             </div>
-          ))}
-            <button className="btn" onClick={handleGoBack}> Go Back </button>
+          )}
         </div>
-      )}
-    </div>
-    </main>
+      </main>
   );
+
 }
 
 export default ApptForm;
