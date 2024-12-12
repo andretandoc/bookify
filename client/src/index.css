@@ -951,3 +951,194 @@ input[type="time"] {
   text-transform: uppercase; /* Uppercase weekday labels */
   margin-bottom: 10px; /* Space below weekdays */
 }
+
+/*******************************************************/
+              /* Meeting list CSS */
+/*******************************************************/
+
+.meeting-list {
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+  position: absolute;
+  list-style: none;
+  margin-left: 60px;
+}
+
+.meeting-list p {
+  font-size: 17px;
+}
+
+.meeting-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  height: 80px;
+  width: fit-content ;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.meeting {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-content: center;
+}
+
+.zoom-btn {
+  background-color: #0027d7;
+  border: none;
+  border-radius: 20px;
+  width: max-content;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 40px;
+}
+
+.zoom-btn:hover {
+  background-color: #0022a9;
+}
+
+.zoom-btn:active {
+  transform: translateY(1px);
+  background-color: #0a207b;
+}
+
+.manage-btn {
+  background-color: #747474;
+  border: none;
+  border-radius: 20px;
+  width: max-content;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 40px;
+}
+
+.manage-btn:hover {
+  background-color: #666666;
+}
+
+
+.manage-btn:active {
+  transform: translateY(1px);
+  background-color: #4e4e4e;
+}
+
+
+.accept-btn {
+  background-color: #01953a;
+  border: none;
+  border-radius: 20px;
+  width: max-content;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 39px;
+}
+
+.accept-btn:hover {
+  background-color: #01722c;
+}
+
+
+.accept-btn:active {
+  transform: translateY(1px);
+  background-color: #016929;
+}
+
+
+.reject-btn {
+  background-color: #b30000;
+  border: none;
+  border-radius: 20px;
+  width: max-content;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 41px;
+}
+
+.reject-btn:hover {
+  background-color: #9a0101;
+}
+
+
+.reject-btn:active {
+  transform: translateY(1px);
+  background-color: #830101;
+}
+
+
+.request-btn {
+  background-color: #db6300;
+  border: none;
+  border-radius: 20px;
+  width: max-content;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 42px;
+}
+
+.request-btn:hover {
+  background-color: #c85a00;
+}
+
+
+.request-btn:active {
+  transform: translateY(1px);
+  background-color: #ab4e01;
+}
+
+
+.accepted {
+  background-color: #01953a;
+  border: none;
+  border-radius: 20px;
+  width: max-content;
+  color: white;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 40px;
+}
+
+.pending {
+  background-color: #db6300;
+  border: none;
+  border-radius: 20px;
+  width: max-content;
+  color: white;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 42px;
+}
+
+.rejected {
+  background-color: #b30000;
+  border: none;
+  border-radius: 20px;
+  width: max-content;
+  color: white;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 41px;
+}

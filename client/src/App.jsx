@@ -18,6 +18,7 @@ import CreateBooking from "./components/private/createBooking";
 import MemberPage from "./components/private/MemberPage";
 
 import { useEffect } from "react";
+import MeetingList from "./components/private/MeetingList";
 
 function App() {
   // Clear token on app initialization
@@ -43,6 +44,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/MemberPage" element={<MemberPage />} />
           <Route path="/CreateBooking" element={<CreateBooking />} />
+          <Route path="/MeetingList" element={<MeetingList />} />
         </Route>
 
         {/* Catch-all route for 404s */}
