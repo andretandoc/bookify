@@ -7,6 +7,7 @@ import HomeBody from "./components/public/HomeBody";
 import Login from "./components/public/Login";
 import Register from "./components/public/Register";
 import ApptForm from "./components/public/ApptForm";
+import BookingForm from "./components/public/BookingForm";
 
 // Route protection
 import PrivateRoute from "./private-routes/privateRoutes";
@@ -34,6 +35,7 @@ function App() {
         <Route element={<PublicRoute />}>
           <Route path="/" element={<HomeBody />} />
           <Route path="/ApptForm" element={<ApptForm />} />
+          <Route path="/BookingForm" element={<BookingForm />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
         </Route>
