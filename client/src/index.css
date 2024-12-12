@@ -28,13 +28,13 @@ body {
 /* Add a black transparent filter over the image */
 body::before {
   content: "";
-  position: absolute; /* Cover the entire page */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* Ensure it stretches beyond the viewport */
+  height: 100%; 
   background-color: rgba(0, 0, 0, 0.75);
-  z-index: 0; /* Keep it below other content */
+  z-index: 0; 
 }
 
 /******************************************************************/
@@ -577,7 +577,6 @@ input[type="text"],
 input[type="password"] {
   color: #333; 
   appearance: none; 
-  
   border: 1px solid grey;
   outline: none; 
   border-radius: 10px; 
@@ -645,6 +644,9 @@ input[type="date"] {
 
 .title {
   text-align: center;
+  margin-bottom: -1px;
+  margin-top: 45px;
+  font-family: "Arvo";
 }
 
 .error-message {
@@ -669,14 +671,14 @@ input[type="date"] {
   justify-content: flex-start; 
   margin-top: 15px; 
   margin-bottom: 15px; 
+  margin-right: auto;
 }
 
 .options input[type="checkbox"] {
-  margin-right: 1px; 
-}
+  margin-right: 3px; }
 
 .options label {
-  font-size: 14px; /* Controls the font size of "Remember me" */
+  font-size: 16px; /* Controls the font size of "Remember me" */
   color: #c61627; /* Changes the color to dark grey for better readability */
 }
 
@@ -689,14 +691,13 @@ input[type="date"] {
   text-decoration: none;
   color: #c61627;
   font-weight: bold;
-  margin-left: auto;
+  margin-left: 40px;
   margin-top: -9px;
   font-size: 15px;
 }
 
 .options a:hover {
   color: #9b0f1f;
-  font-weight: bold;
 }
 
 .options a:active {
@@ -735,9 +736,9 @@ p a:active {
 
 .input-text {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 3px;
-  width: 45%;
+  width: 100%;
   padding-top: 20px;
 }
 
@@ -769,12 +770,12 @@ p a:active {
 .form-box {
   display: flex;
   flex-direction: column;
-  width: 500px; 
+  width: 450px; 
   height: 500px; 
   position: relative;
   align-items: center;
   background-color: white;
-  box-shadow: -10px -10px 1px rgba(198, 22, 39); 
+  box-shadow: -15px -15px 1px rgba(198, 22, 39); 
   color: #c61627;
   font-size: 19.7px;
   font:'Lato';

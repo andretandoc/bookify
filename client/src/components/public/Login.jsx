@@ -40,7 +40,7 @@ function Login() {
   return (
     <main className="form-box-wrapper">
       <div className="form-box">
-        <h1 className="title">Welcome Back</h1>
+        <h1 className="title">Welcome Back !</h1>
         <form id="login_form" action="" method="">
           <div className="input-text">
             <input
