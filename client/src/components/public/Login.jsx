@@ -4,7 +4,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import MemberPage from "../private/MemberPage";
 
-function Login() {
+function Login({ setIsLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -26,6 +26,7 @@ function Login() {
 
       const token = response.data.token;
       localStorage.setItem("token", token);
+      setIsLoggedIn(true);
       //localStorage.setItem("loggedIn", true);
 
       setMessage(`Login successful!`);

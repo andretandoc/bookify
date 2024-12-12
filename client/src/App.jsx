@@ -7,7 +7,7 @@ import HomeBody from "./components/public/HomeBody";
 import Login from "./components/public/Login";
 import Register from "./components/public/Register";
 import ApptForm from "./components/public/ApptForm";
-import BookingForm from "./components/public/BookingForm"
+import BookingForm from "./components/public/BookingForm";
 
 // Route protection
 import PrivateRoute from "./private-routes/privateRoutes";
@@ -17,31 +17,44 @@ import PublicRoute from "./public-routes/publicRoutes";
 import CreateBooking from "./components/private/createBooking";
 import MemberPage from "./components/private/MemberPage";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import MeetingList from "./components/private/MeetingList";
 
 function App() {
-  // Clear token on app initialization
-  useEffect(() => {
-    localStorage.removeItem("token");
-    console.log("Token cleared on app initialization");
-  }, []); // might have to remove this later
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => !!localStorage.getItem("token")
+  );
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear the token
+    setIsLoggedIn(false); // Set logged in state to false
+    window.location.href = "/"; // Redirect to the landing page
+  };
+
+  // // Clear token on app initialization
+  // useEffect(() => {
+  //   localStorage.removeItem("token");
+  //   console.log("Token cleared on app initialization");
+  // }, []); // might have to remove this later
 
   return (
     <Router>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <Routes>
         {/* Public Routes */}
-        <Route element={<PublicRoute />}>
+        <Route element={<PublicRoute isLoggedIn={isLoggedIn} />}>
           <Route path="/" element={<HomeBody />} />
           <Route path="/ApptForm" element={<ApptForm />} />
           <Route path="/BookingForm" element={<BookingForm />} />
-          <Route path="/Login" element={<Login />} />
+          <Route
+            path="/Login"
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          />
           <Route path="/Register" element={<Register />} />
         </Route>
 
         {/* Private Routes */}
-        <Route element={<PrivateRoute />}>
+        <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
           <Route path="/MemberPage" element={<MemberPage />} />
           <Route path="/CreateBooking" element={<CreateBooking />} />
           <Route path="/MeetingList" element={<MeetingList />} />

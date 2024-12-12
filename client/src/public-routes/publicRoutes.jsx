@@ -1,17 +1,17 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 const PublicRoute = () => {
-    const token = localStorage.getItem("token");
-    // If no token, redirect to login
-    if (token) {
-        console.log("No token found. Redirecting to /Login");
-        return <Navigate to="/" />;
-    }
+  const token = localStorage.getItem("token");
 
-    // If token exists, allow access to private route
-    console.log("Token found:", token);
-    return <Outlet />;
-    
-}
+  // If a token exists, redirect logged-in users to the private dashboard
+  if (token) {
+    console.log("Token found. Redirecting to /MemberPage");
+    return <Navigate to="/MemberPage" />;
+  }
 
-export default PublicRoute
+  // If no token exists, allow access to public pages
+  console.log("No token found. Allowing access to public routes");
+  return <Outlet />;
+};
+
+export default PublicRoute;
