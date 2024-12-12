@@ -13,7 +13,7 @@ function Header() {
 
     useEffect(() => {
         // Replace with your actual authentication logic
-        const userLoggedIn = Boolean(localStorage.getItem("authToken"));
+        const userLoggedIn = Boolean(localStorage.getItem("token"));
         setIsAuthenticated(userLoggedIn);
     }, []);
 
@@ -31,22 +31,22 @@ function Header() {
               // Private Header Links
               <>
                 <div className="nav-item">
-                  <Link to="/">Home</Link>
+                  <Link to="/MemberPage">Home</Link>
                 </div>
                 <div className="nav-item">
-                  <Link to="/">Online Meeting</Link>
+                  <Link to="/MemberPage">Online Meeting</Link>
                 </div>
                 <div className="nav-item">
-                  <Link to="/">Book Meeting</Link>
+                  <Link to="/MemberPage">Book Meeting</Link>
                 </div>
                 <div className="nav-item">
-                  <Link to="/">Custom Meeting</Link>
+                  <Link to="/MemberPage">Custom Meeting</Link>
                 </div>
                 <div className="nav-item">
-                  <Link to="/">Create Meeting</Link>
+                  <Link to="/MemberPage">Create Meeting</Link>
                 </div>
                 <div className="nav-item">
-                  <Link to="/">Manage Meeting</Link>
+                  <Link to="/MemberPage">Manage Meeting</Link>
                 </div>
                 <div className="nav-item">
                   <Link to="/">Log Out</Link>
