@@ -32,9 +32,10 @@ function Register() {
   };
 
   return (
-    <div class="glass-container">
-      <h1 class="title">Sign Up</h1>
-      <form id="login_form" action="" method="">
+    <main className="form-box-wrapper">
+      <div className="form-box">
+      <h1 class="title">Register with Bookify</h1>
+      <form id="register_form" className="register-form" action="" method="">
         <div class="input-text">
           <input
             type="text"
@@ -67,7 +68,7 @@ function Register() {
           />{" "}
           <br />
         </div>
-        <button class="btn" type="submit" onClick={handleRegister}>
+        <button class="small-btn" type="submit" onClick={handleRegister}>
           Sign Up
         </button>
         {message && <p>{message}</p>}
@@ -79,6 +80,7 @@ function Register() {
         </div>
       </form>
     </div>
+    </main>
   );
 }
 

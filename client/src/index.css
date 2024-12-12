@@ -339,6 +339,11 @@ footer a:active {
   transform: translateY(1px);
 }
 
+.register-form .small-btn {
+  margin-top: 40px; /* Adjust spacing as needed */
+}
+
+
 .btn {
   font-size: medium;
   width: 100%;
@@ -621,6 +626,12 @@ input[type="date"] {
     cursor: pointer;
     background-size: 15px;
   }
+}
+.register-form input[type="text"],
+.register-form input[type="password"] {
+  width: 120%;
+  margin-top: -10px;
+  margin-left: -25px;
 }
 
 /******************************************************************/
