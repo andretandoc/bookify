@@ -58,7 +58,8 @@ function ApptForm() {
   //   console.log("Appointments State:", appointments);
 
   return (
-    <div className="appt-box">
+    <main className="form-box-wrapper">
+      <div className="form-box">
       <h1 className="title">Appointment History</h1>
       {view === "form" && (
         <form onSubmit={handleAppt}>
@@ -91,8 +92,8 @@ function ApptForm() {
             onChange={(e) => setEndDate(e.target.value)}
           />
         </div>
-        <button className="btn" type="submit">
-          Get Appointments
+        <button className="small-btn" type="submit">
+          View History
         </button>
         {message && <p className="error-message">{message}</p>}
       </form>
@@ -132,6 +133,7 @@ function ApptForm() {
         </div>
       )}
     </div>
+    </main>
   );
 }
 
