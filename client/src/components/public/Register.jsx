@@ -11,6 +11,13 @@ function Register() {
   const handleRegister = async (event) => {
     event.preventDefault();
 
+    // Check if all fields are filled
+    if (!email || !password || !confirmation) {
+      setMessage("All fields are required. Please fill them out.");
+      return;
+    }
+
+    // Check if passwords match
     if (password != confirmation) {
       setMessage("Password inputs don't match");
       return;
@@ -34,52 +41,52 @@ function Register() {
   return (
     <main className="form-box-wrapper">
       <div className="form-box">
-      <h1 class="title">Register with Bookify</h1>
-      <form id="register_form" className="register-form" action="" method="">
-        <div class="input-text">
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />{" "}
-          <br />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />{" "}
-          <br />
-          <input
-            type="password"
-            id="confirmation"
-            name="confirmation"
-            placeholder="Confirm password"
-            value={confirmation}
-            onChange={(e) => setConfirmation(e.target.value)}
-            required
-          />{" "}
-          <br />
-        </div>
-        <button class="small-btn" type="submit" onClick={handleRegister}>
-          Sign Up
-        </button>
-        {message && <p>{message}</p>}
-        <div>
-          <p>
-            Already have an account?{" "}
-            <Link to="/Login">&nbsp;&nbsp;Login</Link>
-          </p>
-        </div>
-      </form>
-    </div>
+        <h1 class="title">Register with Bookify</h1>
+        <form id="register_form" className="register-form" action="" method="">
+          <div class="input-text">
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />{" "}
+            <br />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />{" "}
+            <br />
+            <input
+              type="password"
+              id="confirmation"
+              name="confirmation"
+              placeholder="Confirm password"
+              value={confirmation}
+              onChange={(e) => setConfirmation(e.target.value)}
+              required
+            />{" "}
+            <br />
+          </div>
+          <button class="small-btn" type="submit" onClick={handleRegister}>
+            Sign Up
+          </button>
+          {message && <p>{message}</p>}
+          <div>
+            <p>
+              Already have an account?{" "}
+              <Link to="/Login">&nbsp;&nbsp;Login</Link>
+            </p>
+          </div>
+        </form>
+      </div>
     </main>
   );
 }
