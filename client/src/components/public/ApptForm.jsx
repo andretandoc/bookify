@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate} from "react-router-dom";
 
 function ApptForm() {
   const [email, setEmail] = useState("");
@@ -7,7 +8,7 @@ function ApptForm() {
   const [endDate, setEndDate] = useState("");
   const [message, setMessage] = useState("");
   const [appointments, setAppointments] = useState([]);
-  const [view, setView] = useState("form"); // Tracks the current view (form or list)
+  const navigate = useNavigate();
 
   const handleAppt = async (event) => {
     event.preventDefault();
@@ -41,7 +42,7 @@ function ApptForm() {
         setMessage("No appointments found");
       } else {
         setAppointments(response.data.appointments); // Save appointments in state
-        setView("list"); // Switch to the list view
+        navigate("/ApptList", { state: { appointments: response.data.appointments } });
       }
     } catch (error) {
       setMessage(
@@ -50,10 +51,7 @@ function ApptForm() {
     }
   };
 
-  const handleGoBack = () => {
-    setView("form"); // Switch back to the form view
-    setAppointments([]); // Reset appointments
-  };
+  
 
   //   console.log("Appointments State:", appointments);
 
@@ -61,9 +59,6 @@ function ApptForm() {
     <main className="form-box-wrapper">
         <div className="form-box">
           <h1 className="title">Appointment History</h1>
-          
-          {/* Form View */}
-          {view === "form" && (
             <form className="appt_form" onSubmit={handleAppt}>
               <div className="input-text">
                 <input
@@ -98,46 +93,9 @@ function ApptForm() {
                   />
                 </div>
               </div>
-              <button className="small-btn" type="submit">
-                View History
-              </button>
+              <button className="small-btn" type="submit">View History</button>
               {message && <p className="error-message">{message}</p>}
             </form>
-          )}
-          
-          {/* List View */}
-          {view === "list" && appointments.length > 0 && (
-            <div className="appointments-list">
-              <h2>Appointments:</h2>
-              {appointments.map((appointment, index) => (
-                <div key={appointment._id || index} className="appointment">
-                  <h3>Appointment {index + 1}</h3>
-                  <p>
-                    <strong>First Name:</strong> {appointment.firstName}
-                  </p>
-                  <p>
-                    <strong>Last Name:</strong> {appointment.lastName}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {appointment.email}
-                  </p>
-                  <p>
-                    <strong>Start Date:</strong> {new Date(appointment.startDate).toLocaleString()}
-                  </p>
-                  <p>
-                    <strong>End Date:</strong> {new Date(appointment.endDate).toLocaleString()}
-                  </p>
-                  <p>
-                    <strong>Status:</strong> {appointment.status}
-                  </p>
-                  <hr />
-                </div>
-              ))}
-              <button className="btn" onClick={handleGoBack}>
-                Go Back
-              </button>
-            </div>
-          )}
         </div>
       </main>
   );
