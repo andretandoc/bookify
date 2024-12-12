@@ -62,9 +62,6 @@ function Header() {
                   <Link to="/ApptForm">History</Link>
                 </div>
                 <div className="nav-item">
-                  <Link to="/BookingForm">Booking</Link>
-                </div>
-                <div className="nav-item">
                   <Link to="/Login">Login</Link>
                 </div>
                 <div className="nav-item">
