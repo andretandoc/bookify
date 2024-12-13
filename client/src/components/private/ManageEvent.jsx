@@ -64,157 +64,150 @@ export default function ManageEvent() {
     return (
         <main>
             <div class="container">
-        <h2>Active Appointments:</h2>
+        <h2>My Active Events:</h2>
             <div class="table-wrapper">
                 <ul class="responsive-table">
                     <li class="table-header">
-                    <div class="col">Event</div>
-                    <div class="col">Host</div>
-                    <div class="col">Email</div>
-                    <div class="col">Date & Time</div>
+                    <div class="col">Name</div>
+                    <div class="col">Date</div>
+                    <div class="col">From</div>
+                    <div class="col">To</div>
                     <div class="col">Location</div>
-                    <div class="col"></div>
+                    <div class="col">Recurring</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Joseph V</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
+                    <div class="col" data-label="Name">Review Session : COMP307</div>
+                    <div class="col" data-label="Date">12/12/2024</div>
+                    <div class="col" data-label="From">9:00am</div>
+                    <div class="col" data-label="To">12:00pm</div>
                     <div class="col" data-label="Location">McEng 3rd Floor</div>
-                    <div class="col"><button className="reject-btn" onClick={() => openModal(1)}>Cancel Meeting &#10060;</button></div>
+                    <div class="col" data-label="Recurring">No</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP424</div>
-                    <div class="col" data-label="Host">David Meger</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    <div class="col"><button className="reject-btn" onClick={() => openModal(2)}>Cancel Meeting &#10060;</button></div>
+                    <div class="col" data-label="Name">Office Hours : COMP307</div>
+                    <div class="col" data-label="Date">19/12/2024</div>
+                    <div class="col" data-label="From">11:00am</div>
+                    <div class="col" data-label="To">1:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">Yes</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP330</div>
-                    <div class="col" data-label="Host">Waldisphul</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    <div class="col"><button className="reject-btn" onClick={() => openModal(3)}>Cancel Meeting &#10060;</button></div>
+                    <div class="col" data-label="Name">Office Hours : COMP307</div>
+                    <div class="col" data-label="Date">26/12/2024</div>
+                    <div class="col" data-label="From">11:00am</div>
+                    <div class="col" data-label="To">1:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">Yes</div>
                     </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    <div class="col"><button className="reject-btn" onClick={() => openModal(4)}>Cancel Meeting &#10060;</button></div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    <div class="col"><button className="reject-btn" onClick={() => openModal(5)}>Cancel Meeting &#10060;</button></div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    <div class="col"><button className="reject-btn" onClick={() => openModal(6)}>Cancel Meeting &#10060;</button></div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    <div class="col"><button className="reject-btn" onClick={() => openModal(7)}>Cancel Meeting &#10060;</button></div>
-                    </li>
+                    
                 </ul>
+            </div>
+            <div className="cancel-form-box">
+                <form className="cancel-form">
+                    <div className="select-event">
+                    <p>Select event to cancel:</p>
+                    <select className="dropdown-event" name="event">
+                        <option value="" disabled> Select an option </option>
+                        <option type="dropdown" className="events" name="events" value="Review Session">Comp 307 : Review Session</option>
+                        <option type="dropdown" className="events" name="events" value="Office hours">Comp 307 : Office Hours</option>
+                    </select>
+                    </div>
+                    
+                    
+                    <div className="cancel-from">
+                        <label htmlFor="start-date">From:</label>
+                        <input
+                            type="date"
+                            id="start-date"
+                            name="start-date"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                        />
+                        </div>
+                    
+                    <div className="cancel-to">
+                        <label htmlFor="end-date">To:</label>
+                        <input
+                            type="date"
+                            id="end-date"
+                            name="end-date"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                        />
+                    </div>
+                </form>
+                <div class="col"><button className="reject-btn" onClick={() => openModal(10)}>Cancel Event &#10060;</button></div>
+
             </div>
         </div>
 
         <div class="container">
-        <h2>Past Appointments:</h2>
+        <h2>My Past Events:</h2>
             <div class="table-wrapper">
                 <ul class="responsive-table">
-                    <li class="table-header">
-                    <div class="col">Event</div>
-                    <div class="col">Host</div>
-                    <div class="col">Email</div>
-                    <div class="col">Date & Time</div>
-                    <div class="col">Location</div> 
+                <li class="table-header">
+                    <div class="col">Name</div>
+                    <div class="col">Date</div>
+                    <div class="col">From</div>
+                    <div class="col">To</div>
+                    <div class="col">Location</div>
+                    <div class="col">Recurring</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
+                    <div class="col" data-label="Name">Review Session : COMP307</div>
+                    <div class="col" data-label="Date">12/12/2024</div>
+                    <div class="col" data-label="From">9:00am</div>
+                    <div class="col" data-label="To">12:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">No</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
+                    <div class="col" data-label="Name">Office Hours : COMP307</div>
+                    <div class="col" data-label="Date">19/12/2024</div>
+                    <div class="col" data-label="From">11:00am</div>
+                    <div class="col" data-label="To">1:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">Yes</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
+                    <div class="col" data-label="Name">Office Hours : COMP307</div>
+                    <div class="col" data-label="Date">26/12/2024</div>
+                    <div class="col" data-label="From">11:00am</div>
+                    <div class="col" data-label="To">1:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">Yes</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
+                    <div class="col" data-label="Name">Office Hours : COMP307</div>
+                    <div class="col" data-label="Date">02/01/2025</div>
+                    <div class="col" data-label="From">11:00am</div>
+                    <div class="col" data-label="To">1:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">Yes</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
+                    <div class="col" data-label="Name">Office Hours : COMP307</div>
+                    <div class="col" data-label="Date">09/01/2025</div>
+                    <div class="col" data-label="From">11:00am</div>
+                    <div class="col" data-label="To">1:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">Yes</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
+                    <div class="col" data-label="Name">Office Hours : COMP307</div>
+                    <div class="col" data-label="Date">09/01/2025</div>
+                    <div class="col" data-label="From">11:00am</div>
+                    <div class="col" data-label="To">1:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">Yes</div>
                     </li>
                     <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Host">Office Hours : COMP307</div>
-                    <div class="col" data-label="Host">Karl Wehbe</div>
-                    <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                    <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                    <div class="col" data-label="Location">Mcgill</div>
+                    <div class="col" data-label="Name">Office Hours : COMP307</div>
+                    <div class="col" data-label="Date">09/01/2025</div>
+                    <div class="col" data-label="From">11:00am</div>
+                    <div class="col" data-label="To">1:00pm</div>
+                    <div class="col" data-label="Location">McEng 3rd Floor</div>
+                    <div class="col" data-label="Recurring">Yes</div>
                     </li>
                 </ul>
             </div>
@@ -236,14 +229,3 @@ export default function ManageEvent() {
     );
 }
 
-const style = {
-    btn: {
-        color: "white",
-        textDecoration: "none",
-        fontSize: "16px",
-        cursor: "pointer",
-        display: "block",
-        width: "100%",
-        fontWeight: "bold",
-    }
-}

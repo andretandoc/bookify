@@ -29,7 +29,7 @@ function Header({ isLoggedIn, onLogout }) {
                 <Link to="/CreateBooking">Create Meeting</Link>
               </div>
               <div className="nav-item">
-                <Link to="/CustomMeeting">Request a Custom Meeting</Link>
+                <Link to="/CustomMeeting">Custom Meeting</Link>
               </div>
               <div className="nav-item">
                 <Link to="/ManageBooking">Manage Meeting</Link>

@@ -132,7 +132,7 @@ export default function ManageBooking () {
                     </li>
                 </ul>
             </div>
-            <div class="list-btn"><p>Request a custom meeting:</p><button className="request-btn"><Link to="/CustomBooking" style={style.btn}>Custom Meeting</Link></button></div>
+            <div class="list-btn"><p>Request a custom meeting:</p><button className="request-btn"><Link to="/CustomMeeting" style={style.btn}>Custom Meeting</Link></button></div>
         </div>
 
         <div class="container">

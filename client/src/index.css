@@ -640,7 +640,7 @@ input[type="date"] {
   box-sizing: border-box; 
   height: min-content;
   border: 1px solid grey;
-  color: rgb(160, 160, 160);
+  color: black;
   &::-webkit-datetime-edit-text {
     color: rgb(160, 160, 160);
     padding: 0 0.3em;
@@ -1224,7 +1224,7 @@ strong {
 }
 
 /*******************************************************/
-              /* Manage Meeting CSS */
+                /* Manage Meeting CSS */
 /*******************************************************/
 
 .responsive-table {
@@ -1368,4 +1368,76 @@ strong {
 .btn-cancel:hover {
   background-color: #c0392b;
 }
+
+
+/*******************************************************/
+                /*  Manage Event CSS */
+/*******************************************************/
+
+.cancel-form-box {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;  
+  gap: 30px;
+}
+
+.cancel-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap:50px;
+}
+
+.select-event {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cancel-from {
+  padding-top: 3px;
+  display: flex;
+  align-items: center;
+  gap : 20px;
+}
+
+.cancel-from label {
+  padding-top: 7px;
+}
+
+.cancel-to {
+  padding-top: 3px;
+  display: flex;
+  align-items: center;
+  gap : 20px;
+}
+
+.cancel-to label {
+  padding-top: 10px;
+}
+
+.dropdown-event {
+  border-radius: 10px;
+  text-align: center;
+  background: #f9f9f9; 
+  font-size: small;
+  width: 200px;
+  height: 40px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.dropdown-event:hover {
+  cursor: pointer;
+}
+
+
+.select-event p {
+  font-size: 17px;
+}
+
+
 
