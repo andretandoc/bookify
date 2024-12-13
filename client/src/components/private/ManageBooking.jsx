@@ -243,11 +243,11 @@ const style = {
     btn: {
         color: "white",
         textDecoration: "none",
-        fontSize: "16px",
+        fontSize: "15px",
         cursor: "pointer",
         display: "block",
         width: "100%",
-        fontWeight: "bold",
+        fontWeight: "400",
     }
 }
 
