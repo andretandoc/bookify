@@ -398,7 +398,7 @@ button:focus {
   align-items: center;
   text-align: center;
   z-index: 1;
-  margin: 40px auto;
+  margin: 35px auto;
   gap: 80px;
 }
 
@@ -1405,8 +1405,9 @@ strong {
 }
 
 .cancel-from label {
-  padding-top: 7px;
-}
+    padding-top: 8px;
+  }
+  
 
 .cancel-to {
   padding-top: 3px;
