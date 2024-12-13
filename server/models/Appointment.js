@@ -8,6 +8,9 @@ const AppointmentSchema = new mongoose.Schema({
   endDate: { type: Date, required: true },
   status: { type: String, enum: ["active", "past"], default: "active" }, // Status could be either 'active' or 'past'
   notes: { type: String }, // Optional notes about the meeting
+  event: { type: String, required: true },
+  host: { type: String, required: true },
+  location: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Appointment", AppointmentSchema);

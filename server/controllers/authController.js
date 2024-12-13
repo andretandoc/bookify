@@ -33,7 +33,12 @@ const registerMember = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create new member using Member model
-    const newMember = new Member({ fname, lname, email, password: hashedPassword });
+    const newMember = new Member({
+      fname,
+      lname,
+      email,
+      password: hashedPassword,
+    });
     await newMember.save(); // Save member to db
 
     res.status(201).json({ message: "Member registered successfully" });
@@ -63,9 +68,11 @@ const loginMember = async (req, res) => {
     // Generate JWT token if password is correct
     console.log("JWT_SECRET:", process.env.JWT_SECRET);
     const tokenExpiry = rememberMe ? "7d" : "1h";
-    const token = jwt.sign({ id: member._id }, process.env.JWT_SECRET, {
-      expiresIn: tokenExpiry,
-    });
+    const token = jwt.sign(
+      { id: member._id, email: member.email }, // Include email in token
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
     res.json({ token });
   } catch (error) {

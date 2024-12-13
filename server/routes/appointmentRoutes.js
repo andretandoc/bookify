@@ -1,8 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { getAppointments } = require("../controllers/appointmentsController");
+const {
+  getAppointmentsPublic,
+  getAppointmentsPrivate,
+} = require("../controllers/appointmentsController");
+const { authenticateToken } = require("../middleware/authMiddleware");
 
-// Get appointments based on filters
-router.get("/", getAppointments);
+// Get public appointments
+router.get("/", getAppointmentsPublic);
+
+// Get private appointments
+router.get("/private", authenticateToken, getAppointmentsPrivate);
 
 module.exports = router;

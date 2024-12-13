@@ -1,7 +1,7 @@
 const Appointment = require("../models/Appointment");
 
 // Fetch appointments based on filters
-const getAppointments = async (req, res) => {
+const getAppointmentsPublic = async (req, res) => {
   try {
     const {
       firstName,
@@ -46,4 +46,33 @@ const getAppointments = async (req, res) => {
   }
 };
 
-module.exports = { getAppointments };
+const getAppointmentsPrivate = async (req, res) => {
+  try {
+    const { email } = req.user; // Assuming email is extracted from the token
+    console.log("Fetching appointments for email:", email); // Debugging
+    const currentDate = new Date();
+
+    const activeAppointments = await Appointment.find({
+      email: email,
+      startDate: { $gte: currentDate }, // Future appointments
+    });
+
+    const pastAppointments = await Appointment.find({
+      email: email,
+      startDate: { $lt: currentDate }, // Past appointments
+    });
+
+    console.log("Active Appointments:", activeAppointments); // Debugging
+    console.log("Past Appointments:", pastAppointments); // Debugging
+
+    res.status(200).json({
+      activeAppointments,
+      pastAppointments,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch appointments" });
+  }
+};
+
+module.exports = { getAppointmentsPublic, getAppointmentsPrivate };

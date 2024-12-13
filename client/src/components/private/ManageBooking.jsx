@@ -1,256 +1,179 @@
 import { useState, useEffect } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import { Link } from "react-router-dom";
 
+export default function ManageBooking() {
+  //   const [email, setEmail] = useState("");
+  //   const [startDate, setStartDate] = useState("");
+  //   const [endDate, setEndDate] = useState("");
+  const [message, setMessage] = useState("");
+  const [appointments, setAppointments] = useState({
+    active: [],
+    past: [],
+  });
 
-export default function ManageBooking () {
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      setAppointments({ active: [], past: [] }); // Ensure proper default structure
+      setMessage("");
 
-    const [email, setEmail] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [message, setMessage] = useState("");
-    const [appointments, setAppointments] = useState([]);
+      const token = localStorage.getItem("token");
+      console.log("Token in Frontend:", token); // Debugging
 
-    useEffect(() => {
-        const fetchAppointments = async () => {
-            setAppointments([]);
-            setMessage("");
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          "http://localhost:5005/api/appointments/private",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
-            try {
-                const response = await axios.get(
-                    "http://localhost:5005/api/appointments",
-                    {
-                        params: {
-                            token, // Make sure `token` is properly defined in your actual code
-                        },
-                    }
-                );
-
-                if (response.data.length === 0) {
-                    setMessage("No appointments found");
-                } else {
-                    setAppointments(response.data.appointments);
-                }
-            } catch (error) {
-                setMessage(
-                    error.response?.data?.message || "Failed to retrieve appointments!"
-                );
-            }
-        };
-        fetchAppointments();
-    }, []); // Empty dependency array ensures it runs once on component mount
-
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedMeeting, setSelectedMeeting] = useState(null);
-
-    const openModal = (meetingId) => {
-        setSelectedMeeting(meetingId);
-        setIsModalOpen(true);
+        if (
+          response.data.activeAppointments.length === 0 &&
+          response.data.pastAppointments.length === 0
+        ) {
+          setMessage("No appointments found");
+        } else {
+          setAppointments({
+            active: response.data.activeAppointments || [],
+            past: response.data.pastAppointments || [],
+          });
+        }
+      } catch (error) {
+        setMessage(
+          error.response?.data?.message || "Failed to retrieve appointments!"
+        );
+      }
     };
+    fetchAppointments();
+  }, []);
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setSelectedMeeting(null);
-    };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMeeting, setSelectedMeeting] = useState(null);
 
-    const confirmCancel = () => {
-        console.log(`Meeting ${selectedMeeting} cancelled`);
-        closeModal();
-    };
+  const openModal = (meetingId) => {
+    setSelectedMeeting(meetingId);
+    setIsModalOpen(true);
+  };
 
-      
-    return (
-        <main>
-            <div className="content-wrap">
-                <div class="container">
-                <h2>Active Appointments:</h2>
-                <div class="table-wrapper">
-                    <ul class="responsive-table">
-                        <li class="table-header">
-                        <div class="col">Event</div>
-                        <div class="col">Host</div>
-                        <div class="col">Email</div>
-                        <div class="col">Date & Time</div>
-                        <div class="col">Location</div>
-                        <div class="col"></div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Joseph V</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">McEng 3rd Floor</div>
-                        <div class="col"><button className="reject-btn" onClick={() => openModal(1)}>Cancel Meeting &#10060;</button></div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP424</div>
-                        <div class="col" data-label="Host">David Meger</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        <div class="col"><button className="reject-btn" onClick={() => openModal(2)}>Cancel Meeting &#10060;</button></div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP330</div>
-                        <div class="col" data-label="Host">Waldisphul</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        <div class="col"><button className="reject-btn" onClick={() => openModal(3)}>Cancel Meeting &#10060;</button></div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        <div class="col"><button className="reject-btn" onClick={() => openModal(4)}>Cancel Meeting &#10060;</button></div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        <div class="col"><button className="reject-btn" onClick={() => openModal(5)}>Cancel Meeting &#10060;</button></div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        <div class="col"><button className="reject-btn" onClick={() => openModal(6)}>Cancel Meeting &#10060;</button></div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        <div class="col"><button className="reject-btn" onClick={() => openModal(7)}>Cancel Meeting &#10060;</button></div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="list-btn"><p>Request a custom meeting:</p><button className="request-btn"><Link to="/CustomMeeting" style={style.btn}>Custom Meeting</Link></button></div>
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedMeeting(null);
+  };
+
+  const confirmCancel = () => {
+    console.log(`Meeting ${selectedMeeting} cancelled`);
+    closeModal();
+  };
+
+  return (
+    <main>
+      <div className="content-wrap">
+        <div className="container">
+          <h2>Active Appointments:</h2>
+          {appointments.active.length > 0 ? (
+            <div className="table-wrapper">
+              <ul className="responsive-table">
+                <li className="table-header">
+                  <div className="col">Event</div>
+                  <div className="col">Host</div>
+                  <div className="col">Email</div>
+                  <div className="col">Date & Time</div>
+                  <div className="col">Location</div>
+                  <div className="col"></div>
+                </li>
+                {appointments.active.map((appointment, index) => (
+                  <li key={index} className="table-row">
+                    <div className="col" data-label="Event">
+                      {appointment.event || "N/A"}
+                    </div>
+                    <div className="col" data-label="Host">
+                      {appointment.host || "N/A"}
+                    </div>
+                    <div className="col" data-label="Email">
+                      {appointment.email}
+                    </div>
+                    <div className="col" data-label="Date & Time">
+                      {new Date(appointment.startDate).toLocaleString()}
+                    </div>
+                    <div className="col" data-label="Location">
+                      {appointment.location || "N/A"}
+                    </div>
+                    <div className="col">
+                      <button
+                        className="reject-btn"
+                        onClick={() => openModal(appointment._id)}
+                      >
+                        Cancel Meeting &#10060;
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <div class="container">
-            <h2>Past Appointments:</h2>
-                <div class="table-wrapper">
-                    <ul class="responsive-table">
-                        <li class="table-header">
-                        <div class="col">Event</div>
-                        <div class="col">Host</div>
-                        <div class="col">Email</div>
-                        <div class="col">Date & Time</div>
-                        <div class="col">Location</div> 
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                        <li class="table-row">
-                        <div class="col" data-label="Host">Office Hours : COMP307</div>
-                        <div class="col" data-label="Host">Karl Wehbe</div>
-                        <div class="col" data-label="Email">karlwehbe@gmail.com</div>
-                        <div class="col" data-label="Date & Time">12/12/2024 at 5:00pm</div>
-                        <div class="col" data-label="Location">Mcgill</div>
-                        </li>
-                    </ul>
-                </div>
-            </div> 
-
-            {isModalOpen && (
-            <div className="modal-overlay">
-            <div className="modal">
-                <h3>Are you sure you want to cancel this meeting?</h3>
-                <div className="modal-buttons">
-                <button className="btn-confirm" onClick={confirmCancel}>Yes</button>
-                <button className="btn-cancel" onClick={closeModal}>No</button>
-                </div>
-            </div>
-            </div>
-        )}
+          ) : (
+            <p>{message}</p>
+          )}
         </div>
-            
+
+        <div className="container">
+          <h2>Past Appointments:</h2>
+          {appointments.past.length > 0 ? (
+            <div className="table-wrapper">
+              <ul className="responsive-table">
+                <li className="table-header">
+                  <div className="col">Event</div>
+                  <div className="col">Host</div>
+                  <div className="col">Email</div>
+                  <div className="col">Date & Time</div>
+                  <div className="col">Location</div>
+                </li>
+                {appointments.past.map((appointment, index) => (
+                  <li key={index} className="table-row">
+                    <div className="col" data-label="Event">
+                      {appointment.event || "N/A"}
+                    </div>
+                    <div className="col" data-label="Host">
+                      {appointment.host || "N/A"}
+                    </div>
+                    <div className="col" data-label="Email">
+                      {appointment.email}
+                    </div>
+                    <div className="col" data-label="Date & Time">
+                      {new Date(appointment.startDate).toLocaleString()}
+                    </div>
+                    <div className="col" data-label="Location">
+                      {appointment.location || "N/A"}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>{message}</p>
+          )}
+        </div>
+
+        {isModalOpen && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <h3>Are you sure you want to cancel this meeting?</h3>
+              <div className="modal-buttons">
+                <button className="btn-confirm" onClick={confirmCancel}>
+                  Yes
+                </button>
+                <button className="btn-cancel" onClick={closeModal}>
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </main>
-        
-    );
+  );
 }
-
-const style = {
-    btn: {
-        color: "white",
-        textDecoration: "none",
-        fontSize: "15px",
-        cursor: "pointer",
-        display: "block",
-        width: "100%",
-        fontWeight: "400",
-    }
-}
-
 
 /*
 
