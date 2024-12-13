@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 // Register a new member
 const registerMember = async (req, res) => {
   try {
-    const { email, password, confirmPassword } = req.body;
+    const { fname, lname, email, password, confirmPassword } = req.body;
 
     // Validate email
     const emailRegex = /^[a-zA-Z0-9._%+-]+@(mcgill\.ca|mail\.mcgill\.ca)$/;
@@ -33,7 +33,7 @@ const registerMember = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create new member using Member model
-    const newMember = new Member({ email, password: hashedPassword });
+    const newMember = new Member({ fname, lname, email, password: hashedPassword });
     await newMember.save(); // Save member to db
 
     res.status(201).json({ message: "Member registered successfully" });
