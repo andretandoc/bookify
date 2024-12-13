@@ -17,6 +17,7 @@ import PublicRoute from "./public-routes/publicRoutes";
 // Private components
 import CreateBooking from "./components/private/createBooking";
 import MemberPage from "./components/private/MemberPage";
+import ManageBooking from "./components/private/ManageBooking";
 
 import { useState, useEffect } from "react";
 import MeetingList from "./components/private/MeetingList";
@@ -60,6 +61,7 @@ function App() {
           <Route path="/MemberPage" element={<MemberPage />} />
           <Route path="/CreateBooking" element={<CreateBooking />} />
           <Route path="/MeetingList" element={<MeetingList />} />
+          <Route path="/ManageBooking" element={<ManageBooking />} />
         </Route>
 
         {/* Catch-all route for 404s */}
