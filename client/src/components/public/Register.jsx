@@ -3,6 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 
 function Register() {
+  const [fname, setFirstName] = useState("");
+  const [lname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -12,7 +14,7 @@ function Register() {
     event.preventDefault();
 
     // Check if all fields are filled
-    if (!email || !password || !confirmation) {
+    if (!email || !password || !confirmation || !fname || !lname) {
       setMessage("All fields are required. Please fill them out.");
       return;
     }
@@ -27,6 +29,8 @@ function Register() {
       const response = await axios.post(
         "http://localhost:5005/api/auth/register",
         {
+          fname, 
+          lname,
           email,
           password,
           confirmPassword: confirmation,
@@ -44,48 +48,72 @@ function Register() {
         <h1 class="title">Register with Bookify</h1>
         <form id="register_form" className="register-form" action="" method="">
           <div class="input-text">
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />{" "}
-            <br />
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />{" "}
-            <br />
-            <input
-              type="password"
-              id="confirmation"
-              name="confirmation"
-              placeholder="Confirm password"
-              value={confirmation}
-              onChange={(e) => setConfirmation(e.target.value)}
-              required
-            />{" "}
-            <br />
+            <div class="fl-name">
+              <input
+                type="text"
+                id="fname"
+                name="fname"
+                placeholder="Enter first name"
+                value={fname}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />{" "}
+              <input
+                type="text"
+                id="lname"
+                name="lname"
+                placeholder="Enter last name"
+                value={lname}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />{" "}
+            </div>
+            <div className="input">
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                />{" "}
+            </div> 
+            <div className="input">
+                <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                />{" "}
+            </div>
+            <div className="input">
+                <input
+                type="password"
+                id="confirmation"
+                name="confirmation"
+                placeholder="Confirm password"
+                value={confirmation}
+                onChange={(e) => setConfirmation(e.target.value)}
+                required
+                />{" "}
+            </div>
           </div>
+          {message && <p class="error-message">{message}</p>}
           <button class="small-btn" type="submit" onClick={handleRegister}>
             Sign Up
           </button>
-          {message && <p>{message}</p>}
-          <div>
+         
+        </form>
+        <div>
             <p>
               Already have an account?{" "}
               <Link to="/Login">&nbsp;&nbsp;Login</Link>
             </p>
-          </div>
-        </form>
+        </div>
       </div>
     </main>
   );

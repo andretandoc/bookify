@@ -39,22 +39,22 @@ function ApptList() {
             {appointments.map((appointment, index) => (
               <div key={appointment._id || index} className="appointment">
                 <h3>Appointment {index + 1}</h3>
-                <p>
+                <p className="appt-list-item">
                   <strong>First Name:</strong> {appointment.firstName || "N/A"}
                 </p>
-                <p>
+                <p className="appt-list-item">
                   <strong>Last Name:</strong> {appointment.lastName || "N/A"}
                 </p>
-                <p>
+                <p className="appt-list-item">
                   <strong>Email:</strong> {appointment.email || "N/A"}
                 </p>
-                <p>
+                <p className="appt-list-item">
                   <strong>Start Date:</strong> {appointment.startDate ? new Date(appointment.startDate).toLocaleString() : "N/A"}
                 </p>
-                <p>
+                <p className="appt-list-item">
                   <strong>End Date:</strong> {appointment.endDate ? new Date(appointment.endDate).toLocaleString() : "N/A"}
                 </p>
-                <p>
+                <p className="appt-list-item">
                   <strong>Status:</strong> {appointment.status || "N/A"}
                 </p>
                 <hr />
@@ -65,7 +65,7 @@ function ApptList() {
             &gt;
           </button>
         </div>
-        <button className="small-btn" onClick={handleGoBack}>
+        <button className="history-small-btn" onClick={handleGoBack}>
           Go Back
         </button>
       </div>

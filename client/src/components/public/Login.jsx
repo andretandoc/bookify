@@ -42,7 +42,7 @@ function Login({ setIsLoggedIn }) {
     <main className="form-box-wrapper">
       <div className="form-box">
         <h1 className="title">Welcome Back !</h1>
-        <form id="login_form" action="" method="">
+        <form id="login-form" action="" method="">
           <div className="input-text">
             <input
               type="text"
@@ -53,7 +53,6 @@ function Login({ setIsLoggedIn }) {
               onChange={(e) => setEmail(e.target.value)}
               required
             />{" "}
-            <br />
             <input
               type="password"
               id="password"
@@ -63,7 +62,6 @@ function Login({ setIsLoggedIn }) {
               onChange={(e) => setPassword(e.target.value)}
               required
             />{" "}
-            <br />
           </div>
           <div className="options">
             <input
@@ -78,16 +76,16 @@ function Login({ setIsLoggedIn }) {
               Forgot Password?
             </a>
           </div>
+          {message && <p className="login-error-message">{message}</p>} 
           <button className="small-btn" type="submit" onClick={handleLogin}>
             Log In
           </button>
-          {message && <p className="error-message">{message}</p>}
-          <div>
+        </form>
+        <div>
             <p>
               Don't have an account? <Link to="/Register">&nbsp;Register</Link>
             </p>
-          </div>
-        </form>
+        </div>
       </div>
     </main>
   );

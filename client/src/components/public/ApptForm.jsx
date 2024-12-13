@@ -69,7 +69,6 @@ function ApptForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <br />
               </div>
               <div className="input-date">
                 <div className="from-day">
@@ -94,8 +93,8 @@ function ApptForm() {
                 </div>
               </div>
               <button className="small-btn" type="submit">View History</button>
-              {message && <p className="error-message">{message}</p>}
             </form>
+            {message && <p className="error-message">{message}</p>}
         </div>
       </main>
   );

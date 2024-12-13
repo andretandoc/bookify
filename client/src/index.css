@@ -350,11 +350,6 @@ footer a:active {
   transform: translateY(1px);
 }
 
-.register-form .small-btn {
-  margin-top: 40px; /* Adjust spacing as needed */
-}
-
-
 .btn {
   font-size: medium;
   width: 100%;
@@ -591,14 +586,12 @@ input:focus {
 input::placeholder {
   color: rgb(160, 160, 160);
   background: rgba(0, 0, 0, 0);
-  font-size: large;
+  font-size: 16px;
 }
 
 .register-form input[type="text"],
 .register-form input[type="password"] {
-  width: 120%;
-  margin-top: -10px;
-  margin-left: -25px;
+  width: 100%;
 }
 
 /******************************************************************/
@@ -608,7 +601,7 @@ input::placeholder {
 .appt_form {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 30px;
   width: 62%;
 }
 
@@ -627,7 +620,6 @@ input::placeholder {
 .to-day { 
   display: flex;
   gap: 29px;
-  margin-bottom: 40px; 
 }
 
 input[type="date"] {
@@ -653,9 +645,10 @@ input[type="date"] {
 
 .error-message {
   color: #9e0918;
-  font-size: large;
+  font-size: 17px;
   margin-bottom: 0px;
   font-weight: 900;
+  margin-top: 20px;
 }
 
 .appt_form .small-btn {
@@ -716,7 +709,8 @@ input[type="date"] {
 
 p {
   font-size: 15px;
-  margin-top: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 p a {
@@ -743,10 +737,38 @@ p a:active {
 .input-text {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  width: 100%;
-  padding-top: 20px;
+  padding-top: 17px;
+  gap: 20px;
 }
+
+.fl-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    gap: 30px
+}
+
+.register-form, .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+}
+
+.register-form .small-btn {
+    margin-top: 30px;
+}
+
+.login-error-message {
+    margin-bottom: 20px;
+    color: #9e0918;
+    font-size: 17px;
+    font-weight: 900;
+}
+
 
 /******************************************************************/
                         /* Layered Boxes*/
@@ -786,7 +808,7 @@ p a:active {
   font:'Lato';
   font-weight: 500;
   text-align: center;
-  line-height: 30px; 
+  line-height: 20px; 
   transition: all 0.2s ease;
   overflow: hidden; 
 }
@@ -1168,7 +1190,7 @@ input[type="time"] {
   display: flex;
   overflow-x: scroll;
   gap: 20px;
-  padding: 10px 0;
+  padding: 15px 0;
   scroll-snap-type: x mandatory; /* Enable scroll snap */
   scroll-behavior: smooth;
   flex: 1;
@@ -1185,10 +1207,15 @@ input[type="time"] {
   background-color: white;
   margin: 0 auto;
   scroll-snap-align: start; /* Snap each appointment to the start of the scroll */
+  height: 280px;
 }
 
 .appointment h3 {
   margin-top: 0;
+}
+
+.appt-list-item {
+    padding-bottom: 14px;
 }
 
 .scroll-btn {
@@ -1221,6 +1248,34 @@ strong {
   font-weight: 900;
   color: rgb(147, 1, 1);
   margin-right: 3px;
+}
+
+.history-small-btn {
+    margin-top: 30px;
+    display: inline-block;
+    width: 150px;
+    height: 31px;
+    position: relative;
+    background-color: rgba(198, 22, 39, 1);
+    border: transparent;
+    color: white;
+    font-size: 17px;
+    font-family: "Lato";
+    font-weight: 300;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.history-small-btn:hover {
+    background-color: #9e0918;
+    cursor: pointer
+}
+    
+.small-btn:active {
+    background-color: #9e0918;
+    color: white;
+    transform: translateY(1px);
 }
 
 /*******************************************************/
