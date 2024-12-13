@@ -38,6 +38,9 @@ function Header({ isLoggedIn, onLogout }) {
                 <Link to="/ManageEvent">Manage Event</Link>
               </div>
               <div className="nav-item">
+                <Link to="/CreateEvent">Create Event</Link>
+              </div>
+              <div className="nav-item">
                 <button
                   onClick={onLogout}
                   style={{

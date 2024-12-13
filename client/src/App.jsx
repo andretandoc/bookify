@@ -23,6 +23,7 @@ import ManageEvent from "./components/private/ManageEvent";
 
 import { useState, useEffect } from "react";
 import MeetingList from "./components/private/MeetingList";
+import CreateEvent from "./components/private/createEvent";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -66,6 +67,7 @@ function App() {
           <Route path="/ManageBooking" element={<ManageBooking />} />
           <Route path="/CustomMeeting" element={<CustomMeeting />} />
           <Route path="/ManageEvent" element={<ManageEvent />} />
+          <Route path="/CreateEvent" element={<CreateEvent />} />
         </Route>
 
         {/* Catch-all route for 404s */}

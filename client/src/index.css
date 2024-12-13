@@ -672,7 +672,7 @@ input[type="date"] {
   margin-right: 3px; 
 }
 
-.options input[type="checkbox"]:hover {
+input[type="checkbox"]:hover {
   cursor: pointer;
 }
 
@@ -1496,4 +1496,98 @@ strong {
 }
 
 
+
+/******************************************************************/
+                        /* Create Event */
+/******************************************************************/
+
+.event-form {
+  width: 70%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 15px;
+}
+
+.choose-day {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: center;
+    gap: 20px;
+}
+
+.dropdown-day:hover, .dropdown-day:active, 
+.dropdown-recurring:hover, .dropdown-recurring:active{
+    cursor: pointer;
+}
+
+.dropdown-day {
+    border-radius: 10px;
+    text-align: center;
+    background: #f9f9f9; 
+    font-size: small;
+    width: 100px;
+    cursor: pointer;
+    font-weight: 500; 
+    margin-bottom: 10px;
+}
+
+.dropdown-recurring {
+    border-radius: 10px;
+    text-align: center;
+    background: #f9f9f9; 
+    font-size: small;
+    width: 50px;
+    cursor: pointer;
+    font-weight: 500;  
+    margin-bottom: 10px;
+}
+
+
+.input-time, .split-event {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    gap: 20px
+}
+
+.time-input  {
+    border-radius: 5px;
+    text-align: center;
+    background: #f9f9f9; 
+    font-size: small;
+    width: 100px;
+    cursor: pointer;
+    font-weight: 500;
+    border: 1px solid black;
+}
+
+.event-quantity {
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    border: 1px solid black;
+    background: #f9f9f9; 
+    font-size: small; 
+    text-align: center;
+    width: 40px;
+}
+
+.event-label {
+    font-size: medium;
+}
+
+.choose-recurring {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: center;
+    gap: 10px; 
+}
+
+.event-form .small-btn {
+    margin: 0 auto;
+}
 
