@@ -84,11 +84,10 @@ const CreateEvent = () => {
 
   return (
     <div className="container glass-container">
-      <h2 className="title">Create a Booking</h2>
+      <h2 className="title">Create an Event</h2>
       <form onSubmit={handleSubmit}>
         {/* Title */}
         <div className="input-text">
-          <label htmlFor="title">Title:</label>
           <input
             type="text"
             id="title"
@@ -100,8 +99,20 @@ const CreateEvent = () => {
           />
         </div>
 
-        {/* Type */}
         <div className="input-text">
+          <input
+            type="text"
+            id="location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Enter location (e.g., Online or Room 101)"
+            required
+            className="booking-input"
+          />
+        </div>
+
+        {/* Type */}
+        <div className="choose-privacy">
           <label htmlFor="type">Type:</label>
           <select
             id="type"
@@ -114,21 +125,14 @@ const CreateEvent = () => {
           </select>
         </div>
 
-
-        {/* Location */}
-        <div className="input-text">
-          <label htmlFor="location">Location:</label>
-          <input
-            type="text"
-            id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter location (e.g., Online or Room 101)"
-            required
-            className="booking-input"
-          />
-        </div>
-
+        <div class="choose-privacy">
+              <label className="event-label" htmlFor="day">Event Privacy: </label>
+              <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
+                  <option class="privacy-input" value="" disabled>Pick an option</option>
+                  <option class="privacy-input" value="member">Members Only</option>
+                  <option class="privacy-input" value="public">Open to Everyone</option>
+              </select>
+          </div>
 
         {/* Date */}
         <div className="choose-date">
@@ -179,14 +183,7 @@ const CreateEvent = () => {
           <button type="button" onClick={addProposedTime} className="small-btn">
             Add Another Time
           </button>
-          <div class="choose-privacy">
-              <label className="event-label" htmlFor="day">Event Privacy: </label>
-              <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
-                  <option class="privacy-input" value="" disabled>Pick an option</option>
-                  <option class="privacy-input" value="member">Members Only</option>
-                  <option class="privacy-input" value="public">Open to Everyone</option>
-              </select>
-          </div>
+         
         </div>
 
         {/* Error or Success Messages */}

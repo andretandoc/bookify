@@ -53,6 +53,9 @@ function Header({ isLoggedIn, onLogout }) {
                 <Link to="/BookingURL">BookingURL-Test</Link>
               </div>
               <div className="nav-item">
+                <Link to="/FullEvents">Book an Appointment</Link>
+              </div>
+              <div className="nav-item">
                 <button
                   onClick={onLogout}
                   style={{

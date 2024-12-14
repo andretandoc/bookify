@@ -24,6 +24,7 @@ import ManageBooking from "./components/private/ManageBooking";
 import CustomMeeting from "./components/private/CustomMeeting";
 import ManageEvent from "./components/private/ManageEvent";
 import BookingURL from "./components/private/bookingURL";
+import FullEvents from "./components/private/FullEvents"; 
 
 import { useState, useEffect } from "react";
 
@@ -86,6 +87,7 @@ function App() {
           <Route path="/CustomMeeting" element={<CustomMeeting />} />
           <Route path="/ManageEvent" element={<ManageEvent />} />
           <Route path="/CreateEvent" element={<CreateEvent />} />
+          <Route path="/FullEvents" element={<FullEvents />} />
           <Route path="/booking/:publicURL" element={<BookingURL />} />
         </Route>
 
