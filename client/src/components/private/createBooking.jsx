@@ -1,154 +1,203 @@
-/* This is private page for creating a booking ; it should generate a URL -- Coming Soon*/
-
-/* for backend the form here will have the following elements */
-/*Class;Type;Professor; Date Range;Time Range */
-import React, { useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css"; // Import calendar styles
+import { useState } from "react";
+import axios from "axios";
 
 const CreateBooking = () => {
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]); // Start and End Dates
-  const [timeRange, setTimeRange] = useState({
-    startTime: "",
-    endTime: "",
-  });
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("One-Time");
+  const [hostName, setHostName] = useState(""); // Host Name Field
+  const [location, setLocation] = useState(""); // Location Field
+  const [proposedTimes, setProposedTimes] = useState([]);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [publicURL, setPublicURL] = useState("");
 
-  // Update Date Range Based on Calendar Selection
-  const handleCalendarChange = (range) => {
-    setDateRange(range);
+  // Add new proposed time
+  const addProposedTime = () => {
+    setProposedTimes([...proposedTimes, ""]);
   };
 
-  // Update Date Inputs
-  const handleDateInputChange = (event) => {
-    const { name, value } = event.target;
-    const newDate = new Date(value);
+  // Handle changes for proposed time inputs
+  const handleProposedTimeChange = (index, value) => {
+    const updatedTimes = [...proposedTimes];
+    updatedTimes[index] = value;
+    setProposedTimes(updatedTimes);
+  };
 
-    if (name === "start-date") {
-      setDateRange((prev) => [newDate, prev[1]]);
-    } else if (name === "end-date") {
-      setDateRange((prev) => [prev[0], newDate]);
+  // Remove a specific proposed time
+  const handleRemoveTime = (index) => {
+    setProposedTimes(proposedTimes.filter((_, i) => i !== index));
+  };
+
+  // Submit the form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Reset messages
+    setError("");
+    setSuccessMessage("");
+
+    // Validation: Ensure all required fields are filled
+    if (!title || !hostName || !location || proposedTimes.length === 0) {
+      setError(
+        "Please fill out all required fields and add at least one proposed time."
+      );
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "/api/appointments/create",
+        {
+          event: title,
+          host: hostName, // Dynamic Host Name
+          location: location, // Dynamic Location
+          proposedTimes, // Array of proposed time slots
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is valid
+          },
+        }
+      );
+
+      // Handle success response
+      setSuccessMessage(
+        `Booking created successfully! Share this URL: ${response.data.publicURL}`
+      );
+      setPublicURL(response.data.publicURL);
+      setProposedTimes([]); // Clear form after successful creation
+      setTitle("");
+      setHostName("");
+      setLocation("");
+      setType("One-Time");
+    } catch (error) {
+      console.error(error);
+      setError(
+        error.response?.data?.message ||
+          "Failed to create booking. Please try again."
+      );
     }
   };
 
-  // Update Time Range
-  const handleTimeChange = (event) => {
-    const { name, value } = event.target;
-    setTimeRange((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Date Range:", dateRange);
-    console.log("Time Range:", timeRange);
-  };
-
   return (
-    <div className="cal-box-wrapper">
-      {/* Form Row */}
-      <form className="form-row" onSubmit={handleSubmit}>
-        {/* Class Dropdown */}
-        <label htmlFor="class">
-          Class:
-          <select id="class" name="class" className="form-input">
-            <option value="">Select a Class</option>
-            <option value="class1">Class 1</option>
-            <option value="class2">Class 2</option>
-            <option value="class3">Class 3</option>
+    <div className="container glass-container">
+      <h2 className="title">Create a Booking</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Title */}
+        <div className="input-text">
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter a title (e.g., Office Hours)"
+            required
+            className="booking-input"
+          />
+        </div>
+
+        {/* Type */}
+        <div className="input-text">
+          <label htmlFor="type">Type:</label>
+          <select
+            id="type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="booking-input"
+          >
+            <option value="One-Time">One-Time</option>
+            <option value="Recurring">Recurring</option>
           </select>
-        </label>
+        </div>
 
-        {/* Type Dropdown */}
-        <label htmlFor="type">
-          Type:
-          <select id="type" name="type" className="form-input">
-            <option value="">Select a Type</option>
-            <option value="type1">Type 1</option>
-            <option value="type2">Type 2</option>
-            <option value="type3">Type 3</option>
-          </select>
-        </label>
-
-        {/* Professor Dropdown */}
-        <label htmlFor="professor">
-          Professor:
-          <select id="professor" name="professor" className="form-input">
-            <option value="">Select a Professor</option>
-            <option value="prof1">Professor 1</option>
-            <option value="prof2">Professor 2</option>
-            <option value="prof3">Professor 3</option>
-          </select>
-        </label>
-
-        {/* Date Range */}
-        <label htmlFor="start-date">
-          Start Date:
+        {/* Host Name */}
+        <div className="input-text">
+          <label htmlFor="hostName">Host Name:</label>
           <input
-            type="date"
-            id="start-date"
-            name="start-date"
-            className="form-input"
-            value={dateRange[0]?.toISOString().split("T")[0] || ""}
-            onChange={handleDateInputChange}
+            type="text"
+            id="hostName"
+            value={hostName}
+            onChange={(e) => setHostName(e.target.value)}
+            placeholder="Enter host's name"
+            required
+            className="booking-input"
           />
-        </label>
+        </div>
 
-        <label htmlFor="end-date">
-          End Date:
+        {/* Location */}
+        <div className="input-text">
+          <label htmlFor="location">Location:</label>
           <input
-            type="date"
-            id="end-date"
-            name="end-date"
-            className="form-input"
-            value={dateRange[1]?.toISOString().split("T")[0] || ""}
-            onChange={handleDateInputChange}
+            type="text"
+            id="location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Enter location (e.g., Online or Room 101)"
+            required
+            className="booking-input"
           />
-        </label>
+        </div>
 
-        {/* Time Range */}
-        <label htmlFor="start-time">
-          Start Time:
-          <input
-            type="time"
-            id="start-time"
-            name="startTime"
-            className="form-input"
-            value={timeRange.startTime}
-            onChange={handleTimeChange}
-          />
-        </label>
+        {/* Proposed Times */}
+        <div className="input-text">
+          <label>Proposed Times:</label>
+          {proposedTimes.map((time, index) => (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginBottom: "10px",
+              }}
+            >
+              <input
+                type="datetime-local"
+                value={time}
+                onChange={(e) =>
+                  handleProposedTimeChange(index, e.target.value)
+                }
+                required
+                className="booking-input"
+              />
+              <button
+                type="button"
+                onClick={() => handleRemoveTime(index)}
+                className="small-btn"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addProposedTime} className="small-btn">
+            Add Another Time
+          </button>
+        </div>
 
-        <label htmlFor="end-time">
-          End Time:
-          <input
-            type="time"
-            id="end-time"
-            name="endTime"
-            className="form-input"
-            value={timeRange.endTime}
-            onChange={handleTimeChange}
-          />
-        </label>
+        {/* Error or Success Messages */}
+        {error && <p className="error-message">{error}</p>}
+        {successMessage && (
+          <p className="success-message" style={{ color: "green" }}>
+            {successMessage}
+            <br />
+            <a
+              href={`/booking/${publicURL}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Booking Link
+            </a>
+          </p>
+        )}
 
-        {/* Book Button */}
-        <button type="submit" className="double-btn">
-          Book
+        {/* Submit Button */}
+        <button type="submit" className="btn">
+          Create Booking
         </button>
       </form>
-
-      {/* Calendar Box */}
-      <div className="cal-box">
-        <Calendar
-          selectRange={true}
-          onChange={handleCalendarChange}
-          value={dateRange}
-        />
-      </div>
     </div>
   );
 };
 
 export default CreateBooking;
-

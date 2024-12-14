@@ -14,7 +14,7 @@ app.use(express.json()); // Parse JSON data in requests
 
 // Routes
 app.use("/api/auth", authRoutes); // Auth routes
-app.use("/api/appointments", appointmentRoutes); // Auth routes
+app.use("/api/appointments", appointmentRoutes); // Appointment routes
 
 // Connect to MongoDB
 mongoose

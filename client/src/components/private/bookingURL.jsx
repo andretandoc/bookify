@@ -1,87 +1,131 @@
-
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function BookingURL() {
+  const { publicURL } = useParams(); // Get publicURL from the route
+  const [appointmentDetails, setAppointmentDetails] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(""); // Selected time slot
+  const [fname, setFirstName] = useState("");
+  const [lname, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-    const [fname, setFirstName] = useState("");
-    const [lname, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("");
+  useEffect(() => {
+    const fetchAppointmentDetails = async () => {
+      try {
+        const response = await axios.get(`/api/appointments/${publicURL}`);
+        setAppointmentDetails(response.data);
+      } catch (error) {
+        console.error(error);
+        setMessage("Failed to load booking details. Please try again later.");
+      }
+    };
 
-    return (
-        <main className="form-box-wrapper">
-            <div className="booking-box">
-                <div class="booking-title">
-                <h1 className="title">Title : COMP307 Office Hours</h1>
-                <h3>Hosted by Professor Joseph Vybihal on 13/12/2024</h3>
-                </div>
-                <div className="booking-form">
-                    <div className="time-slots">
-                        <button class="slot-btn">11:00 am</button>
-                        <button class="slot-btn">11:15 am</button>
-                        <button class="slot-btn">11:30 am</button>
-                        <button class="slot-btn">11:45 am</button>
-                        <button class="slot-btn">12:00 pm</button>
-                        <button class="slot-btn">12:15 pm</button>
-                        <button class="slot-btn">12:30 pm</button>
-                        <button class="slot-btn">11:45 pm</button>
-                        <button class="slot-btn">1:00 pm</button>
-                    </div>
-                    <div className="attendee-info-form">
-                        {/* if the user is a mcgill member, we ask for ssa...*/
-                        /* if not, we ask for user info such as name, email, ...*/}  
-                         <form id="info-form" className="info-form" action="" method="">
-                            <div class="input-text">
-                                <div class="f-name">
-                                    <input
-                                        type="text"
-                                        id="fname"
-                                        name="fname"
-                                        placeholder="Enter first name"
-                                        value={fname}
-                                        onChange={(e) => setFirstName(e.target.value)}
-                                        required
-                                    />{" "}
-                                </div>
-                                <div class="l-name">
-                                    <input
-                                        type="text"
-                                        id="lname"
-                                        name="lname"
-                                        placeholder="Enter last name"
-                                        value={lname}
-                                        onChange={(e) => setLastName(e.target.value)}
-                                        required
-                                />{" "}
-                                </div>
-                                <div className="input">
-                                    <input
-                                        type="text"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Enter email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                        />{" "}
-                                </div> 
-                            </div>
-                            {message && <p class="error-message">{message}</p>}
-                            <button class="booking-small-btn" type="submit" onClick="">
-                                Book Appointment
-                            </button>
-                            
-                        </form>      
-                    </div>
-                </div>
-            </div>
-        </main>
-    )
-   
-    
+    fetchAppointmentDetails();
+  }, [publicURL]);
+
+  const handleSlotSelect = (slot) => {
+    setSelectedSlot(slot);
+  };
+
+  const handleBookingSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!selectedSlot) {
+      setMessage("Please select a time slot.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `/api/appointments/${publicURL}/reserve`,
+        {
+          firstName: fname,
+          lastName: lname,
+          email,
+        }
+      );
+
+      setMessage("Appointment booked successfully!");
+    } catch (error) {
+      console.error(error);
+      setMessage("Failed to book appointment. Please try again.");
+    }
+  };
+
+  if (!appointmentDetails) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <main className="form-box-wrapper">
+      <div className="booking-box">
+        <div className="booking-title">
+          <h1 className="title">Title: {appointmentDetails.event}</h1>
+          <h3>
+            Hosted by {appointmentDetails.host} at {appointmentDetails.location}
+          </h3>
+        </div>
+        <div className="booking-form">
+          <div className="time-slots">
+            {appointmentDetails.proposedTimes.map((slot, index) => (
+              <button
+                key={index}
+                className={`slot-btn ${
+                  selectedSlot === slot ? "selected" : ""
+                }`}
+                onClick={() => handleSlotSelect(slot)}
+              >
+                {new Date(slot).toLocaleString()}
+              </button>
+            ))}
+          </div>
+          <div className="attendee-info-form">
+            <form
+              id="info-form"
+              className="info-form"
+              onSubmit={handleBookingSubmit}
+            >
+              <div className="input-text">
+                <input
+                  type="text"
+                  id="fname"
+                  name="fname"
+                  placeholder="Enter first name"
+                  value={fname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                />
+                <input
+                  type="text"
+                  id="lname"
+                  name="lname"
+                  placeholder="Enter last name"
+                  value={lname}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              {message && <p className="error-message">{message}</p>}
+              <button className="booking-small-btn" type="submit">
+                Book Appointment
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
 }
 
 export default BookingURL;
-

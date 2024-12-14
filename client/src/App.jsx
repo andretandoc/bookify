@@ -15,12 +15,12 @@ import PrivateRoute from "./private-routes/privateRoutes";
 import PublicRoute from "./public-routes/publicRoutes";
 
 // Private components
-import CreateBooking from "./components/private/createBooking";
+import CreateBooking from "./components/private/CreateBooking";
 import MemberPage from "./components/private/MemberPage";
 import ManageBooking from "./components/private/ManageBooking";
 import CustomMeeting from "./components/private/CustomMeeting";
 import ManageEvent from "./components/private/ManageEvent";
-import BookingURL from "./components/private/bookingURL"
+import BookingURL from "./components/private/bookingURL";
 
 import { useState, useEffect } from "react";
 import MeetingList from "./components/private/MeetingList";
@@ -69,7 +69,7 @@ function App() {
           <Route path="/CustomMeeting" element={<CustomMeeting />} />
           <Route path="/ManageEvent" element={<ManageEvent />} />
           <Route path="/CreateEvent" element={<CreateEvent />} />
-          <Route path="/BookingURL" element={<BookingURL />} />
+          <Route path="/booking/:publicURL" element={<BookingURL />} />
         </Route>
 
         {/* Catch-all route for 404s */}
