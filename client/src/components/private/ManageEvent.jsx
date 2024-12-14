@@ -74,6 +74,7 @@ export default function ManageEvent() {
                     <div class="col">To</div>
                     <div class="col">Location</div>
                     <div class="col">Recurring</div>
+                    <div class="col">Privacy</div>
                     </li>
                     <li class="table-row">
                     <div class="col" data-label="Name">Review Session : COMP307</div>
@@ -82,6 +83,7 @@ export default function ManageEvent() {
                     <div class="col" data-label="To">12:00pm</div>
                     <div class="col" data-label="Location">McEng 3rd Floor</div>
                     <div class="col" data-label="Recurring">No</div>
+                    <div class="col" data-label="Privacy">Private</div>
                     </li>
                     <li class="table-row">
                     <div class="col" data-label="Name">Office Hours : COMP307</div>
@@ -90,6 +92,7 @@ export default function ManageEvent() {
                     <div class="col" data-label="To">1:00pm</div>
                     <div class="col" data-label="Location">McEng 3rd Floor</div>
                     <div class="col" data-label="Recurring">Yes</div>
+                    <div class="col" data-label="Privacy">Public</div>
                     </li>
                     <li class="table-row">
                     <div class="col" data-label="Name">Office Hours : COMP307</div>
@@ -98,6 +101,7 @@ export default function ManageEvent() {
                     <div class="col" data-label="To">1:00pm</div>
                     <div class="col" data-label="Location">McEng 3rd Floor</div>
                     <div class="col" data-label="Recurring">Yes</div>
+                    <div class="col" data-label="Privacy">Private</div>
                     </li>
                     
                 </ul>
