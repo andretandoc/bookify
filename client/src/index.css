@@ -195,7 +195,7 @@ header .profile-icon:hover {
       position: absolute; /* Make it part of the page flow */
       top: 80px; /* Adjust based on the header height */
       width: 100%; /* Same as the regular navbar */
-      background: transparent;
+      background: #c61627;
       padding: 20px;
       flex-direction: column;
       gap: 15px;
@@ -304,7 +304,7 @@ footer a:active {
 @media (max-width: 800px) {
   .double-red-btn {
     display: inline-block;
-    width: 350px;
+    width: 250px;
     height: 90px;
     position: relative;
     background-color: rgba(198, 22, 39, 0.9);
@@ -446,6 +446,7 @@ button:focus {
   text-align: left;
   font-family: "Lato";
   font-size: 25px;
+  height: 600px;
 }
 
 .right-section {
@@ -482,6 +483,7 @@ button:focus {
 
   .left-section {
     align-items: center;
+    margin-bottom: 50px;
   }
 
   .home-title {
@@ -491,11 +493,6 @@ button:focus {
   .home-p {
     font-size: 16px;
     line-height: 1.5;
-  }
-
-  .small-btn {
-    align-self: center;
-    width: 80%;
   }
 
   .right-section {
@@ -510,8 +507,6 @@ button:focus {
     padding: 15px;
   }
 }
-
-
 
 .home-title {
   z-index: 0;
@@ -573,21 +568,6 @@ button:focus {
     padding: 10px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /******************************************************************/

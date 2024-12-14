@@ -11,13 +11,12 @@ export default function HomeBody() {
       connect with the McGill community. Manage your appointments with
       confidence and stay focused on achieving your goals.
     </p>
-    <button className="small-btn">Sign In</button>
   </div>
 
   {/* Right Section */}
   <div className="right-section">
     <button className="double-red-btn">Schedule Appointment</button>
-    <button className="double-red-btn">Manage Scheduled and Completed Appointments</button>
+    <button className="double-red-btn">Sign in or Register </button>
   </div>
 </div>
   );
