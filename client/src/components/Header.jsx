@@ -5,7 +5,14 @@ import { useState, useEffect } from "react";
 function Header({ isLoggedIn, onLogout }) {
   const [showNavbar, setShowNavbar] = useState(false);
 
-  const handleShowNavbar = () => {
+  useEffect(() => {
+    document.body.classList.toggle("nav-open", showNavbar);
+    return () => {
+      document.body.classList.remove("nav-open");
+    };
+  }, [showNavbar]);
+
+  const toggleNavbar = () => {
     setShowNavbar(!showNavbar);
   };
 
@@ -18,9 +25,14 @@ function Header({ isLoggedIn, onLogout }) {
           </Link>
           <span className="tool-name">&nbsp;&nbsp;Bookify</span>
         </div>
+        <button
+          className={`hamburger ${showNavbar ? "active" : ""}`}
+          onClick={toggleNavbar}
+        >
+          &#9776;
+        </button>
         <nav className={`navbar ${showNavbar ? "active" : ""}`}>
           {isLoggedIn ? (
-            // Private Header Links
             <>
               <div className="nav-item">
                 <Link to="/MemberPage">Home</Link>
@@ -58,7 +70,6 @@ function Header({ isLoggedIn, onLogout }) {
               </div>
             </>
           ) : (
-            // Public Header Links
             <>
               <div className="nav-item">
                 <Link to="/">Home</Link>
@@ -75,9 +86,6 @@ function Header({ isLoggedIn, onLogout }) {
             </>
           )}
         </nav>
-        <button className="hamburger" onClick={handleShowNavbar}>
-          &#9776;
-        </button>
       </header>
     </div>
   );

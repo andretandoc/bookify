@@ -3,37 +3,23 @@ import { Link } from "react-router-dom";
 export default function HomeBody() {
   return (
     <div className="content-wrapper">
-      <div className="left-section">
-        <h1 className="home-title">
-          Simplifying <br /> Academic Scheduling
-          <br /> & Meetings
-        </h1>
-        <p className="home-p">
-          {" "}
-          Take control of your academic journey—effortlessly schedule meetings
-          and connect with the McGill community. Manage your appointments with
-          confidence and stay focused on achieving your goals.{" "}
-        </p>
-        <button className="small-btn">
-          <Link to="/Login" style={style.btn}>
-            Sign In
-          </Link>
-        </button>
-      </div>
+  {/* Left Section */}
+  <div className="left-section">
+    <h1 className="home-title">Simplifying Academic Scheduling & Meetings</h1>
+    <p className="home-p">
+      Take control of your academic journey—effortlessly schedule meetings and
+      connect with the McGill community. Manage your appointments with
+      confidence and stay focused on achieving your goals.
+    </p>
+    <button className="small-btn">Sign In</button>
+  </div>
 
-      <div className="right-section">
-        <button className="double-red-btn">
-          <Link to="/BookingForm" style={style.doubleBtn}>
-            Schedule Appointment <br /> with a McGill Professor
-          </Link>
-        </button>
-        <button className="double-red-btn">
-          <Link to="/ApptForm" style={style.doubleBtn}>
-            Manage Scheduled and <br /> Completed Appointments
-          </Link>
-        </button>
-      </div>
-    </div>
+  {/* Right Section */}
+  <div className="right-section">
+    <button className="double-red-btn">Schedule Appointment</button>
+    <button className="double-red-btn">Manage Scheduled and Completed Appointments</button>
+  </div>
+</div>
   );
 }
 
@@ -49,7 +35,6 @@ const style = {
     width: "100%",
     display: "block",
   },
-
   btn: {
     color: "white",
     textDecoration: "none",
