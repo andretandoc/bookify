@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -43,9 +45,25 @@ function App() {
   //   localStorage.removeItem("token");
   //   console.log("Token cleared on app initialization");
   // }, []); // might have to remove this later
+  const privateRoutes = [
+    "/MemberPage",
+    "/CreateBooking",
+    "/MeetingList",
+    "/ManageBooking",
+    "/CustomMeeting",
+    "/ManageEvent",
+    "/CreateEvent",
+    "/booking/:publicURL",
+  ];
+
+  const isPrivateRoute = privateRoutes.some((route) =>
+    location.pathname.startsWith(route.split("/:")[0])
+  );
+
 
   return (
-    <Router>
+    <div className={isPrivateRoute ? "private-page" : "public-page"}>
+      <Router>
       <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <Routes>
         {/* Public Routes */}
@@ -79,6 +97,8 @@ function App() {
       </Routes>
       <Footer />
     </Router>
+    </div>
+    
   );
 }
 

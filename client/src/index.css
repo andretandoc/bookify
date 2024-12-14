@@ -1,8 +1,7 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css);
 @import url(https://fonts.googleapis.com/css2?family=Arvo&family=Lato:wght@100;300;400;500&display=swap);
 
-body,
-html {
+.public-page {
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
@@ -16,7 +15,15 @@ html {
   overflow-x: hidden;
 }
 
-body {
+.private-page {
+    background: none;
+    background-color: #ffffff;
+    min-height: 100vh;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+.public-page {
   position: relative;
   min-height: 100vh;
   margin: 0;
@@ -27,7 +34,7 @@ body {
 }
 
 /* Add a black transparent filter over the image */
-body::before {
+.public-page::before {
   content: "";
   position: fixed; 
   top: 0;
@@ -179,7 +186,7 @@ header .profile-icon:hover {
     top: 80px; 
     left: 50%;
     transform: translateX(-50%);
-    background: transparent; 
+    background: #c61627; 
     width: 100%;
     padding: 20px;
     border-radius: 8px;
@@ -443,6 +450,7 @@ button:focus {
   display: flex;
   flex-direction: column;
   gap: 50px;
+  height:600px;
   text-align: left;
   font-family: "Lato";
   font-size: 25px;
