@@ -956,6 +956,7 @@ p a:active {
   transition: all 0.2s ease;
   overflow: hidden; 
 }
+
 .form-box-wrapper {
   position: relative;
   left: 50%; 
@@ -965,7 +966,7 @@ p a:active {
   flex-direction: column; 
   align-items: center; 
   gap: 0px; 
-  padding-top: 170px;
+  padding-top: 70px;
   width: 100%; 
   
 }
