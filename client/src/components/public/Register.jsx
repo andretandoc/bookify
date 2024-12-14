@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-function Register() {
+function Register({ setIsLoggedIn }) {
   const [fname, setFirstName] = useState("");
   const [lname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -40,7 +40,7 @@ function Register() {
 
       const token = response.data.token;
       localStorage.setItem("token", token);
-      
+      setIsLoggedIn(true);
       setMessage(response.data.message);
       navigate("/MemberPage");
     } catch (error) {

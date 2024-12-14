@@ -11,6 +11,7 @@ import Register from "./components/public/Register";
 import ApptForm from "./components/public/ApptForm";
 import BookingForm from "./components/public/BookingForm";
 import ApptList from "./components/public/ApptList";
+import PublicEvents from "./components/public/PublicEvents";
 
 // Route protection
 import PrivateRoute from "./private-routes/privateRoutes";
@@ -25,8 +26,7 @@ import ManageEvent from "./components/private/ManageEvent";
 import BookingURL from "./components/private/bookingURL";
 
 import { useState, useEffect } from "react";
-import MeetingList from "./components/private/MeetingList";
-import PublicEvents from "./components/public/PublicEvents";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -46,7 +46,6 @@ function App() {
   // }, []); // might have to remove this later
   const privateRoutes = [
     "/MemberPage",
-    "/MeetingList",
     "/ManageBooking",
     "/CustomMeeting",
     "/ManageEvent",
@@ -83,7 +82,6 @@ function App() {
         {/* Private Routes */}
         <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
           <Route path="/MemberPage" element={<MemberPage />} />
-          <Route path="/MeetingList" element={<MeetingList />} />
           <Route path="/ManageBooking" element={<ManageBooking />} />
           <Route path="/CustomMeeting" element={<CustomMeeting />} />
           <Route path="/ManageEvent" element={<ManageEvent />} />

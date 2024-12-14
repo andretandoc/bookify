@@ -41,6 +41,16 @@ const registerMember = async (req, res) => {
     });
     await newMember.save(); // Save member to db
 
+    console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    const tokenExpiry = rememberMe ? "7d" : "1h";
+    const token = jwt.sign(
+      { id: member._id, email: member.email }, // Include email in token
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.json({ token });
+
     res.status(201).json({ message: "Member registered successfully" });
   } catch (error) {
     console.error(error);
