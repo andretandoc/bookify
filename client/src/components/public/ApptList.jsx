@@ -40,19 +40,19 @@ function ApptList() {
               <div key={appointment._id || index} className="appointment">
                 <h3>Appointment {index + 1}</h3>
                 <p className="appt-list-item">
-                  <strong>First Name:</strong> {appointment.firstName || "N/A"}
+                  <strong>Host:</strong> {appointment.firstName || "N/A"}
                 </p>
                 <p className="appt-list-item">
-                  <strong>Last Name:</strong> {appointment.lastName || "N/A"}
+                  <strong>Email:</strong> {appointment.lastName || "N/A"}
                 </p>
                 <p className="appt-list-item">
-                  <strong>Email:</strong> {appointment.email || "N/A"}
+                  <strong>Date:</strong> {appointment.email || "N/A"}
                 </p>
                 <p className="appt-list-item">
-                  <strong>Start Date:</strong> {appointment.startDate ? new Date(appointment.startDate).toLocaleString() : "N/A"}
+                  <strong>Time:</strong> {appointment.startDate ? new Date(appointment.startDate).toLocaleString() : "N/A"}
                 </p>
                 <p className="appt-list-item">
-                  <strong>End Date:</strong> {appointment.endDate ? new Date(appointment.endDate).toLocaleString() : "N/A"}
+                  <strong>Location</strong> {appointment.endDate ? new Date(appointment.endDate).toLocaleString() : "N/A"}
                 </p>
                 <p className="appt-list-item">
                   <strong>Status:</strong> {appointment.status || "N/A"}

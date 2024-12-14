@@ -7,43 +7,54 @@ import { Link } from "react-router-dom";
 export default function FullEvents() {
 
     const [message, setMessage] = useState("");
-    const [appointments, setAppointments] = useState([]);
+    const [appointments, setAppointments] = useState({
+        active: []
+    });
 
     useEffect(() => {
         const fetchAppointments = async () => {
-            setAppointments([]);
-            setMessage("");
+        setAppointments({ active: []}); // Ensure proper default structure
+        setMessage("");
 
-            try {
-                const response = await axios.get(
-                    "http://localhost:5005/api/appointments",
-                    {
-                        params: {
-                             // Make sure `token` is properly defined in your actual code
-                        },
-                    }
-                );
+        const token = localStorage.getItem("token");
+        console.log("Token in Frontend:", token); // Debugging
 
-                if (response.data.length === 0) {
-                    setMessage("No appointments found");
-                } else {
-                    setAppointments(response.data.appointments);
-                }
-            } catch (error) {
-                setMessage(
-                    error.response?.data?.message || "Failed to retrieve appointments!"
-                );
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(
+            "http://localhost:5005/api/appointments/private",
+            {
+                headers: { Authorization: `Bearer ${token}` },
             }
+            );
+
+            if (
+            response.data.activeAppointments.length === 0 &&
+            response.data.pastAppointments.length === 0
+            ) {
+            setMessage("No appointments found");
+            } else {
+            setAppointments({
+                active: response.data.activeAppointments || [],
+                past: response.data.pastAppointments || [],
+            });
+            }
+        } catch (error) {
+            setMessage(
+            error.response?.data?.message || "Failed to retrieve appointments!"
+            );
+        }
         };
         fetchAppointments();
-    }, []); // Empty dependency array ensures it runs once on component mount
+    }, []);
 
 
       
     return (
         <main>
             <div class="container">
-        <h2>All bookable Events at Mcgill:</h2>
+            <h2>All bookable Events at Mcgill:</h2>
+            {appointments.active.length > 0 ? (
             <div class="table-wrapper">
                 <ul class="responsive-table">
                     <li class="table-header">
@@ -55,66 +66,33 @@ export default function FullEvents() {
                     <div class="col">Location</div>
                     <div class="col"></div>
                     </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Name">OH: COMP206</div>
-                    <div class="col" data-label="Host">J. Vybihal</div>
-                    <div class="col" data-label="Date">12/12/2024</div>
-                    <div class="col" data-label="From">9:00am</div>
-                    <div class="col" data-label="To">12:00pm</div>
-                    <div class="col" data-label="Location">McEng 3rd Floor</div>
-                    <div class="col" data-label="URL"><button>Go to URL</button></div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Name">OH: COMP307</div>
-                    <div class="col" data-label="Host">J. Vybihal</div>
-                    <div class="col" data-label="Date">19/12/2024</div>
-                    <div class="col" data-label="From">11:00am</div>
-                    <div class="col" data-label="To">1:00pm</div>
-                    <div class="col" data-label="Location">McEng 3rd Floor</div>
-                    <div class="col" data-label="URL"><button>Go to URL</button></div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Name">OH: COMP424</div>
-                    <div class="col" data-label="Host">David Meger</div>
-                    <div class="col" data-label="Date">26/12/2024</div>
-                    <div class="col" data-label="From">11:00am</div>
-                    <div class="col" data-label="To">1:00pm</div>
-                    <div class="col" data-label="Location">McEng 3rd Floor</div>
-                    <div class="col" data-label="URL"><button>Go to URL</button></div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Name">OH: COMP330</div>
-                    <div class="col" data-label="Host">Wald</div>
-                    <div class="col" data-label="Date">26/12/2024</div>
-                    <div class="col" data-label="From">11:00am</div>
-                    <div class="col" data-label="To">1:00pm</div>
-                    <div class="col" data-label="Location">McEng 3rd Floor</div>
-                    <div class="col" data-label="URL"><button>Go to URL</button></div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Name">OH: COMP350</div>
-                    <div class="col" data-label="Host">Ronaldo</div>
-                    <div class="col" data-label="Date">26/12/2024</div>
-                    <div class="col" data-label="From">11:00am</div>
-                    <div class="col" data-label="To">1:00pm</div>
-                    <div class="col" data-label="Location">McEng 3rd Floor</div>
-                    <div class="col" data-label="URL"><button>Go to URL</button></div>
-                    </li>
-                    <li class="table-row">
-                    <div class="col" data-label="Name">OH: COMP360</div>
-                    <div class="col" data-label="Host">Hatami</div>
-                    <div class="col" data-label="Date">26/12/2024</div>
-                    <div class="col" data-label="From">11:00am</div>
-                    <div class="col" data-label="To">1:00pm</div>
-                    <div class="col" data-label="Location">McEng 3rd Floor</div>
-                    <div class="col" data-label="URL"><button>Go to URL</button></div>
-                    </li>
                     
+                    {appointments.active.map((appointment, index) => (
+                    <li key={index} className="table-row">
+                    <div className="col" data-label="Event">
+                      {appointment.event || "N/A"}
+                    </div>
+                    <div className="col" data-label="Host">
+                      {appointment.host || "N/A"}
+                    </div>
+                    <div className="col" data-label="Email">
+                      {appointment.email}
+                    </div>
+                    <div className="col" data-label="Date & Time">
+                      {new Date(appointment.startDate).toLocaleString()}
+                    </div>
+                    <div className="col" data-label="Location">
+                      {appointment.location || "N/A"}
+                    </div>
+                    </li>
+                    ))}
                 </ul>
-            </div>
+            </div> 
+            ) : (
+            <p>{message}</p>
+            )} 
         </div>
     </main>
-        
     );
 }
 

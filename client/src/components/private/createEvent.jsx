@@ -6,7 +6,7 @@ const CreateEvent = () => {
   const [type, setType] = useState("One-Time");
   const [date, setDate] = useState(""); // Host Name Field
   const [location, setLocation] = useState(""); // Location Field
-  const [proposedTimes, setProposedTimes] = useState([]);
+  const [timeslots, setTimeSlots] = useState([]);
   const [privacy, setPrivacy] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -14,19 +14,19 @@ const CreateEvent = () => {
 
   // Add new proposed time
   const addProposedTime = () => {
-    setProposedTimes([...proposedTimes, ""]);
+    setTimeSlots([...timeslots, ""]);
   };
 
   // Handle changes for proposed time inputs
   const handleProposedTimeChange = (index, value) => {
-    const updatedTimes = [...proposedTimes];
+    const updatedTimes = [...timeslots];
     updatedTimes[index] = value;
-    setProposedTimes(updatedTimes);
+    setTimeSlots(updatedTimes);
   };
 
   // Remove a specific proposed time
   const handleRemoveTime = (index) => {
-    setProposedTimes(proposedTimes.filter((_, i) => i !== index));
+    setTimeSlots(timeslots.filter((_, i) => i !== index));
   };
 
   // Submit the form
@@ -38,14 +38,15 @@ const CreateEvent = () => {
     setSuccessMessage("");
 
     // Validation: Ensure all required fields are filled
-    if (!title || !date || !location || proposedTimes.length === 0) {
+    if (!title || !date || !location || timeslots.length === 0) {
       setError(
         "Please fill out all required fields and add at least one proposed time."
       );
       return;
     }
 
-
+    const userEmail = req.user?.email; // Assuming req.user is populated by authentication middleware
+    const userName = req.user?.name;
 
     try {
       const response = await axios.post(
@@ -54,7 +55,8 @@ const CreateEvent = () => {
           event: title,
           date: date, // Dynamic Host Name
           location: location, // Dynamic Location
-          proposedTimes, // Array of proposed time slots
+          timeslots, // Array of proposed time slots
+          privacy,
         },
         {
           headers: {
@@ -68,7 +70,7 @@ const CreateEvent = () => {
         `Booking created successfully! Share this URL: ${response.data.publicURL}`
       );
       setPublicURL(response.data.publicURL);
-      setProposedTimes([]); // Clear form after successful creation
+      setTimeSlots([]); // Clear form after successful creation
       setTitle("");
       setHostName("");
       setLocation("");
@@ -151,8 +153,8 @@ const CreateEvent = () => {
 
         {/* Proposed Times */}
         <div className="input-text">
-          <label>Proposed Times:</label>
-          {proposedTimes.map((time, index) => (
+          <label>Time slots:</label>
+          {timeslots.map((time, index) => (
             <div
               key={index}
               style={{
