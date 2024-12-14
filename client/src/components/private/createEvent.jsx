@@ -8,13 +8,14 @@ export default function CreateEvent() {
     const [endTime, setEndTime] = useState("");
     const [recurring, setRecurring] = useState(false);
     const [submeetings, setSubMeetings] = useState("")
+    const [message, setMessage] = useState("");
     
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
 
         // Validate required fields
         if (!title || !date || !startTime || !endTime || !submeetings) {
-            alert("Please fill in all required fields.");
+            setMessage("Please fill in all required fields.");
             return;
         }
 
@@ -39,15 +40,15 @@ export default function CreateEvent() {
 
             if (response.ok) {
                 const result = await response.json();
-                alert("Event created successfully!");
+                setMessage("Event created successfully!");
                 console.log(result);
             } else {
-                alert("Failed to create event. Please try again.");
+                setMessage("Failed to create event. Please try again.");
                 console.error("Error:", response.statusText);
             }
         } catch (error) {
             console.error("API call failed:", error);
-            alert("An error occurred. Please try again.");
+            setMessage("An error occurred. Please try again.");
         }
     };
 
@@ -80,15 +81,15 @@ export default function CreateEvent() {
                         />
                     </div>
                     <div class="input-time">
-                        <label className="event-label" htmlFor="start-time">From: </label>
+                        <label className="event-label" htmlFor="start-time">Start time: </label>
                         <input type="time" className="time-input" id="start-time" name="start-time" value={startTime} onChange={(e) => setStartTime(e.target.value)} required></input>
                     </div>
                     <div class="input-time">
-                        <label className="event-label" htmlFor="end-time">To: </label>
+                        <label className="event-label" htmlFor="end-time">End time: </label>
                         <input type="time" className="time-input" id="end-time" name="end-time" value={endTime} onChange={(e) => setEndTime(e.target.value)} required ></input>
                     </div>
                     <div className="split-event">
-                        <label className="event-label" for="quantity">Number of meetings in event:</label>
+                        <label className="event-label" for="quantity">Total time slots: </label>
                         <input type="number" className="event-quantity" id="quantity" name="quantity" min="1" max="15" value={submeetings} onChange={(e) => setSubMeetings(e.target.value)}  required></input>
                     </div>
                     
@@ -105,7 +106,7 @@ export default function CreateEvent() {
                     <button className="small-btn" type="submit" onClick={handleSubmit}>
                         Create Event
                     </button>
-
+                    {message && <p>{message}</p>}
                 </form>
             </div>
         </main>
