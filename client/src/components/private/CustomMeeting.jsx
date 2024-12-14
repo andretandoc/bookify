@@ -4,6 +4,8 @@ const CustomMeeting = () => {
   const [recipientEmail, setRecipientEmail] = useState("");
   const [proposedTimes, setProposedTimes] = useState([]);
   const [message, setMessage] = useState("");
+  const [date, setDate] = useState(""); // Host Name Field
+  const [location, setLocation] = useState(""); // Location Field
 
   const addProposedTime = () => {
     setProposedTimes([...proposedTimes, ""]);
@@ -42,6 +44,31 @@ const CustomMeeting = () => {
             className="booking-input"
           />
         </div>
+
+        <div className="input-text">
+          <input
+            type="text"
+            id="location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Enter location (e.g., Online or Room 101)"
+            required
+            className="booking-input"
+          />
+        </div>
+
+        {/* Date */}
+        <div className="choose-date">
+          <label className="event-label" htmlFor="start-date">Date:</label>
+          <input
+              type="date"
+              id="start-date"
+              name="start-date"
+              className="date-input"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+          />
+      </div>
 
         {/* Proposed Times */}
         <div className="input-text">
