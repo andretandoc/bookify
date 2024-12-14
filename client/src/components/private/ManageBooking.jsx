@@ -175,35 +175,3 @@ export default function ManageBooking() {
   );
 }
 
-/*
-
-    <div className="container">
-            <h2>My Appointments:</h2>
-            {message && <p>{message}</p>}
-
-            {appointments.length > 0 && (
-                <ul className="responsive-table">
-                    <li className="table-header">
-                        <p><strong>Name</strong></p>
-                        <p><strong>Email</strong></p>
-                        <p><strong>Date</strong></p>
-                        <p><strong>Status</strong></p>
-                        <p><strong>Actions</strong></p>
-                    </li>
-                    {appointments.map((appointment, index) => (
-                        <li key={index} className="table-row">
-                            <p>{appointment.name || "N/A"}</p>
-                            <p>{appointment.email || "N/A"}</p>
-                            <p>{appointment.Date ? new Date(appointment.Date).toLocaleString() : "N/A"}</p>
-                            <p>{appointment.status || "N/A"}</p>
-                            <div>
-                                <button className="request-btn">Request Custom Meeting</button>
-                                <button className="reject-btn">Cancel Meeting &#10060;</button>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            )}        
-    </div>
-
-*/
