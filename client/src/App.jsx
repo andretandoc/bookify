@@ -17,7 +17,7 @@ import PrivateRoute from "./private-routes/privateRoutes";
 import PublicRoute from "./public-routes/publicRoutes";
 
 // Private components
-import CreateBooking from "./components/private/CreateBooking";
+import CreateEvent from "./components/private/createEvent";
 import MemberPage from "./components/private/MemberPage";
 import ManageBooking from "./components/private/ManageBooking";
 import CustomMeeting from "./components/private/CustomMeeting";
@@ -26,7 +26,6 @@ import BookingURL from "./components/private/bookingURL";
 
 import { useState, useEffect } from "react";
 import MeetingList from "./components/private/MeetingList";
-import CreateEvent from "./components/private/createEvent";
 import PublicEvents from "./components/public/PublicEvents";
 
 function App() {
@@ -47,7 +46,6 @@ function App() {
   // }, []); // might have to remove this later
   const privateRoutes = [
     "/MemberPage",
-    "/CreateBooking",
     "/MeetingList",
     "/ManageBooking",
     "/CustomMeeting",
@@ -77,13 +75,14 @@ function App() {
             path="/Login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
-          <Route path="/Register" element={<Register />} />
+          <Route 
+            path="/Register" 
+            element={<Register setIsLoggedIn={setIsLoggedIn} />} />
         </Route>
 
         {/* Private Routes */}
         <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
           <Route path="/MemberPage" element={<MemberPage />} />
-          <Route path="/CreateBooking" element={<CreateBooking />} />
           <Route path="/MeetingList" element={<MeetingList />} />
           <Route path="/ManageBooking" element={<ManageBooking />} />
           <Route path="/CustomMeeting" element={<CustomMeeting />} />

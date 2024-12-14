@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -9,6 +9,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [confirmation, setConfirmation] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -36,7 +37,12 @@ function Register() {
           confirmPassword: confirmation,
         }
       );
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+      
       setMessage(response.data.message);
+      navigate("/MemberPage");
     } catch (error) {
       setMessage(error.response?.data?.message || "Registration failed");
     }

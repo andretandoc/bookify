@@ -38,9 +38,6 @@ function Header({ isLoggedIn, onLogout }) {
                 <Link to="/MemberPage">Home</Link>
               </div>
               <div className="nav-item">
-                <Link to="/CreateBooking">Create Meeting</Link>
-              </div>
-              <div className="nav-item">
                 <Link to="/CustomMeeting">Custom Meeting</Link>
               </div>
               <div className="nav-item">

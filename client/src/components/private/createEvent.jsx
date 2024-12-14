@@ -1,124 +1,217 @@
 import { useState } from "react";
+import axios from "axios";
 
-export default function CreateEvent() {
+const CreateEvent = () => {
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("One-Time");
+  const [date, setDate] = useState(""); // Host Name Field
+  const [location, setLocation] = useState(""); // Location Field
+  const [proposedTimes, setProposedTimes] = useState([]);
+  const [privacy, setPrivacy] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [publicURL, setPublicURL] = useState("");
 
-    const [email, setTitle] = useState("");
-    const [date, setDate] = useState("");
-    const [startTime, setStartTime] = useState("");
-    const [endTime, setEndTime] = useState("");
-    const [recurring, setRecurring] = useState(false);
-    const [submeetings, setSubMeetings] = useState("")
-    const [privacy, setPrivacy] = useState("");
-    const [message, setMessage] = useState("");
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+  // Add new proposed time
+  const addProposedTime = () => {
+    setProposedTimes([...proposedTimes, ""]);
+  };
 
-        // Validate required fields
-        if (!title || !date || !startTime || !endTime || !submeetings) {
-            setMessage("Please fill in all required fields.");
-            return;
+  // Handle changes for proposed time inputs
+  const handleProposedTimeChange = (index, value) => {
+    const updatedTimes = [...proposedTimes];
+    updatedTimes[index] = value;
+    setProposedTimes(updatedTimes);
+  };
+
+  // Remove a specific proposed time
+  const handleRemoveTime = (index) => {
+    setProposedTimes(proposedTimes.filter((_, i) => i !== index));
+  };
+
+  // Submit the form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Reset messages
+    setError("");
+    setSuccessMessage("");
+
+    // Validation: Ensure all required fields are filled
+    if (!title || !date || !location || proposedTimes.length === 0) {
+      setError(
+        "Please fill out all required fields and add at least one proposed time."
+      );
+      return;
+    }
+
+
+
+    try {
+      const response = await axios.post(
+        "/api/appointments/create",
+        {
+          event: title,
+          date: date, // Dynamic Host Name
+          location: location, // Dynamic Location
+          proposedTimes, // Array of proposed time slots
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is valid
+          },
         }
+      );
 
-        // Prepare the event data
-        const eventData = {
-            title,
-            date,
-            start_time: startTime,
-            end_time: endTime,
-            recurring,
-            submeetings: parseInt(submeetings, 10), // Ensure submeetings is a number
-            privacy,
-        };
+      // Handle success response
+      setSuccessMessage(
+        `Booking created successfully! Share this URL: ${response.data.publicURL}`
+      );
+      setPublicURL(response.data.publicURL);
+      setProposedTimes([]); // Clear form after successful creation
+      setTitle("");
+      setHostName("");
+      setLocation("");
+      setType("One-Time");
+    } catch (error) {
+      console.error(error);
+      setError(
+        error.response?.data?.message ||
+          "Failed to create booking. Please try again."
+      );
+    }
+  };
 
-        try {
-            const response = await fetch("https://your-api-endpoint.com/events", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(eventData),
-            });
+  return (
+    <div className="container glass-container">
+      <h2 className="title">Create a Booking</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Title */}
+        <div className="input-text">
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter a title (e.g., Office Hours)"
+            required
+            className="booking-input"
+          />
+        </div>
 
-            if (response.ok) {
-                const result = await response.json();
-                setMessage("Event created successfully!");
-                console.log(result);
-            } else {
-                setMessage("Failed to create event. Please try again.");
-                console.error("Error:", response.statusText);
-            }
-        } catch (error) {
-            console.error("API call failed:", error);
-            setMessage("An error occurred. Please try again.");
-        }
-    };
+        {/* Type */}
+        <div className="input-text">
+          <label htmlFor="type">Type:</label>
+          <select
+            id="type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="booking-input"
+          >
+            <option value="One-Time">One-Time</option>
+            <option value="Recurring">Recurring</option>
+          </select>
+        </div>
 
 
-    return (
-        <main className="form-box-wrapper">
-        <div className="form-box">
-            <h1 className="title">Create an Event</h1>
-            <form className="event-form" action="" method="">
-                <div className="input-text">
-                    <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    placeholder="Enter event title"
-                    value={email}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                    />{" "}
-                </div>
-                    <div className="choose-date">
-                        <label className="event-label" htmlFor="start-date">Date:</label>
-                        <input
-                            type="date"
-                            id="start-date"
-                            name="start-date"
-                            className="date-input"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                        />
-                    </div>
-                    <div class="input-time">
-                        <label className="event-label" htmlFor="start-time">Start time: </label>
-                        <input type="time" className="time-input" id="start-time" name="start-time" value={startTime} onChange={(e) => setStartTime(e.target.value)} required></input>
-                    </div>
-                    <div class="input-time">
-                        <label className="event-label" htmlFor="end-time">End time: </label>
-                        <input type="time" className="time-input" id="end-time" name="end-time" value={endTime} onChange={(e) => setEndTime(e.target.value)} required ></input>
-                    </div>
-                    <div className="split-event">
-                        <label className="event-label" for="quantity">Total time slots: </label>
-                        <input type="number" className="event-quantity" id="quantity" name="quantity" min="1" max="15" value={submeetings} onChange={(e) => setSubMeetings(e.target.value)}  required></input>
-                    </div>
-                    
-                    <div class="choose-recurring">
-                        <label className="event-label" htmlFor="day">Recurring Event: </label>
-                        <select id="recurring" className="dropdown-recurring" name="recurring" value={recurring} onChange={(e) => setRecurring(e.target.value)} required>
-                            <option class="recurring-input" value="" disabled>Pick an option</option>
-                            <option class="recurring-input" value="daily">Daily</option>
-                            <option class="recurring-input" value="weekly">Weekly</option>
-                            <option class="recurring-input" value="monthly">Monthly</option>
-                        </select>
-                    </div>
+        {/* Location */}
+        <div className="input-text">
+          <label htmlFor="location">Location:</label>
+          <input
+            type="text"
+            id="location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Enter location (e.g., Online or Room 101)"
+            required
+            className="booking-input"
+          />
+        </div>
 
-                    <div class="choose-privacy">
-                        <label className="event-label" htmlFor="day">Event Privacy: </label>
-                        <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
-                            <option class="privacy-input" value="" disabled>Pick an option</option>
-                            <option class="privacy-input" value="member">Members Only</option>
-                            <option class="privacy-input" value="public">Open to Everyone</option>
-                        </select>
-                    </div>
-                    {message && <p>{message}</p>}
-                    <button className="small-btn" type="submit" onClick={handleSubmit}>
-                        Create Event
-                    </button>
-                </form>
+
+        {/* Date */}
+        <div className="choose-date">
+          <label className="event-label" htmlFor="start-date">Date:</label>
+          <input
+              type="date"
+              id="start-date"
+              name="start-date"
+              className="date-input"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+          />
+      </div>
+
+        
+
+        {/* Proposed Times */}
+        <div className="input-text">
+          <label>Proposed Times:</label>
+          {proposedTimes.map((time, index) => (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginBottom: "10px",
+              }}
+            >
+              <input
+                type="time"
+                value={time}
+                onChange={(e) =>
+                  handleProposedTimeChange(index, e.target.value)
+                }
+                required
+                className="booking-input"
+              />
+              <button
+                type="button"
+                onClick={() => handleRemoveTime(index)}
+                className="small-btn"
+              >
+                Remove
+              </button>
             </div>
-        </main>
-    )
-}
+          ))}
+          <button type="button" onClick={addProposedTime} className="small-btn">
+            Add Another Time
+          </button>
+          <div class="choose-privacy">
+              <label className="event-label" htmlFor="day">Event Privacy: </label>
+              <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
+                  <option class="privacy-input" value="" disabled>Pick an option</option>
+                  <option class="privacy-input" value="member">Members Only</option>
+                  <option class="privacy-input" value="public">Open to Everyone</option>
+              </select>
+          </div>
+        </div>
+
+        {/* Error or Success Messages */}
+        {error && <p className="error-message">{error}</p>}
+        {successMessage && (
+          <p className="success-message" style={{ color: "green" }}>
+            {successMessage}
+            <br />
+            <a
+              href={`/booking/${publicURL}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Event Link
+            </a>
+          </p>
+        )}
+
+        {/* Submit Button */}
+        <button type="submit" className="btn">
+          Create Event
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default CreateEvent;
