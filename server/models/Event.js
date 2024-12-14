@@ -9,6 +9,7 @@ const EventSchema = new mongoose.Schema({
   status: { type: String, enum: ["active", "past"], default: "active" }, // Status could be either 'active' or 'past'
   meetings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Meeting" }], // Array of Meeting references
   notes: { type: String }, // Optional notes about the meeting
+  privacy: { type: String, enum:["members", "public"], default: "public", required: true}
 });
 
 module.exports = mongoose.model("Event", EventSchema);

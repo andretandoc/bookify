@@ -1506,7 +1506,7 @@ strong {
   display: flex;
   flex-direction: column;
   justify-content: left;
-  gap: 10px;
+  gap: 8px;
 }
 
 .event-form .input-text {
@@ -1533,7 +1533,8 @@ input[type="number"] {
 }
 
 .dropdown-day:hover, .dropdown-day:active, 
-.dropdown-recurring:hover, .dropdown-recurring:active{
+.dropdown-recurring:hover, .dropdown-recurring:active, 
+.dropdown-privacy:hover, .dropdown-privacy:active {
     cursor: pointer;
 }
 
@@ -1543,7 +1544,7 @@ input[type="number"] {
     text-align: center;
     background: #f9f9f9; 
     font-size: small;
-    width: 80px;
+    width: 120px;
     height: 30px;
     cursor: pointer;
     font-weight: 500;  
@@ -1586,19 +1587,31 @@ input[type="number"] {
     margin-top: 6px;
 }
 
-.choose-recurring {
+.choose-recurring, .choose-privacy {
     display: flex;
     flex-direction: row;
     justify-content: left;
     text-align: center;
     gap: 10px; 
-    margin-bottom: 10px;
+}
+
+.dropdown-privacy {
+    border-radius: 10px;
+    text-align: center;
+    background: #f9f9f9; 
+    font-size: small;
+    width: 120px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: 500;  
+    margin-bottom: 5px; 
 }
 
 .event-form .small-btn {
     margin: 0 auto;
-}
+    margin-top: 5px;
 
+}
 
 /******************************************************************/
                         /* Booking URL Page */

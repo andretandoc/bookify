@@ -9,7 +9,8 @@ const getAppointments = async (req, res) => {
         start_time, 
         end_time, 
         recurring, 
-        submeetings 
+        submeetings,
+        privacy,
     } = req.body;
     
     const userEmail = req.user?.email; // Assuming req.user is populated by authentication middleware
@@ -34,6 +35,14 @@ const getAppointments = async (req, res) => {
     return res.status(400).json({ message: "Invalid recurrence option." });
     }
 
+    const submeetingsCount = parseInt(submeetings, 10);
+    if (isNaN(submeetingsCount) || submeetingsCount <= 0) {
+      return res.status(400).json({ message: "Number of submeetings must be a positive integer." });
+    }
+
+    // Default privacy if not provided
+    const eventPrivacy = privacy || "public"; // "public" or "private"
+
     // Create event object
     const newEvent = new Event({
         title,
@@ -42,6 +51,7 @@ const getAppointments = async (req, res) => {
         end_time,
         recurring,
         submeetings: parseInt(submeetings, 10), // Ensure it's an integer
+        privacy: eventPrivacy,
         createdBy: {
             email: userEmail,
             name: userName,

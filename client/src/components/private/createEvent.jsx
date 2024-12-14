@@ -8,6 +8,7 @@ export default function CreateEvent() {
     const [endTime, setEndTime] = useState("");
     const [recurring, setRecurring] = useState(false);
     const [submeetings, setSubMeetings] = useState("")
+    const [privacy, setPrivacy] = useState("");
     const [message, setMessage] = useState("");
     
     const handleSubmit = async (e) => {
@@ -27,6 +28,7 @@ export default function CreateEvent() {
             end_time: endTime,
             recurring,
             submeetings: parseInt(submeetings, 10), // Ensure submeetings is a number
+            privacy,
         };
 
         try {
@@ -94,19 +96,27 @@ export default function CreateEvent() {
                     </div>
                     
                     <div class="choose-recurring">
-                    <label className="event-label" htmlFor="day">Recurring Event: </label>
-                    <select id="recurring" className="dropdown-recurring" name="recurring" value={recurring} onChange={(e) => setRecurring(e.target.value)} required>
-                        <option class="recurring-input" value="" disabled>Pick an option</option>
-                        <option class="recurring-input" value="daily">Daily</option>
-                        <option class="recurring-input" value="weekly">Weekly</option>
-                        <option class="recurring-input" value="monthly">Monthly</option>
-                    </select>
-                </div>
-                    
+                        <label className="event-label" htmlFor="day">Recurring Event: </label>
+                        <select id="recurring" className="dropdown-recurring" name="recurring" value={recurring} onChange={(e) => setRecurring(e.target.value)} required>
+                            <option class="recurring-input" value="" disabled>Pick an option</option>
+                            <option class="recurring-input" value="daily">Daily</option>
+                            <option class="recurring-input" value="weekly">Weekly</option>
+                            <option class="recurring-input" value="monthly">Monthly</option>
+                        </select>
+                    </div>
+
+                    <div class="choose-privacy">
+                        <label className="event-label" htmlFor="day">Event Privacy: </label>
+                        <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
+                            <option class="privacy-input" value="" disabled>Pick an option</option>
+                            <option class="privacy-input" value="member">Members Only</option>
+                            <option class="privacy-input" value="public">Open to Everyone</option>
+                        </select>
+                    </div>
+                    {message && <p>{message}</p>}
                     <button className="small-btn" type="submit" onClick={handleSubmit}>
                         Create Event
                     </button>
-                    {message && <p>{message}</p>}
                 </form>
             </div>
         </main>
