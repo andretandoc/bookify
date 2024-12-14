@@ -25,6 +25,7 @@ import BookingURL from "./components/private/bookingURL";
 import { useState, useEffect } from "react";
 import MeetingList from "./components/private/MeetingList";
 import CreateEvent from "./components/private/createEvent";
+import PublicEvents from "./components/public/PublicEvents";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -53,6 +54,7 @@ function App() {
           <Route path="/ApptForm" element={<ApptForm />} />
           <Route path="/BookingForm" element={<BookingForm />} />
           <Route path="/ApptList" element={<ApptList />} />
+          <Route path="/PublicEvents" element={<PublicEvents />} />
           <Route
             path="/Login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
