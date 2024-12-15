@@ -85,6 +85,7 @@ const CreateEvent = () => {
   };
 
   return (
+    
     <div className="container glass-container">
       <h2 className="title">Create an Event</h2>
       <form onSubmit={handleSubmit}>

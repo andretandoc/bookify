@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MemberPage = () => {
   const meetings = [
@@ -34,11 +35,13 @@ const MemberPage = () => {
         }}
       >
         <ul style={{ listStyleType: "none", padding: "0" }}>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}>History</li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}>Manage meetings</li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}>Create an event</li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}>Book a meeting</li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}>Request a custom meeting</li>
+          <li style={{ marginBottom: "20px", cursor: "pointer" }}><Link to = "/MemberPage" style={style.link}>Home</Link></li>
+          <li style={{ marginBottom: "20px", cursor: "pointer" }}><Link to = "/CreateEvent" style={style.link}>Create Events</Link></li>
+          <li style={{ marginBottom: "20px", cursor: "pointer" }}> <Link to = "/ManageEvent" style={style.link}>Manage Events</Link></li>
+          <li style={{ marginBottom: "20px", cursor: "pointer" }}><Link to = "/ManageBooking" style={style.link}>Manage Meetings</Link></li>
+          <li style={{ marginBottom: "20px", cursor: "pointer" }}><Link to = "/FullEvents" style={style.link}>Book an Appointment</Link></li>
+          <li style={{ marginBottom: "20px", cursor: "pointer" }}> <Link to = "/CustomMeeting" style={style.link}>Custom Meeting</Link></li>
+         
         </ul>
         <button
           style={{
@@ -127,3 +130,11 @@ const MemberPage = () => {
 };
 
 export default MemberPage;
+
+
+const style = {
+  link : {
+    textDecoration: "none",
+    color: "white",
+  }
+}
