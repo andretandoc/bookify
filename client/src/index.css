@@ -6,12 +6,18 @@ body {
   padding: 0;
 }
 
+
+
+
+/*******************************************************/
+            /* Public pages General styling  */
+/*******************************************************/
 .public-page {
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
   color: white;
-  height: 100%;
+  min-height: 100vh;
   background: url("McGill-Background.jpeg") no-repeat center center fixed;
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.75);
@@ -20,15 +26,6 @@ body {
   overflow-x: hidden;
 }
 
-.private-page {
-    background: none;
-    background-color: #ffffff;
-    min-height: 100vh;
-    font-family: "Lato", sans-serif;
-    margin: 0;
-    padding: 0;
-    color: black;
-}
 
 .public-page {
   position: relative;
@@ -52,73 +49,9 @@ body {
   z-index: 0; 
 }
 
-/*******************************************************/
-                /* Private page CSS  */
-/*******************************************************/
-.private-page .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px 30px;
-    position: fixed;
-    width: 95%;
-    height: max-content;
-    z-index: 1;
-    bottom: 0;
-    color: black;
-}
   
-  .private-page .footer a {
-    color: black;
-    text-decoration: none;
-    font-size: 15px;
-    margin: 2%;
-    transition: color 0.3s ease;
-    font-weight: bolder;
-  }
-  
-  .private-page footer a:hover {
-    color: #c61627;
-  }
-  
-  .private-page footer a:active {
-    transform: translateY(1px);
-  }
-
-  .private-page .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 30px;
-    width: 90%;
-    position: relative;
-    z-index: 1;
-}
-
-.private-page .header {
-    background-color: #c61627;
-}
-
-.private-page .footer {
-    bottom: 0;
-    position: relative;
-    left: 0;
-    margin-top: auto;
-}
-  
-  
-
-
-
-/******************************************************************/
 /* Header Section */
-/******************************************************************/
 
-/* Header Styling */
 header {
   display: flex;
   justify-content: space-between;
@@ -279,9 +212,9 @@ header .profile-icon:hover {
   }
 }
 
-/******************************************************************/
+
 /* Footer Section */
-/******************************************************************/
+
 
 Footer {
   display: flex;
@@ -295,6 +228,7 @@ Footer {
   height: max-content;
   z-index: 1;
   bottom: 0;
+  background-color: #c61627;
 }
 
 Footer::before {
@@ -308,9 +242,8 @@ Footer::before {
   margin-top: 20px;
 }
 
-/******************************************************************/
+
 /* Buttons */
-/******************************************************************/
 
 /* Large Buttons Landing page Style*/
 .double-red-btn {
@@ -380,10 +313,10 @@ Footer::before {
   width: 140px; 
   height: 40px; 
   position: relative;
-  background-color: white;
+  background-color: #c61627;
   border: transparent;
-  box-shadow: -10px -10px 1px rgba(198, 22, 39); 
-  color: #c61627; 
+  box-shadow: -10px -10px 1px #9e0918; 
+  color: white; 
   font-size: 18px;
   font-family: 'Lato', sans-serif; 
   font-weight: bolder;
@@ -394,7 +327,7 @@ Footer::before {
 }
 
 .double-btn:hover{
-  background-color: #c61627;
+  background-color: #9e0918;
   color:#fff;
   border: #333;
 }
@@ -463,9 +396,65 @@ button:focus {
   outline: none;
 }
 
-/******************************************************************/
+
+/* layered boxes */
+
+/*For Calendars*/
+.cal-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1200px; 
+  height: 500px; 
+  position: relative;
+  background-color: white;
+  border: 3px solid #c61627;
+  box-shadow: -10px -10px 1px rgba(198, 22, 39); 
+  color: white;
+  font-size: 19.7px;
+  font:'Lato';
+  font-weight: 500;
+  text-align: center;
+  line-height: 50px; 
+  transition: all 0.2s ease; 
+}
+
+/*For Forms*/
+.form-box {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  width: 450px; 
+  height: 500px; 
+  position: relative;
+  align-items: center;
+  background-color: white;
+  box-shadow: -15px -15px 1px rgba(198, 22, 39); 
+  color: #c61627;
+  font-size: 19.7px;
+  font:'Lato';
+  font-weight: 500;
+  text-align: center;
+  line-height: 20px; 
+  transition: all 0.2s ease;
+  overflow: hidden; 
+}
+
+.form-box-wrapper {
+  position: relative;
+  left: 50%; 
+  transform: translateX(-50%); 
+  bottom: 15%; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 0px; 
+  padding-top: 70px;
+  width: 100%; 
+  
+}
+
 /* Home Page CSS */
-/******************************************************************/
 
 .content-wrapper {
   display: flex;
@@ -478,6 +467,7 @@ button:focus {
   gap: 80px;
   width: 90%;
 }
+
 
 .left-section {
   flex: 1;
@@ -618,6 +608,140 @@ button:focus {
   }
 }
 
+/* Appt History Section */
+
+.appt_form {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 62%;
+}
+
+.input-date {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.from-day { 
+  display: flex;
+  gap: 20px;
+}
+
+.to-day { 
+  display: flex;
+  gap: 29px;
+}
+
+input[type = "date"] {
+  font-weight: bolder;
+  outline: none; 
+  border-radius: 10px; 
+  background: #f9f9f9; 
+  padding: 10px; 
+  width: 150px; 
+  box-sizing: border-box; 
+  height: min-content;
+  border: 1px solid grey;
+  color: black;
+  &::-webkit-datetime-edit-text {
+    color: rgb(160, 160, 160);
+    padding: 0 0.3em;
+  }
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    background-size: 15px;
+  }
+}
+
+.error-message {
+  color: #c61627;
+  font-size: 17px;
+  margin-bottom: 0px;
+  font-weight: 900;
+  margin-top: 20px;
+}
+
+.appt_form .double-btn {
+  margin: 0 auto;
+}
+/*******************************************************/
+              /* Appointment History CSS */
+/*******************************************************/
+
+
+.appointment-scroll-container {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  width: 90%;
+  max-width: 100%;
+}
+
+.appointment-list {
+  color: rgb(72, 71, 71);
+  display: flex;
+  overflow-x: scroll;
+  gap: 20px;
+  padding: 15px 0;
+  scroll-snap-type: x mandatory; 
+  scroll-behavior: smooth;
+  flex: 1;
+  overflow-x: auto; 
+  width: 100%; 
+}
+
+.appointment {
+  text-align: left;
+  align-content: center;
+  flex-shrink: 0;
+  width: 100%; 
+  max-width: 100%; 
+  box-sizing: border-box; 
+  background-color: white;
+  margin: 0 auto;
+  scroll-snap-align: start; 
+  height: 280px;
+  padding-left: 60px;
+}
+.title {
+  margin-top: 40px;
+}
+.appointment h3 {
+  margin-top: 0;
+}
+
+.appt-list-item {
+    padding-bottom: 14px;
+}
+
+.scroll-btn {
+  background-color: #c61627;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 50px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.scroll-btn.left {
+  left: 10px;
+}
+
+.scroll-btn.right {
+  right: 10px;
+}
+
+.scroll-btn:hover {
+  background-color: #98111e;
+}
 
 /******************************************************************/
 /* Book Meeting Page CSS */
@@ -779,71 +903,8 @@ input::placeholder {
   width: 100%;
 }
 
-/******************************************************************/
-/* Appt History Section */
-/******************************************************************/
 
-.appt_form {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  width: 62%;
-}
-
-.input-date {
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.from-day { 
-  display: flex;
-  gap: 20px;
-}
-
-.to-day { 
-  display: flex;
-  gap: 29px;
-}
-
-input[type="date"] {
-  font-weight: bolder;
-  outline: none; 
-  border-radius: 10px; 
-  background: #f9f9f9; 
-  padding: 10px; 
-  width: 150px; 
-  box-sizing: border-box; 
-  height: min-content;
-  border: 1px solid grey;
-  color: black;
-  &::-webkit-datetime-edit-text {
-    color: rgb(160, 160, 160);
-    padding: 0 0.3em;
-  }
-  &::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    background-size: 15px;
-  }
-}
-
-.error-message {
-  color: #9e0918;
-  font-size: 17px;
-  margin-bottom: 0px;
-  font-weight: 900;
-  margin-top: 20px;
-}
-
-.appt_form .small-btn {
-  margin: 0 auto;
-}
-
-/******************************************************************/
 /* Login Section */
-/******************************************************************/
-
 .options {
   display: flex;
   align-items: center; 
@@ -888,10 +949,8 @@ input[type="checkbox"]:hover {
   transform: translateY(1px);
 }
 
-/******************************************************************/
-                /* Login & Register Section */
-/******************************************************************/
 
+/* Login & Register Section */
 p {
   font-size: 15px;
   margin-top: 0px;
@@ -954,68 +1013,130 @@ p a:active {
     font-weight: 900;
 }
 
+/* Public events*/
 
-/******************************************************************/
-                        /* Layered Boxes*/
-/******************************************************************/
-/*For Calendars*/
-.cal-box {
+.container {
   display: flex;
+  font-family: "Arvo", sans-serif;
+  padding: 40px;
+  background-color: #f9f9f9;
+  color: black;
   flex-direction: column;
-  align-items: center;
-  width: 1200px; 
-  height: 500px; 
-  position: relative;
-  background-color: white;
-  border: 3px solid #c61627;
-  box-shadow: -10px -10px 1px rgba(198, 22, 39); 
-  color: white;
-  font-size: 19.7px;
-  font:'Lato';
-  font-weight: 500;
-  text-align: center;
-  line-height: 50px; 
-  transition: all 0.2s ease; 
+  width: 90vh;
+  margin-bottom: 200px;
 }
 
-/*For Forms*/
-.form-box {
+.container h2 {
+  font-size: 36px;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* Public Event Card Styles */
+.event-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e3b4ae;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.event-card div {
   display: flex;
   flex-direction: column;
-  width: 450px; 
-  height: 500px; 
-  position: relative;
+  gap: 5px;
+}
+
+.event-card p {
+  margin: 0;
+  font-size: 15px;
+  color: #393838;
+}
+
+.event-card p strong {
+  font-weight: bold;
+}
+
+.event-card .event-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+}
+
+
+
+/*******************************************************/
+            /* Private page General styling  */
+/*******************************************************/
+
+.private-page {
+  background: none;
+  background-color: #ffffff;
+  min-height: 100vh;
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+.private-page .footer {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: white;
-  box-shadow: -15px -15px 1px rgba(198, 22, 39); 
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 30px;
+  position: fixed;
+  width: 95%;
+  height: max-content;
+  z-index: 1;
+  bottom: 0;
+  color: black;
+}
+
+.private-page .footer a {
+  color: black;
+  text-decoration: none;
+  font-size: 15px;
+  margin: 2%;
+  transition: color 0.3s ease;
+  font-weight: bolder;
+}
+
+.private-page footer a:hover {
   color: #c61627;
-  font-size: 19.7px;
-  font:'Lato';
-  font-weight: 500;
-  text-align: center;
-  line-height: 20px; 
-  transition: all 0.2s ease;
-  overflow: hidden; 
 }
 
-.form-box-wrapper {
-  position: relative;
-  left: 50%; 
-  transform: translateX(-50%); 
-  bottom: 15%; 
+.private-page footer a:active {
+  transform: translateY(1px);
+}
+
+.private-page .header {
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 0px; 
-  padding-top: 70px;
-  width: 100%; 
-  
+  justify-content: space-between;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px 30px;
+  width: 90%;
+  position: relative;
+  z-index: 1;
 }
 
-/*******************************************************/
-                /* Private page Background */
-/*******************************************************/
-/* Styles specific to the createBooking page */
+.private-page .header {
+  background-color: #c61627;
+}
+
+.private-page .footer {
+  bottom: 0;
+  position: relative;
+  left: 0;
+  margin-top: auto;
+}
+
 
 body.private-page{
   background: none;
@@ -1031,6 +1152,8 @@ body.private-page{
 .private-page::before {
   content: none !important; 
 }
+
+
 
 /*******************************************************/
               /* CreateBooking page CSS */
@@ -1359,110 +1482,7 @@ input[type="time"] {
 }
 
 
-/*******************************************************/
-              /* Appointment History CSS */
-/*******************************************************/
 
-
-.appointment-scroll-container {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-  width: 90%;
-}
-
-.appointment-list {
-  display: flex;
-  overflow-x: scroll;
-  gap: 20px;
-  padding: 15px 0;
-  scroll-snap-type: x mandatory; /* Enable scroll snap */
-  scroll-behavior: smooth;
-  flex: 1;
-  overflow-x: auto; /* Allow horizontal scrolling */
-  width: 100%; /* Full width of the container */
-}
-
-.appointment {
-  align-content: center;
-  flex-shrink: 0;
-  width: 100%; /* Make sure the item takes the full available width */
-  max-width: 100%; /* Maximum width of each appointment card */
-  box-sizing: border-box; /* Include padding in the width calculation */
-  background-color: white;
-  margin: 0 auto;
-  scroll-snap-align: start; /* Snap each appointment to the start of the scroll */
-  height: 280px;
-}
-
-.appointment h3 {
-  margin-top: 0;
-}
-
-.appt-list-item {
-    padding-bottom: 14px;
-}
-
-.scroll-btn {
-  background-color: #c61627;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 50px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-}
-
-.scroll-btn.left {
-  left: 10px;
-}
-
-.scroll-btn.right {
-  right: 10px;
-}
-
-.scroll-btn:hover {
-  background-color: #98111e;
-}
-
-strong {
-  font-weight: 900;
-  color: rgb(147, 1, 1);
-  margin-right: 3px;
-}
-
-.history-small-btn {
-    margin-top: 30px;
-    display: inline-block;
-    width: 150px;
-    height: 31px;
-    position: relative;
-    background-color: rgba(198, 22, 39, 1);
-    border: transparent;
-    color: white;
-    font-size: 17px;
-    font-family: "Lato";
-    font-weight: 300;
-    border-radius: 6px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.history-small-btn:hover {
-    background-color: #9e0918;
-    cursor: pointer
-}
-    
-.small-btn:active {
-    background-color: #9e0918;
-    color: white;
-    transform: translateY(1px);
-}
 
 /*******************************************************/
                 /* Manage Meeting CSS */
@@ -1965,3 +1985,5 @@ input[type="number"] {
   background-color: #c61627;
   color: white;
 }
+
+

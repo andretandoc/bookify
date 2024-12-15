@@ -110,8 +110,9 @@ function Header({ isLoggedIn, onLogout }) {
               <div className="nav-item">
                 <Link to="/Login">Login</Link>
               </div>
-              <div className="nav-item">
-                <Link to="/Register">Register</Link>
+
+              <div className = "nav-item">
+                <Link to = "/Register">Register</Link>
               </div>
             </>
           )}

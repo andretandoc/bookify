@@ -37,7 +37,6 @@ function ApptForm() {
       );
 
       // console.log("API Response:", response.data);
-
       if (response.data.length === 0) {
         setMessage("No appointments found");
       } else {
@@ -51,50 +50,47 @@ function ApptForm() {
     }
   };
 
-  
-
   //   console.log("Appointments State:", appointments);
-
   return (
-    <main className="form-box-wrapper">
-        <div className="form-box">
-          <h1 className="title">Appointment History</h1>
-            <form className="appt_form" onSubmit={handleAppt}>
-              <div className="input-text">
+    <main className = "form-box-wrapper">
+        <div className = "form-box">
+          <h1 className = "title">Appointment History</h1>
+            <form className = "appt_form" onSubmit={handleAppt}>
+              <div className = "input-text">
                 <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type = "text"
+                  id = "email"
+                  name = "email"
+                  placeholder = "Enter email"
+                  value = {email}
+                  onChange = {(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="input-date">
-                <div className="from-day">
-                  <label htmlFor="start-date">Start Date:</label>
+              <div className = "input-date">
+                <div className = "from-day">
+                  <label htmlFor = "start-date">Start Date:</label>
                   <input
-                    type="date"
-                    id="start-date"
-                    name="start-date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
+                    type = "date"
+                    id = "start-date"
+                    name = "start-date"
+                    value = {startDate}
+                    onChange = {(e) => setStartDate(e.target.value)}
                   />
                 </div>
-                <div className="to-day">
-                  <label htmlFor="end-date">End Date:</label>
+                <div className = "to-day">
+                  <label htmlFor = "end-date">End Date:</label>
                   <input
-                    type="date"
-                    id="end-date"
-                    name="end-date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
+                    type = "date"
+                    id = "end-date"
+                    name = "end-date"
+                    value = {endDate}
+                    onChange = {(e) => setEndDate(e.target.value)}
                   />
                 </div>
               </div>
-              <button className="small-btn" type="submit">View History</button>
+              <button className = "double-btn" type = "submit">View History</button>
             </form>
-            {message && <p className="error-message">{message}</p>}
+            {message && <p className = "error-message">{message}</p>}
         </div>
       </main>
   );
