@@ -13,12 +13,13 @@ export default function HomeBody() {
         </p>
       </div>
 
-    {/* right Section of the body */}
+      {/* right Section of the body */}
       <div className = "right-section">
         <button className = "double-red-btn">
           <Link to = "/PublicEvents" style = {style.doubleBtn}>
           Schedule Appointment</Link> 
         </button>
+        
         <button className = "double-red-btn">
           <Link to = "/ApptForm" style = {style.doubleBtn}>
           Manage Scheduled and Completed Appointments</Link>
