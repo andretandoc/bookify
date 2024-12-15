@@ -1,6 +1,11 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css);
 @import url(https://fonts.googleapis.com/css2?family=Arvo&family=Lato:wght@100;300;400;500&display=swap);
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .public-page {
   margin: 0;
   padding: 0;
@@ -19,9 +24,11 @@
     background: none;
     background-color: #ffffff;
     min-height: 100vh;
-    transition: background-color 0.3s ease-in-out;
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+    color: black;
 }
-
 
 .public-page {
   position: relative;
@@ -44,6 +51,68 @@
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 0; 
 }
+
+/*******************************************************/
+                /* Private page CSS  */
+/*******************************************************/
+.private-page .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 30px;
+    position: fixed;
+    width: 95%;
+    height: max-content;
+    z-index: 1;
+    bottom: 0;
+    color: black;
+}
+  
+  .private-page .footer a {
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+    margin: 2%;
+    transition: color 0.3s ease;
+    font-weight: bolder;
+  }
+  
+  .private-page footer a:hover {
+    color: #c61627;
+  }
+  
+  .private-page footer a:active {
+    transform: translateY(1px);
+  }
+
+  .private-page .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 30px;
+    width: 90%;
+    position: relative;
+    z-index: 1;
+}
+
+.private-page .header {
+    background-color: #c61627;
+}
+
+.private-page .footer {
+    bottom: 0;
+    position: relative;
+    left: 0;
+    margin-top: auto;
+}
+  
+  
+
+
 
 /******************************************************************/
 /* Header Section */
@@ -588,7 +657,7 @@ button:focus {
   padding: 40px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.4);
   color: #333;
   position: relative;
 }
@@ -1770,10 +1839,10 @@ input[type="number"] {
     display: flex;
     flex-direction: column;
     width: 900px;
-    height: 450px; 
+    height:fit-content; 
     position: relative;
     align-items: center;
-    background-color: white;
+    background-color: rgb(215, 215, 215);
     box-shadow: -15px -15px 1px rgba(198, 22, 39); 
     color: #c61627;
     font-size: 19.7px;
@@ -1809,7 +1878,7 @@ input[type="number"] {
     width: 140px; 
     height: 40px; 
     position: relative;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border: transparent;
     box-shadow: -10px -10px 1px rgba(198, 22, 39); 
     color: #c61627; 
@@ -1835,7 +1904,13 @@ input[type="number"] {
 }
 
 .attendee-info-form {
-    width: 300px;
+  width: 280px; /* Slightly narrower */
+  padding: 15px; /* Add padding for spacing */
+  background-color: #f9f9f9; /* Light background for distinction */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for focus */
+  margin-bottom: 40px;
+  margin-right: 40px;
 }
 
 .info-form {
@@ -1876,4 +1951,45 @@ input[type="number"] {
     color: white;
     transform: translateY(1px);
    
+}
+
+.form-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px
+}
+
+.back-btn {
+  background: none;
+  color: white;
+  background-color: #c61627;
+  border-radius: 10px;
+  border: 1px solid;
+  text-align: center;
+  padding-top: 0px;
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.back-btn:hover {
+  cursor: pointer;
+  background-color: #b41321;
+}
+
+.back-btn:active {
+  transform: translateY(4px); 
+  background-color: #830101; 
+}
+
+.selected-time-header .bold-time{
+  color: #9d0606;
+}
+
+.slot-btn.selected {
+  background-color: #c61627;
+  color: white;
 }
