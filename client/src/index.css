@@ -230,10 +230,6 @@ header .profile-icon:hover {
 
 /* Responsive header */
 @media (max-width: 950px) {
-  header {
-    flex-direction: row;
-    justify-content: space-between;
-  }
 
   .hamburger {
     display: block;
@@ -247,51 +243,39 @@ header .profile-icon:hover {
     border-radius: 4px;
     padding: 8px;
   }
+  
   .navbar {
+    left: 50%;
+    transform: translateX(-48%);
     display: none;
     position: fixed;
-    top: 80px; 
-    left: 50%;
-    transform: translateX(-50%);
-    background: #c61627; 
-    width: 100%;
     padding: 20px;
-    border-radius: 8px;
     flex-direction: column;
     gap: 15px;
     z-index: 100;
-    text-align: center;
     color: white;
   }
 
   .navbar.active {
       display: flex;
-      position: absolute; /* Make it part of the page flow */
-      top: 80px; /* Adjust based on the header height */
-      width: 100%; /* Same as the regular navbar */
+      position: absolute;
+      align-items: center;
+      top: 82px; 
+      width: 100%;
       background: #c61627;
-      padding: 20px;
-      flex-direction: column;
-      gap: 15px;
-      z-index: 101;
-      text-align: center;
-      overflow: auto; /* Allow scrolling for long content */
-  }
-
-  .nav-item {
-    margin: 0;
+      z-index: 1;
   }
 
   .nav-item a {
     font-size: 18px;
-    padding: 10px 0;
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
   .nav-item a:hover {
-    color: #9e0918;
+    color: #6c0610;
+    font-weight: bold;
   }
 }
 
@@ -527,25 +511,28 @@ button:focus {
 
 
 /*Home page body responsive*/
-@media (max-width: 900px) {
+@media (max-width: 950px) {
   body.nav-open .content-wrapper {
     margin-top: 150px;
   }
   .content-wrapper {
+    display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 30px;
     padding: 20px;
+    position: relative;
+    z-index: 0;
   }
 
   .left-section {
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
   }
 
   .home-title {
-    margin-top: 50px;
+    margin-top: 60px;
     font-size: 32px;
   }
 
@@ -606,12 +593,15 @@ button:focus {
 
 
 /* responsive content wrapper */
-@media (max-width: 800px) {
+@media (max-width: 950px) {
   .content-wrapper {
+    display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 10px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
   }
 
   .left-section {

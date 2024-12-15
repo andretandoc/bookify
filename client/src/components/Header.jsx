@@ -98,24 +98,20 @@ function Header({ isLoggedIn, onLogout }) {
             </>
           ) : (
             <>
-              <div className = "nav-item">
-                <Link to = "/">Home</Link>
+              <div className="nav-item">
+                <Link to="/">Home</Link>
               </div>
-
-              <div className = "nav-item">
-                <Link to = "/ApptForm">History</Link>
+              <div className="nav-item">
+                <Link to="/ApptForm">History</Link>
               </div>
-
-              <div className = "nav-item">
-                <Link to = "/PublicEvents">Events</Link>
+              <div className="nav-item">
+                <Link to="/PublicEvents">Events</Link>
               </div>
-
-              <div className = "nav-item">
+              <div className="nav-item">
                 <Link to="/Login">Login</Link>
               </div>
-              
-              <div className = "nav-item">
-                <Link to = "/Register">Register</Link>
+              <div className="nav-item">
+                <Link to="/Register">Register</Link>
               </div>
             </>
           )}
