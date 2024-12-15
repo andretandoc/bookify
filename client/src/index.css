@@ -225,20 +225,20 @@ Footer {
   padding: 40px;
   position: fixed;
   width: 95%;
-  height: max-content;
   z-index: 1;
+  height: 0px;
   bottom: 0;
-  background-color: #c61627;
+  background-color: #1c1919;
+  color: white;
 }
 
-Footer::before {
+Footer::before { /*useless but will keep incase */
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: #c61627;
   margin-top: 20px;
 }
 
@@ -1082,7 +1082,7 @@ p a:active {
   color: black;
 }
 
-.private-page .footer {
+.private-page Footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1091,10 +1091,10 @@ p a:active {
   padding: 10px 30px;
   position: fixed;
   width: 95%;
-  height: max-content;
+  height: 80px;
   z-index: 1;
   bottom: 0;
-  color: black;
+  background-color: #c61627;
 }
 
 .private-page .footer a {
