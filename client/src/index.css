@@ -421,7 +421,6 @@ button:focus {
 
 /*For Forms*/
 .form-box {
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
   width: 450px; 
@@ -684,13 +683,14 @@ input[type = "date"] {
   color: rgb(72, 71, 71);
   display: flex;
   overflow-x: scroll;
-  gap: 20px;
-  padding: 15px 0;
+  gap: 0px;
+  padding: 5px 0;
   scroll-snap-type: x mandatory; 
   scroll-behavior: smooth;
   flex: 1;
   overflow-x: auto; 
-  width: 100%; 
+  width: 100%;
+  margin-bottom: 35px; 
 }
 
 .appointment {
