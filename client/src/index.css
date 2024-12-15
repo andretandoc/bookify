@@ -1002,8 +1002,9 @@ p a:active {
     width: 70%;
 }
 
-.register-form .small-btn {
+.register-form .double-btn {
     margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .login-error-message {

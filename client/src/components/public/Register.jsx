@@ -49,67 +49,67 @@ function Register({ setIsLoggedIn }) {
   };
 
   return (
-    <main className="form-box-wrapper">
-      <div className="form-box">
-        <h1 class="title">Register with Bookify</h1>
-        <form id="register_form" className="register-form" action="" method="">
-          <div class="input-text">
-            <div class="fl-name">
+    <main className = "form-box-wrapper">
+      <div className = "form-box">
+        <h1 class = "title">Register with Bookify</h1>
+        <form id = "register_form" className = "register-form" action = "" method="">
+          <div class = "input-text">
+            <div class = "fl-name">
               <input
-                type="text"
-                id="fname"
-                name="fname"
-                placeholder="Enter first name"
-                value={fname}
-                onChange={(e) => setFirstName(e.target.value)}
+                type = "text"
+                id = "fname"
+                name = "fname"
+                placeholder = "Enter first name"
+                value = {fname}
+                onChange = {(e) => setFirstName(e.target.value)}
                 required
               />{" "}
               <input
-                type="text"
-                id="lname"
-                name="lname"
-                placeholder="Enter last name"
-                value={lname}
-                onChange={(e) => setLastName(e.target.value)}
+                type = "text"
+                id = "lname"
+                name = "lname"
+                placeholder = "Enter last name"
+                value = {lname}
+                onChange = {(e) => setLastName(e.target.value)}
                 required
               />{" "}
             </div>
-            <div className="input">
+            <div className = "input">
               <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type = "text"
+                id = "email"
+                name = "email"
+                placeholder = "Enter email"
+                value = {email}
+                onChange = {(e) => setEmail(e.target.value)}
                 required
                 />{" "}
             </div> 
-            <div className="input">
+            <div className = "input">
                 <input
-                type="password"
-                id="password"
+                type = "password"
+                id = "password"
                 name="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder = "Enter password"
+                value = {password}
+                onChange = {(e) => setPassword(e.target.value)}
                 required
                 />{" "}
             </div>
-            <div className="input">
+            <div className = "input">
                 <input
-                type="password"
-                id="confirmation"
-                name="confirmation"
-                placeholder="Confirm password"
-                value={confirmation}
-                onChange={(e) => setConfirmation(e.target.value)}
+                type = "password"
+                id = "confirmation"
+                name = "confirmation"
+                placeholder = "Confirm password"
+                value = {confirmation}
+                onChange = {(e) => setConfirmation(e.target.value)}
                 required
                 />{" "}
             </div>
           </div>
-          {message && <p class="error-message">{message}</p>}
-          <button class="small-btn" type="submit" onClick={handleRegister}>
+          {message && <p class = "error-message">{message}</p>}
+          <button class = "double-btn" type = "submit" onClick = {handleRegister}>
             Sign Up
           </button>
          
@@ -117,7 +117,7 @@ function Register({ setIsLoggedIn }) {
         <div>
             <p>
               Already have an account?{" "}
-              <Link to="/Login">&nbsp;&nbsp;Login</Link>
+              <Link to = "/Login">&nbsp;&nbsp;Login</Link>
             </p>
         </div>
       </div>
