@@ -115,10 +115,9 @@ body {
 
 
 /******************************************************************/
-/* Header Section */
+/* Header Section Public */
 /******************************************************************/
 
-/* Header Styling */
 header {
   display: flex;
   justify-content: space-between;
@@ -1049,6 +1048,9 @@ body.private-page{
   background: none;
 }
 
+.header {
+  background-color: #c61627;
+}
 .private-page {
   min-height: 100vh;
   background: white !important; 
