@@ -544,6 +544,7 @@ button:focus {
   }
 
   .home-title {
+    margin-top: 50px;
     font-size: 32px;
   }
 
