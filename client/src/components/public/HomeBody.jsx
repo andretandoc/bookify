@@ -11,7 +11,6 @@ export default function HomeBody() {
       connect with the McGill community. Manage your appointments with
       confidence and stay focused on achieving your goals.
     </p>
-    <button className="small-btn"><Link to="/Login" style={style.btn}>Sign In or Register</Link></button>
   </div>
 
   {/* Right Section */}
