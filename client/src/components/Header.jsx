@@ -1,9 +1,16 @@
 import image from "../icons/Bookify.jpeg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Header({ isLoggedIn, onLogout }) {
   const [showNavbar, setShowNavbar] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle("nav-open", showNavbar);
+    return () => {
+      document.body.classList.remove("nav-open");
+    };
+  }, [showNavbar]);
 
   const toggleNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -31,9 +38,6 @@ function Header({ isLoggedIn, onLogout }) {
                 <Link to="/MemberPage">Home</Link>
               </div>
               <div className="nav-item">
-                <Link to="/CreateBooking">Create Meeting</Link>
-              </div>
-              <div className="nav-item">
                 <Link to="/CustomMeeting">Custom Meeting</Link>
               </div>
               <div className="nav-item">
@@ -47,6 +51,9 @@ function Header({ isLoggedIn, onLogout }) {
               </div>
               <div className="nav-item">
                 <Link to="/URLTest">BookingURL-Test</Link>
+              </div>
+              <div className="nav-item">
+                <Link to="/FullEvents">Book an Appointment</Link>
               </div>
               <div className="nav-item">
                 <button
@@ -64,7 +71,15 @@ function Header({ isLoggedIn, onLogout }) {
             </>
           ) : (
             <>
-
+              <div className="nav-item">
+                <Link to="/">Home</Link>
+              </div>
+              <div className="nav-item">
+                <Link to="/ApptForm">History</Link>
+              </div>
+              <div className="nav-item">
+                <Link to="/PublicEvents">Events</Link>
+              </div>
               <div className="nav-item">
                 <Link to="/Login">Login</Link>
               </div>
