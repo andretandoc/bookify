@@ -25,8 +25,10 @@ import CustomMeeting from "./components/private/CustomMeeting";
 import ManageEvent from "./components/private/ManageEvent";
 import BookingURL from "./components/private/bookingURL";
 import FullEvents from "./components/private/FullEvents"; 
+import URLTest from "./components/private/URLtest";
 
 import { useState, useEffect } from "react";
+
 
 
 function App() {
@@ -52,6 +54,7 @@ function App() {
     "/ManageEvent",
     "/CreateEvent",
     "/booking/:publicURL",
+    "/URLTest",
   ];
 
   const isPrivateRoute = privateRoutes.some((route) =>
@@ -89,6 +92,7 @@ function App() {
           <Route path="/CreateEvent" element={<CreateEvent />} />
           <Route path="/FullEvents" element={<FullEvents />} />
           <Route path="/booking/:publicURL" element={<BookingURL />} />
+          <Route path="/URLTest" element={<URLTest />} /> 
         </Route>
 
         {/* Catch-all route for 404s */}

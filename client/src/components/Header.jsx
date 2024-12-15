@@ -50,7 +50,7 @@ function Header({ isLoggedIn, onLogout }) {
                 <Link to="/CreateEvent">Create Event</Link>
               </div>
               <div className="nav-item">
-                <Link to="/BookingURL">BookingURL-Test</Link>
+                <Link to="/URLTest">BookingURL-Test</Link>
               </div>
               <div className="nav-item">
                 <Link to="/FullEvents">Book an Appointment</Link>
