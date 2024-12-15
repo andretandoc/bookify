@@ -17,12 +17,12 @@ export default function HomeBody() {
       <div className = "right-section">
         <button className = "double-red-btn">
           <Link to = "/PublicEvents" style = {style.doubleBtn}>
-          Schedule Appointment</Link> 
+          Schedule an Appointment</Link> 
         </button>
         
         <button className = "double-red-btn">
           <Link to = "/ApptForm" style = {style.doubleBtn}>
-          Manage Scheduled and Completed Appointments</Link>
+          Manage Scheduled & <br></br> Completed Appointments</Link>
         </button>
       </div>
     </div>    
