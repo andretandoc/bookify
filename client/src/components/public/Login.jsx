@@ -39,51 +39,51 @@ function Login({ setIsLoggedIn }) {
   };
 
   return (
-    <main className="form-box-wrapper">
-      <div className="form-box">
-        <h1 className="title">Welcome Back !</h1>
-        <form id="login-form" action="" method="">
-          <div className="input-text">
+    <main className = "form-box-wrapper">
+      <div className = "form-box">
+        <h1 className = "title">Welcome Back !</h1>
+        <form id = "login-form" action = "" method = "">
+          <div className = "input-text">
             <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type = "text"
+              id = "email"
+              name = "email"
+              placeholder = "Enter email"
+              value = {email}
+              onChange = {(e) => setEmail(e.target.value)}
               required
             />{" "}
             <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type = "password"
+              id = "password"
+              name = "password"
+              placeholder = "Enter password"
+              value = {password}
+              onChange = {(e) => setPassword(e.target.value)}
               required
             />{" "}
           </div>
-          <div className="options">
+          <div className = "options">
             <input
-              type="checkbox"
-              id="remember"
-              name="remember"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
+              type = "checkbox"
+              id = "remember"
+              name = "remember"
+              checked = {rememberMe}
+              onChange = {(e) => setRememberMe(e.target.checked)}
             />{" "}
-            <label htmlFor="remember">Remember me</label>{" "}
-            <a className="forgot" href="#">
+            <label htmlFor = "remember">Remember me</label>{" "}
+            <a className = "forgot" href = "#">
               Forgot Password?
             </a>
           </div>
-          {message && <p className="login-error-message">{message}</p>} 
-          <button className="small-btn" type="submit" onClick={handleLogin}>
+          {message && <p className = "login-error-message">{message}</p>} 
+          <button className = "double-btn" type = "submit" onClick = {handleLogin}>
             Log In
           </button>
         </form>
         <div>
             <p>
-              Don't have an account? <Link to="/Register">&nbsp;Register</Link>
+              Don't have an account? <Link to = "/Register">&nbsp;Register</Link>
             </p>
         </div>
       </div>

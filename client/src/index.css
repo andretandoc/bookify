@@ -953,7 +953,7 @@ input[type="checkbox"]:hover {
 /* Login & Register Section */
 p {
   font-size: 15px;
-  margin-top: 0px;
+  margin-top: 20px;
   margin-bottom: 0px;
 }
 
@@ -1009,7 +1009,7 @@ p a:active {
 
 .login-error-message {
     margin-bottom: 20px;
-    color: #9e0918;
+    color: #c61627;
     font-size: 17px;
     font-weight: 900;
 }
