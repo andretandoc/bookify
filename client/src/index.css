@@ -11,10 +11,9 @@ body {
   padding: 0;
   font-family: "Lato", sans-serif;
   color: white;
-  height: 100%;
+  height: 80%;
   background: url("McGill-Background.jpeg") no-repeat center center fixed;
   background-size: cover;
-  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -129,6 +128,7 @@ header {
   position: relative;
   z-index: 1;
 }
+/* Header red line */
 header::after {
   content: "";
   position: absolute;
@@ -162,7 +162,7 @@ header .logo .tool-name {
   text-decoration: none;
 }
 
-header .profile-icon {
+/* header .profile-icon {
   font-size: 23px;
   padding-right: 18px;
   margin-left: 30px;
@@ -173,7 +173,7 @@ header .profile-icon {
 
 header .profile-icon:hover {
   color: #9e0918;
-}
+} */
 
 .hamburger {
   display: none;
@@ -222,7 +222,6 @@ header .profile-icon:hover {
   z-index: 2; 
 }
 
-/* Hover or Focus Effect */
 .nav-item:hover::before,
 .nav-item:focus::before {
    height: 200%;
