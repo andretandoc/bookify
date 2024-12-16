@@ -164,7 +164,7 @@ header .profile-icon:hover {
 /* Responsive header */
 @media (max-width: 950px) {
 
-  .hamburger {
+  .public-page hamburger {
     display: block;
     font-size: 24px;
     cursor: pointer;
@@ -181,7 +181,7 @@ header .profile-icon:hover {
     left: 50%;
     transform: translateX(-48%);
     display: none;
-    position: fixed;
+    position: relative;
     padding: 20px;
     flex-direction: column;
     gap: 15px;
