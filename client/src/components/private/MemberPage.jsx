@@ -112,15 +112,18 @@ const MemberPage = () => {
             appointments.active.map((appointment, index) => (
               <div key={index} className="event-card">
                 <div>
-                  <p className="event-title">{appointment.title}</p>
+                  <h className="event-title">Event : {appointment.event}</h>
                   <p>
-                    <strong>When:</strong> {appointment.time}
+                    <strong>Hosted by:</strong> {appointment.host}
+                  </p>
+                  <p>
+                    <strong>When:</strong> {appointment.startDate}
                   </p>
                   <p>
                     <strong>Where:</strong> {appointment.location}
                   </p>
                 </div>
-                <button className="double-btn">Manage</button>
+                <button className="double-btn"><Link to="/ManageBooking" className="link">Manage</Link></button>
               </div>
               ))
             )}
