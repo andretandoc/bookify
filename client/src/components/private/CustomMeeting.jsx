@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CustomMeeting = () => {
   const [recipientEmail, setRecipientEmail] = useState("");
@@ -7,6 +8,7 @@ const CustomMeeting = () => {
   const [message, setMessage] = useState("");
   const [date, setDate] = useState(""); // Host Name Field
   const [location, setLocation] = useState(""); // Location Field
+  const navigate = useNavigate();
 
   const addProposedTime = () => {
     setProposedTimes([...proposedTimes, ""]);
@@ -23,10 +25,62 @@ const CustomMeeting = () => {
     setProposedTimes(updatedTimes);
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Sending Custom Meeting Request...");
+  // };
+
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sending Custom Meeting Request...");
+  
+    const token = localStorage.getItem("token"); // Retrieve JWT token
+    if (!token) {
+      alert("You must be logged in to send a meeting request!");
+      return;
+    }
+  
+    // Convert proposedTimes to full Date objects
+    const fullProposedTimes = proposedTimes.map((time) => {
+      const [hours, minutes] = time.split(":"); // Extract hours and minutes
+      const meetingDate = new Date(date); // Clone the date
+      meetingDate.setHours(hours, minutes, 0, 0); // Add time to the date
+      return meetingDate;
+    });
+  
+    const customMeetingData = {
+      recipientEmail,
+      proposedTimes: fullProposedTimes, // Use full Date objects
+      message,
+      date, // Ensure date is "YYYY-MM-DD"
+      location,
+    };
+  
+    try {
+      const response = await axios.post(
+        "http://localhost:5005/api/custom-meetings",
+        customMeetingData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+  
+      setMessage("Custom meeting request sent successfully!");
+      alert(`Meeting ID: ${response.data.meeting._id}`);
+      setRecipientEmail("");
+      setProposedTimes([]);
+      setMessage("");
+      setDate("");
+      setLocation("");
+      navigate("/ManageBooking"); // Redirect to manage bookings
+    } catch (error) {
+      setMessage(
+        error.response?.data?.message || "Failed to create meeting. Please try again."
+      );
+    }
   };
+  
+  
 
   return (
     <main class="layout">
