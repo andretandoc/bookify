@@ -1,71 +1,83 @@
 const Appointment = require("../models/Appointment");
+const Event = require("../models/Event");
+const User = require("../models/Member");
+const crypto = require("crypto");
 
-// Fetch appointments based on filters
-const getAppointments = async (req, res) => {
-  try {      
-    const { 
-        title, 
-        date, 
-        start_time, 
-        end_time, 
-        recurring, 
-        submeetings,
-        privacy,
-    } = req.body;
+const createEvent = async (req, res) => {
+    try {
+        
+        // Assuming email is extracted from the token
+        const { title, startDate, endDate, location, timeslots, privacy, type} = req.body;
+      
+        if (!timeslots || timeslots.length === 0) {
+            return res.status(400).json({ message: "Proposed times are required." });
+        }
+
+        console.log(req.user)
+        const email = req.user.email; 
+        
+        const user = await User.findOne({email : email});
+        const fname = user.fname || "NA" ;
+        const lname = user.lname;
+        const host = `${fname} ${lname}`;
+
+        const publicURL = crypto.randomBytes(16).toString("hex");
+
+        const newEvent = new Event({
+            title,
+            host,
+            email,
+            startDate,
+            endDate,
+            location,
+            timeslots,
+            publicURL,
+            privacy,
+          });
+
+          await newEvent.save();
+          res.status(201).json({ message: "Event created", publicURL });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ message: "Failed to create event" });
+        }
+    };
+
+
+
+// Fetch events for a member
+const getMemberEvents = async (req, res) => {
+    try {
+      const { email } = req.user; // Assuming email is extracted from the token
+      console.log("Fetching events for email:", email); // Debugging
+      const currentDate = new Date();
+  
+      const activeEvents = await Event.find({
+        email: email,
+        date: { $gte: currentDate }, // Future appointments
+      });
+  
+      const pastEvents = await Event.find({
+        email: email,
+        date: { $lt: currentDate }, // Past appointments
+      });
+      
     
-    const userEmail = req.user?.email; // Assuming req.user is populated by authentication middleware
-    const userName = req.user?.name;
-
-    if (!title || !date || !start_time || !end_time || !submeetings) {
-    return res.status(400).json({ message: "Please provide all required fields." });
-    }
-
-    if (!userEmail || !userName) {
-    return res.status(401).json({ message: "User information is required to create an event." });
-    }
-
-    // Validate time logic
-    if (new Date(`${date}T${end_time}`) <= new Date(`${date}T${start_time}`)) {
-    return res.status(400).json({ message: "End time must be after start time." });
-    }
-
-    // Recurrence validation (if applicable)
-    const validRecurrenceOptions = ["daily", "weekly", "monthly", ""];
-    if (!validRecurrenceOptions.includes(recurring)) {
-    return res.status(400).json({ message: "Invalid recurrence option." });
-    }
-
-    const submeetingsCount = parseInt(submeetings, 10);
-    if (isNaN(submeetingsCount) || submeetingsCount <= 0) {
-      return res.status(400).json({ message: "Number of submeetings must be a positive integer." });
-    }
-
-    // Default privacy if not provided
-    const eventPrivacy = privacy || "public"; // "public" or "private"
-
-    // Create event object
-    const newEvent = new Event({
-        title,
-        date: new Date(date), // Ensure it's stored as a proper date
-        start_time,
-        end_time,
-        recurring,
-        submeetings: parseInt(submeetings, 10), // Ensure it's an integer
-        privacy: eventPrivacy,
-        createdBy: {
-            email: userEmail,
-            name: userName,
-        },
-    });
-
-    // Save to database
-    const savedEvent = await newEvent.save();
-
-    res.status(201).json({ message: "Event created successfully!", event: savedEvent });
+      console.log("Active private Events:", activeEvents); // Debugging
+      console.log("Past private Events:", pastEvents); // Debugging
+  
+      res.status(200).json({
+        activeEvents,
+        pastEvents,
+      });
     } catch (error) {
-        console.error("Error creating event:", error);
-        res.status(500).json({ message: "Server error. Please try again later." });
+      console.error(error);
+      res.status(500).json({ message: "Failed to fetch events" });
     }
-};
+  };
 
-module.exports = { createEvent };
+
+  module.exports = {
+    createEvent,
+    getMemberEvents,
+  };

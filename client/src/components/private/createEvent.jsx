@@ -4,10 +4,12 @@ import axios from "axios";
 const CreateEvent = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("One-Time");
-  const [date, setDate] = useState(""); // Host Name Field
-  const [location, setLocation] = useState(""); // Location Field
+  const [startDate, setStartDate] = useState(""); 
+  const [endDate, setEndDate] = useState(""); 
+  const [location, setLocation] = useState(""); 
   const [timeslots, setTimeSlots] = useState([]);
   const [privacy, setPrivacy] = useState("");
+  
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [publicURL, setPublicURL] = useState("");
@@ -45,24 +47,24 @@ const CreateEvent = () => {
       return;
     }
 
-    const userEmail = req.user?.email; // Assuming req.user is populated by authentication middleware
-    const userName = req.user?.name;
+   
 
     try {
+      const token = localStorage.getItem("token");
+      console.log("Token in Frontend:", token); // Debugging
       const response = await axios.post(
-        "/api/appointments/create",
+        "http://localhost:5005/api/events/create-event",
         {
-          event: title,
-          date: date, // Dynamic Host Name
-          location: location, // Dynamic Location
+          title,
+          startDate, // Dynamic Host Name
+          endDate,
+          location, // Dynamic Location
           timeslots, // Array of proposed time slots
           privacy,
+          type, //recurring or one time
         },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is valid
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}`},}
+
       );
 
       // Handle success response
@@ -85,7 +87,6 @@ const CreateEvent = () => {
   };
 
   return (
-    
     <div className="container glass-container">
       <h2 className="title">Create an Event</h2>
       <form onSubmit={handleSubmit}>
@@ -128,12 +129,12 @@ const CreateEvent = () => {
           </select>
         </div>
 
-        <div class="choose-privacy">
+        <div className="choose-privacy">
               <label className="event-label" htmlFor="day">Event Privacy: </label>
               <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
-                  <option class="privacy-input" value="" disabled>Pick an option</option>
-                  <option class="privacy-input" value="member">Members Only</option>
-                  <option class="privacy-input" value="public">Open to Everyone</option>
+                  <option className="privacy-input" value="" disabled>Pick an option</option>
+                  <option className="privacy-input" value="private">Members Only</option>
+                  <option className="privacy-input" value="public">Open to Everyone</option>
               </select>
           </div>
 
@@ -145,12 +146,22 @@ const CreateEvent = () => {
               id="start-date"
               name="start-date"
               className="date-input"
-              value={date}
+              value={startDate}
               onChange={(e) => setDate(e.target.value)}
           />
       </div>
 
-        
+      <div className="choose-date">
+          <label className="event-label" htmlFor="start-date">Until:</label>
+          <input
+              type="date"
+              id="end-date"
+              name="end-date"
+              className="date-input"
+              value={endDate}
+              onChange={(e) => setDate(e.target.value)}
+          />
+      </div>
 
         {/* Proposed Times */}
         <div className="input-text">
