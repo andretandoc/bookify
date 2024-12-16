@@ -39,7 +39,7 @@ function Login({ setIsLoggedIn }) {
   };
 
   return (
-    <main className = "form-box-wrapper">
+    <main className = "layout">
       <div className = "form-box">
         <h1 className = "title">Welcome Back !</h1>
         <form id = "login-form" action = "" method = "">
@@ -87,6 +87,13 @@ function Login({ setIsLoggedIn }) {
             </p>
         </div>
       </div>
+
+      <div className = "footer">
+            <footer>
+                <p> &copy; 2024 Bookify! McGill University  </p>
+            </footer>
+        </div>
+
     </main>
   );
 }

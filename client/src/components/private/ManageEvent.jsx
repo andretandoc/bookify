@@ -74,47 +74,47 @@ export default function ManageEvent() {
     return (
         <main class="layout">
             <aside className = "sidebar">
-        <ul className = "menu">
+                <ul className = "menu">
 
-        <li>
-            <Link to = "/MemberPage" className = "link">
-              Home
-            </Link>
-          </li>
+                <li>
+                    <Link to = "/MemberPage" className = "link">
+                    Home
+                    </Link>
+                </li>
 
-          <li>
-            <Link to = "/CreateEvent" className = "link">
-              Create Events
-            </Link>
-          </li>
-          <li>
-            <Link to = "/ManageEvent" className = "link">
-              Manage Events
-            </Link>
-          </li>
-          <li>
-            <Link to = "/ManageBooking" className = "link">
-              Manage Meetings
-            </Link>
-          </li>
-          <li>
-            <Link to = "/FullEvents" className = "link">
-              Book an Appointment
-            </Link>
-          </li>
+                <li>
+                    <Link to = "/CreateEvent" className = "link">
+                    Create Events
+                    </Link>
+                </li>
+                <li>
+                    <Link to = "/ManageEvent" className = "link">
+                    Manage Events
+                    </Link>
+                </li>
+                <li>
+                    <Link to = "/ManageBooking" className = "link">
+                    Manage Meetings
+                    </Link>
+                </li>
+                <li>
+                    <Link to = "/FullEvents" className = "link">
+                    Book an Appointment
+                    </Link>
+                </li>
 
-          <li>
-            <Link to = "/CustomMeeting" className = "link">
-              Custom Meeting
-            </Link>
-          </li>
-            
-          <li>
-            <Link to = "/URLTest" className = "link">
-            BookingURL-Test
-            </Link>
-          </li>
-        </ul>
+                <li>
+                    <Link to = "/CustomMeeting" className = "link">
+                    Custom Meeting
+                    </Link>
+                </li>
+                    
+                <li>
+                    <Link to = "/URLTest" className = "link">
+                    BookingURL-Test
+                    </Link>
+                </li>
+                </ul>
       </aside>
             <div class="content-wrap">
             <div class="container">
@@ -265,7 +265,15 @@ export default function ManageEvent() {
         </div>
       )}
     </div>
+
+    <div className = "footer">
+    <footer>
+        <p> &copy; 2024 Bookify! McGill University  </p>
+    </footer>
+    </div>
     </main>
+
+
         
     );
 }

@@ -155,7 +155,8 @@ export default function PublicEvents() {
   }, []);
 
   return (
-    <div className="container">
+    <main className="layout">
+       <div className="container">
       <h2>Public Events at McGill:</h2>
       {message && <p>{message}</p>}
       {appointments.map((event, index) => (
@@ -188,6 +189,14 @@ export default function PublicEvents() {
           </a>
         </div>
       ))}
+    </div> 
+
+    <div className = "footer">
+    <footer>
+        <p> &copy; 2024 Bookify! McGill University  </p>
+    </footer>
     </div>
+    </main>
+   
   );
 }

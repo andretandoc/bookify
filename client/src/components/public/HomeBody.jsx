@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 export default function HomeBody() {
   return (
     /* Left Section of the body */
+    <main className="layout">
     <div className = "content-wrapper">
       <div className = "left-section">
         <h1 className = "home-title">Simplifying Academic Scheduling & Meetings</h1>
@@ -25,7 +26,16 @@ export default function HomeBody() {
           Manage Scheduled & <br></br> Completed Appointments</Link>
         </button>
       </div>
-    </div>    
+    
+    </div>
+    
+    <div className = "footer">
+    <footer>
+        <p> &copy; 2024 Bookify! McGill University  </p>
+    </footer>
+    </div>
+    </main>
+    
   );
 }
 

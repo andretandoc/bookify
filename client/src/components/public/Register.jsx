@@ -49,7 +49,7 @@ function Register({ setIsLoggedIn }) {
   };
 
   return (
-    <main className = "form-box-wrapper">
+    <main className = "layout">
       <div className = "form-box">
         <h1 class = "title">Register with Bookify</h1>
         <form id = "register_form" className = "register-form" action = "" method="">
@@ -121,6 +121,13 @@ function Register({ setIsLoggedIn }) {
             </p>
         </div>
       </div>
+
+      <div className = "footer">
+    <footer>
+        <p> &copy; 2024 Bookify! McGill University  </p>
+    </footer>
+    </div>
+
     </main>
   );
 }

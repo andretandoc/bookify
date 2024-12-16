@@ -129,6 +129,15 @@ const MemberPage = () => {
             )}
             </div>
           </section>
+
+
+          <div className = "footer">
+            <footer>
+                <p> &copy; 2024 Bookify! McGill University  </p>
+            </footer>
+        </div>
+
+        
         </div>
   );
 };

@@ -2,14 +2,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 // Public components
 import HomeBody from "./components/public/HomeBody";
 import Login from "./components/public/Login";
 import Register from "./components/public/Register";
 import ApptForm from "./components/public/ApptForm";
-import BookingForm from "./components/public/BookingForm";
 import ApptList from "./components/public/ApptList";
 import PublicEvents from "./components/public/PublicEvents";
 
@@ -71,7 +69,6 @@ function App() {
         <Route element={<PublicRoute isLoggedIn={isLoggedIn} />}>
           <Route path="/" element={<HomeBody />} />
           <Route path="/ApptForm" element={<ApptForm />} />
-          <Route path="/BookingForm" element={<BookingForm />} />
           <Route path="/ApptList" element={<ApptList />} />
           <Route path="/PublicEvents" element={<PublicEvents />} />
           <Route
@@ -98,7 +95,6 @@ function App() {
         {/* Catch-all route for 404s */}
         <Route path="*" element={<h1>Page not found</h1>} />
       </Routes>
-      <Footer />
     </Router>
     </div>
     

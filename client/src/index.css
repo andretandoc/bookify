@@ -49,6 +49,14 @@ body {
   z-index: 0; 
 }
 
+#root{
+  position: relative;
+}
+
+.private-page::before {
+  position: relative;
+}
+
   
 /* Header Section */
 
@@ -215,8 +223,7 @@ header .profile-icon:hover {
 
 /* Footer Section */
 
-
-Footer {
+.footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,7 +231,7 @@ Footer {
   margin-right: auto;
   padding: 40px;
   padding-top: 25px;
-  position: fixed;
+  position: absolute;
   width: 95%;
   z-index: 1;
   height: 0px;
@@ -378,7 +385,8 @@ Footer::before { /*useless but will keep incase */
   text-align: center;
   line-height: 20px; 
   transition: all 0.2s ease;
-  overflow: hidden; 
+  overflow: hidden;
+  margin: 80px auto; 
 }
 
 .form-box-wrapper {

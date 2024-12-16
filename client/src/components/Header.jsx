@@ -58,16 +58,9 @@ function Header({ isLoggedIn, onLogout }) {
              
               <div className = "nav-item">
                 <button
+                  className="double-btn"
                   onClick = {onLogout}
-                  style = {{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    color: "white",
-                    fontSize: "13px",
-                    fontFamily: "lato",
-                    textDecoration: "none"
-                  }}>
+                 >
                   Log Out
                 </button>
               </div>

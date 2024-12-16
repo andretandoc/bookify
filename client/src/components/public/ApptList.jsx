@@ -28,7 +28,7 @@ function ApptList() {
   };
 
   return (
-    <main className = "form-box-wrapper">
+    <main className = "layout">
       <div className = "form-box">
         <h1 className = "title">Appointment History</h1>
         <div className = "appointment-scroll-container">
@@ -69,6 +69,13 @@ function ApptList() {
           Go Back
         </button>
       </div>
+
+      <div className = "footer">
+            <footer>
+                <p> &copy; 2024 Bookify! McGill University  </p>
+            </footer>
+      </div>
+
     </main>
   );
 }

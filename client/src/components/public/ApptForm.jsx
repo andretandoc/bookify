@@ -52,7 +52,7 @@ function ApptForm() {
 
   //   console.log("Appointments State:", appointments);
   return (
-    <main className = "form-box-wrapper">
+    <main className = "layout">
         <div className = "form-box">
           <h1 className = "title">Appointment History</h1>
             <form className = "appt_form" onSubmit={handleAppt}>
@@ -92,6 +92,13 @@ function ApptForm() {
             </form>
             {message && <p className = "error-message">{message}</p>}
         </div>
+
+        <div className = "footer">
+            <footer>
+                <p> &copy; 2024 Bookify! McGill University  </p>
+            </footer>
+        </div>
+
       </main>
   );
 

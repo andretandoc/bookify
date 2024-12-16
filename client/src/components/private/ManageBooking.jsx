@@ -214,6 +214,13 @@ export default function ManageBooking() {
           </div>
         )}
       </div>
+
+      <div className = "footer">
+            <footer>
+                <p> &copy; 2024 Bookify! McGill University  </p>
+            </footer>
+      </div>
+      
     </main>
   );
 }

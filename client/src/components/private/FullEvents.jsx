@@ -135,6 +135,13 @@ export default function FullEvents() {
             <p>{message}</p>
             )} 
         </div>
+
+        <div className = "footer">
+            <footer>
+                <p> &copy; 2024 Bookify! McGill University  </p>
+            </footer>
+        </div>
+        
     </main>
     );
 }
