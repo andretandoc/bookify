@@ -21,106 +21,63 @@ const MemberPage = () => {
   ];
 
   return (
-    <div style={{ display: "flex", fontFamily: "Arvo, sans-serif" }}>
+    <div className = "layout">
       {/* Sidebar */}
-      <aside
-        style={{
-          width: "20%",
-          backgroundColor: "#9b0f1f",
-          color: "white",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "20px",
-        }}
-      >
-        <ul style={{ listStyleType: "none", padding: "0" }}>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}><Link to = "/MemberPage" style={style.link}>Home</Link></li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}><Link to = "/CreateEvent" style={style.link}>Create Events</Link></li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}> <Link to = "/ManageEvent" style={style.link}>Manage Events</Link></li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}><Link to = "/ManageBooking" style={style.link}>Manage Meetings</Link></li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}><Link to = "/FullEvents" style={style.link}>Book an Appointment</Link></li>
-          <li style={{ marginBottom: "20px", cursor: "pointer" }}> <Link to = "/CustomMeeting" style={style.link}>Custom Meeting</Link></li>
-         
+      <aside className = "sidebar">
+        <ul className = "menu">
+
+          <li>
+            <Link to = "/CreateEvent" className = "link">
+              Create Events
+            </Link>
+          </li>
+          <li>
+            <Link to = "/ManageEvent" className = "link">
+              Manage Events
+            </Link>
+          </li>
+          <li>
+            <Link to = "/ManageBooking" className = "link">
+              Manage Meetings
+            </Link>
+          </li>
+          <li>
+            <Link to = "/FullEvents" className = "link">
+              Book an Appointment
+            </Link>
+          </li>
+
+          <li>
+            <Link to = "/CustomMeeting" className = "link">
+              Custom Meeting
+            </Link>
+          </li>
+            
+          <li>
+            <Link to = "/URLTest" className = "link">
+            BookingURL-Test
+            </Link>
+          </li>
         </ul>
-        <button
-          style={{
-            background: "none",
-            border: "none",
-            color: "white",
-            cursor: "pointer",
-            fontSize: "16px",
-          }}
-        >
-          Log out
-        </button>
       </aside>
 
       {/* Main Content */}
-      <section
-        style={{
-          flex: 1,
-          padding: "40px",
-          backgroundColor: "#f9f9f9",
-          color: "black",
-        }}
-      >
-        <h1 style={{ fontSize: "36px", color: "#222" }}>Hey Leen!</h1>
-        <h2 style={{ fontSize: "24px", margin: "20px 0", color: "#555" }}>
-          Your upcoming meetings:
-        </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+      <section className = "container" style = {{boxShadow : "none", backgroundColor: "white"}}>
+        <h1>Hey Leen!</h1>
+        <h2>Your upcoming meetings:</h2>
+        <div>
           {meetings.map((meeting, index) => (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                backgroundColor: "#f2ebea",
-                padding: "20px",
-                borderRadius: "10px",
-                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-              }}
-            >
+            <div key={index} className="event-card">
               <div>
-                <p style={{ fontWeight: "bold", fontSize: "18px", margin: "0 0 10px" }}>
-                  {meeting.title}
+                <p className = "event-title">{meeting.title}</p>
+                <p>
+                  <strong>When:</strong> {meeting.time}
                 </p>
-                <p style={{ margin: "0 0 5px" }}>When: {meeting.time}</p>
-                <p style={{ margin: "0" }}>Where: {meeting.location}</p>
+                <p>
+                  <strong>Where:</strong> {meeting.location}
+                </p>
               </div>
-              <button
-                style={{
-                  display: "inline-block",
-                  width: "140px",
-                  height: "40px",
-                  backgroundColor: "white",
-                  border: "transparent",
-                  boxShadow: "-10px -10px 1px rgba(198, 22, 39)",
-                  color: "#c61627",
-                  fontSize: "12px",
-                  fontWeight: "bolder",
-                  textAlign: "center",
-                  lineHeight: "38px",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) =>
-                  Object.assign(e.target.style, {
-                    backgroundColor: "#c61627",
-                    color: "white",
-                  })
-                }
-                onMouseLeave={(e) =>
-                  Object.assign(e.target.style, {
-                    backgroundColor: "white",
-                    color: "#c61627",
-                  })
-                }
-              >
-                Manage Meeting
-              </button>
+              <button className = "double-btn">Manage</button>
             </div>
           ))}
         </div>
@@ -130,11 +87,3 @@ const MemberPage = () => {
 };
 
 export default MemberPage;
-
-
-const style = {
-  link : {
-    textDecoration: "none",
-    color: "white",
-  }
-}

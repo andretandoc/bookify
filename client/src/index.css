@@ -149,7 +149,7 @@ header .profile-icon:hover {
   height: 0%; 
   transform: scaleY(0);
   background-color: #c61627;
-  transform-origin: bottom; 
+  transform-origin: 50px; 
   transition: transform 0.4s ease; 
   z-index: 2; 
 }
@@ -338,65 +338,6 @@ Footer::before { /*useless but will keep incase */
   transform: translateY(4px); 
   color: white; 
 }
-
-/* Small Buttons Forms Style*/
-.small-btn{
-  display: inline-block;
-  width: 150px;
-  height: 31px;
-  position: relative;
-  background-color: rgba(198, 22, 39, 1);
-  border: transparent;
-  color: white;
-  font-size: 17px;
-  font-family: "Lato";
-  font-weight: 300;
-  border-radius: 6px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.small-btn:hover {
-  background-color: #9e0918;
-  cursor: pointer
-}
-.small-btn:active {
-  background-color: #9e0918;
-  color: white;
-  transform: translateY(1px);
-}
-
-.btn {
-  font-size: medium;
-  width: 100%;
-  height: 45px;
-  background: #c61627;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  border: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 10px;
-  border-radius: 15px;
-  margin-bottom: 10px;
-}
-
-.btn:hover {
-  background-color: #9b0f1f;
-  color: white;
-  transform: translateY(-3px);
-}
-
-.btn:active {
-  background-color: #8a0e18;
-  transform: translateY(1px);
-}
-
-button:focus {
-  outline: none;
-}
-
 
 /* layered boxes */
 
@@ -1030,10 +971,11 @@ p a:active {
   flex-direction: column;
   width: 90vh;
   margin-bottom: 200px;
+  z-index: 0;
 }
 
 .container h2 {
-  font-size: 36px;
+  font-size: 25px;
   color: #222;
   margin-bottom: 20px;
 }
@@ -1048,6 +990,7 @@ p a:active {
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
+  width: 50vw;
 }
 
 .event-card div {
@@ -1067,7 +1010,7 @@ p a:active {
 }
 
 .event-card .event-title {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   color: #222;
 }
@@ -1080,85 +1023,81 @@ p a:active {
 
 .private-page {
   background: none;
-  background-color: #ffffff;
   min-height: 100vh;
   font-family: "Lato", sans-serif;
   margin: 0;
   padding: 0;
   color: black;
-}
-
-.private-page Footer {
+  background: white !important; 
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px 30px;
-  position: fixed;
-  width: 95%;
-  height: 80px;
-  z-index: 1;
-  bottom: 0;
-  background-color: #c61627;
+  flex-direction: column;
+  z-index: -1;
 }
-
-.private-page .footer a {
-  color: black;
-  text-decoration: none;
-  font-size: 15px;
-  margin: 2%;
-  transition: color 0.3s ease;
-  font-weight: bolder;
-}
-
-.private-page footer a:hover {
-  color: #c61627;
-}
-
-.private-page footer a:active {
-  transform: translateY(1px);
-}
-
-.private-page .header {
+.private-page .header{
   display: flex;
   justify-content: space-between;
+  height: 60px;
   align-items: center;
   margin-right: auto;
   margin-left: auto;
   padding: 10px 30px;
-  width: 90%;
+  width: 100%;
   position: relative;
   z-index: 1;
+  background-color: #1c1919;
 }
 
-.private-page .header {
-  background-color: #c61627;
+.private-page .footer{
+ z-index:4;
 }
 
-.private-page .footer {
-  bottom: 0;
-  position: relative;
-  left: 0;
-  margin-top: auto;
+.private-page header::after{
+  background-color: transparent;
 }
-
+.nav-item::before {
+  background-color: transparent;
+}
 
 body.private-page{
   background: none;
 }
 
-.private-page {
-  min-height: 100vh;
-  background: white !important; 
-  display: flex;
-  flex-direction: column;
-  z-index: 1;
-}
 .private-page::before {
   content: none !important; 
 }
 
+/* Member Page styling */
+/* Sidebar Styles */
+.sidebar {
+  width: 20%;
+  background-color: #9e0918;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  z-index: 3;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu li {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.layout {
+  display: flex;
+  min-height: 50vh; /* Ensure full height layout */
+}
 
 
 /*******************************************************/
@@ -1221,79 +1160,6 @@ input[type="time"] {
   font-size: 12px; 
   background-color: #f9f9f9; 
   color: #333; 
-}
-
-
-/* Style for the calendar */
-.react-calendar {
-  width: 100% !important; /* Makes the calendar take full width of the cal-box */
-  height: 100% !important;
-  background: white; /* Background for the calendar */
-  border: none; /* Removes default border */
-}
-
-/* Style for calendar navigation (month/year controls) */
-.react-calendar__navigation {
-  display: flex; /* Aligns navigation items in a row */
-  justify-content: space-between; /* Space out navigation buttons */
-  margin-bottom: 10px; /* Adds space below the navigation */
-  font-weight: bold; /* Makes navigation text bold */
-}
-
-.react-calendar__navigation button {
-  background: #c61627; /* Red background for buttons */
-  color: #c61627; /* White text */
-  border: none; /* Removes default border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 5px 10px; /* Adds padding inside buttons */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth transition effect */
-}
-
-.react-calendar__navigation button:hover {
-  background: #9b0f1f; /* Darker red on hover */
-}
-
-/* Style for the days and weeks grid */
-.react-calendar__month-view__days {
-  display: grid; /* Makes the days a grid layout */
-  grid-template-columns: repeat(7, 1fr); /* 7 columns for each day of the week */
-  gap: 3px; /* Space between day cells */
-}
-
-.react-calendar__tile {
-  background: #9e0918; /* Light grey background for days */
-  color: #333; /* Dark text color */
-  border-radius: 5px; /* Rounded corners for days */
-  padding: 10px; /* Space inside each day tile */
-  text-align: center; /* Centers the day number */
-  transition: all 0.3s ease; /* Smooth hover transition */
-}
-
-.react-calendar__tile--active {
-  background: #c61627; /* Red background for selected date */
-  color: white; /* White text for active date */
-}
-
-.react-calendar__tile:hover {
-  background: #9b0f1f; /* Darker red on hover */
-  color: white; /* White text on hover */
-  transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-.react-calendar__tile--now {
-  background: #ffe9e9; /* Light red background for today */
-  color: #c61627; /* Red text for today */
-  font-weight: bold; /* Bold text for today */
-}
-
-/* Calendar header styling */
-.react-calendar__month-view__weekdays {
-  font-weight: bold; /* Bold text for weekdays */
-  text-align: center; /* Center weekday text */
-  color: #c61627; /* Red text for weekdays */
-  text-transform: uppercase; /* Uppercase weekday labels */
-  margin-bottom: 10px; /* Space below weekdays */
 }
 
 /*******************************************************/
