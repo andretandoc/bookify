@@ -1,25 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const {
+  createEvent,
   getAppointmentsPublic,
   getAppointmentsPrivate,
-  createAppointment,
-  getAppointmentByPublicURL,
+  getEventByPublicURL,
   reserveAppointment,
+  getEvents,
 } = require("../controllers/appointmentsController");
 const { authenticateToken } = require("../middleware/authMiddleware");
 
-// Get appointments (public)
+// Fetch public appointments with filters
 router.get("/", getAppointmentsPublic);
 
-// Get appointments (private)
+// Fetch private appointments for a member
 router.get("/private", authenticateToken, getAppointmentsPrivate);
 
-// Create appointments
-router.post("/create", authenticateToken, createAppointment);
+// Create a new event (requires authentication)
+router.post("/create", authenticateToken, createEvent);
 
-// View and reserve appointment (public)
-router.get("/:publicURL", getAppointmentByPublicURL);
+// Fetch events
+router.get("/events", authenticateToken, getEvents);
+
+// Get event details by public URL (public access)
+router.get("/:publicURL", getEventByPublicURL);
+
+// Reserve an appointment time slot (public access)
 router.post("/:publicURL/reserve", reserveAppointment);
 
 module.exports = router;

@@ -41,7 +41,7 @@ const registerMember = async (req, res) => {
     });
     await newMember.save(); // Save member to db
 
-    console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    // console.log("JWT_SECRET:", process.env.JWT_SECRET);
     const tokenExpiry = rememberMe ? "7d" : "1h";
     const token = jwt.sign(
       { id: member._id, email: member.email }, // Include email in token
@@ -76,7 +76,7 @@ const loginMember = async (req, res) => {
     }
 
     // Generate JWT token if password is correct
-    console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    // console.log("JWT_SECRET:", process.env.JWT_SECRET);
     const tokenExpiry = rememberMe ? "7d" : "1h";
     const token = jwt.sign(
       { id: member._id, email: member.email }, // Include email in token

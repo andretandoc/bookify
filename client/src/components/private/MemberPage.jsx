@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-
 const MemberPage = () => {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
@@ -50,47 +49,46 @@ const MemberPage = () => {
   }, []);
 
   return (
-    <div className = "layout">
+    <div className="layout">
       {/* Sidebar */}
-      <aside className = "sidebar">
-        <ul className = "menu">
-
-        <li>
-            <Link to = "/MemberPage" className = "link">
+      <aside className="sidebar">
+        <ul className="menu">
+          <li>
+            <Link to="/MemberPage" className="link">
               Home
             </Link>
           </li>
 
           <li>
-            <Link to = "/CreateEvent" className = "link">
+            <Link to="/CreateEvent" className="link">
               Create Events
             </Link>
           </li>
           <li>
-            <Link to = "/ManageEvent" className = "link">
+            <Link to="/ManageEvent" className="link">
               Manage Events
             </Link>
           </li>
           <li>
-            <Link to = "/ManageBooking" className = "link">
+            <Link to="/ManageBooking" className="link">
               Manage Meetings
             </Link>
           </li>
           <li>
-            <Link to = "/FullEvents" className = "link">
+            <Link to="/FullEvents" className="link">
               Book an Appointment
             </Link>
           </li>
 
           <li>
-            <Link to = "/CustomMeeting" className = "link">
+            <Link to="/CustomMeeting" className="link">
               Custom Meeting
             </Link>
           </li>
-            
+
           <li>
-            <Link to = "/URLTest" className = "link">
-            BookingURL-Test
+            <Link to="/URLTest" className="link">
+              BookingURL-Test
             </Link>
           </li>
         </ul>
@@ -123,22 +121,23 @@ const MemberPage = () => {
                     <strong>Where:</strong> {appointment.location}
                   </p>
                 </div>
-                <button className="double-btn"><Link to="/ManageBooking" className="link">Manage</Link></button>
+                <button className="double-btn">
+                  <Link to="/ManageBooking" className="link">
+                    Manage
+                  </Link>
+                </button>
               </div>
-              ))
-            )}
-            </div>
-          </section>
-
-
-          <div className = "footer">
-            <footer>
-                <p> &copy; 2024 Bookify! McGill University  </p>
-            </footer>
+            ))
+          )}
         </div>
+      </section>
 
-        
-        </div>
+      <div className="footer">
+        <footer>
+          <p> &copy; 2024 Bookify! McGill University </p>
+        </footer>
+      </div>
+    </div>
   );
 };
 

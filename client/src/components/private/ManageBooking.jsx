@@ -69,45 +69,44 @@ export default function ManageBooking() {
 
   return (
     <main class="layout">
-            <aside className = "sidebar">
-        <ul className = "menu">
-
-        <li>
-            <Link to = "/MemberPage" className = "link">
+      <aside className="sidebar">
+        <ul className="menu">
+          <li>
+            <Link to="/MemberPage" className="link">
               Home
             </Link>
           </li>
 
           <li>
-            <Link to = "/CreateEvent" className = "link">
+            <Link to="/CreateEvent" className="link">
               Create Events
             </Link>
           </li>
           <li>
-            <Link to = "/ManageEvent" className = "link">
+            <Link to="/ManageEvent" className="link">
               Manage Events
             </Link>
           </li>
           <li>
-            <Link to = "/ManageBooking" className = "link">
+            <Link to="/ManageBooking" className="link">
               Manage Meetings
             </Link>
           </li>
           <li>
-            <Link to = "/FullEvents" className = "link">
+            <Link to="/FullEvents" className="link">
               Book an Appointment
             </Link>
           </li>
 
           <li>
-            <Link to = "/CustomMeeting" className = "link">
+            <Link to="/CustomMeeting" className="link">
               Custom Meeting
             </Link>
           </li>
-            
+
           <li>
-            <Link to = "/URLTest" className = "link">
-            BookingURL-Test
+            <Link to="/URLTest" className="link">
+              BookingURL-Test
             </Link>
           </li>
         </ul>
@@ -215,13 +214,11 @@ export default function ManageBooking() {
         )}
       </div>
 
-      <div className = "footer">
-            <footer>
-                <p> &copy; 2024 Bookify! McGill University  </p>
-            </footer>
+      <div className="footer">
+        <footer>
+          <p> &copy; 2024 Bookify! McGill University </p>
+        </footer>
       </div>
-      
     </main>
   );
 }
-

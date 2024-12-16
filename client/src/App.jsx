@@ -22,12 +22,10 @@ import ManageBooking from "./components/private/ManageBooking";
 import CustomMeeting from "./components/private/CustomMeeting";
 import ManageEvent from "./components/private/ManageEvent";
 import BookingURL from "./components/private/bookingURL";
-import FullEvents from "./components/private/FullEvents"; 
+import FullEvents from "./components/private/FullEvents";
 import URLTest from "./components/private/URLtest";
 
 import { useState, useEffect } from "react";
-
-
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -59,45 +57,47 @@ function App() {
     location.pathname.startsWith(route.split("/:")[0])
   );
 
-
   return (
     <div className={isPrivateRoute ? "private-page" : "public-page"}>
       <Router>
-      <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-      <Routes>
-        {/* Public Routes */}
-        <Route element={<PublicRoute isLoggedIn={isLoggedIn} />}>
-          <Route path="/" element={<HomeBody />} />
-          <Route path="/ApptForm" element={<ApptForm />} />
-          <Route path="/ApptList" element={<ApptList />} />
-          <Route path="/PublicEvents" element={<PublicEvents />} />
-          <Route
-            path="/Login"
-            element={<Login setIsLoggedIn={setIsLoggedIn} />}
-          />
-          <Route 
-            path="/Register" 
-            element={<Register setIsLoggedIn={setIsLoggedIn} />} />
-        </Route>
+        <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+        <Routes>
+          {/* Public Routes */}
+          <Route element={<PublicRoute isLoggedIn={isLoggedIn} />}>
+            <Route path="/" element={<HomeBody />} />
+            <Route path="/ApptForm" element={<ApptForm />} />
+            <Route path="/ApptList" element={<ApptList />} />
+            <Route path="/PublicEvents" element={<PublicEvents />} />
+            <Route
+              path="/Login"
+              element={<Login setIsLoggedIn={setIsLoggedIn} />}
+            />
+            <Route
+              path="/Register"
+              element={<Register setIsLoggedIn={setIsLoggedIn} />}
+            />
+          </Route>
 
-        {/* Private Routes */}
-        <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
-          <Route path="/MemberPage" element={<MemberPage />} />
-          <Route path="/ManageBooking" element={<ManageBooking />} />
-          <Route path="/CustomMeeting" element={<CustomMeeting />} />
-          <Route path="/ManageEvent" element={<ManageEvent />} />
-          <Route path="/CreateEvent" element={<CreateEvent />} />
-          <Route path="/FullEvents" element={<FullEvents />} />
-          <Route path="/booking/:publicURL" element={<BookingURL />} />
-          <Route path="/URLTest" element={<URLTest />} /> 
-        </Route>
+          {/* Private Routes */}
+          <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
+            <Route path="/MemberPage" element={<MemberPage />} />
+            <Route path="/ManageBooking" element={<ManageBooking />} />
+            <Route path="/CustomMeeting" element={<CustomMeeting />} />
+            <Route path="/ManageEvent" element={<ManageEvent />} />
+            <Route path="/CreateEvent" element={<CreateEvent />} />
+            <Route path="/FullEvents" element={<FullEvents />} />
+            {/* <Route path="/booking/:publicURL" element={<URLTest />} /> */}
+            <Route path="/URLTest" element={<URLTest />} />
+          </Route>
 
-        {/* Catch-all route for 404s */}
-        <Route path="*" element={<h1>Page not found</h1>} />
-      </Routes>
-    </Router>
+          {/* Public and Private Route */}
+          <Route path="/booking/:publicURL" element={<URLTest />} />
+
+          {/* Catch-all route for 404s */}
+          <Route path="*" element={<h1>Page not found</h1>} />
+        </Routes>
+      </Router>
     </div>
-    
   );
 }
 

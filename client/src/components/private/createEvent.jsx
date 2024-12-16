@@ -4,252 +4,261 @@ import { Link } from "react-router-dom";
 
 const CreateEvent = () => {
   const [title, setTitle] = useState("");
-  const [type, setType] = useState("One-Time");
-  const [startDate, setStartDate] = useState(""); 
-  const [endDate, setEndDate] = useState(""); 
-  const [location, setLocation] = useState(""); 
-  const [timeslots, setTimeSlots] = useState([]);
-  const [privacy, setPrivacy] = useState("");
-  
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [publicURL, setPublicURL] = useState("");
+  const [type, setType] = useState("One-Time"); // Event Type: One-Time or Recurring
+  const [recurrenceFrequency, setRecurrenceFrequency] = useState("Weekly"); // Weekly or Monthly
+  const [startDate, setStartDate] = useState(""); // Start Date
+  const [endDate, setEndDate] = useState(""); // End Date (for Recurring)
+  const [location, setLocation] = useState(""); // Event Location
+  const [privacy, setPrivacy] = useState(""); // Public or Members-Only
+  const [baseTimeslots, setBaseTimeslots] = useState([]); // Array of base time slots
+  const [error, setError] = useState(""); // Error Message
+  const [successMessage, setSuccessMessage] = useState(""); // Success Message
+  const [publicURL, setPublicURL] = useState(""); // Generated Public URL
 
-  // Add new proposed time
-  const addProposedTime = () => {
-    setTimeSlots([...timeslots, ""]);
+  // Add new base time slot
+  const addBaseTimeSlot = () => {
+    setBaseTimeslots([...baseTimeslots, ""]);
   };
 
-  // Handle changes for proposed time inputs
-  const handleProposedTimeChange = (index, value) => {
-    const updatedTimes = [...timeslots];
+  // Handle base time slot change
+  const handleBaseTimeChange = (index, value) => {
+    const updatedTimes = [...baseTimeslots];
     updatedTimes[index] = value;
-    setTimeSlots(updatedTimes);
+    setBaseTimeslots(updatedTimes);
   };
 
-  // Remove a specific proposed time
-  const handleRemoveTime = (index) => {
-    setTimeSlots(timeslots.filter((_, i) => i !== index));
+  // Remove a specific base time slot
+  const handleRemoveBaseTime = (index) => {
+    setBaseTimeslots(baseTimeslots.filter((_, i) => i !== index));
   };
 
   // Submit the form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Reset messages
     setError("");
     setSuccessMessage("");
 
-    // Validation: Ensure all required fields are filled
-    if (!title || !date || !location || timeslots.length === 0) {
-      setError(
-        "Please fill out all required fields and add at least one proposed time."
-      );
+    // Validate all required fields
+    if (
+      !title ||
+      !location ||
+      !privacy ||
+      !startDate ||
+      baseTimeslots.length === 0
+    ) {
+      setError("Please fill out all fields and add at least one time slot.");
       return;
     }
 
-   
-
     try {
       const token = localStorage.getItem("token");
-      console.log("Token in Frontend:", token); // Debugging
+
+      // Create the event payload
+      const payload = {
+        title,
+        type,
+        location,
+        privacy,
+        startDate,
+        endDate: type === "Recurring" ? endDate : startDate,
+        recurrence: type === "Recurring" ? recurrenceFrequency : null,
+        timeslots: baseTimeslots, // Send plain times ["06:40"]
+      };
+
+      console.log("Sending payload:", payload);
+
       const response = await axios.post(
-        "http://localhost:5005/api/events/create-event",
-        {
-          title,
-          startDate, // Dynamic Host Name
-          endDate,
-          location, // Dynamic Location
-          timeslots, // Array of proposed time slots
-          privacy,
-          type, //recurring or one time
-        },
-        { headers: { Authorization: `Bearer ${token}`},}
-
+        "http://localhost:5005/api/appointments/create",
+        payload,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Handle success response
-      setSuccessMessage(
-        `Booking created successfully! Share this URL: ${response.data.publicURL}`
-      );
+      // Success response
+      setSuccessMessage("Event created successfully! Share this URL:");
       setPublicURL(response.data.publicURL);
-      setTimeSlots([]); // Clear form after successful creation
+
+      // Reset form fields
       setTitle("");
-      setHostName("");
-      setLocation("");
       setType("One-Time");
+      setLocation("");
+      setPrivacy("");
+      setStartDate("");
+      setEndDate("");
+      setBaseTimeslots([]);
     } catch (error) {
-      console.error(error);
+      console.error("Error:", error.message);
       setError(
         error.response?.data?.message ||
-          "Failed to create booking. Please try again."
+          "Failed to create the event. Please try again."
       );
     }
   };
 
   return (
     <main className="layout">
-      <aside className = "sidebar">
-        <ul className = "menu">
-
-        <li>
-            <Link to = "/MemberPage" className = "link">
+      <aside className="sidebar">
+        <ul className="menu">
+          <li>
+            <Link to="/MemberPage" className="link">
               Home
             </Link>
           </li>
 
           <li>
-            <Link to = "/CreateEvent" className = "link">
+            <Link to="/CreateEvent" className="link">
               Create Events
             </Link>
           </li>
           <li>
-            <Link to = "/ManageEvent" className = "link">
+            <Link to="/ManageEvent" className="link">
               Manage Events
             </Link>
           </li>
           <li>
-            <Link to = "/ManageBooking" className = "link">
+            <Link to="/ManageBooking" className="link">
               Manage Meetings
             </Link>
           </li>
           <li>
-            <Link to = "/FullEvents" className = "link">
+            <Link to="/FullEvents" className="link">
               Book an Appointment
             </Link>
           </li>
 
           <li>
-            <Link to = "/CustomMeeting" className = "link">
+            <Link to="/CustomMeeting" className="link">
               Custom Meeting
             </Link>
           </li>
-            
+
           <li>
-            <Link to = "/URLTest" className = "link">
-            BookingURL-Test
+            <Link to="/URLTest" className="link">
+              BookingURL-Test
             </Link>
           </li>
         </ul>
       </aside>
 
-        <div className="container glass-container">
+      <div className="container glass-container">
         <h2 className="title">Create an Event</h2>
         <form onSubmit={handleSubmit}>
           {/* Title */}
           <div className="input-text">
             <input
               type="text"
-              id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter a title (e.g., Office Hours)"
+              placeholder="Enter event title"
               required
-              className="booking-input"
             />
           </div>
 
+          {/* Location */}
           <div className="input-text">
             <input
               type="text"
-              id="location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Enter location (e.g., Online or Room 101)"
               required
-              className="booking-input"
             />
           </div>
 
           {/* Type */}
           <div className="choose-privacy">
-            <label htmlFor="type">Type:</label>
-            <select
-              id="type"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              className="booking-input"
-            >
+            <label>Type:</label>
+            <select value={type} onChange={(e) => setType(e.target.value)}>
               <option value="One-Time">One-Time</option>
               <option value="Recurring">Recurring</option>
             </select>
           </div>
 
-          <div className="choose-privacy">
-                <label className="event-label" htmlFor="day">Event Privacy: </label>
-                <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
-                    <option className="privacy-input" value="" disabled>Pick an option</option>
-                    <option className="privacy-input" value="private">Members Only</option>
-                    <option className="privacy-input" value="public">Open to Everyone</option>
-                </select>
-            </div>
-
-          {/* Date */}
+          {/* Show Start Date for One-Time */}
           <div className="choose-date">
-            <label className="event-label" htmlFor="start-date">Date:</label>
+            <label>{type === "Recurring" ? "Start:" : "Date:"}</label>
             <input
-                type="date"
-                id="start-date"
-                name="start-date"
-                className="date-input"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              required
             />
-        </div>
+          </div>
 
-        <div className="choose-date">
-            <label className="event-label" htmlFor="start-date">Until:</label>
-            <input
-                type="date"
-                id="end-date"
-                name="end-date"
-                className="date-input"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-            />
-        </div>
+          {/* Show End Date and Recurrence for Recurring Events */}
+          {type === "Recurring" && (
+            <>
+              <div className="choose-date">
+                <label>Until:</label>
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  required
+                />
+              </div>
 
-          {/* Proposed Times */}
+              <div className="choose-privacy">
+                <label>Recurrence:</label>
+                <select
+                  value={recurrenceFrequency}
+                  onChange={(e) => setRecurrenceFrequency(e.target.value)}
+                >
+                  <option value="Weekly">Weekly</option>
+                  <option value="Monthly">Monthly</option>
+                </select>
+              </div>
+            </>
+          )}
+
+          {/* Privacy */}
+          <div className="choose-privacy">
+            <label>Event Privacy:</label>
+            <select
+              value={privacy}
+              onChange={(e) => setPrivacy(e.target.value)}
+              required
+            >
+              <option value="" disabled>
+                Select Privacy
+              </option>
+              <option value="Public">Open to Everyone</option>
+              <option value="Members-Only">Members Only</option>
+            </select>
+          </div>
+
+          {/* Time Slots */}
           <div className="input-text">
             <label>Time slots:</label>
-            {timeslots.map((time, index) => (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  marginBottom: "10px",
-                }}
-              >
+            {baseTimeslots.map((time, index) => (
+              <div key={index} style={{ display: "flex", gap: "10px" }}>
                 <input
                   type="time"
                   value={time}
-                  onChange={(e) =>
-                    handleProposedTimeChange(index, e.target.value)
-                  }
+                  onChange={(e) => handleBaseTimeChange(index, e.target.value)}
                   required
-                  className="booking-input"
                 />
                 <button
                   type="button"
-                  onClick={() => handleRemoveTime(index)}
+                  onClick={() => handleRemoveBaseTime(index)}
                   className="small-btn"
                 >
                   Remove
                 </button>
               </div>
             ))}
-            <button type="button" onClick={addProposedTime} className="small-btn">
-              Add Another Time
+            <button
+              type="button"
+              onClick={addBaseTimeSlot}
+              className="small-btn"
+            >
+              Add Time
             </button>
-          
           </div>
 
-          {/* Error or Success Messages */}
+          {/* Messages */}
           {error && <p className="error-message">{error}</p>}
           {successMessage && (
-            <p className="success-message" style={{ color: "green" }}>
+            <p className="success-message">
               {successMessage}
               <br />
               <a
@@ -268,16 +277,7 @@ const CreateEvent = () => {
           </button>
         </form>
       </div>
-
-      <div className = "footer">
-            <footer>
-                <p> &copy; 2024 Bookify! McGill University  </p>
-            </footer>
-        </div>
-
-        
     </main>
-    
   );
 };
 
