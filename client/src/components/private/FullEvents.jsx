@@ -51,7 +51,50 @@ export default function FullEvents() {
 
       
     return (
-        <main>
+        <main class="layout">
+            <aside className = "sidebar">
+        <ul className = "menu">
+
+        <li>
+            <Link to = "/MemberPage" className = "link">
+              Home
+            </Link>
+          </li>
+
+          <li>
+            <Link to = "/CreateEvent" className = "link">
+              Create Events
+            </Link>
+          </li>
+          <li>
+            <Link to = "/ManageEvent" className = "link">
+              Manage Events
+            </Link>
+          </li>
+          <li>
+            <Link to = "/ManageBooking" className = "link">
+              Manage Meetings
+            </Link>
+          </li>
+          <li>
+            <Link to = "/FullEvents" className = "link">
+              Book an Appointment
+            </Link>
+          </li>
+
+          <li>
+            <Link to = "/CustomMeeting" className = "link">
+              Custom Meeting
+            </Link>
+          </li>
+            
+          <li>
+            <Link to = "/URLTest" className = "link">
+            BookingURL-Test
+            </Link>
+          </li>
+        </ul>
+      </aside>
             <div class="container">
             <h2>All bookable Events at Mcgill:</h2>
             {appointments.active.length > 0 ? (

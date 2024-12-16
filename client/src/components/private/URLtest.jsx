@@ -183,10 +183,11 @@ function URLTest() {
                                                 }
                                                 required
                                             />
+                                        <button className="btn" onClick={handleSsaSubmit}>Book Appointment</button>
+
                                         </div>
-                                        
                                     )}
-                                    <button className="btn" onClick={handleSsaSubmit}>Book Appointment</button>
+                                    
                                 </form>
                             </>
                         )}

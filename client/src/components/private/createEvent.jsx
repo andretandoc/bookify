@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const CreateEvent = () => {
   const [title, setTitle] = useState("");
@@ -87,141 +88,188 @@ const CreateEvent = () => {
   };
 
   return (
-    <div className="container glass-container">
-      <h2 className="title">Create an Event</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Title */}
-        <div className="input-text">
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter a title (e.g., Office Hours)"
-            required
-            className="booking-input"
-          />
-        </div>
+    <main className="layout">
+      <aside className = "sidebar">
+        <ul className = "menu">
 
-        <div className="input-text">
-          <input
-            type="text"
-            id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter location (e.g., Online or Room 101)"
-            required
-            className="booking-input"
-          />
-        </div>
+        <li>
+            <Link to = "/MemberPage" className = "link">
+              Home
+            </Link>
+          </li>
 
-        {/* Type */}
-        <div className="choose-privacy">
-          <label htmlFor="type">Type:</label>
-          <select
-            id="type"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            className="booking-input"
-          >
-            <option value="One-Time">One-Time</option>
-            <option value="Recurring">Recurring</option>
-          </select>
-        </div>
+          <li>
+            <Link to = "/CreateEvent" className = "link">
+              Create Events
+            </Link>
+          </li>
+          <li>
+            <Link to = "/ManageEvent" className = "link">
+              Manage Events
+            </Link>
+          </li>
+          <li>
+            <Link to = "/ManageBooking" className = "link">
+              Manage Meetings
+            </Link>
+          </li>
+          <li>
+            <Link to = "/FullEvents" className = "link">
+              Book an Appointment
+            </Link>
+          </li>
 
-        <div className="choose-privacy">
-              <label className="event-label" htmlFor="day">Event Privacy: </label>
-              <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
-                  <option className="privacy-input" value="" disabled>Pick an option</option>
-                  <option className="privacy-input" value="private">Members Only</option>
-                  <option className="privacy-input" value="public">Open to Everyone</option>
-              </select>
+          <li>
+            <Link to = "/CustomMeeting" className = "link">
+              Custom Meeting
+            </Link>
+          </li>
+            
+          <li>
+            <Link to = "/URLTest" className = "link">
+            BookingURL-Test
+            </Link>
+          </li>
+        </ul>
+      </aside>
+
+        <div className="container glass-container">
+        <h2 className="title">Create an Event</h2>
+        <form onSubmit={handleSubmit}>
+          {/* Title */}
+          <div className="input-text">
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter a title (e.g., Office Hours)"
+              required
+              className="booking-input"
+            />
           </div>
 
-        {/* Date */}
-        <div className="choose-date">
-          <label className="event-label" htmlFor="start-date">Date:</label>
-          <input
-              type="date"
-              id="start-date"
-              name="start-date"
-              className="date-input"
-              value={startDate}
-              onChange={(e) => setDate(e.target.value)}
-          />
-      </div>
+          <div className="input-text">
+            <input
+              type="text"
+              id="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Enter location (e.g., Online or Room 101)"
+              required
+              className="booking-input"
+            />
+          </div>
 
-      <div className="choose-date">
-          <label className="event-label" htmlFor="start-date">Until:</label>
-          <input
-              type="date"
-              id="end-date"
-              name="end-date"
-              className="date-input"
-              value={endDate}
-              onChange={(e) => setDate(e.target.value)}
-          />
-      </div>
-
-        {/* Proposed Times */}
-        <div className="input-text">
-          <label>Time slots:</label>
-          {timeslots.map((time, index) => (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                marginBottom: "10px",
-              }}
+          {/* Type */}
+          <div className="choose-privacy">
+            <label htmlFor="type">Type:</label>
+            <select
+              id="type"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="booking-input"
             >
-              <input
-                type="time"
-                value={time}
-                onChange={(e) =>
-                  handleProposedTimeChange(index, e.target.value)
-                }
-                required
-                className="booking-input"
-              />
-              <button
-                type="button"
-                onClick={() => handleRemoveTime(index)}
-                className="small-btn"
-              >
-                Remove
-              </button>
+              <option value="One-Time">One-Time</option>
+              <option value="Recurring">Recurring</option>
+            </select>
+          </div>
+
+          <div className="choose-privacy">
+                <label className="event-label" htmlFor="day">Event Privacy: </label>
+                <select id="privacy" className="dropdown-privacy" name="privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} required>
+                    <option className="privacy-input" value="" disabled>Pick an option</option>
+                    <option className="privacy-input" value="private">Members Only</option>
+                    <option className="privacy-input" value="public">Open to Everyone</option>
+                </select>
             </div>
-          ))}
-          <button type="button" onClick={addProposedTime} className="small-btn">
-            Add Another Time
-          </button>
-         
+
+          {/* Date */}
+          <div className="choose-date">
+            <label className="event-label" htmlFor="start-date">Date:</label>
+            <input
+                type="date"
+                id="start-date"
+                name="start-date"
+                className="date-input"
+                value={startDate}
+                onChange={(e) => setDate(e.target.value)}
+            />
         </div>
 
-        {/* Error or Success Messages */}
-        {error && <p className="error-message">{error}</p>}
-        {successMessage && (
-          <p className="success-message" style={{ color: "green" }}>
-            {successMessage}
-            <br />
-            <a
-              href={`/booking/${publicURL}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Event Link
-            </a>
-          </p>
-        )}
+        <div className="choose-date">
+            <label className="event-label" htmlFor="start-date">Until:</label>
+            <input
+                type="date"
+                id="end-date"
+                name="end-date"
+                className="date-input"
+                value={endDate}
+                onChange={(e) => setDate(e.target.value)}
+            />
+        </div>
 
-        {/* Submit Button */}
-        <button type="submit" className="btn">
-          Create Event
-        </button>
-      </form>
-    </div>
+          {/* Proposed Times */}
+          <div className="input-text">
+            <label>Time slots:</label>
+            {timeslots.map((time, index) => (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  marginBottom: "10px",
+                }}
+              >
+                <input
+                  type="time"
+                  value={time}
+                  onChange={(e) =>
+                    handleProposedTimeChange(index, e.target.value)
+                  }
+                  required
+                  className="booking-input"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveTime(index)}
+                  className="small-btn"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button type="button" onClick={addProposedTime} className="small-btn">
+              Add Another Time
+            </button>
+          
+          </div>
+
+          {/* Error or Success Messages */}
+          {error && <p className="error-message">{error}</p>}
+          {successMessage && (
+            <p className="success-message" style={{ color: "green" }}>
+              {successMessage}
+              <br />
+              <a
+                href={`/booking/${publicURL}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Event Link
+              </a>
+            </p>
+          )}
+
+          {/* Submit Button */}
+          <button type="submit" className="btn">
+            Create Event
+          </button>
+        </form>
+      </div>
+    </main>
+    
   );
 };
 
