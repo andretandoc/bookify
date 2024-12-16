@@ -84,7 +84,7 @@ const CustomMeeting = () => {
               }}
             >
               <input
-                type="datetime-local"
+                type="time"
                 value={time}
                 onChange={(e) =>
                   handleProposedTimeChange(index, e.target.value)
