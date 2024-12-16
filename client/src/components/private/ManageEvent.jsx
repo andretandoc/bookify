@@ -103,12 +103,6 @@ export default function ManageEvent() {
               Custom Meeting
             </Link>
           </li>
-
-          <li>
-            <Link to="/URLTest" className="link">
-              BookingURL-Test
-            </Link>
-          </li>
         </ul>
       </aside>
       <div class="content-wrap">

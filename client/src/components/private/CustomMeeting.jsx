@@ -30,16 +30,15 @@ const CustomMeeting = () => {
   //   console.log("Sending Custom Meeting Request...");
   // };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const token = localStorage.getItem("token"); // Retrieve JWT token
     if (!token) {
       alert("You must be logged in to send a meeting request!");
       return;
     }
-  
+
     // Convert proposedTimes to full Date objects
     const fullProposedTimes = proposedTimes.map((time) => {
       const [hours, minutes] = time.split(":"); // Extract hours and minutes
@@ -47,7 +46,7 @@ const CustomMeeting = () => {
       meetingDate.setHours(hours, minutes, 0, 0); // Add time to the date
       return meetingDate;
     });
-  
+
     const customMeetingData = {
       recipientEmail,
       proposedTimes: fullProposedTimes, // Use full Date objects
@@ -55,7 +54,7 @@ const CustomMeeting = () => {
       date, // Ensure date is "YYYY-MM-DD"
       location,
     };
-  
+
     try {
       const response = await axios.post(
         "http://localhost:5005/api/custom-meetings",
@@ -64,7 +63,7 @@ const CustomMeeting = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-  
+
       setMessage("Custom meeting request sent successfully!");
       alert(`Meeting ID: ${response.data.meeting._id}`);
       setRecipientEmail("");
@@ -75,57 +74,50 @@ const CustomMeeting = () => {
       navigate("/ManageBooking"); // Redirect to manage bookings
     } catch (error) {
       setMessage(
-        error.response?.data?.message || "Failed to create meeting. Please try again."
+        error.response?.data?.message ||
+          "Failed to create meeting. Please try again."
       );
     }
   };
-  
-  
 
   return (
     <main class="layout">
-        <aside className = "sidebar">
-          <ul className = "menu">
-            <li>
-                <Link to = "/MemberPage" className = "link">
-                  Home
-                </Link>
-              </li>
+      <aside className="sidebar">
+        <ul className="menu">
+          <li>
+            <Link to="/MemberPage" className="link">
+              Home
+            </Link>
+          </li>
 
-              <li>
-                <Link to = "/CreateEvent" className = "link">
-                  Create Events
-                </Link>
-              </li>
-              <li>
-                <Link to = "/ManageEvent" className = "link">
-                  Manage Events
-                </Link>
-              </li>
-              <li>
-                <Link to = "/ManageBooking" className = "link">
-                  Manage Meetings
-                </Link>
-              </li>
-              <li>
-                <Link to = "/FullEvents" className = "link">
-                  Book an Appointment
-                </Link>
-              </li>
+          <li>
+            <Link to="/CreateEvent" className="link">
+              Create Events
+            </Link>
+          </li>
+          <li>
+            <Link to="/ManageEvent" className="link">
+              Manage Events
+            </Link>
+          </li>
+          <li>
+            <Link to="/ManageBooking" className="link">
+              Manage Meetings
+            </Link>
+          </li>
+          <li>
+            <Link to="/FullEvents" className="link">
+              Book an Appointment
+            </Link>
+          </li>
 
-              <li>
-                <Link to = "/CustomMeeting" className = "link">
-                  Custom Meeting
-                </Link>
-              </li>
-                
-              <li>
-                <Link to = "/URLTest" className = "link">
-                BookingURL-Test
-                </Link>
-              </li>
-          </ul>
-        </aside>
+          <li>
+            <Link to="/CustomMeeting" className="link">
+              Custom Meeting
+            </Link>
+          </li>
+        </ul>
+      </aside>
       <div className="container">
         <h2>Send a Custom Meeting Request</h2>
         <form onSubmit={handleSubmit}>
@@ -157,16 +149,18 @@ const CustomMeeting = () => {
 
           {/* Date */}
           <div className="choose-date">
-            <label className="event-label" htmlFor="start-date">Date:</label>
+            <label className="event-label" htmlFor="start-date">
+              Date:
+            </label>
             <input
-                type="date"
-                id="start-date"
-                name="start-date"
-                className="date-input"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
+              type="date"
+              id="start-date"
+              name="start-date"
+              className="date-input"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
             />
-        </div>
+          </div>
 
           {/* Proposed Times */}
           <div className="input-text">
@@ -199,7 +193,11 @@ const CustomMeeting = () => {
                 </button>
               </div>
             ))}
-            <button type="button" onClick={addProposedTime} className="small-btn">
+            <button
+              type="button"
+              onClick={addProposedTime}
+              className="small-btn"
+            >
               Add Another Time
             </button>
           </div>
@@ -224,14 +222,12 @@ const CustomMeeting = () => {
         </form>
       </div>
 
-      <div className = "footer">
-            <footer>
-                <p> &copy; 2024 Bookify! McGill University  </p>
-            </footer>
-        </div>
-        
+      <div className="footer">
+        <footer>
+          <p> &copy; 2024 Bookify! McGill University </p>
+        </footer>
+      </div>
     </main>
-
   );
 };
 

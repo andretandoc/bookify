@@ -85,12 +85,6 @@ const MemberPage = () => {
               Custom Meeting
             </Link>
           </li>
-
-          <li>
-            <Link to="/URLTest" className="link">
-              BookingURL-Test
-            </Link>
-          </li>
         </ul>
       </aside>
 
