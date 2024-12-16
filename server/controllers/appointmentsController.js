@@ -1,4 +1,5 @@
 const Appointment = require("../models/Appointment");
+const User = require("../models/Member");
 const crypto = require("crypto");
 
 // Fetch appointments based on filters
@@ -62,11 +63,17 @@ const getAppointmentsPrivate = async (req, res) => {
       email: email,
       startDate: { $lt: currentDate }, // Past appointments
     });
+    
+    const user = await User.findOne({email : email});
+    const name = user.fname || "NA" ;
 
-    console.log("Active Appointments:", activeAppointments); // Debugging
-    console.log("Past Appointments:", pastAppointments); // Debugging
+    console.log("Member :",user)
+    console.log("Name:", name);
+    console.log("Active private Appointments:", activeAppointments); // Debugging
+    console.log("Past private Appointments:", pastAppointments); // Debugging
 
     res.status(200).json({
+      name,
       activeAppointments,
       pastAppointments,
     });
@@ -75,6 +82,7 @@ const getAppointmentsPrivate = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch appointments" });
   }
 };
+
 
 // For members to create a booking
 const createAppointment = async (req, res) => {

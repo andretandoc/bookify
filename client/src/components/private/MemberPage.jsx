@@ -1,24 +1,53 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
+
 const MemberPage = () => {
-  const meetings = [
-    {
-      title: "Meeting with Professor Joseph Vybhial",
-      time: "Thursday Dec 12 at 5 pm",
-      location: "McLennan",
-    },
-    {
-      title: "Meeting with Professor Joseph Vybhial",
-      time: "Thursday Dec 12 at 5 pm",
-      location: "McLennan",
-    },
-    {
-      title: "Meeting with Professor Joseph Vybhial",
-      time: "Thursday Dec 12 at 5 pm",
-      location: "McLennan",
-    },
-  ];
+  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [appointments, setAppointments] = useState({
+    active: [],
+    past: [],
+  });
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      setAppointments({ active: [], past: [] }); // Reset state before fetching
+      setMessage("");
+
+      const token = localStorage.getItem("token");
+      console.log("Token in Frontend:", token); // Debugging
+
+      try {
+        const response = await axios.get(
+          "http://localhost:5005/api/appointments/private",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        console.log(response.data);
+
+        setName(response.data.name || "NA"); // Set user's name
+
+        if (response.data.activeAppointments.length === 0) {
+          setMessage("No active appointments found");
+        } else {
+          setAppointments({
+            active: response.data.activeAppointments || [],
+            past: response.data.pastAppointments || [],
+          });
+        }
+      } catch (error) {
+        setMessage(
+          error.response?.data?.message || "Failed to retrieve appointments!"
+        );
+      }
+    };
+
+    fetchAppointments();
+  }, []);
 
   return (
     <div className = "layout">
@@ -68,27 +97,36 @@ const MemberPage = () => {
       </aside>
 
       {/* Main Content */}
-      <section className = "container" style = {{boxShadow : "none", backgroundColor: "white"}}>
-        <h1>Hey Leen!</h1>
+      <section
+        className="container"
+        style={{ boxShadow: "none", backgroundColor: "white" }}
+      >
+        <h1>Hey {name}!</h1>
         <h2>Your upcoming meetings:</h2>
         <div>
-          {meetings.map((meeting, index) => (
-            <div key={index} className="event-card">
-              <div>
-                <p className = "event-title">{meeting.title}</p>
-                <p>
-                  <strong>When:</strong> {meeting.time}
-                </p>
-                <p>
-                  <strong>Where:</strong> {meeting.location}
-                </p>
+          {/* Show a message if there are no active appointments */}
+          {appointments.active.length === 0 ? (
+            <p>{message || "No active appointments."}</p>
+          ) : (
+            // Render active appointments if available
+            appointments.active.map((appointment, index) => (
+              <div key={index} className="event-card">
+                <div>
+                  <p className="event-title">{appointment.title}</p>
+                  <p>
+                    <strong>When:</strong> {appointment.time}
+                  </p>
+                  <p>
+                    <strong>Where:</strong> {appointment.location}
+                  </p>
+                </div>
+                <button className="double-btn">Manage</button>
               </div>
-              <button className = "double-btn">Manage</button>
+              ))
+            )}
             </div>
-          ))}
+          </section>
         </div>
-      </section>
-    </div>
   );
 };
 
