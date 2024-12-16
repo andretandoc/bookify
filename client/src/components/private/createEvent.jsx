@@ -193,7 +193,7 @@ const CreateEvent = () => {
                 name="start-date"
                 className="date-input"
                 value={startDate}
-                onChange={(e) => setDate(e.target.value)}
+                onChange={(e) => setStartDate(e.target.value)}
             />
         </div>
 
@@ -205,7 +205,7 @@ const CreateEvent = () => {
                 name="end-date"
                 className="date-input"
                 value={endDate}
-                onChange={(e) => setDate(e.target.value)}
+                onChange={(e) => setEndDate(e.target.value)}
             />
         </div>
 
