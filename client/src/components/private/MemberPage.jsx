@@ -26,6 +26,12 @@ const MemberPage = () => {
       <aside className = "sidebar">
         <ul className = "menu">
 
+        <li>
+            <Link to = "/MemberPage" className = "link">
+              Home
+            </Link>
+          </li>
+
           <li>
             <Link to = "/CreateEvent" className = "link">
               Create Events
