@@ -8,14 +8,17 @@ const getEvents = async (req, res) => {
     // Log the user from the token
     console.log("Request user:", req.user);
 
-    const { type, privacy, startDate, endDate, createdBy } = req.query;
+    const { type, privacy, startDate, endDate } = req.query;
+
+    // Fetch the logged-in user's email or ID
+    const createdBy = req.user.email; // Assuming `email` is in req.user
 
     // Build the query filter object
-    let filter = {};
+    let filter = { createdBy }; // Include only events created by the logged-in user
 
     if (type) filter.type = type; // Filter by event type
     if (privacy) filter.privacy = privacy; // Filter by event privacy
-    if (createdBy) filter.createdBy = createdBy; // Filter by creator email
+    // if (createdBy) filter.createdBy = createdBy; // Filter by creator email
     if (startDate && endDate) {
       filter.startDate = { $gte: new Date(startDate), $lte: new Date(endDate) }; // Date range filter
     } else if (startDate) {

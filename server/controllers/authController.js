@@ -42,16 +42,14 @@ const registerMember = async (req, res) => {
     await newMember.save(); // Save member to db
 
     // console.log("JWT_SECRET:", process.env.JWT_SECRET);
-    const tokenExpiry = rememberMe ? "7d" : "1h";
+
     const token = jwt.sign(
-      { id: member._id, email: member.email }, // Include email in token
+      { id: newMember._id, email: newMember.email }, // Include email in token
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
-    res.json({ token });
-
-    res.status(201).json({ message: "Member registered successfully" });
+    res.status(201).json({ message: "Member registered successfully", token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -76,7 +74,7 @@ const loginMember = async (req, res) => {
     }
 
     // Generate JWT token if password is correct
-    // console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    console.log("JWT_SECRET:", process.env.JWT_SECRET);
     const tokenExpiry = rememberMe ? "7d" : "1h";
     const token = jwt.sign(
       { id: member._id, email: member.email }, // Include email in token
