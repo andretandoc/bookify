@@ -172,17 +172,13 @@ const createEvent = async (req, res) => {
 // Fetch appointments based on filters
 const getAppointmentsPublic = async (req, res) => {
   try {
-    const {
-      firstName,
-      lastName,
-      email,
-      startDate,
-      endDate,
-      page = 1,
-      limit = 5,
-    } = req.query;
-
+    const { email, startDate, endDate } = req.query;
+  
+    const currentDate = new Date(); // Current date for comparison
+  
+    // Build the filter dynamically based on provided parameters
     let filter = {};
+
 
     if (firstName) filter.firstName = new RegExp(firstName, "i"); // case-insensitive
     if (lastName) filter.lastName = new RegExp(lastName, "i");
@@ -192,28 +188,41 @@ const getAppointmentsPublic = async (req, res) => {
       filter.endDate = { $lte: new Date(endDate) };
     }
 
-    // Get the total number of appointments matching the filter
-    const totalAppointments = await Appointment.countDocuments(filter);
-
-    // Fetch appointments with pagination
-    const appointments = await Appointment.find(filter)
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
-
+    if (email) filter.email = new RegExp(email, "i"); // Case-insensitive search
+    if (startDate) filter.startDate = { $gte: new Date(startDate) };
+    if (endDate) filter.endDate = { ...filter.endDate, $lte: new Date(endDate) };
+  
+    // Fetch all appointments matching the filter
+    const appointments = await Appointment.find(filter);
+  
+    // Split appointments into active and past categories
+    const activeAppointments = appointments.filter(
+      (appointment) => new Date(appointment.startDate) >= currentDate
+    );
+    const pastAppointments = appointments.filter(
+      (appointment) => new Date(appointment.startDate) < currentDate
+    );
+  
+    // Debugging logs
+    console.log("Active Appointments:", activeAppointments);
+    console.log("Past Appointments:", pastAppointments);
+  
+    // Handle the case where no appointments were found
     if (appointments.length === 0) {
       return res.status(404).json({ message: "No appointments found" });
     }
 
+  
+    // Return the categorized appointments
     res.status(200).json({
-      totalAppointments,
-      currentPage: page,
-      totalPages: Math.ceil(totalAppointments / limit),
-      appointments,
+      activeAppointments,
+      pastAppointments,
     });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 const getAppointmentsPrivate = async (req, res) => {
   try {

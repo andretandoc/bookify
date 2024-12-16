@@ -7,7 +7,10 @@ function ApptForm() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [message, setMessage] = useState("");
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState({
+    active: [],
+    past: [],
+  });
   const navigate = useNavigate();
 
   const handleAppt = async (event) => {
@@ -36,12 +39,19 @@ function ApptForm() {
         }
       );
 
-      // console.log("API Response:", response.data);
-      if (response.data.length === 0) {
+      if (
+        response.data.activeAppointments.length === 0 &&
+        response.data.pastAppointments.length === 0
+      ) {
         setMessage("No appointments found");
       } else {
-        setAppointments(response.data.appointments); // Save appointments in state
-        navigate("/ApptList", { state: { appointments: response.data.appointments } });
+        const newAppointments = {
+          active: response.data.activeAppointments || [],
+          past: response.data.pastAppointments || [],
+        };
+        setAppointments(newAppointments);
+        console.log(newAppointments)
+        navigate("/ApptList", { state: { appointments: newAppointments } });
       }
     } catch (error) {
       setMessage(

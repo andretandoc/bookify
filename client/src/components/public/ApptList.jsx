@@ -1,79 +1,167 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useRef } from "react";
+import { useState, useEffect } from "react";
 
 function ApptList() {
   const navigate = useNavigate();
   const location = useLocation();
-  const appointments = location.state?.appointments || []; // Default to empty array if undefined
 
-  // Ref for the scrollable container
-  const scrollContainerRef = useRef();
+  const [appointments, setAppointments] = useState({ active: [], past: [] });
+  const [message, setMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMeeting, setSelectedMeeting] = useState(null);
 
+  // Initialize appointments from location.state
+  useEffect(() => {
+    const data = location.state?.appointments || { active: [], past: [] };
+    setAppointments(data);
+
+    if (data.active.length === 0 || data.past.length === 0) {
+      setMessage("No appointments available");
+    }
+  }, [location.state]);
+
+  // Handle "Go Back" button
   const handleGoBack = () => {
     navigate(-1); // Navigate back
   };
 
-  // Function to scroll the container left
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -420, behavior: "smooth" });
-    }
+  // Modal controls
+  const openModal = (meetingId) => {
+    setSelectedMeeting(meetingId);
+    setIsModalOpen(true);
   };
 
-  // Function to scroll the container right
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 420, behavior: "smooth" });
-    }
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedMeeting(null);
   };
+
+  const confirmCancel = () => {
+    console.log(`Meeting ${selectedMeeting} cancelled`);
+    closeModal();
+  };
+
+  // Debugging logs
+  console.log("Appointments in list:", appointments);
+  console.log("Active appointments:", appointments.active);
+  console.log("Past appointments:", appointments.past);
 
   return (
     <main className = "layout">
-      <div className = "form-box">
-        <h1 className = "title">Appointment History</h1>
-        <div className = "appointment-scroll-container">
-          <button className = "scroll-btn left" onClick = {scrollLeft}>
-            &lt; 
-          </button>
-          <div className = "appointment-list" ref={scrollContainerRef}>
-            {appointments.map((appointment, index) => (
-              <div key={appointment._id || index} className = "appointment">
-                <h3>Appointment {index + 1}</h3>
-                <p className = "appt-list-item">
-                  <strong>Host:</strong> {appointment.firstName || "N/A"}
-                </p>
-                <p className = "appt-list-item">
-                  <strong>Email:</strong> {appointment.lastName || "N/A"}
-                </p>
-                <p className = "appt-list-item">
-                  <strong>Date:</strong> {appointment.email || "N/A"}
-                </p>
-                <p className = "appt-list-item">
-                  <strong>Time:</strong> {appointment.startDate ? new Date(appointment.startDate).toLocaleString() : "N/A"}
-                </p>
-                <p className="appt-list-item">
-                  <strong>Location</strong> {appointment.endDate ? new Date(appointment.endDate).toLocaleString() : "N/A"}
-                </p>
-                <p className = "appt-list-item">
-                  <strong>Status:</strong> {appointment.status || "N/A"}
-                </p>
-
-              </div>
-            ))}
-          </div>
-          <button className = "scroll-btn right" onClick = {scrollRight}>
-            &gt;
-          </button>
-        </div>
-        <button className = "double-btn" onClick = {handleGoBack}>
+      <div className="content-wrap">
+      <button className = "double-btn" onClick = {handleGoBack}>
           Go Back
         </button>
+        <div className="container">
+          <h2>Active Appointments: </h2>
+          {appointments.active.length > 0 ? (
+            <div className="table-wrapper">
+              <ul className="responsive-table">
+                <li className="table-header">
+                  <div className="col">Event</div>
+                  <div className="col">Host</div>
+                  <div className="col">Email</div>
+                  <div className="col">Date & Time</div>
+                  <div className="col">Location</div>
+                  <div className="col"></div>
+                </li>
+                {appointments.activeAppointments.map((appointment, index) => (
+                  <li key={index} className="table-row">
+                    <div className="col" data-label="Event">
+                      {appointment.event || "N/A"}
+                    </div>
+                    <div className="col" data-label="Host">
+                      {appointment.host || "N/A"}
+                    </div>
+                    <div className="col" data-label="Email">
+                      {appointment.email}
+                    </div>
+                    <div className="col" data-label="Date & Time">
+                      {new Date(appointment.startDate).toLocaleString()}
+                    </div>
+                    <div className="col" data-label="Location">
+                      {appointment.location || "N/A"}
+                    </div>
+                    <div className="col">
+                      <button
+                        className="reject-btn"
+                        onClick={() => openModal(appointment._id)}
+                      >
+                        Cancel Meeting &#10060;
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>{message}</p>
+          )}
+        </div>
+
+        <div className="container">
+          <h2>Past Appointments:</h2>
+          {appointments.past.length > 0 ? (
+            <div className="table-wrapper">
+              <ul className="responsive-table">
+                <li className="table-header">
+                  <div className="col">Event</div>
+                  <div className="col">Host</div>
+                  <div className="col">Email</div>
+                  <div className="col">Date & Time</div>
+                  <div className="col">Location</div>
+                </li>
+                {appointments.past.map((appointment, index) => (
+                  <li key={index} className="table-row">
+                    <div className="col" data-label="Event">
+                      {appointment.event || "N/A"}
+                    </div>
+                    <div className="col" data-label="Host">
+                      {appointment.host || "N/A"}
+                    </div>
+                    <div className="col" data-label="Email">
+                      {appointment.email}
+                    </div>
+                    <div className="col" data-label="Date & Time">
+                      {new Date(appointment.startDate).toLocaleString()}
+                    </div>
+                    <div className="col" data-label="Location">
+                      {appointment.location || "N/A"}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>{message}</p>
+          )}
+
+          
+        </div>
+
+        {isModalOpen && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <h3>Are you sure you want to cancel this meeting?</h3>
+              <div className="modal-buttons">
+                <button className="btn-confirm" onClick={confirmCancel}>
+                  Yes
+                </button>
+                <button className="btn-cancel" onClick={closeModal}>
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
+       
+
       <div className = "footer">
-            <footer>
-                <p> &copy; 2024 Bookify! McGill University  </p>
-            </footer>
+        <footer>
+            <p> &copy; 2024 Bookify! McGill University  </p>
+        </footer>
       </div>
 
     </main>
