@@ -134,7 +134,7 @@ const CreateEvent = () => {
         </ul>
       </aside>
 
-      <div className="container glass-container">
+      <div className="container" style={{marginLeft: "100px"}}>
         <h2 className="title">Create an Event</h2>
         <form onSubmit={handleSubmit}>
           {/* Title */}
@@ -244,7 +244,7 @@ const CreateEvent = () => {
             <button
               type="button"
               onClick={addBaseTimeSlot}
-              className="small-btn"
+              className="double-btn"
             >
               Add Time
             </button>
@@ -267,7 +267,7 @@ const CreateEvent = () => {
           )}
 
           {/* Submit Button */}
-          <button type="submit" className="btn">
+          <button type="submit" className="double-btn">
             Create Event
           </button>
         </form>

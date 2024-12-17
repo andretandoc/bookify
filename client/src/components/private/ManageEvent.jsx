@@ -126,7 +126,7 @@ export default function ManageEvent() {
         </ul>
       </aside>
       <div class="content-wrap">
-        <div class="container">
+        <div class="container"style={{marginLeft: "100px"}}>
 
           
           <h2>My Active Events:</h2>
@@ -202,7 +202,7 @@ export default function ManageEvent() {
         </div>
 
 
-        <div className="container">
+        <div className="container"style={{marginLeft: "100px"}}>
           <h2>My Past Events:</h2>
           {events.past.length > 0 ? (
             <div className="table-wrapper">

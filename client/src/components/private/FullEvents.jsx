@@ -79,7 +79,7 @@ export default function FullEvents() {
         </ul>
       </aside>
 
-      <div className="container">
+      <div className="container"style={{marginLeft: "100px"}}>
         <h2>All Events at McGill:</h2>
         {events.active.length > 0 ? (
           <div className="table-wrapper">

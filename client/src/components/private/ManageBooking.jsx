@@ -107,7 +107,7 @@ export default function ManageBooking() {
         </ul>
       </aside>
       <div className="content-wrap">
-        <div className="container">
+        <div className="container"style={{marginLeft: "100px"}}>
           <h2>Active Appointments:</h2>
           {appointments.active.length > 0 ? (
             <div className="table-wrapper">
@@ -157,7 +157,7 @@ export default function ManageBooking() {
           )}
         </div>
 
-        <div className="container">
+        <div className="container"style={{marginLeft: "100px"}}>
           <h2>Past Appointments:</h2>
           {appointments.past.length > 0 ? (
             <div className="table-wrapper">

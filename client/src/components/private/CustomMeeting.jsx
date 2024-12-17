@@ -121,7 +121,7 @@ const CustomMeeting = () => {
           </li>
         </ul>
       </aside>
-      <div className = "container">
+      <div className = "container"style={{marginLeft: "100px"}}>
         <h2>Send a Custom Meeting Request</h2>
 
         {/* Feedback Message */}
