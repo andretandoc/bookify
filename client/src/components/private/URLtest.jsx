@@ -51,15 +51,13 @@ function URLTest() {
     }
 
     try {
-      await axios.post(
-        `http://localhost:5005/api/appointments/${publicURL}/reserve`,
-        {
-          firstName: fname,
-          lastName: lname,
-          email: email,
-          timeSlotId: selectedTimeSlotId,
-        }
-      );
+      const API_URL = import.meta.env.VITE_API_URL;
+      await axios.post(`${API_URL}/api/appointments/${publicURL}/reserve`, {
+        firstName: fname,
+        lastName: lname,
+        email: email,
+        timeSlotId: selectedTimeSlotId,
+      });
       setReservationSuccess("Appointment booked successfully!");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to reserve appointment.");
