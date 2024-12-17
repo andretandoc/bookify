@@ -127,6 +127,15 @@ header .profile-icon:hover {
 }
 
 
+.hamburger.active {
+  color: #c61627; /* Highlight active state */
+}
+
+.navbar {
+  display: flex;
+  gap: 20px;
+}
+
 .nav-item {
   position: relative;
   display: inline-block;
@@ -977,9 +986,19 @@ p a:active {
   background-color: #f9f9f9;
   color: black;
   flex-direction: column;
-  width: 90vh;
+  width: 80vh;
   margin-bottom: 200px;
+  margin-left: 20px;
   z-index: 0;
+}
+@media (max-width: 1050px) {
+  .container {
+    width: 70%; /* Use percentage for flexibility */
+    padding: 20px;
+    margin-left: 30px;
+    margin-bottom: 80px;
+    margin-right: 50px;
+  }
 }
 
 .container h2 {
@@ -1030,16 +1049,18 @@ p a:active {
 /*******************************************************/
 
 .private-page {
-  background: none;
+  position: relative; /* Needed for the overlay */
   min-height: 100vh;
   font-family: "Lato", sans-serif;
   margin: 0;
   padding: 0;
-  color: black;
-  background: white !important; 
+  color: white; /* Match public page text color */
   display: flex;
   flex-direction: column;
-  z-index: -1;
+  background: url("McGill-Background.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.75); /* Add dark overlay */
+  z-index: 0;
 }
 .private-page .header{
   display: flex;
@@ -1052,26 +1073,36 @@ p a:active {
   width: 100%;
   position: relative;
   z-index: 1;
-  background-color: #1c1919;
-}
-
+} 
 .private-page .footer{
  z-index:4;
 }
 
 .private-page header::after{
-  background-color: transparent;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw; 
+  height: 1px; 
+  background-color: #c61627; 
 }
-.nav-item::before {
-  background-color: transparent;
-}
+
 
 body.private-page{
   background: none;
 }
 
 .private-page::before {
-  content: none !important; 
+  content: "";
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.75); /* Same dark overlay */
+  z-index: 0; 
+
 }
 
 /* Member Page styling */
@@ -1085,6 +1116,7 @@ body.private-page{
   justify-content: space-between;
   padding: 20px;
   z-index: 3;
+  height: 85vh;
 }
 
 .menu {
@@ -1101,6 +1133,7 @@ body.private-page{
   text-decoration: none;
   color: white;
 }
+
 
 .layout {
   display: flex;

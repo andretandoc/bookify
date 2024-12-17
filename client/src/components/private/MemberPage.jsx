@@ -52,26 +52,26 @@ const MemberPage = () => {
   return (
     <div className="layout">
       {/* Sidebar */}
-      <aside className="sidebar">
-        <ul className="menu">
+      <aside className = "sidebar">
+        <ul className = "menu">
           <li>
-            <Link to="/MemberPage" className="link">
+            <Link to = "/MemberPage" className = "link">
               Home
             </Link>
           </li>
 
           <li>
-            <Link to="/CreateEvent" className="link">
+            <Link to = "/CreateEvent" className = "link">
               Create Events
             </Link>
           </li>
           <li>
-            <Link to="/ManageEvent" className="link">
+            <Link to = "/ManageEvent" className = "link">
               Manage Events
             </Link>
           </li>
           <li>
-            <Link to="/ManageBooking" className="link">
+            <Link to = "/ManageBooking" className = "link">
               Manage Meetings
             </Link>
           </li>
@@ -82,7 +82,7 @@ const MemberPage = () => {
           </li>
 
           <li>
-            <Link to="/CustomMeeting" className="link">
+            <Link to = "/CustomMeeting" className = "link">
               Custom Meeting
             </Link>
           </li>
@@ -103,9 +103,9 @@ const MemberPage = () => {
           ) : (
             // Render active appointments if available
             appointments.active.map((appointment, index) => (
-              <div key={index} className="event-card">
+              <div key = {index} className = "event-card">
                 <div>
-                  <h className="event-title">Event : {appointment.event}</h>
+                  <h className = "event-title">Event : {appointment.event}</h>
                   <p>
                     <strong>Hosted by:</strong> {appointment.host}
                   </p>
@@ -116,8 +116,8 @@ const MemberPage = () => {
                     <strong>Where:</strong> {appointment.location}
                   </p>
                 </div>
-                <button className="double-btn">
-                  <Link to="/ManageBooking" className="link">
+                <button className = "double-btn">
+                  <Link to = "/ManageBooking" className = "link">
                     Manage
                   </Link>
                 </button>
@@ -127,7 +127,7 @@ const MemberPage = () => {
         </div>
       </section>
 
-      <div className="footer">
+      <div className = "footer">
         <footer>
           <p> &copy; 2024 Bookify! McGill University </p>
         </footer>
