@@ -77,7 +77,7 @@ const MemberPage = () => {
           </li>
           <li>
             <Link to="/FullEvents" className="link">
-              Book an Appointment
+              View Public Events
             </Link>
           </li>
 

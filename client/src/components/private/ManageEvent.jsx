@@ -21,7 +21,7 @@ export default function ManageEvent() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log(response.data.activeEvents)
+        console.log(response.data.activeEvents);
 
         if (
           response.data.activeEvents.length === 0 &&
@@ -92,7 +92,7 @@ export default function ManageEvent() {
           </li>
           <li>
             <Link to="/FullEvents" className="link">
-              Book an Appointment
+              View Public Events
             </Link>
           </li>
 
@@ -105,8 +105,6 @@ export default function ManageEvent() {
       </aside>
       <div class="content-wrap">
         <div class="container">
-
-          
           <h2>My Active Events:</h2>
           {events.active.length > 0 ? (
             <div class="table-wrapper">
@@ -142,24 +140,26 @@ export default function ManageEvent() {
                       {event.privacy || "N/A"}
                     </div>
                     <div className="col" data-label="Public URL">
-                    <button
-                      onClick={() => {
-                        if (event.publicURL) {
-                          window.location.href = `http://localhost:5173/booking/${event.publicURL}`;
-
-                        } else {
-                          alert("No URL available");
-                        }
-                      }}
-                    >
-                      Go to URL
-                    </button>
-                  </div>
-                  <div class="col">
-                    <button className="reject-btn" onClick={() => openModal(10)}>
-                      Cancel Event &#10060;
-                    </button>
-                  </div>
+                      <button
+                        onClick={() => {
+                          if (event.publicURL) {
+                            window.location.href = `http://localhost:5173/booking/${event.publicURL}`;
+                          } else {
+                            alert("No URL available");
+                          }
+                        }}
+                      >
+                        Go to URL
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button
+                        className="reject-btn"
+                        onClick={() => openModal(10)}
+                      >
+                        Cancel Event &#10060;
+                      </button>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -167,12 +167,7 @@ export default function ManageEvent() {
           ) : (
             <p>{message}</p>
           )}
-
-
-
-
         </div>
-
 
         <div className="container">
           <h2>My Past Events:</h2>
@@ -241,5 +236,3 @@ export default function ManageEvent() {
     </main>
   );
 }
-
-
