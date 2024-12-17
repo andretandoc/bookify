@@ -9,6 +9,10 @@ export default function ManageEvent() {
     past: [],
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+
   useEffect(() => {
     const fetchEvents = async () => {
       setEvents({ active: [], past: [] });
@@ -43,26 +47,45 @@ export default function ManageEvent() {
     fetchEvents();
   }, []); // Empty dependency array ensures it runs once on component mount
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMeeting, setSelectedMeeting] = useState(null);
-
-  const openModal = (meetingId) => {
-    setSelectedMeeting(meetingId);
+  const openModal = (eventId) => {
+    setSelectedEventId(eventId);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedMeeting(null);
+    setSelectedEventId(null);
   };
 
-  const confirmCancel = () => {
-    console.log(`Meeting ${selectedMeeting} cancelled`);
-    closeModal();
-  };
+  const confirmCancel = async () => {
+    if (!selectedEventId) return;
 
-  const handleEventChange = (e) => {
-    setSelectedMeeting(e.target.value);
+    try {
+      const token = localStorage.getItem("token");
+      const API_URL = import.meta.env.VITE_API_URL;
+
+      const response = await axios.delete(
+        `${API_URL}/api/appointments/${selectedEventId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      // Remove the canceled event from the state
+      setEvents((prev) => ({
+        ...prev,
+        active: prev.active.filter((event) => event._id !== selectedEventId),
+      }));
+
+      setSuccessMessage("Event successfully canceled!"); // Add success message
+    } catch (error) {
+      console.error("Error canceling event:", error);
+      setMessage(
+        error.response?.data?.message || "Failed to cancel the event!"
+      );
+    } finally {
+      closeModal();
+    }
   };
 
   return (
@@ -112,26 +135,22 @@ export default function ManageEvent() {
                 <li class="table-header">
                   <div class="col">Name</div>
                   <div class="col">Date</div>
-                  <div class="col">From</div>
-                  <div class="col">To</div>
+                  <div class="col">Time</div>
                   <div class="col">Location</div>
                   <div class="col">Privacy</div>
                   <div class="col">URL</div>
-                  <div class="col">Cancel</div>
+                  <div class="col"></div>
                 </li>
                 {events.active.map((event, index) => (
                   <li key={index} className="table-row">
                     <div className="col" data-label="Name">
-                      {event.name || "N/A"}
+                      {event.title || "N/A"}
                     </div>
                     <div className="col" data-label="Date">
                       {new Date(event.startDate).toLocaleString()}
                     </div>
                     <div className="col" data-label="From">
                       {event.startTime}
-                    </div>
-                    <div className="col" data-label="To">
-                      {event.endTime}
                     </div>
                     <div className="col" data-label="Location">
                       {event.location || "N/A"}
@@ -167,6 +186,15 @@ export default function ManageEvent() {
           ) : (
             <p>{message}</p>
           )}
+
+          {successMessage && (
+            <p
+              className="success-message"
+              style={{ color: "green", marginTop: "10px" }}
+            >
+              {successMessage}
+            </p>
+          )}
         </div>
 
         <div className="container">
@@ -177,18 +205,18 @@ export default function ManageEvent() {
                 <li className="table-header">
                   <div className="col">Name</div>
                   <div className="col">Date</div>
-                  <div className="col">From</div>
-                  <div className="col">To</div>
+                  <div className="col">Time</div>
                   <div className="col">Location</div>
                   <div className="col">Recurring</div>
+                  <div className="col">Privacy</div>
                 </li>
                 {events.past.map((event, index) => (
                   <li key={index} className="table-row">
                     <div className="col" data-label="Name">
-                      {event.name || "N/A"}
+                      {event.title || "N/A"}
                     </div>
                     <div className="col" data-label="Date">
-                      {new Date(event.date).toLocaleString()}
+                      {new Date(event.startDate).toLocaleString()}
                     </div>
                     <div className="col" data-label="From">
                       {event.startTime}
@@ -214,7 +242,7 @@ export default function ManageEvent() {
         {isModalOpen && (
           <div className="modal-overlay">
             <div className="modal">
-              <h3>Are you sure you want to cancel this meeting?</h3>
+              <h3>Are you sure you want to cancel this event?</h3>
               <div className="modal-buttons">
                 <button className="btn-confirm" onClick={confirmCancel}>
                   Yes
