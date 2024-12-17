@@ -289,20 +289,26 @@ const getAppointmentsPublic = async (req, res) => {
 
 const getClosestAppointments = async (req, res) => {
   try {
-    const { email } = req.user; // Assuming email is extracted from the token
+    const { email } = req.user; // Email extracted from the authenticated user
     console.log("Fetching appointments for email:", email); // Debugging
 
     const user = await User.findOne({ email: email });
-    const name = user.fname || "NA";
-    // Get the current date
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const name = user.fname || "NA"; // Get user's first name or fallback to "NA"
+    
+    // Get the current date and time
     const currentDate = new Date();
 
-    // Query to find all appointments with a startDate greater than or equal to the current date
+    // Query to find the closest appointments
     const closestAppointments = await Appointment.find({
-      startDate: { $gte: currentDate },
+      email: email, // Make sure to filter by the user's email
+      startDate: { $gte: currentDate }, // Ensure the appointment's start date is >= current date
     })
-      .sort({ startDate: 1 }) // Sort by startDate in ascending order
-      .limit(4); // Limit the result to the 4 closest appointments
+      .sort({ startDate: 1 }) // Sort appointments by the closest upcoming date
+      .limit(4); // Limit the number of appointments to 4
 
     // Check if no appointments were found
     if (closestAppointments.length === 0) {
