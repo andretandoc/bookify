@@ -7,6 +7,7 @@ const {
   getEventByPublicURL,
   reserveAppointment,
   getEvents,
+  deleteEvent,
 } = require("../controllers/appointmentsController");
 const { authenticateToken } = require("../middleware/authMiddleware");
 
@@ -18,6 +19,8 @@ router.get("/private", authenticateToken, getAppointmentsPrivate);
 
 // Create a new event (requires authentication)
 router.post("/create", authenticateToken, createEvent);
+
+router.delete("/:id", authenticateToken, deleteEvent);
 
 // Fetch events
 router.get("/events", authenticateToken, getEvents);

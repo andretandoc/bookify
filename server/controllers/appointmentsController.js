@@ -169,6 +169,34 @@ const createEvent = async (req, res) => {
   }
 };
 
+const deleteEvent = async (req, res) => {
+  try {
+    const { id } = req.params; // Extract event ID from params
+
+    // Check if the event exists
+    const event = await Event.findById(id);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found." });
+    }
+
+    console.log(event);
+    // Delete the event
+    await Event.findByIdAndDelete(id);
+
+    // Delete all associated appointments
+    await Appointment.deleteMany({ eventId: id });
+
+    res.status(200).json({
+      message: "Event and all associated appointments deleted successfully.",
+    });
+  } catch (error) {
+    console.error("Error deleting event:", error);
+    res.status(500).json({ message: "Failed to delete the event." });
+  }
+};
+
+
+
 // Fetch appointments based on filters
 const getAppointmentsPublic = async (req, res) => {
   try {
@@ -358,4 +386,5 @@ module.exports = {
   getEventByPublicURL,
   reserveAppointment,
   getEvents,
+  deleteEvent,
 };
