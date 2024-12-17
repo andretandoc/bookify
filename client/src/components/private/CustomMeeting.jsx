@@ -121,7 +121,7 @@ const CustomMeeting = () => {
           </li>
         </ul>
       </aside>
-      <div className="container">
+      <div className = "container">
         <h2>Send a Custom Meeting Request</h2>
 
         {/* Feedback Message */}
@@ -187,15 +187,15 @@ const CustomMeeting = () => {
                     handleProposedTimeChange(index, e.target.value)
                   }
                   required
-                  className="booking-input"
+                  className="input-form"
                 />
-                <button type="button" onClick={() => handleRemoveTime(index)}>
+                <button type="button" className = "double-btn" onClick={() => handleRemoveTime(index)}>
                   Remove
                 </button>
               </div>
             ))}
-            <button type="button" onClick={addProposedTime}>
-              Add Another Time
+            <button type="button" className = "double-btn" onClick={addProposedTime}>
+              Add Another
             </button>
           </div>
 
@@ -213,7 +213,7 @@ const CustomMeeting = () => {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn">
+          <button type = "double-btn" className = "double-btn" >
             Send Request
           </button>
 
@@ -230,7 +230,7 @@ const CustomMeeting = () => {
         </form>
       </div>
 
-      <div className="footer">
+      <div className = "footer">
         <footer>
           <p> &copy; 2024 Bookify! McGill University </p>
         </footer>

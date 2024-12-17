@@ -326,6 +326,8 @@ Footer::before { /*useless but will keep incase */
   width: 140px; 
   height: 40px; 
   position: relative;
+  left: 40px;
+  margin: 20px;
   background-color: #c61627;
   border: transparent;
   box-shadow: -10px -10px 1px #9e0918; 
