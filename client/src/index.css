@@ -204,8 +204,8 @@ header .profile-icon:hover {
       display: flex;
       position: absolute;
       align-items: center;
-      top: 82px; 
-      width: 100%;
+      top: 83px; 
+      width: 105%;
       background: #c61627;
       z-index: 1;
   }
