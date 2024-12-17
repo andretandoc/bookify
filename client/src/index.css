@@ -128,15 +128,6 @@ header .profile-icon:hover {
 }
 
 
-.hamburger.active {
-  color: #c61627; /* Highlight active state */
-}
-
-.navbar {
-  display: flex;
-  gap: 20px;
-}
-
 .nav-item {
   position: relative;
   display: inline-block;
@@ -182,7 +173,7 @@ header .profile-icon:hover {
 /* Responsive header */
 @media (max-width: 950px) {
 
-  .public-page hamburger {
+  .hamburger {
     display: block;
     font-size: 24px;
     cursor: pointer;
@@ -196,15 +187,17 @@ header .profile-icon:hover {
   }
   
   .navbar {
-    left: 50%;
-    transform: translateX(-48%);
-    display: none;
-    position: relative;
-    padding: 20px;
+    display: none; /* Hide navbar by default */
+    position: absolute;
+    top: 100%; /* Position below the header */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Dark background for visibility */
     flex-direction: column;
+    align-items: center;
     gap: 15px;
+    padding: 20px 0;
     z-index: 100;
-    color: white;
   }
 
   .navbar.active {
