@@ -285,7 +285,42 @@ const getAppointmentsPublic = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Failed to fetch appointments" });
   }
-} 
+}
+
+const getClosestAppointments = async (req, res) => {
+  try {
+    const { email } = req.user; // Assuming email is extracted from the token
+    console.log("Fetching appointments for email:", email); // Debugging
+
+    const user = await User.findOne({ email: email });
+    const name = user.fname || "NA";
+    // Get the current date
+    const currentDate = new Date();
+
+    // Query to find all appointments with a startDate greater than or equal to the current date
+    const closestAppointments = await Appointment.find({
+      startDate: { $gte: currentDate },
+    })
+      .sort({ startDate: 1 }) // Sort by startDate in ascending order
+      .limit(4); // Limit the result to the 4 closest appointments
+
+    // Check if no appointments were found
+    if (closestAppointments.length === 0) {
+      return res.status(404).json({ message: "No upcoming appointments found." });
+    }
+
+    console.log("Closest appointments:", closestAppointments);
+
+    // Return the closest appointments
+    res.status(200).json({
+      name,
+      closestAppointments,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch appointments" });
+  }
+};
 
 
 const getAppointmentsPrivate = async (req, res) => {
@@ -425,4 +460,5 @@ module.exports = {
   deleteEvent,
   getPublicEvents,
   getAllEvents,
+  getClosestAppointments,
 };
