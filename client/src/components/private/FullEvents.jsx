@@ -17,29 +17,25 @@ export default function FullEvents() {
       console.log("Token in Frontend:", token); // Debugging
 
       try {
-        const token = localStorage.getItem("token");
+        // Assuming `API_URL` holds the URL to the backend server
         const API_URL = import.meta.env.VITE_API_URL;
-        const response = await axios.get(
-          `${API_URL}/api/appointments/private`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
 
-        if (
-          response.data.activeAppointments.length === 0 &&
-          response.data.pastAppointments.length === 0
-        ) {
-          setMessage("No appointments found");
+        // Update this to fetch all events
+        const response = await axios.get(`${API_URL}/api/appointments/allevents`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        // Check if no events found
+        if (response.data.allEvents.length === 0) {
+          setMessage("No events found");
         } else {
           setAppointments({
-            active: response.data.activeAppointments || [],
-            past: response.data.pastAppointments || [],
+            active: response.data.allEvents || [],
           });
         }
       } catch (error) {
         setMessage(
-          error.response?.data?.message || "Failed to retrieve appointments!"
+          error.response?.data?.message || "Failed to retrieve events!"
         );
       }
     };
@@ -47,7 +43,7 @@ export default function FullEvents() {
   }, []);
 
   return (
-    <main class="layout">
+    <main className="layout">
       <aside className="sidebar">
         <ul className="menu">
           <li>
@@ -55,7 +51,6 @@ export default function FullEvents() {
               Home
             </Link>
           </li>
-
           <li>
             <Link to="/CreateEvent" className="link">
               Create Events
@@ -73,10 +68,9 @@ export default function FullEvents() {
           </li>
           <li>
             <Link to="/FullEvents" className="link">
-              View Public Events
+              View All Events
             </Link>
           </li>
-
           <li>
             <Link to="/CustomMeeting" className="link">
               Custom Meeting
@@ -84,37 +78,45 @@ export default function FullEvents() {
           </li>
         </ul>
       </aside>
-      <div class="container">
-        <h2>All bookable Events at Mcgill:</h2>
+
+      <div className="container">
+        <h2>All Events at McGill:</h2>
         {appointments.active.length > 0 ? (
-          <div class="table-wrapper">
-            <ul class="responsive-table">
-              <li class="table-header">
-                <div class="col">Event</div>
-                <div class="col">Host</div>
-                <div class="col">Date</div>
-                <div class="col">From</div>
-                <div class="col">To</div>
-                <div class="col">Location</div>
-                <div class="col"></div>
+          <div className="table-wrapper">
+            <ul className="responsive-table">
+              <li className="table-header">
+                <div className="col">Event</div>
+                <div className="col">Host</div>
+                <div className="col">Date</div>
+                <div className="col">From</div>
+                <div className="col">To</div>
+                <div className="col">Location</div>
+                <div className="col"></div>
               </li>
 
               {appointments.active.map((appointment, index) => (
                 <li key={index} className="table-row">
                   <div className="col" data-label="Event">
-                    {appointment.event || "N/A"}
+                    {appointment.title || "N/A"}
                   </div>
                   <div className="col" data-label="Host">
-                    {appointment.host || "N/A"}
-                  </div>
-                  <div className="col" data-label="Email">
-                    {appointment.email}
+                    {appointment.createdBy || "N/A"}
                   </div>
                   <div className="col" data-label="Date & Time">
                     {new Date(appointment.startDate).toLocaleString()}
                   </div>
                   <div className="col" data-label="Location">
                     {appointment.location || "N/A"}
+                  </div>
+                  <div className="col" data-label="URL">
+                    <a
+                      href={appointment.publicURL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <button className="double-btn">Go to Event</button>
+                    </a>
                   </div>
                 </li>
               ))}

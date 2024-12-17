@@ -9,6 +9,7 @@ const {
   getEvents,
   deleteEvent,
   getPublicEvents,
+  getAllEvents,
 } = require("../controllers/appointmentsController");
 const { authenticateToken } = require("../middleware/authMiddleware");
 
@@ -25,6 +26,8 @@ router.delete("/:id", authenticateToken, deleteEvent);
 
 // Fetch events
 router.get("/events", authenticateToken, getEvents);
+
+router.get("/allevents", authenticateToken, getAllEvents)
 
 //Fetch public events
 router.get("/public", getPublicEvents);

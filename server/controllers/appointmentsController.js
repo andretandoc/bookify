@@ -219,6 +219,30 @@ const getPublicEvents = async (req, res) => {
   } 
 };
 
+const getAllEvents = async (req, res) => {
+  try {
+    // Get today's date at midnight (to ignore time part)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set to the beginning of the day
+
+    // Fetch all events starting from today or in the future
+    const allEvents = await Event.find({ startDate: { $gte: today } });
+
+    // Check if no events were found
+    if (allEvents.length === 0) {
+      return res.status(404).json({ message: "No events found." });
+    }
+
+    console.log("All future events = ", allEvents);
+
+    // Return the list of all events
+    res.status(200).json({ allEvents });
+  } catch (error) {
+    console.error("Error fetching all events:", error);
+    res.status(500).json({ message: "Failed to retrieve events." });
+  }
+};
+
 
 const getAppointmentsPublic = async (req, res) => {
   try {
@@ -400,4 +424,5 @@ module.exports = {
   getEvents,
   deleteEvent,
   getPublicEvents,
+  getAllEvents,
 };
