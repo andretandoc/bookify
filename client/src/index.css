@@ -69,6 +69,7 @@ header {
   width: 90%;
   position: relative;
   z-index: 1;
+  gap: 10px
 }
 header::after {
   content: "";
@@ -459,7 +460,7 @@ Footer::before { /*useless but will keep incase */
 
 
 /*Home page body responsive*/
-@media (max-width: 950px) {
+@media (max-width: 1000px) {
   body.nav-open .content-wrapper {
     margin-top: 150px;
   }
