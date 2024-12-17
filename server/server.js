@@ -10,24 +10,14 @@ const appointmentRoutes = require("./routes/appointmentRoutes");
 // const eventRoutes = require("./routes/eventRoutes"); // Path to the event routes
 const customMeetingRoutes = require("./routes/customMeetingRoutes"); // Import the custom meeting routes
 
-const allowedOrigins = [
-  "http://localhost:5173", // Local development
-  "https://your-vercel-project.vercel.app", // Vercel domain
-];
+const corsOptions = {
+  origin: ["https://bookify-ten-beige.vercel.app", "http://localhost:5173"],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow cookies or auth headers
+};
 
 // Middleware
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow the request
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow credentials (cookies, authorization headers)
-  })
-);
+app.use(cors(corsOptions));
 app.use(express.json()); // Parse JSON data in requests
 
 // Routes
