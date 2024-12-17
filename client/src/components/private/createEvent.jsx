@@ -66,9 +66,10 @@ const CreateEvent = () => {
       };
 
       console.log("Sending payload:", payload);
-
+      console.log("API URL:", import.meta.env.VITE_API_URL);
+      const API_URL = import.meta.env.VITE_API_URL;
       const response = await axios.post(
-        "http://localhost:5005/api/appointments/create",
+        `${API_URL}/api/appointments/create`,
         payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );
