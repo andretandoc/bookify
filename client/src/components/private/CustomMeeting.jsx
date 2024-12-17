@@ -28,25 +28,25 @@ const CustomMeeting = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("You must be logged in to send a meeting request!");
+      setFeedbackMessage("You must be logged in to send a meeting request!");
       return;
     }
-
+  
     if (proposedTimes.length === 0) {
       setFeedbackMessage("Please add at least one proposed time.");
       return;
     }
-
+  
     const fullProposedTimes = proposedTimes.map((time) => {
       const [hours, minutes] = time.split(":");
       const meetingDate = new Date(date);
       meetingDate.setHours(hours, minutes, 0, 0);
       return meetingDate;
     });
-
+  
     const customMeetingData = {
       recipientEmail,
       proposedTimes: fullProposedTimes,
@@ -54,7 +54,7 @@ const CustomMeeting = () => {
       date,
       location,
     };
-
+  
     try {
       const API_URL = import.meta.env.VITE_API_URL;
       const response = await axios.post(
@@ -64,16 +64,18 @@ const CustomMeeting = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
+  
+      // Set success feedback message
       setFeedbackMessage(
-        `Custom meeting created successfully! Meeting ID: ${response.data.meeting._id}`
+        `Invite sent successfully to ${recipientEmail}. Meeting ID: ${response.data.meeting._id}`
       );
+  
+      // Clear form inputs
       setRecipientEmail("");
       setProposedTimes([]);
       setMessage("");
       setDate("");
       setLocation("");
-      navigate("/ManageBooking");
     } catch (error) {
       setFeedbackMessage(
         error.response?.data?.message ||
@@ -81,6 +83,7 @@ const CustomMeeting = () => {
       );
     }
   };
+  
 
   return (
     <main className="layout">
