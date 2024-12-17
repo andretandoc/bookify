@@ -1125,11 +1125,11 @@ body.private-page{
   cursor: pointer;
 }
 
+
 .link {
   text-decoration: none;
   color: white;
 }
-
 
 .layout {
   display: flex;
