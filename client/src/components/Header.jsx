@@ -56,34 +56,7 @@ function Header({ isLoggedIn, onLogout }) {
           ref = {navbarRef} >
           {isLoggedIn ? (
             <>
-              <div className = "nav-item">
-                <Link to = "/MemberPage">Home</Link>
-              </div>
-
-              <div className = "nav-item">
-                <Link to = "/CustomMeeting">Custom Meeting</Link>
-              </div>
-
-              <div className = "nav-item">
-                <Link to = "/ManageBooking">Manage Meeting</Link>
-              </div>
-
-              <div className = "nav-item">
-                <Link to = "/ManageEvent">Manage Event</Link>
-              </div>
-
-              <div className = "nav-item">
-                <Link to = "/CreateEvent">Create Event</Link>
-              </div>
-
-              <div className = "nav-item">
-                <Link to = "/URLTest">BookingURL-Test</Link>
-              </div>
-
-              <div className = "nav-item">
-                <Link to = "/FullEvents">Book an Appointment</Link>
-              </div>
-
+            
               <div className = "nav-item">
                 <button
                   onClick = {onLogout}
