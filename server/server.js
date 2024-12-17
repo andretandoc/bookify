@@ -10,8 +10,24 @@ const appointmentRoutes = require("./routes/appointmentRoutes");
 // const eventRoutes = require("./routes/eventRoutes"); // Path to the event routes
 const customMeetingRoutes = require("./routes/customMeetingRoutes"); // Import the custom meeting routes
 
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://your-vercel-project.vercel.app", // Vercel domain
+];
+
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" })); // Allow requests from frontend running on port 5173
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow credentials (cookies, authorization headers)
+  })
+);
 app.use(express.json()); // Parse JSON data in requests
 
 // Routes
