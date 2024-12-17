@@ -13,6 +13,7 @@ export default function ManageEvent() {
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
 
+
   useEffect(() => {
     const fetchEvents = async () => {
       setEvents({ active: [], past: [] });
@@ -25,7 +26,7 @@ export default function ManageEvent() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log(response.data.activeEvents);
+        console.log(response.data.activeEvents)
 
         if (
           response.data.activeEvents.length === 0 &&
@@ -47,6 +48,7 @@ export default function ManageEvent() {
     fetchEvents();
   }, []); // Empty dependency array ensures it runs once on component mount
 
+  
   const openModal = (eventId) => {
     setSelectedEventId(eventId);
     setIsModalOpen(true);
@@ -59,24 +61,21 @@ export default function ManageEvent() {
 
   const confirmCancel = async () => {
     if (!selectedEventId) return;
-
+  
     try {
       const token = localStorage.getItem("token");
       const API_URL = import.meta.env.VITE_API_URL;
-
-      const response = await axios.delete(
-        `${API_URL}/api/appointments/${selectedEventId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
+  
+      const response = await axios.delete(`${API_URL}/api/appointments/${selectedEventId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
       // Remove the canceled event from the state
       setEvents((prev) => ({
         ...prev,
         active: prev.active.filter((event) => event._id !== selectedEventId),
       }));
-
+  
       setSuccessMessage("Event successfully canceled!"); // Add success message
     } catch (error) {
       console.error("Error canceling event:", error);
@@ -128,6 +127,8 @@ export default function ManageEvent() {
       </aside>
       <div class="content-wrap">
         <div class="container">
+
+          
           <h2>My Active Events:</h2>
           {events.active.length > 0 ? (
             <div class="table-wrapper">
@@ -159,43 +160,47 @@ export default function ManageEvent() {
                       {event.privacy || "N/A"}
                     </div>
                     <div className="col" data-label="Public URL">
-                      <button
-                        onClick={() => {
-                          if (event.publicURL) {
-                            window.location.href = `http://localhost:5173/booking/${event.publicURL}`;
-                          } else {
-                            alert("No URL available");
-                          }
-                        }}
-                      >
-                        Go to URL
-                      </button>
-                    </div>
-                    <div class="col">
-                      <button
+                    <button
+                      onClick={() => {
+                        if (event.publicURL) {
+                          window.location.href = `http://localhost:5173/booking/${event.publicURL}`;
+
+                        } else {
+                          alert("No URL available");
+                        }
+                      }}
+                    >
+                      Go to URL
+                    </button>
+                  </div>
+                  <div class="col">
+                  <button
                         className="reject-btn"
-                        onClick={() => openModal(10)}
+                        onClick={() => openModal(event._id)}
                       >
                         Cancel Event &#10060;
                       </button>
-                    </div>
+                  </div>
                   </li>
                 ))}
               </ul>
+
+              
             </div>
           ) : (
-            <p>{message}</p>
+            <div className="no-events">
+              <button className="double-btn"> <Link to="/CreateEvent" className="link"> Create Events </Link></button>
+              <p>{message}</p>
+            </div>
           )}
 
-          {successMessage && (
-            <p
-              className="success-message"
-              style={{ color: "green", marginTop: "10px" }}
-            >
-              {successMessage}
-            </p>
-          )}
+        {successMessage && (
+          <p className="success-message" style={{ color: "green", marginTop: "10px" }}>
+            {successMessage}
+          </p>
+        )}
         </div>
+
 
         <div className="container">
           <h2>My Past Events:</h2>
@@ -209,6 +214,7 @@ export default function ManageEvent() {
                   <div className="col">Location</div>
                   <div className="col">Recurring</div>
                   <div className="col">Privacy</div>
+
                 </li>
                 {events.past.map((event, index) => (
                   <li key={index} className="table-row">
@@ -264,3 +270,5 @@ export default function ManageEvent() {
     </main>
   );
 }
+
+

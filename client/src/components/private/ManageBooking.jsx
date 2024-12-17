@@ -150,7 +150,10 @@ export default function ManageBooking() {
               </ul>
             </div>
           ) : (
+            <div className="no-events">
+            <button className="double-btn"> <Link to="/FullEvents" className="link">Book a Meeting</Link></button>
             <p>{message}</p>
+          </div>
           )}
         </div>
 
