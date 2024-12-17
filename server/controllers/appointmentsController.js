@@ -196,8 +196,30 @@ const deleteEvent = async (req, res) => {
 };
 
 
+const getPublicEvents = async (req, res) => {
+  try {
 
-// Fetch appointments based on filters
+    const { privacy } = req.query;
+    if (privacy) filter.privacy = privacy; // Filter by event privacy
+    // Query to fetch events where privacy is 'Public'
+    const publicEvents = await Event.find({ privacy: "Public" });
+
+    // Check if no public events were found
+    if (publicEvents.length === 0) {
+      return res.status(404).json({ message: "No public events found." });
+    }
+
+    console.log("Public events = ", publicEvents);
+
+    // Return the list of public events
+    res.status(200).json({ publicEvents });
+  } catch (error) {
+    console.error("Error fetching public events:", error);
+    res.status(500).json({ message: "Failed to retrieve public events." });
+  } 
+};
+
+
 const getAppointmentsPublic = async (req, res) => {
   try {
     const { email, startDate, endDate } = req.query;
@@ -206,16 +228,6 @@ const getAppointmentsPublic = async (req, res) => {
   
     // Build the filter dynamically based on provided parameters
     let filter = {};
-
-
-    if (firstName) filter.firstName = new RegExp(firstName, "i"); // case-insensitive
-    if (lastName) filter.lastName = new RegExp(lastName, "i");
-    if (email) filter.email = new RegExp(email, "i");
-    if (startDate && endDate) {
-      filter.startDate = { $gte: new Date(startDate) };
-      filter.endDate = { $lte: new Date(endDate) };
-    }
-
     if (email) filter.email = new RegExp(email, "i"); // Case-insensitive search
     if (startDate) filter.startDate = { $gte: new Date(startDate) };
     if (endDate) filter.endDate = { ...filter.endDate, $lte: new Date(endDate) };
@@ -239,7 +251,6 @@ const getAppointmentsPublic = async (req, res) => {
     if (appointments.length === 0) {
       return res.status(404).json({ message: "No appointments found" });
     }
-
   
     // Return the categorized appointments
     res.status(200).json({
@@ -247,9 +258,10 @@ const getAppointmentsPublic = async (req, res) => {
       pastAppointments,
     });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch appointments" });
   }
-};
+} 
 
 
 const getAppointmentsPrivate = async (req, res) => {
@@ -387,4 +399,5 @@ module.exports = {
   reserveAppointment,
   getEvents,
   deleteEvent,
+  getPublicEvents,
 };

@@ -25,6 +25,12 @@ function ApptForm() {
       return;
     }
 
+    /*const emailRegex = /^[a-zA-Z0-9._%+-]+@(mcgill\.ca|mail\.mcgill\.ca)$/;
+    if (emailRegex.test(email)) {
+        setMessage("Mcgill members should login to access their history");
+      return;
+    }*/
+
     try {
       const API_URL = import.meta.env.VITE_API_URL;
       const response = await axios.get(`${API_URL}/api/appointments`, {
