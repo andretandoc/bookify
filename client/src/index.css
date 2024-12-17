@@ -573,12 +573,12 @@ Footer::before { /*useless but will keep incase */
 input[type = "date"] {
   font-weight: bolder;
   outline: none; 
-  border-radius: 10px; 
+  border-radius: 8px; 
   background: #f9f9f9; 
   padding: 10px; 
   width: 150px; 
   box-sizing: border-box; 
-  height: min-content;
+  height: 15px;
   border: 1px solid grey;
   color: black;
   &::-webkit-datetime-edit-text {
@@ -644,7 +644,8 @@ input[type = "date"] {
   padding-left: 60px;
 }
 .title {
-  margin-top: 40px;
+  margin-top: 10px;
+  margin-bottom: 2px ;
 }
 .appointment h3 {
   margin-top: 0;
@@ -922,8 +923,7 @@ p a:active {
 .input-text {
   display: flex;
   flex-direction: column;
-  padding-top: 17px;
-  gap: 20px;
+  gap: 5px;
 }
 
 .fl-name {
@@ -960,7 +960,7 @@ p a:active {
 .container {
   display: flex;
   font-family: "Arvo", sans-serif;
-  padding: 40px;
+  padding: 20px;
   background-color: #f9f9f9;
   color: black;
   flex-direction: column;
@@ -982,7 +982,8 @@ p a:active {
 .container h2 {
   font-size: 25px;
   color: #222;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* Public Event Card Styles */
@@ -1179,6 +1180,7 @@ input[type="time"] {
   font-size: 12px; 
   background-color: #f9f9f9; 
   color: #333; 
+  border-radius: 8px;
 }
 
 /*******************************************************/
@@ -1691,6 +1693,11 @@ input[type="number"] {
     justify-content: left;
     text-align: center;
     gap: 10px; 
+}
+.choose-privacy select {
+  border-radius: 8px; 
+  width: 150px; 
+  margin-left: 6px;   
 }
 
 .dropdown-privacy {
