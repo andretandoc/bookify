@@ -151,8 +151,7 @@ const CustomMeeting = () => {
           </div>
 
           {/* Location */}
-          <div className="input-text"style={{marginBottom: "10px"}}>
-          <label htmlFor="Location">Location:</label>
+          <div className="input-text">
             <input
               type="text"
               id="location"
@@ -165,7 +164,7 @@ const CustomMeeting = () => {
           </div>
 
           {/* Date */}
-          <div className="choose-date"style={{marginBottom: "10px"}}>
+          <div className="choose-date">
             <label htmlFor="start-date">Date:</label>
             <input
               type="date"
@@ -190,14 +189,7 @@ const CustomMeeting = () => {
                   required
                   className="input-form"
                 />
-                <button type="button" className = "double-btn" style={{
-                    fontSize: "12px",
-                    width: "80px",
-                    height:"24px",
-                    lineHeight:"24px",
-                    background:"grey",
-                    boxShadow: "-5px -5px 1px #1234"
-                  }} onClick={() => handleRemoveTime(index)}>
+                <button type="button" className = "double-btn" onClick={() => handleRemoveTime(index)}>
                   Remove
                 </button>
               </div>
@@ -221,7 +213,7 @@ const CustomMeeting = () => {
           </div>
 
           {/* Submit Button */}
-          <button type = "double-btn" className = "double-btn"style={{marginLeft: "460px"}} >
+          <button type = "double-btn" className = "double-btn" >
             Send Request
           </button>
 
