@@ -65,6 +65,8 @@ function Header({ isLoggedIn, onLogout }) {
                     border: "none",
                     cursor: "pointer",
                     color: "inherit",
+                    fontSize: "15px",
+                    fontFamily: "lato",
                   }}>
                   Log Out
                 </button>
