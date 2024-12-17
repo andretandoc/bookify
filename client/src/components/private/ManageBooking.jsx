@@ -22,8 +22,9 @@ export default function ManageBooking() {
 
       try {
         const token = localStorage.getItem("token");
+        const API_URL = import.meta.env.VITE_API_URL;
         const response = await axios.get(
-          "http://localhost:5005/api/appointments/private",
+          `${API_URL}/api/appointments/private`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

@@ -19,8 +19,9 @@ const MemberPage = () => {
       console.log("Token in Frontend:", token); // Debugging
 
       try {
+        const API_URL = import.meta.env.VITE_API_URL;
         const response = await axios.get(
-          "http://localhost:5005/api/appointments/private",
+          `${API_URL}/api/appointments/private`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

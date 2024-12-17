@@ -14,7 +14,10 @@ function BookingURL() {
   useEffect(() => {
     const fetchAppointmentDetails = async () => {
       try {
-        const response = await axios.get(`/api/appointments/${publicURL}`);
+        const API_URL = import.meta.env.VITE_API_URL;
+        const response = await axios.get(
+          `${API_URL}/api/appointments/${publicURL}`
+        );
         setAppointmentDetails(response.data);
       } catch (error) {
         console.error(error);

@@ -27,8 +27,9 @@ function URLTest() {
     // Fetch event details and available time slots
     const fetchEventData = async () => {
       try {
+        const API_URL = import.meta.env.VITE_API_URL;
         const response = await axios.get(
-          `http://localhost:5005/api/appointments/${publicURL}`
+          `${API_URL}/api/appointments/${publicURL}`
         );
         setEventDetails(response.data.eventDetails);
         setTimeSlots(response.data.availableAppointments);

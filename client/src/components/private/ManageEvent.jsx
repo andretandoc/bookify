@@ -18,12 +18,10 @@ export default function ManageEvent() {
 
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
-          "http://localhost:5005/api/appointments/events",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const API_URL = import.meta.env.VITE_API_URL;
+        const response = await axios.get(`${API_URL}/api/appointments/events`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
         if (
           response.data.activeEvents.length === 0 &&
