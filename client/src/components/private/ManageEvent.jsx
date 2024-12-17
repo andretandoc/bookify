@@ -25,6 +25,8 @@ export default function ManageEvent() {
           }
         );
 
+        console.log(response.data.activeEvents)
+
         if (
           response.data.activeEvents.length === 0 &&
           response.data.pastEvents.length === 0
@@ -107,6 +109,8 @@ export default function ManageEvent() {
       </aside>
       <div class="content-wrap">
         <div class="container">
+
+          
           <h2>My Active Events:</h2>
           {events.active.length > 0 ? (
             <div class="table-wrapper">
@@ -119,6 +123,7 @@ export default function ManageEvent() {
                   <div class="col">Location</div>
                   <div class="col">Recurring</div>
                   <div class="col">Privacy</div>
+                  <div class="col"></div>
                 </li>
                 {events.active.map((event, index) => (
                   <li key={index} className="table-row">
@@ -126,7 +131,7 @@ export default function ManageEvent() {
                       {event.name || "N/A"}
                     </div>
                     <div className="col" data-label="Date">
-                      {new Date(event.date).toLocaleString()}
+                      {new Date(event.startDate).toLocaleString()}
                     </div>
                     <div className="col" data-label="From">
                       {event.startTime}
@@ -143,63 +148,82 @@ export default function ManageEvent() {
                     <div className="col" data-label="Privacy">
                       {event.privacy || "N/A"}
                     </div>
+                    <div className="col" data-label="Public URL">
+                    <button
+                      onClick={() => {
+                        if (event.publicURL) {
+                          window.location.href = `http://localhost:5173/booking/${event.publicURL}`;
+
+                        } else {
+                          alert("No URL available");
+                        }
+                      }}
+                    >
+                      Go to URL
+                    </button>
+                  </div>
                   </li>
                 ))}
               </ul>
-
-              <div className="cancel-form-box">
-                <form className="cancel-form">
-                  <div className="select-event">
-                    <p>Select event to cancel:</p>
-                    <select
-                      className="dropdown-event"
-                      name="event"
-                      onChange={handleEventChange} // Update state on selection
-                    >
-                      <option value="" disabled>
-                        Select an option
-                      </option>
-                      {events.active.map((event, index) => (
-                        <option key={index} value={event.name}>
-                          {event.name || "N/A"}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="cancel-from">
-                    <label htmlFor="start-date">From:</label>
-                    <input
-                      type="date"
-                      id="start-date"
-                      name="start-date"
-                      value={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="cancel-to">
-                    <label htmlFor="end-date">To:</label>
-                    <input
-                      type="date"
-                      id="end-date"
-                      name="end-date"
-                      value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                    />
-                  </div>
-                </form>
-                <div class="col">
-                  <button className="reject-btn" onClick={() => openModal(10)}>
-                    Cancel Event &#10060;
-                  </button>
-                </div>
-              </div>
             </div>
           ) : (
             <p>{message}</p>
           )}
+
+<div className="cancel-form-box">
+  <form className="cancel-form">
+    <div className="select-event">
+      <p>Select event to cancel:</p>
+      <select
+        className="dropdown-event"
+        name="event"
+        onChange={handleEventChange} // Update state on selection
+      >
+        <option value="" disabled>
+          Select an option
+        </option>
+        {events.active.map((event, index) => (
+          <option key={index} value={event.name}>
+            {event.name || "N/A"}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    <div className="cancel-from">
+      <label htmlFor="start-date">From:</label>
+      <input
+        type="date"
+        id="start-date"
+        name="start-date"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+      />
+    </div>
+
+    <div className="cancel-to">
+      <label htmlFor="end-date">To:</label>
+      <input
+        type="date"
+        id="end-date"
+        name="end-date"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+      />
+    </div>
+  </form>
+  <div class="col">
+    <button className="reject-btn" onClick={() => openModal(10)}>
+      Cancel Event &#10060;
+    </button>
+  </div>
+  </div>
         </div>
+
+
+
+
+
 
         <div className="container">
           <h2>My Past Events:</h2>

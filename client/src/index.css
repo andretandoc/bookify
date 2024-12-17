@@ -702,7 +702,7 @@ input[type = "date"] {
 /******************************************************************/
 
 .container {
-  max-width: 80%;
+  max-width: 100%;
   margin: 50px auto;
   padding: 40px;
   background: #fff;
@@ -1529,7 +1529,8 @@ input[type="time"] {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap:50px;
+  gap:30px;
+  width: 100%;
 }
 
 .select-event {
