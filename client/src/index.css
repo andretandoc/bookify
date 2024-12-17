@@ -69,7 +69,7 @@ header {
   width: 90%;
   position: relative;
   z-index: 1;
-  gap: 10px
+  gap: 10px;
 }
 header::after {
   content: "";
@@ -78,7 +78,7 @@ header::after {
   left: 0;
   width: 100vw; 
   height: 1px; 
-  background-color: #c61627; 
+  background-color: #9e0918; 
 }
 
 /* Logo Styling */
@@ -204,8 +204,8 @@ header .profile-icon:hover {
       display: flex;
       position: absolute;
       align-items: center;
-      top: 83px; 
-      width: 105%;
+      top: 82px; 
+      width: 100%;
       background: #c61627;
       z-index: 1;
   }
@@ -251,6 +251,8 @@ Footer::before { /*useless but will keep incase */
   width: 100%;
   height: 0px;
   margin-top: 0px;
+  height: 1px; 
+  background-color: #9e0918; 
 }
 
 
