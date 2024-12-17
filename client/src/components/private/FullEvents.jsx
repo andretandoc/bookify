@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 export default function FullEvents() {
   const [message, setMessage] = useState("");
-  const [appointments, setAppointments] = useState({
+  const [events, setEvents] = useState({
     active: [],
   });
 
   useEffect(() => {
-    const fetchAppointments = async () => {
-      setAppointments({ active: [] }); // Ensure proper default structure
+    const fetchEvents = async () => {
+      setEvents({ active: [] }); // Ensure proper default structure
       setMessage("");
 
       const token = localStorage.getItem("token");
@@ -29,7 +29,7 @@ export default function FullEvents() {
         if (response.data.allEvents.length === 0) {
           setMessage("No events found");
         } else {
-          setAppointments({
+          setEvents({
             active: response.data.allEvents || [],
           });
         }
@@ -39,7 +39,7 @@ export default function FullEvents() {
         );
       }
     };
-    fetchAppointments();
+    fetchEvents();
   }, []);
 
   return (
@@ -81,7 +81,7 @@ export default function FullEvents() {
 
       <div className="container">
         <h2>All Events at McGill:</h2>
-        {appointments.active.length > 0 ? (
+        {events.active.length > 0 ? (
           <div className="table-wrapper">
             <ul className="responsive-table">
               <li className="table-header">
@@ -94,29 +94,33 @@ export default function FullEvents() {
                 <div className="col"></div>
               </li>
 
-              {appointments.active.map((appointment, index) => (
+              {events.active.map((event, index) => (
                 <li key={index} className="table-row">
                   <div className="col" data-label="Event">
-                    {appointment.title || "N/A"}
+                    {event.title || "N/A"}
                   </div>
                   <div className="col" data-label="Host">
-                    {appointment.createdBy || "N/A"}
+                    {event.createdBy || "N/A"}
                   </div>
                   <div className="col" data-label="Date & Time">
-                    {new Date(appointment.startDate).toLocaleString()}
+                    {new Date(event.startDate).toLocaleString()}
                   </div>
                   <div className="col" data-label="Location">
-                    {appointment.location || "N/A"}
+                    {event.location || "N/A"}
                   </div>
                   <div className="col" data-label="URL">
-                    <a
-                      href={appointment.publicURL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none" }}
+                    <button
+                      className="double-btn"
+                      onClick={() => {
+                        if (event.publicURL) {
+                          window.location.href = `http://localhost:5173/booking/${event.publicURL}`;
+                        } else {
+                          alert("No URL available");
+                        }
+                      }}
                     >
-                      <button className="double-btn">Go to Event</button>
-                    </a>
+                      Go to Event
+                    </button>
                   </div>
                 </li>
               ))}
