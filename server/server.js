@@ -12,7 +12,7 @@ const customMeetingRoutes = require("./routes/customMeetingRoutes"); // Import t
 
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "https://your-vercel-project.vercel.app", // Vercel domain
+  "https://bookify-ten-beige.vercel.app", // Vercel domain
 ];
 
 // Middleware
