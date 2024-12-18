@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
 const CustomMeetingSchema = new mongoose.Schema({
-  recipientEmail: { type: String, required: true }, // Email of the recipient
-  proposedTimes: { type: [Date], required: true }, // Array of proposed times
-  message: { type: String }, // Optional message
-  date: { type: Date, required: true }, // Date of the meeting
-  location: { type: String, required: true }, // Meeting location
-  createdBy: { type: String, required: true }, // Email of the user creating the meeting
-  status: { type: String, enum: ["pending", "confirmed", "cancelled"], default: "pending" }, // Meeting status, not sure if this should be added but GPT mentioned in when provided with implementation
-  createdAt: { type: Date, default: Date.now }, // Timestamp for creation
+  recipientEmail: { type: String, required: true },
+  proposedTimes: { type: [String], required: true },  // Store times as strings
+  message: { type: String },
+  date: { type: Date, required: true },
+  location: { type: String, required: true },
+  createdBy: { type: String, required: true },
 });
 
-module.exports = mongoose.model("CustomMeeting", CustomMeetingSchema);
+const CustomMeeting = mongoose.model("CustomMeeting", CustomMeetingSchema);
+
+module.exports = CustomMeeting;

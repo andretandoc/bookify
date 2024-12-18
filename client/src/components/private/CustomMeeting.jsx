@@ -40,16 +40,21 @@ const CustomMeeting = () => {
       return;
     }
   
+    const proposedTimeStrings = proposedTimes.map((time) => time); // Keep it as is (HH:mm)
+    // Mapping proposed times to full Date objects
     const fullProposedTimes = proposedTimes.map((time) => {
       const [hours, minutes] = time.split(":");
-      const meetingDate = new Date(date);
-      meetingDate.setHours(hours, minutes, 0, 0);
-      return meetingDate;
+      const meetingDate = new Date(date); // Create a Date object using the selected date
+      meetingDate.setHours(hours, minutes, 0, 0); // Set the hours and minutes
+      // Ensure the proposed time is in the correct format (ISO 8601)
+      return meetingDate.toISOString(); // Use ISO format for date
     });
+
+    console.log("Time", proposedTimes)
   
     const customMeetingData = {
       recipientEmail,
-      proposedTimes: fullProposedTimes,
+      proposedTimes: proposedTimeStrings,
       message,
       date,
       location,
@@ -123,17 +128,6 @@ const CustomMeeting = () => {
       </aside>
       <div className = "container"style={{marginLeft: "100px"}}>
         <h2>Send a Custom Meeting Request</h2>
-
-        {/* Feedback Message */}
-        {feedbackMessage && (
-          <p
-            className={`feedback-message ${
-              feedbackMessage.includes("Failed") ? "error" : "success"
-            }`}
-          >
-            {feedbackMessage}
-          </p>
-        )}
 
         <form onSubmit={handleSubmit}>
           {/* Recipient Email */}
@@ -222,14 +216,14 @@ const CustomMeeting = () => {
           </div>
 
           {/* Submit Button */}
-          <button type = "double-btn" className = "double-btn" style={{marginLeft: "500px"}}>
+          <button type = "double-btn" className = "double-btn" style={{marginLeft: "500px"}} onClick={handleSubmit}>
             Send Request
           </button>
 
           {/* Feedback Message - Displayed Below Submit Button */}
           {feedbackMessage && (
             <p
-              className={`feedback-message ${
+              className={`error-message ${
                 feedbackMessage.includes("Failed") ? "error" : "success"
               }`}
             >

@@ -12,33 +12,50 @@ const createCustomMeeting = async (req, res) => {
       return res.status(400).json({ message: "All required fields must be provided." });
     }
 
-    // Convert proposed times into full Date objects
-    const fullProposedTimes = proposedTimes.map((time) => {
+    // Validate and parse the date (base date for proposed times)
+    const parsedDate = new Date(date);
+    if (isNaN(parsedDate)) {
+      return res.status(400).json({ message: "Invalid date format." });
+    }
+    
+    
+    // Store the proposed times as strings (HH:mm)
+    const proposedTimeStrings = proposedTimes.map((time) => {
+      // Make sure the time format is correct (e.g., "19:34")
       const [hours, minutes] = time.split(":");
-      const fullDate = new Date(date);
-      fullDate.setHours(hours, minutes, 0, 0);
-      return fullDate;
+      if (isNaN(hours) || isNaN(minutes)) {
+        throw new Error(`Invalid time format: ${time}`);
+      }
+      return `${hours}:${minutes}`; // Just store the time part as a string
     });
 
     // Create and save the meeting
     const newMeeting = new CustomMeeting({
       recipientEmail,
-      proposedTimes: fullProposedTimes,
+      proposedTimes: proposedTimeStrings,  // Store times as strings
       message,
-      date: new Date(date),
+      date: parsedDate,
       location,
       createdBy,
     });
 
     const savedMeeting = await newMeeting.save();
 
-    // Email setup
+    // Email setup (convert times back to Date objects for email display)
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+    });
+
+    // Convert the proposed times into formatted time strings for the email
+    const formattedProposedTimes = proposedTimeStrings.map((time) => {
+      const [hours, minutes] = time.split(":");
+      const timeObj = new Date();
+      timeObj.setHours(hours, minutes, 0, 0);
+      return timeObj.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     });
 
     const mailOptions = {
@@ -54,9 +71,7 @@ const createCustomMeeting = async (req, res) => {
         - Created By: ${createdBy}
         - Location: ${location}
         - Date: ${new Date(date).toDateString()}
-        - Proposed Times: ${fullProposedTimes
-          .map((time) => time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }))
-          .join(", ")}
+        - Proposed Times: ${formattedProposedTimes.join(", ")}
         - Message: ${message || "No additional details provided."}
 
         Please confirm your availability.
@@ -81,6 +96,7 @@ const createCustomMeeting = async (req, res) => {
     res.status(500).json({ message: "Failed to create custom meeting." });
   }
 };
+
 
 // Retrieve all custom meetings for the logged-in user
 const getCustomMeetings = async (req, res) => {
