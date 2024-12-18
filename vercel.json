@@ -1,0 +1,7 @@
+{
+    "rewrites": [
+      { "source": "/booking/:publicURL", "destination": "/" },
+      { "source": "/(.*)", "destination": "/" }
+    ]
+  }
+  
