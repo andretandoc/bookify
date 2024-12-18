@@ -376,6 +376,68 @@ const getAppointmentsPrivate = async (req, res) => {
   }
 };
 
+
+const cancelPublicAppointment = async (req, res) => {
+  try {
+    const appointmentId = req.params.id;
+
+    // Find the appointment to get the eventId and the time slot
+    const appointment = await Appointment.findById(appointmentId);
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+
+    // Find the event associated with this appointment
+    const event = await Event.findById(appointment.eventId);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    // Re-add the slot back to the event's available times
+    event.availableSlots.push(appointment.time); // Add the canceled slot back to the event
+    await event.save(); // Save the updated event
+
+    // Now delete the appointment
+    await appointment.deleteOne();
+
+    res.status(200).json({ message: "Public appointment successfully canceled and slot re-added" });
+  } catch (error) {
+    console.error("Error canceling public appointment:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+const cancelPrivateAppointment = async (req, res) => {
+  try {
+    const appointmentId = req.params.id;
+
+    // Find the appointment to ensure it belongs to the authenticated user
+    const appointment = await Appointment.findOne({ _id: appointmentId, "reservedBy.userId": userId });
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found or unauthorized to cancel" });
+    }
+
+    // Find the event associated with this appointment
+    const event = await Event.findById(appointment.eventId);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    // Re-add the slot back to the event's available times
+    event.availableSlots.push(appointment.time); // Add the canceled slot back to the event
+    await event.save(); // Save the updated event
+
+    // Delete the appointment
+    await appointment.deleteOne();
+
+    res.status(200).json({ message: "Private appointment successfully canceled and slot re-added" });
+  } catch (error) {
+    console.error("Error canceling private appointment:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // For members to create a booking
 // const createAppointment = async (req, res) => {
 //   try {
@@ -480,4 +542,6 @@ module.exports = {
   getPublicEvents,
   getAllEvents,
   getClosestAppointments,
+  cancelPublicAppointment,
+  cancelPrivateAppointment,
 };

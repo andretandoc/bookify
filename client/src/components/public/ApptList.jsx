@@ -8,7 +8,8 @@ function ApptList() {
   const [appointments, setAppointments] = useState({ active: [], past: [] });
   const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Initialize appointments from location.state
   useEffect(() => {
@@ -25,21 +26,44 @@ function ApptList() {
     navigate(-1); // Navigate back
   };
 
-  // Modal controls
-  const openModal = (meetingId) => {
-    setSelectedMeeting(meetingId);
+
+  const openModal = (appointmentID) => {
+    setSelectedAppointment(appointmentID);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedMeeting(null);
+    setSelectedAppointment(null);
   };
 
-  const confirmCancel = () => {
-    console.log(`Meeting ${selectedMeeting} cancelled`);
-    closeModal();
+  const confirmCancel = async () => {
+    if (!selectedAppointment) return;
+  
+    try {
+      const token = localStorage.getItem("token");
+      const API_URL = import.meta.env.VITE_API_URL;
+  
+      const response = await axios.delete(`${API_URL}/api/appointments/cancelpublic-${selectedAppointment}`);
+       
+  
+      // Remove the canceled event from the state
+      setAppointments((prev) => ({
+        ...prev,
+        active: prev.active.filter((appointment) => appointment._id !== selectedAppointment),
+      }));
+  
+      setSuccessMessage("Event successfully canceled!"); // Add success message
+    } catch (error) {
+      console.error("Error canceling appointment:", error);
+      setMessage(
+        error.response?.data?.message || "Failed to cancel the appointment!"
+      );
+    } finally {
+      closeModal();
+    }
   };
+
 
   return (
     <main className="layout">
@@ -105,6 +129,12 @@ function ApptList() {
           ) : (
             <p>{message}</p>
           )}
+
+        {successMessage && (
+          <p className="success-message" style={{ color: "green", marginTop: "10px" }}>
+            {successMessage}
+          </p>
+        )}
         </div>
 
         {/* Past Appointments */}
