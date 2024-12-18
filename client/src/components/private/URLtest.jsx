@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Import useParams
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function URLTest() {
   const [currentStep, setCurrentStep] = useState("ssaCheck");
@@ -10,6 +12,9 @@ function URLTest() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [reservationSuccess, setReservationSuccess] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
 
   // User form data
   const [fname, setFirstName] = useState("");
@@ -19,9 +24,10 @@ function URLTest() {
   const [accommodation, setAccommodation] = useState("");
 
   // Replace this with actual logic to fetch logged-in status
-  const [isLoggedIn] = useState(false);
+  const [isLoggedIn] = useState(true);
 
   const { publicURL } = useParams(); // Extract the publicURL from route params
+
 
   useEffect(() => {
     // Fetch event details and available time slots
@@ -49,7 +55,7 @@ function URLTest() {
       alert("Please select a time slot.");
       return;
     }
-
+  
     try {
       const API_URL = import.meta.env.VITE_API_URL;
       await axios.post(`${API_URL}/api/appointments/${publicURL}/reserve`, {
@@ -58,15 +64,24 @@ function URLTest() {
         email: email,
         timeSlotId: selectedTimeSlotId,
       });
-      setReservationSuccess("Appointment booked successfully!");
+      setShowModal(true); // Show the modal on success
     } catch (err) {
       setError(err.response?.data?.message || "Failed to reserve appointment.");
     }
   };
+  
+  const handleSSACheck = () => {
+    if (ssaStatus === "no") {
+      setReservationSuccess("Appointment booked successfully!");
+      setShowModal(true); // Trigger the modal
+    } else {
+      setCurrentStep("accommodation");
+    }
+  };
+  
 
   if (loading) return <div>Loading event details...</div>;
   if (error) return <div>Error: {error}</div>;
-  if (reservationSuccess) return <div>{reservationSuccess}</div>;
 
   return (
     <main className="form-box-wrapper">
@@ -122,68 +137,125 @@ function URLTest() {
                     style={{width:"23vh", height:"3.5vh", borderRadius:"0.5em",borderWidth:"0.1em",background:"none"}}
                   />
                   <button className="double-btn" style={{fontSize:"15px"}} type="submit" >
-                    Book Appointment
+                    Book
                   </button>
                 </>
               ) : (
                 <>
                   {currentStep === "ssaCheck" && (
-                    <div className="ssa-check">
-                      <h4>Are you registered with SSA?</h4>
-                      <select
-                        value={ssaStatus}
-                        onChange={(e) => setSsaStatus(e.target.value)}
-                        required
-                      >
-                        <option value="" disabled>
-                          Select an option
-                        </option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                      </select>
-                      <button
-                        className="btn"
-                        onClick={() =>
-                          ssaStatus === "no"
-                            ? setReservationSuccess(
-                                "Appointment booked successfully!"
-                              )
-                            : setCurrentStep("accommodation")
-                        }
-                      >
-                        {ssaStatus === "no" ? "Book Appointment" : "Next"}
-                      </button>
-                    </div>
-                  )}
+                  <div className="ssa-check">
+                    <h4>Are you registered with SSA?</h4>
+                    <select
+                      value={ssaStatus}
+                      onChange={(e) => setSsaStatus(e.target.value)}
+                      required
+                    >
+                      <option value="" disabled>
+                        Select an option
+                      </option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                    <button
+                      className="double-btn"
+                      onClick={() => handleSSACheck()}
+                      style={{
+                        fontSize: "12px",
+                        width: "80px",
+                        height: "24px",
+                        lineHeight: "24px",
+                        boxShadow: "-5px -5px 1px #9e0918",
+                      }}
+                    >
+                      {ssaStatus === "no" ? "Book" : "Next"}
+                    </button>
+                  </div>
+                )}
+
 
                   {currentStep === "accommodation" && (
-                    <div>
-                      <h4>Select the kind of accommodation:</h4>
-                      <select
-                        value={accommodation}
-                        onChange={(e) => setAccommodation(e.target.value)}
-                        required
-                      >
-                        <option value="" disabled>
-                          Select an option
-                        </option>
-                        <option value="disability">Disability</option>
-                        <option value="hearing">Hearing Problems</option>
-                        <option value="other">Other</option>
-                      </select>
-                      <button className="btn" type="submit">
-                        Book Appointment
-                      </button>
-                    </div>
-                  )}
+                      <div>
+                        <h4>Enter the kind of accommodation you need:</h4>
+                        <input
+                          type="text"
+                          value={accommodation}
+                          onChange={(e) => setAccommodation(e.target.value)}
+                          placeholder="Enter accommodation details"
+                          required
+                          style={{
+                            fontSize: "14px",
+                            width: "300px",
+                            height: "30px",
+                            borderRadius: "5px",
+                            border: "1px solid #ccc",
+                            padding: "5px",
+                            marginBottom:"10px"
+                          }}
+                        />
+                        <button
+                          className="double-btn"
+                          type="submit"
+                          style={{
+                            fontSize: "15px",
+                            width: "200px",
+                            height: "34px",
+                            lineHeight: "24px",
+                            boxShadow: "-5px -5px 1px #9e0918",
+                            marginTop: "10px",
+                          }}
+                        >
+                          Book
+                        </button>
+                      </div>
+                    )}
+
                 </>
               )}
             </form>
           </div>
         )}
       </div>
+      {showModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+        >
+          <div
+            style={{
+              background: "white",
+              padding: "20px",
+              color:"black",
+              borderRadius: "10px",
+              textAlign: "center",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              maxWidth: "400px",
+              width: "100%",
+            }}
+          >
+            <h2 style={{ margin: "0 0 10px" }}>Success</h2>
+            <p style={{ margin: "0 0 20px" }}>Appointment booked successfully!</p>
+            <button
+              className="double-btn"
+              onClick={() => navigate("/ManageBooking")}
+            >
+              Close
+            </button>
+
+          </div>
+        </div>
+      )}
+
     </main>
   );
 }
-
 export default URLTest;
