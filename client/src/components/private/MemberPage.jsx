@@ -70,7 +70,7 @@ const MemberPage = () => {
       </aside>
 
       {/* Main Content */}
-      <section className="container" style={{ boxShadow: "none", backgroundColor: "white", marginLeft:"100px"}}>
+      <section className="container" style={{ boxShadow: "none", backgroundColor: "white", marginLeft:"100px", width:"max-content"}}>
         <h1>Hey {name}!</h1>
         <h2>Your upcoming meetings:</h2>
         <div>

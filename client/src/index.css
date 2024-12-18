@@ -1091,26 +1091,28 @@ body.private-page{
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 20px;
-  z-index: 1;
   height: 100vh;
+  z-index: 1000
 }
-/* Links inside the sidebar */
+
+/* Link Styles */
 .sidebar .link {
   color: white;
   text-decoration: none;
   font-size: 1rem;
   margin-bottom: 10px;
-  transition: color 0.3s ease, background-color 0.3s ease;
   padding: 10px;
   border-radius: 5px;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-/* Hover effect for links */
+/* Hover effect */
 .sidebar .link:hover {
-  color: #1c1919; /* Change text color */
+  color: #1c1919;
 }
+
 
 .menu {
   list-style-type: none;
