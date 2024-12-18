@@ -51,9 +51,9 @@ export default function PublicEvents() {
               </div>
               <a
                 href={`/booking/${event.publicURL}`}
-                target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}
+                target="_self"
               >
                 <button className="double-btn">Go to URL</button>
               </a>
