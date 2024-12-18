@@ -21,7 +21,6 @@ import MemberPage from "./components/private/MemberPage";
 import ManageBooking from "./components/private/ManageBooking";
 import CustomMeeting from "./components/private/CustomMeeting";
 import ManageEvent from "./components/private/ManageEvent";
-import BookingURL from "./components/private/bookingURL";
 import FullEvents from "./components/private/FullEvents";
 import URLTest from "./components/private/URLtest";
 

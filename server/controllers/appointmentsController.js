@@ -429,6 +429,7 @@ const getEventByPublicURL = async (req, res) => {
     res.status(200).json({
       eventDetails: event,
       availableAppointments,
+      privacy: event.privacy, // Add the privacy field
     });
   } catch (error) {
     console.error(error);
