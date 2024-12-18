@@ -12,6 +12,8 @@ export default function ManageBooking() {
     past: [],
   });
 
+  const [successMessage, setSuccessMessage] = useState("");
+
   useEffect(() => {
     const fetchAppointments = async () => {
       setAppointments({ active: [], past: [] }); // Ensure proper default structure
@@ -51,21 +53,44 @@ export default function ManageBooking() {
   }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
 
-  const openModal = (meetingId) => {
-    setSelectedMeeting(meetingId);
+  const openModal = (appointmentID) => {
+    setSelectedAppointment(appointmentID);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedMeeting(null);
+    setSelectedAppointment(null);
   };
 
-  const confirmCancel = () => {
-    console.log(`Meeting ${selectedMeeting} cancelled`);
-    closeModal();
+  const confirmCancel = async () => {
+    if (!selectedAppointment) return;
+  
+    try {
+      const token = localStorage.getItem("token");
+      const API_URL = import.meta.env.VITE_API_URL;
+  
+      const response = await axios.delete(`${API_URL}/api/appointments/cancelprivate-${selectedAppointment}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      // Remove the canceled event from the state
+      setAppointments((prev) => ({
+        ...prev,
+        active: prev.active.filter((appointment) => appointment._id !== selectedAppointment),
+      }));
+  
+      setSuccessMessage("Event successfully canceled!"); // Add success message
+    } catch (error) {
+      console.error("Error canceling appointment:", error);
+      setMessage(
+        error.response?.data?.message || "Failed to cancel the appointment!"
+      );
+    } finally {
+      closeModal();
+    }
   };
 
   return (
@@ -163,6 +188,13 @@ export default function ManageBooking() {
             <p>{message}</p>
           </div>
           )}
+
+        {successMessage && (
+          <p className="success-message" style={{ color: "green", marginTop: "10px" }}>
+            {successMessage}
+          </p>
+        )}
+
         </div>
 
         <div className="container"style={{marginLeft: "100px"}}>
