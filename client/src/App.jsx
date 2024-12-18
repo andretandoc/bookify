@@ -28,10 +28,9 @@ import URLTest from "./components/private/URLtest";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    const token = localStorage.getItem("token");
-    return token ? true : false;
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => !!localStorage.getItem("token")
+  );
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Clear the token
