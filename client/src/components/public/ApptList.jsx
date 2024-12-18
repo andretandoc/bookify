@@ -71,9 +71,7 @@ function ApptList() {
   return (
     <main className="layout">
       <div className="content-wrap" >
-        <button className="double-btn" onClick={handleGoBack} style={{marginLeft:"77rem", marginTop:"50px"}}>
-          Go Back
-        </button>
+       
 
         {/* Active Appointments */}
         <div className="container" style={{marginLeft: "350px",marginBottom: "50px"}}>
@@ -84,7 +82,7 @@ function ApptList() {
                 <li className="table-header">
                   <div className="col">Event</div>
                   <div className="col">Host</div>
-                  <div className="col">Email</div>
+                  <div className="col">Attendee</div>
                   <div className="col">Date & Time</div>
                   <div className="col">Location</div>
                   <div className="col"></div>
@@ -95,11 +93,10 @@ function ApptList() {
                       {appointment.eventId?.title || "N/A"}
                     </div>
                     <div className="col" data-label="Host">
-                      {appointment.reservedBy?.firstName || "N/A"}{" "}
-                      {appointment.reservedBy?.lastName || "N/A"}
+                      {appointment.eventId?.createdBy || "N/A"}{" "}
                     </div>
                     <div className="col" data-label="Email">
-                      {appointment.reservedBy?.email || "N/A"}
+                      {`${appointment.reservedBy?.firstName} ${appointment.reservedBy?.lastName}`  || "N/A"}
                     </div>
                     <div className="col" data-label="Date & Time">
                       {appointment.time
@@ -107,7 +104,7 @@ function ApptList() {
                         : "N/A"}
                     </div>
                     <div className="col" data-label="Location">
-                      {appointment.location || "N/A"}
+                      {appointment.eventId?.location || "N/A"}
                     </div>
                     <div className="col">
                       <button
@@ -149,21 +146,20 @@ function ApptList() {
                 <li className="table-header">
                   <div className="col">Event</div>
                   <div className="col">Host</div>
-                  <div className="col">Email</div>
+                  <div className="col">Attendee</div>
                   <div className="col">Date & Time</div>
                   <div className="col">Location</div>
                 </li>
                 {appointments.past.map((appointment, index) => (
                   <li key={index} className="table-row">
                     <div className="col" data-label="Event">
-                      {appointment.eventId || "N/A"}
+                      {appointment.eventId?.title || "N/A"}
                     </div>
                     <div className="col" data-label="Host">
-                      {appointment.reservedBy?.firstName || "N/A"}{" "}
-                      {appointment.reservedBy?.lastName || "N/A"}
+                    {appointment.eventId?.createdBy || "N/A"}{" "}
                     </div>
                     <div className="col" data-label="Email">
-                      {appointment.reservedBy?.email || "N/A"}
+                    {`${appointment.reservedBy?.firstName} ${appointment.reservedBy?.lastName}`  || "N/A"}
                     </div>
                     <div className="col" data-label="Date & Time">
                       {appointment.time
@@ -171,7 +167,7 @@ function ApptList() {
                         : "N/A"}
                     </div>
                     <div className="col" data-label="Location">
-                      {appointment.location || "N/A"}
+                      {appointment.eventId?.location || "N/A"}
                     </div>
                   </li>
                 ))}

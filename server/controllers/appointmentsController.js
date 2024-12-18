@@ -242,32 +242,34 @@ const getAllEvents = async (req, res) => {
   }
 };
 
+
 const getAppointmentsPublic = async (req, res) => {
   try {
     const { email, startDate, endDate } = req.query;
 
     const currentDate = new Date(); // Current date for comparison
 
+    // Build the dynamic filter object based on the query parameters
     let filter = {};
 
     if (email) {
       filter["reservedBy.email"] = new RegExp(email.trim(), "i");
     }
 
-    if (startDate) filter.time = { $gte: new Date(startDate) };
-    if (endDate) filter.time = { ...filter.time, $lte: new Date(endDate) };
+    if (startDate) {
+      filter.time = { $gte: new Date(startDate) };
+    }
+
+    if (endDate) {
+      filter.time = filter.time
+        ? { ...filter.time, $lte: new Date(endDate) }
+        : { $lte: new Date(endDate) };
+    }
 
     console.log("Filter used for query:", filter);
 
-    // Build the filter dynamically based on provided parameters -- OLD
-    // if (email) filter.email["reservedBy.email"] = new RegExp(email, "i"); // Case-insensitive search
-    // if (startDate) filter.startDate = { $gte: new Date(startDate) };
-    // if (endDate)
-    //   filter.endDate = { ...filter.endDate, $lte: new Date(endDate) };
-
-    // Fetch all appointments matching the filter
-    console.log("Filter:", filter);
-    const appointments = await Appointment.find(filter);
+    // Fetch all appointments matching the filter and populate eventId with relevant fields
+    const appointments = await Appointment.find(filter).populate("eventId", "title createdBy startDate location");
     console.log("Appointments:", appointments);
 
     // Split appointments into active and past categories
@@ -287,7 +289,7 @@ const getAppointmentsPublic = async (req, res) => {
       return res.status(404).json({ message: "No appointments found" });
     }
 
-    // Return the categorized appointments
+    // Return the categorized appointments with event details
     res.status(200).json({
       activeAppointments,
       pastAppointments,
@@ -297,6 +299,7 @@ const getAppointmentsPublic = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch appointments" });
   }
 };
+
 
 const getClosestAppointments = async (req, res) => {
   try {
