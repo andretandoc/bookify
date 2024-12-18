@@ -91,7 +91,9 @@ const createEvent = async (req, res) => {
     const createdBy = req.user.email;
 
     // Generate a public URL
-    const publicURL = crypto.randomBytes(16).toString("hex");
+    //const publicURL = crypto.randomBytes(16).toString("hex");
+    const publicURL = `${process.env.BASE_URL}/event/${crypto.randomBytes(16).toString("hex")}`;
+
 
     // Create the Event
     const newEvent = new Event({
