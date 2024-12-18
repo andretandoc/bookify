@@ -92,7 +92,7 @@ const createEvent = async (req, res) => {
 
     // Generate a public URL
     //const publicURL = crypto.randomBytes(16).toString("hex");
-    const publicURL = `/${crypto.randomBytes(16).toString("hex")}`;
+    const publicURL = crypto.randomBytes(16).toString("hex");
 
 
     // Create the Event

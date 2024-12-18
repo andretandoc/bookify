@@ -163,7 +163,7 @@ export default function ManageEvent() {
                     <button
                       onClick={() => {
                         if (event.publicURL) {
-                          window.location.href = `${event.publicURL}`;
+                          window.location.href = `/booking/${event.publicURL}`;
 
                         } else {
                           alert("No URL available");

@@ -113,7 +113,7 @@ export default function FullEvents() {
                       className="double-btn"
                       onClick={() => {
                         if (event.publicURL) {
-                          window.location.href = `${event.publicURL}`;
+                          window.location.href = `/booking/${event.publicURL}`;
                         } else {
                           alert("No URL available");
                         }
