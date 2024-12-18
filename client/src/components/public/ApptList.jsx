@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function ApptList() {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ function ApptList() {
                 {appointments.active.map((appointment, index) => (
                   <li key={index} className="table-row">
                     <div className="col" data-label="Event">
-                      {appointment.eventId || "N/A"}
+                      {appointment.eventId?.title || "N/A"}
                     </div>
                     <div className="col" data-label="Host">
                       {appointment.reservedBy?.firstName || "N/A"}{" "}

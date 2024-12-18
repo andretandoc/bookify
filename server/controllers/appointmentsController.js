@@ -388,21 +388,21 @@ const cancelPublicAppointment = async (req, res) => {
         .status(404)
         .json({ message: "Appointment not found or already canceled" });
     }
-    
-    console.log("apptmnt:", appointment)
+
+    console.log("Found appointment:", appointment);
+
     // Clear the reservedBy field to mark the appointment as available
     appointment.reservedBy = null;
     await appointment.save();
 
     res.status(200).json({
-      message: "Public appointment successfully canceled and marked as available",
+      message: "Public appointment successfully canceled and deleted",
     });
   } catch (error) {
     console.error("Error canceling public appointment:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
 
 const cancelPrivateAppointment = async (req, res) => {
   try {
