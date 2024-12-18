@@ -206,6 +206,12 @@ export default function ManageBooking() {
               <p>{message}</p>
             </div>
           )}
+
+        {successMessage && (
+          <p className="success-message" style={{ color: "green", marginTop: "10px" }}>
+            {successMessage}
+          </p>
+        )}
         </div>
 
         <div className="container" style={{ marginLeft: "100px" }}>
@@ -226,6 +232,8 @@ export default function ManageBooking() {
           ) : (
             <p>{message}</p>
           )}
+
+       
         </div>
 
         {isModalOpen && (
