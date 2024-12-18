@@ -43,13 +43,13 @@ function ApptList() {
 
   return (
     <main className="layout">
-      <div className="content-wrap">
-        <button className="double-btn" onClick={handleGoBack} >
+      <div className="content-wrap" >
+        <button className="double-btn" onClick={handleGoBack} style={{marginLeft:"77rem", marginTop:"50px"}}>
           Go Back
         </button>
 
         {/* Active Appointments */}
-        <div className="container" style={{marginLeft:"20%"}}>
+        <div className="container" style={{marginLeft: "350px",marginBottom: "50px"}}>
           <h2>Active Appointments:</h2>
           {appointments.active.length > 0 ? (
             <div className="table-wrapper">
@@ -84,10 +84,18 @@ function ApptList() {
                     </div>
                     <div className="col">
                       <button
-                        className="reject-btn"
+                        className="double-btn"
                         onClick={() => openModal(appointment._id)}
+                        style={{
+                          fontSize: "12px",
+                          width: "80px",
+                          height:"24px",
+                          lineHeight:"24px",
+                          background:"grey",
+                          boxShadow: "-5px -5px 1px #1234"
+                        }}
                       >
-                        Cancel Meeting &#10060;
+                        Cancel Meeting;
                       </button>
                     </div>
                   </li>
@@ -100,7 +108,7 @@ function ApptList() {
         </div>
 
         {/* Past Appointments */}
-        <div className="container"style={{marginLeft:"20%"}}>
+        <div className="container"style={{marginLeft: "350px"}}>
           <h2>Past Appointments:</h2>
           {appointments.past.length > 0 ? (
             <div className="table-wrapper">
