@@ -478,6 +478,35 @@ Footer::before { /*useless but will keep incase */
   font-size: 18px;
 }
 
+.booking-input {
+  width: 100%;
+  max-width: 400px; /* Default max width */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+textarea.booking-input {
+  resize: vertical;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .booking-input {
+    max-width: 300px; /* Shrink max width on medium screens */
+    font-size: 14px; /* Adjust font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-input {
+    max-width: 100%; /* Take up full width on small screens */
+    font-size: 12px; /* Further adjust font size */
+  }
+}
 
 /*Home page body responsive*/
 @media (max-width: 1000px) {

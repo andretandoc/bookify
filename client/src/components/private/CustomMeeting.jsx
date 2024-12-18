@@ -216,7 +216,7 @@ const CustomMeeting = () => {
           </div>
 
           {/* Submit Button */}
-          <button type = "double-btn" className = "double-btn" style={{marginLeft: "500px"}} onClick={handleSubmit}>
+          <button type = "double-btn" className = "create-evnt-btn" onClick={handleSubmit}>
             Send Request
           </button>
 
