@@ -107,7 +107,7 @@ export default function ManageBooking() {
         </ul>
       </aside>
       <div className="content-wrap">
-        <div className="container"style={{marginLeft: "100px"}}>
+        <div className="container"style={{marginLeft: "100px",marginBottom: "50px"}}>
           <h2>Active Appointments:</h2>
           {appointments.active.length > 0 ? (
             <div className="table-wrapper">

@@ -126,7 +126,7 @@ export default function ManageEvent() {
         </ul>
       </aside>
       <div class="content-wrap">
-        <div class="container"style={{marginLeft: "100px"}}>
+        <div class="container"style={{marginLeft: "100px", marginBottom: "50px"}}>
 
           
           <h2>My Active Events:</h2>
