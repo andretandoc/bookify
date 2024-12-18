@@ -44,12 +44,12 @@ function ApptList() {
   return (
     <main className="layout">
       <div className="content-wrap">
-        <button className="double-btn" onClick={handleGoBack}>
+        <button className="double-btn" onClick={handleGoBack} >
           Go Back
         </button>
 
         {/* Active Appointments */}
-        <div className="container">
+        <div className="container" style={{marginLeft:"20%"}}>
           <h2>Active Appointments:</h2>
           {appointments.active.length > 0 ? (
             <div className="table-wrapper">
@@ -100,7 +100,7 @@ function ApptList() {
         </div>
 
         {/* Past Appointments */}
-        <div className="container">
+        <div className="container"style={{marginLeft:"20%"}}>
           <h2>Past Appointments:</h2>
           {appointments.past.length > 0 ? (
             <div className="table-wrapper">
