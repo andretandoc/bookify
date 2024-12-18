@@ -15,7 +15,7 @@ function ApptList() {
     const data = location.state?.appointments || { active: [], past: [] };
     setAppointments(data);
 
-    if (data.active.length === 0 || data.past.length === 0) {
+    if (data.active.length === 0 && data.past.length === 0) {
       setMessage("No appointments available");
     }
   }, [location.state]);
@@ -41,19 +41,16 @@ function ApptList() {
     closeModal();
   };
 
-  // Debugging logs
-  console.log("Appointments in list:", appointments);
-  console.log("Active appointments:", appointments.active);
-  console.log("Past appointments:", appointments.past);
-
   return (
     <main className="layout">
       <div className="content-wrap">
         <button className="double-btn" onClick={handleGoBack}>
           Go Back
         </button>
+
+        {/* Active Appointments */}
         <div className="container">
-          <h2>Active Appointments: </h2>
+          <h2>Active Appointments:</h2>
           {appointments.active.length > 0 ? (
             <div className="table-wrapper">
               <ul className="responsive-table">
@@ -68,16 +65,19 @@ function ApptList() {
                 {appointments.active.map((appointment, index) => (
                   <li key={index} className="table-row">
                     <div className="col" data-label="Event">
-                      {appointment.event || "N/A"}
+                      {appointment.eventId || "N/A"}
                     </div>
                     <div className="col" data-label="Host">
-                      {appointment.host || "N/A"}
+                      {appointment.reservedBy?.firstName || "N/A"}{" "}
+                      {appointment.reservedBy?.lastName || "N/A"}
                     </div>
                     <div className="col" data-label="Email">
-                      {appointment.email}
+                      {appointment.reservedBy?.email || "N/A"}
                     </div>
                     <div className="col" data-label="Date & Time">
-                      {new Date(appointment.startDate).toLocaleString()}
+                      {appointment.time
+                        ? new Date(appointment.time).toLocaleString()
+                        : "N/A"}
                     </div>
                     <div className="col" data-label="Location">
                       {appointment.location || "N/A"}
@@ -99,6 +99,7 @@ function ApptList() {
           )}
         </div>
 
+        {/* Past Appointments */}
         <div className="container">
           <h2>Past Appointments:</h2>
           {appointments.past.length > 0 ? (
@@ -114,16 +115,19 @@ function ApptList() {
                 {appointments.past.map((appointment, index) => (
                   <li key={index} className="table-row">
                     <div className="col" data-label="Event">
-                      {appointment.event || "N/A"}
+                      {appointment.eventId || "N/A"}
                     </div>
                     <div className="col" data-label="Host">
-                      {appointment.host || "N/A"}
+                      {appointment.reservedBy?.firstName || "N/A"}{" "}
+                      {appointment.reservedBy?.lastName || "N/A"}
                     </div>
                     <div className="col" data-label="Email">
-                      {appointment.email}
+                      {appointment.reservedBy?.email || "N/A"}
                     </div>
                     <div className="col" data-label="Date & Time">
-                      {new Date(appointment.startDate).toLocaleString()}
+                      {appointment.time
+                        ? new Date(appointment.time).toLocaleString()
+                        : "N/A"}
                     </div>
                     <div className="col" data-label="Location">
                       {appointment.location || "N/A"}
@@ -137,6 +141,7 @@ function ApptList() {
           )}
         </div>
 
+        {/* Cancel Modal */}
         {isModalOpen && (
           <div className="modal-overlay">
             <div className="modal">
@@ -154,6 +159,7 @@ function ApptList() {
         )}
       </div>
 
+      {/* Footer */}
       <div className="footer">
         <footer>
           <p> &copy; 2024 Bookify! McGill University </p>
