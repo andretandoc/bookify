@@ -92,7 +92,7 @@ const createEvent = async (req, res) => {
 
     // Generate a public URL
     //const publicURL = crypto.randomBytes(16).toString("hex");
-    const publicURL = `${process.env.BASE_URL}/booking/${crypto.randomBytes(16).toString("hex")}`;
+    const publicURL = `/booking/${crypto.randomBytes(16).toString("hex")}`;
 
 
     // Create the Event
