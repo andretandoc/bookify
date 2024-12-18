@@ -47,9 +47,9 @@ function ApptList() {
   console.log("Past appointments:", appointments.past);
 
   return (
-    <main className = "layout">
+    <main className="layout">
       <div className="content-wrap">
-      <button className = "double-btn" onClick = {handleGoBack}>
+        <button className="double-btn" onClick={handleGoBack}>
           Go Back
         </button>
         <div className="container">
@@ -65,7 +65,7 @@ function ApptList() {
                   <div className="col">Location</div>
                   <div className="col"></div>
                 </li>
-                {appointments.activeAppointments.map((appointment, index) => (
+                {appointments.active.map((appointment, index) => (
                   <li key={index} className="table-row">
                     <div className="col" data-label="Event">
                       {appointment.event || "N/A"}
@@ -135,8 +135,6 @@ function ApptList() {
           ) : (
             <p>{message}</p>
           )}
-
-          
         </div>
 
         {isModalOpen && (
@@ -156,14 +154,11 @@ function ApptList() {
         )}
       </div>
 
-       
-
-      <div className = "footer">
+      <div className="footer">
         <footer>
-            <p> &copy; 2024 Bookify! McGill University  </p>
+          <p> &copy; 2024 Bookify! McGill University </p>
         </footer>
       </div>
-
     </main>
   );
 }
