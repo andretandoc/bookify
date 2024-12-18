@@ -50,7 +50,7 @@ export default function PublicEvents() {
                 </p>
               </div>
               <a
-                href={`http://localhost:5173/booking/${event.publicURL}`}
+                href={`/booking/${event.publicURL}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}
