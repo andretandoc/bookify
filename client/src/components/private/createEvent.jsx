@@ -50,6 +50,12 @@ const CreateEvent = () => {
       return;
     }
 
+    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    if (startDate < today) {
+      setError("The event start date cannot be before today.");
+      return;
+    }
+
     try {
       const token = localStorage.getItem("token");
 
