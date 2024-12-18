@@ -18,7 +18,7 @@ const MemberPage = () => {
       try {
         const API_URL = import.meta.env.VITE_API_URL;
         const response = await axios.get(
-          `${API_URL}/api/appointments/closest`,
+          `${API_URL}/api/appointments/private`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -28,10 +28,10 @@ const MemberPage = () => {
 
         setName(response.data.name || "NA"); // Set user's name
 
-        if (response.data.closestAppointments.length === 0) {
+        if (response.data.activeAppointments.length === 0) {
           setMessage("No upcoming appointments found");
         } else {
-          setAppointments(response.data.closestAppointments);
+          setAppointments(response.data.activeAppointments);
         }
       } catch (error) {
         setMessage(
@@ -49,28 +49,48 @@ const MemberPage = () => {
       <aside className="sidebar">
         <ul className="menu">
           <li>
-            <Link to="/MemberPage" className="link">Home</Link>
+            <Link to="/MemberPage" className="link">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/CreateEvent" className="link">Create Events</Link>
+            <Link to="/CreateEvent" className="link">
+              Create Events
+            </Link>
           </li>
           <li>
-            <Link to="/ManageEvent" className="link">Manage Events</Link>
+            <Link to="/ManageEvent" className="link">
+              Manage Events
+            </Link>
           </li>
           <li>
-            <Link to="/ManageBooking" className="link">Manage Meetings</Link>
+            <Link to="/ManageBooking" className="link">
+              Manage Meetings
+            </Link>
           </li>
           <li>
-            <Link to="/FullEvents" className="link">View All Events</Link>
+            <Link to="/FullEvents" className="link">
+              View All Events
+            </Link>
           </li>
           <li>
-            <Link to="/CustomMeeting" className="link">Custom Meeting</Link>
+            <Link to="/CustomMeeting" className="link">
+              Custom Meeting
+            </Link>
           </li>
         </ul>
       </aside>
 
       {/* Main Content */}
-      <section className="container" style={{ boxShadow: "none", backgroundColor: "white", marginLeft:"100px", width:"max-content"}}>
+      <section
+        className="container"
+        style={{
+          boxShadow: "none",
+          backgroundColor: "white",
+          marginLeft: "100px",
+          width: "max-content",
+        }}
+      >
         <h1>Hey {name}!</h1>
         <h2>Your upcoming meetings:</h2>
         <div>
@@ -82,15 +102,27 @@ const MemberPage = () => {
             appointments.slice(0, 4).map((appointment, index) => (
               <div key={index} className="event-card">
                 <div>
-                  <h className="event-title">Event : {appointment.event}</h>
-                  <p><strong>Hosted by:</strong> {appointment.host}</p>
-                  <p><strong>When:</strong> {new Date(appointment.startDate).toLocaleString()}</p>
-                  <p><strong>Where:</strong> {appointment.location}</p>
+                  <h className="event-title">
+                    Event : {appointment.eventId?.title || "N/A"}
+                  </h>
+                  <p>
+                    <strong>Hosted by:</strong>{" "}
+                    {appointment.eventId?.createdBy || "N/A"}
+                  </p>
+                  <p>
+                    <strong>When:</strong>{" "}
+                    {appointment.eventId?.startDate
+                      ? new Date(appointment.eventId.startDate).toLocaleString()
+                      : "N/A"}
+                  </p>
+                  <p>
+                    <strong>Where:</strong>{" "}
+                    {appointment.eventId?.location || "N/A"}
+                  </p>
                 </div>
                 <Link to="/ManageBooking" className="double-btn link">
                   Manage
                 </Link>
-
               </div>
             ))
           )}

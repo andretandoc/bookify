@@ -67,21 +67,26 @@ export default function ManageBooking() {
 
   const confirmCancel = async () => {
     if (!selectedAppointment) return;
-  
+
     try {
       const token = localStorage.getItem("token");
       const API_URL = import.meta.env.VITE_API_URL;
-  
-      const response = await axios.delete(`${API_URL}/api/appointments/cancelprivate-${selectedAppointment}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-  
+
+      const response = await axios.delete(
+        `${API_URL}/api/appointments/cancelprivate-${selectedAppointment}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
       // Remove the canceled event from the state
       setAppointments((prev) => ({
         ...prev,
-        active: prev.active.filter((appointment) => appointment._id !== selectedAppointment),
+        active: prev.active.filter(
+          (appointment) => appointment._id !== selectedAppointment
+        ),
       }));
-  
+
       setSuccessMessage("Event successfully canceled!"); // Add success message
     } catch (error) {
       console.error("Error canceling appointment:", error);
@@ -92,6 +97,32 @@ export default function ManageBooking() {
       closeModal();
     }
   };
+
+  const renderAppointments = (appointments) => (
+    <>
+      {appointments.map((appointment, index) => (
+        <li key={index} className="table-row">
+          <div className="col" data-label="Event">
+            {appointment.eventId?.title || "N/A"}
+          </div>
+          <div className="col" data-label="Host">
+            {appointment.eventId?.createdBy || "N/A"}
+          </div>
+          {/* <div className="col" data-label="Email">
+            {appointment.reservedBy?.email || "N/A"}
+          </div> */}
+          <div className="col" data-label="Date & Time">
+            {appointment.eventId?.startDate
+              ? new Date(appointment.eventId.startDate).toLocaleString()
+              : "Invalid Date"}
+          </div>
+          <div className="col" data-label="Location">
+            {appointment.eventId?.location || "N/A"}
+          </div>
+        </li>
+      ))}
+    </>
+  );
 
   return (
     <main class="layout">
@@ -132,7 +163,10 @@ export default function ManageBooking() {
         </ul>
       </aside>
       <div className="content-wrap">
-        <div className="container"style={{marginLeft: "100px",marginBottom: "50px"}}>
+        <div
+          className="container"
+          style={{ marginLeft: "100px", marginBottom: "50px" }}
+        >
           <h2>Active Appointments:</h2>
           {appointments.active.length > 0 ? (
             <div className="table-wrapper">
@@ -140,64 +174,27 @@ export default function ManageBooking() {
                 <li className="table-header">
                   <div className="col">Event</div>
                   <div className="col">Host</div>
-                  <div className="col">Email</div>
+                  {/* <div className="col">Email</div> */}
                   <div className="col">Date & Time</div>
                   <div className="col">Location</div>
                   <div className="col"></div>
                 </li>
-                {appointments.active.map((appointment, index) => (
-                  <li key={index} className="table-row">
-                    <div className="col" data-label="Event">
-                      {appointment.event || "N/A"}
-                    </div>
-                    <div className="col" data-label="Host">
-                      {appointment.host || "N/A"}
-                    </div>
-                    <div className="col" data-label="Email">
-                      {appointment.email}
-                    </div>
-                    <div className="col" data-label="Date & Time">
-                      {new Date(appointment.startDate).toLocaleString()}
-                    </div>
-                    <div className="col" data-label="Location">
-                      {appointment.location || "N/A"}
-                    </div>
-                    <div className="col">
-                      <button
-                        className="double-btn"
-                        onClick={() => openModal(appointment._id)}
-                        style={{
-                          fontSize: "12px",
-                          width: "80px",
-                          height:"24px",
-                          lineHeight:"24px",
-                          background:"grey",
-                          boxShadow: "-5px -5px 1px #1234"
-                        }}
-                      >
-                        Cancel Meeting;
-                      </button>
-                    </div>
-                  </li>
-                ))}
+                {renderAppointments(appointments.active)}
               </ul>
             </div>
           ) : (
             <div className="no-events">
-            <button className="double-btn"> <Link to="/FullEvents" className="link">Book a Meeting</Link></button>
-            <p>{message}</p>
-          </div>
+              <button className="double-btn">
+                <Link to="/FullEvents" className="link">
+                  Book a Meeting
+                </Link>
+              </button>
+              <p>{message}</p>
+            </div>
           )}
-
-        {successMessage && (
-          <p className="success-message" style={{ color: "green", marginTop: "10px" }}>
-            {successMessage}
-          </p>
-        )}
-
         </div>
 
-        <div className="container"style={{marginLeft: "100px"}}>
+        <div className="container" style={{ marginLeft: "100px" }}>
           <h2>Past Appointments:</h2>
           {appointments.past.length > 0 ? (
             <div className="table-wrapper">
@@ -205,29 +202,11 @@ export default function ManageBooking() {
                 <li className="table-header">
                   <div className="col">Event</div>
                   <div className="col">Host</div>
-                  <div className="col">Email</div>
+                  {/* <div className="col">Email</div> */}
                   <div className="col">Date & Time</div>
                   <div className="col">Location</div>
                 </li>
-                {appointments.past.map((appointment, index) => (
-                  <li key={index} className="table-row">
-                    <div className="col" data-label="Event">
-                      {appointment.event || "N/A"}
-                    </div>
-                    <div className="col" data-label="Host">
-                      {appointment.host || "N/A"}
-                    </div>
-                    <div className="col" data-label="Email">
-                      {appointment.email}
-                    </div>
-                    <div className="col" data-label="Date & Time">
-                      {new Date(appointment.startDate).toLocaleString()}
-                    </div>
-                    <div className="col" data-label="Location">
-                      {appointment.location || "N/A"}
-                    </div>
-                  </li>
-                ))}
+                {renderAppointments(appointments.past)}
               </ul>
             </div>
           ) : (
