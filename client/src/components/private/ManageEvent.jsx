@@ -135,8 +135,7 @@ export default function ManageEvent() {
               <ul class="responsive-table">
                 <li class="table-header">
                   <div class="col">Name</div>
-                  <div class="col">Date</div>
-                  <div class="col">Time</div>
+                  <div class="col">Date & Time</div>
                   <div class="col">Location</div>
                   <div class="col">Privacy</div>
                   <div class="col">URL</div>
@@ -147,12 +146,10 @@ export default function ManageEvent() {
                     <div className="col" data-label="Name">
                       {event.title || "N/A"}
                     </div>
-                    <div className="col" data-label="Date">
+                    <div className="col" data-label="Date & Time">
                       {new Date(event.startDate).toLocaleString()}
                     </div>
-                    <div className="col" data-label="From">
-                      {event.startTime}
-                    </div>
+                  
                     <div className="col" data-label="Location">
                       {event.location || "N/A"}
                     </div>
@@ -224,8 +221,7 @@ export default function ManageEvent() {
               <ul className="responsive-table">
                 <li className="table-header">
                   <div className="col">Name</div>
-                  <div className="col">Date</div>
-                  <div className="col">Time</div>
+                  <div className="col">Date & Time</div>
                   <div className="col">Location</div>
                   <div className="col">Recurring</div>
                   <div className="col">Privacy</div>
@@ -239,17 +235,15 @@ export default function ManageEvent() {
                     <div className="col" data-label="Date">
                       {new Date(event.startDate).toLocaleString()}
                     </div>
-                    <div className="col" data-label="From">
-                      {event.startTime}
-                    </div>
-                    <div className="col" data-label="To">
-                      {event.endTime}
-                    </div>
+                   
                     <div className="col" data-label="Location">
                       {event.location || "N/A"}
                     </div>
                     <div className="col" data-label="Recurring">
-                      {event.recurring || "N/A"}
+                      {event.type || "N/A"}
+                    </div>
+                    <div className="col" data-label="Privacy">
+                      {event.privacy || "N/A"}
                     </div>
                   </li>
                 ))}
