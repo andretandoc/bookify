@@ -111,7 +111,7 @@ const CustomMeeting = () => {
           </li>
           <li>
             <Link to="/FullEvents" className="link">
-              View Public Events
+              View All Events
             </Link>
           </li>
           <li>

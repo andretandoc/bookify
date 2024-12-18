@@ -61,7 +61,7 @@ const MemberPage = () => {
             <Link to="/ManageBooking" className="link">Manage Meetings</Link>
           </li>
           <li>
-            <Link to="/FullEvents" className="link">View Public Events</Link>
+            <Link to="/FullEvents" className="link">View All Events</Link>
           </li>
           <li>
             <Link to="/CustomMeeting" className="link">Custom Meeting</Link>
