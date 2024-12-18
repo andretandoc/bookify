@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Import useParams
 import axios from "axios";
+import { jwtDecode } from "jwt-decode"; // To decode the token
 
 function URLTest() {
   const [currentStep, setCurrentStep] = useState("ssaCheck");
@@ -27,6 +28,33 @@ function URLTest() {
 
   const { publicURL } = useParams(); // Extract the publicURL from route params
 
+  // Decode user information from the token
+  const getUserInfoFromToken = (token) => {
+    try {
+      const decoded = jwtDecode(token);
+      return {
+        firstName: decoded.firstName,
+        lastName: decoded.lastName,
+        email: decoded.email,
+      };
+    } catch (err) {
+      console.error("Failed to decode token:", err);
+      return null;
+    }
+  };
+
+  // Prefill form fields for logged-in users
+  useEffect(() => {
+    if (token) {
+      const userInfo = getUserInfoFromToken(token);
+      if (userInfo) {
+        setFirstName(userInfo.firstName || "");
+        setLastName(userInfo.lastName || "");
+        setEmail(userInfo.email || "");
+      }
+    }
+  }, [token]);
+
   useEffect(() => {
     // Fetch event details and available time slots
     const fetchEventData = async () => {
@@ -38,7 +66,7 @@ function URLTest() {
         setEventDetails(response.data.eventDetails);
         setTimeSlots(response.data.availableAppointments);
 
-        console.log(response.data)
+        console.log(response.data);
 
         // Check if the event is private and if the user has a token
         if (response.data.eventDetails.privacy === "Members-Only" && !token) {
@@ -57,6 +85,9 @@ function URLTest() {
 
   const handleReserve = async (e) => {
     e.preventDefault();
+
+    console.log("Form Data:", { fname, lname, email, selectedTimeSlotId });
+
     if (!selectedTimeSlotId) {
       alert("Please select a time slot.");
       return;
@@ -92,9 +123,12 @@ function URLTest() {
     return (
       <main className="form-box-wrapper">
         <div className="booking-box">
-          <div style={{ marginTop: "20px", marginBottom: "20px"}}>
+          <div style={{ marginTop: "20px", marginBottom: "20px" }}>
             <h2>Access Denied</h2>
-            <p className="error-message" style={{ marginTop: "20px", marginBottom: "20px"}}>
+            <p
+              className="error-message"
+              style={{ marginTop: "20px", marginBottom: "20px" }}
+            >
               This event is private and requires a valid token to access.
             </p>
             <button className="double-btn" onClick={() => navigate("/login")}>
@@ -117,13 +151,13 @@ function URLTest() {
 
         {/* Go Back Button */}
         {token && (
-        <button
-          className="double-btn"
-          onClick={() => navigate(-1)} // This will navigate to the previous page
-        >
-          Go Back
-        </button>
-      )}
+          <button
+            className="double-btn"
+            onClick={() => navigate(-1)} // This will navigate to the previous page
+          >
+            Go Back
+          </button>
+        )}
 
         <div className="time-slots">
           {timeSlots.length === 0 ? (
@@ -289,7 +323,9 @@ function URLTest() {
             }}
           >
             <h2 style={{ margin: "0 0 10px" }}>Success</h2>
-            <p style={{ margin: "0 0 20px" }}>Appointment booked successfully!</p>
+            <p style={{ margin: "0 0 20px" }}>
+              Appointment booked successfully!
+            </p>
             <button
               className="double-btn"
               onClick={() => navigate("/ManageBooking")}
@@ -304,6 +340,5 @@ function URLTest() {
 }
 
 export default URLTest;
-
 
 //http://localhost:5173/booking/2885feabec5a2c4633dbf193c6a39369
