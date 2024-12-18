@@ -115,12 +115,13 @@ function URLTest() {
                   />
                   <input
                     type="email"
-                    placeholder="Email"
+                    placeholder=" Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    style={{width:"23vh", height:"3.5vh", borderRadius:"0.5em",borderWidth:"0.1em",background:"none"}}
                   />
-                  <button className="btn" type="submit">
+                  <button className="double-btn" style={{fontSize:"15px"}} type="submit" >
                     Book Appointment
                   </button>
                 </>

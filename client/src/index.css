@@ -1774,12 +1774,13 @@ input[type="number"] {
 
 .slot-btn {
     display: inline-block;
-    width: 140px; 
+    width: 100px; 
     height: 40px; 
     position: relative;
     background-color: rgb(255, 255, 255);
-    border: transparent;
-    box-shadow: -10px -10px 1px rgba(198, 22, 39); 
+    border-color: #c61627;
+    border-width: 0.5px;
+    box-shadow: -5px -5px 1px rgba(198, 22, 39); 
     color: #c61627; 
     font-size: 18px;
     font-family: 'Lato', sans-serif; 
@@ -1803,7 +1804,7 @@ input[type="number"] {
 }
 
 .attendee-info-form {
-  width: 280px; /* Slightly narrower */
+  width: 300px; /* Slightly narrower */
   padding: 15px; /* Add padding for spacing */
   background-color: #f9f9f9; /* Light background for distinction */
   border-radius: 8px; /* Rounded corners */
