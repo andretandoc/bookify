@@ -30,7 +30,7 @@ export default function PublicEvents() {
 
   return (
     <main className="layout">
-      <div className="container">
+      <div className="container" style={{marginLeft:"350px", width:"53%"}}>
         <h2>Public Events at McGill:</h2>
         {message && <p>{message}</p>}
         {events.length > 0 ? (
