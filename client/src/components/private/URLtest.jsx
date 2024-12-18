@@ -116,12 +116,14 @@ function URLTest() {
         </div>
 
         {/* Go Back Button */}
+        {token && (
         <button
           className="double-btn"
           onClick={() => navigate(-1)} // This will navigate to the previous page
         >
           Go Back
         </button>
+      )}
 
         <div className="time-slots">
           {timeSlots.length === 0 ? (
