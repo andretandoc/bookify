@@ -160,7 +160,7 @@ export default function ManageEvent() {
                       {event.privacy || "N/A"}
                     </div>
                     <div className="col" data-label="Public URL">
-                    <button
+                    <button className="double-btn"
                       onClick={() => {
                         if (event.publicURL) {
                           window.location.href = `/booking/${event.publicURL}`;
@@ -169,16 +169,31 @@ export default function ManageEvent() {
                           alert("No URL available");
                         }
                       }}
+                      style={{
+                        fontSize: "12px",
+                        width: "80px",
+                        height:"24px",
+                        lineHeight:"24px",
+                        boxShadow: "-5px -5px 1px #9e0918"
+                      }}
                     >
                       Go to URL
                     </button>
                   </div>
                   <div class="col">
                   <button
-                        className="reject-btn"
+                        className="double-btn"
                         onClick={() => openModal(event._id)}
+                        style={{
+                          fontSize: "12px",
+                          width: "80px",
+                          height:"24px",
+                          lineHeight:"24px",
+                          background:"grey",
+                          boxShadow: "-5px -5px 1px #1234"
+                        }}
                       >
-                        Cancel Event &#10060;
+                        Cancel Event;
                       </button>
                   </div>
                   </li>

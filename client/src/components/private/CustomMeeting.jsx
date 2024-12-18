@@ -172,6 +172,7 @@ const CustomMeeting = () => {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
+              style={{borderRadius:"10px", width:"150px", marginLeft:"3px", height:"24px"}}
             />
           </div>
 
@@ -188,6 +189,7 @@ const CustomMeeting = () => {
                   }
                   required
                   className="input-form"
+                  style={{borderRadius:"10px", width:"150px", marginLeft:"3px", height:"24px"}}
                 />
                 <button type="button" className = "double-btn" style={{
                     fontSize: "12px",
