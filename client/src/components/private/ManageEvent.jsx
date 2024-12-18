@@ -204,7 +204,7 @@ export default function ManageEvent() {
             </div>
           ) : (
             <div className="no-events">
-              <button className="double-btn"> <Link to="/CreateEvent" className="link"> Create Events </Link></button>
+              <button className="double-btn"> <Link to="/CreateEvent" className="link"> Create  </Link></button>
               <p>{message}</p>
             </div>
           )}

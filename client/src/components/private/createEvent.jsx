@@ -287,7 +287,7 @@ const CreateEvent = () => {
           )}
 
           {/* Submit Button */}
-          <button type="submit" className="double-btn" style={{marginLeft: "60vh"}}>
+          <button type="submit" className="create-evnt-btn">
             Create Event
           </button>
         </form>

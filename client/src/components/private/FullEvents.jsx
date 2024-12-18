@@ -88,8 +88,6 @@ export default function FullEvents() {
                 <div className="col">Event</div>
                 <div className="col">Host</div>
                 <div className="col">Date</div>
-                <div className="col">From</div>
-                <div className="col">To</div>
                 <div className="col">Location</div>
                 <div className="col"></div>
               </li>

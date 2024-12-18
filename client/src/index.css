@@ -353,6 +353,49 @@ Footer::before { /*useless but will keep incase */
   color: white; 
 }
 
+/* Double white/red buttons Booking page Style*/
+.create-evnt-btn {
+  display: inline-block;
+  width: 140px; 
+  height: 40px; 
+  position: relative;
+  left: 10px;
+  margin: 20px;
+  background-color: #c61627;
+  border: transparent;
+  box-shadow: -10px -10px 1px #9e0918; 
+  color: white; 
+  font-size: 18px;
+  font-family: 'Lato', sans-serif; 
+  font-weight: bolder;
+  text-align: center;
+  line-height: 38px; 
+  cursor: pointer;
+  transition: all 0.2s ease; 
+  margin-left:50vh;
+}
+
+.create-evnt-btn:hover{
+  background-color: #9e0918;
+  color:#fff;
+  border: #333;
+}
+
+.create-evnt-btn:active {
+  box-shadow: 0px 0px 0px #9e0918; 
+  transform: translateY(4px); 
+  color: white; 
+}
+
+@media (max-width: 1000px){
+  .create-evnt-btn {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 50px;
+
+  }
+}
+
 /* layered boxes */
 
 /*For Forms*/
@@ -958,26 +1001,29 @@ p a:active {
 /* Public events*/
 
 .container {
+  margin: 0 auto;
+  padding: 20px;
+  margin: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.4);
+  color: #333;
   display: flex;
-  font-family: "Arvo", sans-serif;
-  padding: 40px;
-  background-color: #f9f9f9;
-  color: black;
   flex-direction: column;
-  width: 80vh;
-  margin-bottom: 200px;
-  margin-left: 20px;
-  z-index: 0;
+  position: relative;
+  overflow: hidden;
 }
-@media (max-width: 1050px) {
+
+/* Adjust container for medium screens */
+@media (max-width: 900px) {
   .container {
-    width: 70%; /* Use percentage for flexibility */
-    padding: 20px;
-    margin-left: 30px;
-    margin-bottom: 80px;
-    margin-right: 50px;
+    max-width: 90%;
+    padding: 15px;
+    max-height: 80vh;
   }
 }
+
+
 
 .container h2 {
   font-size: 25px;
@@ -988,6 +1034,7 @@ p a:active {
 /* Public Event Card Styles */
 .event-card {
   display: flex;
+  min-width: 80%;
   justify-content: space-between;
   align-items: center;
   background-color: #e3b4ae;
