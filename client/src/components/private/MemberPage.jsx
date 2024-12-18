@@ -87,9 +87,10 @@ const MemberPage = () => {
                   <p><strong>When:</strong> {new Date(appointment.startDate).toLocaleString()}</p>
                   <p><strong>Where:</strong> {appointment.location}</p>
                 </div>
-                <button className="double-btn">
-                  <Link to="/ManageBooking" className="link">Manage</Link>
-                </button>
+                <Link to="/ManageBooking" className="double-btn link">
+                  Manage
+                </Link>
+
               </div>
             ))
           )}
