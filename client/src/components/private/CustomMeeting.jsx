@@ -111,7 +111,7 @@ const CustomMeeting = () => {
           </li>
           <li>
             <Link to="/FullEvents" className="link">
-              View Public Events
+              View All Events
             </Link>
           </li>
           <li>
@@ -194,9 +194,8 @@ const CustomMeeting = () => {
                     width: "80px",
                     height:"24px",
                     lineHeight:"24px",
-                    alignItems:"center",
                     background:"grey",
-                    boxShadow:"-5px -5px 1px #1234" 
+                    boxShadow: "-5px -5px 1px #1234"
                   }} onClick={() => handleRemoveTime(index)}>
                   Remove
                 </button>

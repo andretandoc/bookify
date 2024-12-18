@@ -122,7 +122,7 @@ const CreateEvent = () => {
           </li>
           <li>
             <Link to="/FullEvents" className="link">
-              View Public Events
+              View All Events
             </Link>
           </li>
 
@@ -150,8 +150,8 @@ const CreateEvent = () => {
           </div>
 
           {/* Location */}
-          <div className="input-text" style={{marginBottom:"28px"}}>
-          <label style={{marginBottom:"-2px"}}>Location:</label>
+          <div className="input-text"style={{marginBottom: "20px"}}>
+          <label>Location:</label>
             <input
               type="text"
               value={location}
@@ -162,7 +162,7 @@ const CreateEvent = () => {
           </div>
 
           {/* Type */}
-          <div className="choose-privacy"style={{marginBottom:"18px"}}>
+          <div className="choose-privacy"style={{marginBottom: "10px"}}>
             <label>Type:</label>
             <select value={type} onChange={(e) => setType(e.target.value)} style={{borderRadius:"10px", width:"150px", marginLeft:"10px"}}>
               <option value="One-Time">One-Time</option>
@@ -171,7 +171,7 @@ const CreateEvent = () => {
           </div>
 
           {/* Show Start Date for One-Time */}
-          <div className="choose-date"style={{marginBottom:"18px"}}>
+          <div className="choose-date"style={{marginBottom: "10px"}}>
             <label>{type === "Recurring" ? "Start:" : "Date:"}</label>
             <input
               type="date"
@@ -185,7 +185,7 @@ const CreateEvent = () => {
           {/* Show End Date and Recurrence for Recurring Events */}
           {type === "Recurring" && (
             <>
-              <div className="choose-date"style={{marginBottom:"18px"}}>
+              <div className="choose-date"style={{marginBottom: "10px"}}>
                 <label>Until:</label>
                 <input
                   type="date"
@@ -196,7 +196,7 @@ const CreateEvent = () => {
                 />
               </div>
 
-              <div className="choose-privacy"style={{marginBottom:"18px"}}>
+              <div className="choose-privacy"style={{marginBottom: "10px"}}>
                 <label>Recurrence:</label>
                 <select
                   value={recurrenceFrequency}
@@ -247,9 +247,8 @@ const CreateEvent = () => {
                     width: "80px",
                     height:"24px",
                     lineHeight:"24px",
-                    alignItems:"center",
                     background:"grey",
-                    boxShadow:"-5px -5px 1px #1234" 
+                    boxShadow: "-5px -5px 1px #1234"
                   }}
                 >
                   Remove
@@ -282,7 +281,7 @@ const CreateEvent = () => {
           )}
 
           {/* Submit Button */}
-          <button type="submit" className="double-btn" style={{marginLeft:"480px"}}>
+          <button type="submit" className="double-btn" style={{marginLeft: "460px"}}>
             Create Event
           </button>
         </form>

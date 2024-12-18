@@ -28,9 +28,9 @@ router.delete("/:id", authenticateToken, deleteEvent);
 // Fetch events
 router.get("/events", authenticateToken, getEvents);
 
-router.get("/allevents", authenticateToken, getAllEvents)
+router.get("/allevents", authenticateToken, getAllEvents);
 
-router.get("/closest", authenticateToken, getClosestAppointments)
+router.get("/closest", authenticateToken, getClosestAppointments);
 
 //Fetch public events
 router.get("/public", getPublicEvents);

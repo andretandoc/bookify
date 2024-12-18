@@ -195,10 +195,8 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-
 const getPublicEvents = async (req, res) => {
   try {
-
     const { privacy } = req.query;
     if (privacy) filter.privacy = privacy; // Filter by event privacy
     // Query to fetch events where privacy is 'Public'
@@ -216,7 +214,7 @@ const getPublicEvents = async (req, res) => {
   } catch (error) {
     console.error("Error fetching public events:", error);
     res.status(500).json({ message: "Failed to retrieve public events." });
-  } 
+  }
 };
 
 const getAllEvents = async (req, res) => {
@@ -243,39 +241,51 @@ const getAllEvents = async (req, res) => {
   }
 };
 
-
 const getAppointmentsPublic = async (req, res) => {
   try {
     const { email, startDate, endDate } = req.query;
-  
+
     const currentDate = new Date(); // Current date for comparison
-  
-    // Build the filter dynamically based on provided parameters
+
     let filter = {};
-    if (email) filter.email = new RegExp(email, "i"); // Case-insensitive search
-    if (startDate) filter.startDate = { $gte: new Date(startDate) };
-    if (endDate) filter.endDate = { ...filter.endDate, $lte: new Date(endDate) };
-  
+
+    if (email) {
+      filter["reservedBy.email"] = new RegExp(email.trim(), "i");
+    }
+
+    if (startDate) filter.time = { $gte: new Date(startDate) };
+    if (endDate) filter.time = { ...filter.time, $lte: new Date(endDate) };
+
+    console.log("Filter used for query:", filter);
+
+    // Build the filter dynamically based on provided parameters -- OLD
+    // if (email) filter.email["reservedBy.email"] = new RegExp(email, "i"); // Case-insensitive search
+    // if (startDate) filter.startDate = { $gte: new Date(startDate) };
+    // if (endDate)
+    //   filter.endDate = { ...filter.endDate, $lte: new Date(endDate) };
+
     // Fetch all appointments matching the filter
+    console.log("Filter:", filter);
     const appointments = await Appointment.find(filter);
-  
+    console.log("Appointments:", appointments);
+
     // Split appointments into active and past categories
     const activeAppointments = appointments.filter(
-      (appointment) => new Date(appointment.startDate) >= currentDate
+      (appointment) => new Date(appointment.time) >= currentDate
     );
     const pastAppointments = appointments.filter(
-      (appointment) => new Date(appointment.startDate) < currentDate
+      (appointment) => new Date(appointment.time) < currentDate
     );
-  
+
     // Debugging logs
     console.log("Active Appointments:", activeAppointments);
     console.log("Past Appointments:", pastAppointments);
-  
+
     // Handle the case where no appointments were found
     if (appointments.length === 0) {
       return res.status(404).json({ message: "No appointments found" });
     }
-  
+
     // Return the categorized appointments
     res.status(200).json({
       activeAppointments,
@@ -285,7 +295,7 @@ const getAppointmentsPublic = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Failed to fetch appointments" });
   }
-}
+};
 
 const getClosestAppointments = async (req, res) => {
   try {
@@ -298,7 +308,7 @@ const getClosestAppointments = async (req, res) => {
     }
 
     const name = user.fname || "NA"; // Get user's first name or fallback to "NA"
-    
+
     // Get the current date and time
     const currentDate = new Date();
 
@@ -312,7 +322,9 @@ const getClosestAppointments = async (req, res) => {
 
     // Check if no appointments were found
     if (closestAppointments.length === 0) {
-      return res.status(404).json({ message: "No upcoming appointments found." });
+      return res
+        .status(404)
+        .json({ message: "No upcoming appointments found." });
     }
 
     console.log("Closest appointments:", closestAppointments);
@@ -327,7 +339,6 @@ const getClosestAppointments = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch appointments" });
   }
 };
-
 
 const getAppointmentsPrivate = async (req, res) => {
   try {
