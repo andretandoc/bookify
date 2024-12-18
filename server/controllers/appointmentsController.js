@@ -380,27 +380,22 @@ const cancelPublicAppointment = async (req, res) => {
   try {
     const appointmentId = req.params.id;
 
-    // Find the appointment to get the eventId and the time slot
-    const appointment = await Appointment.findById(appointmentId);
+    // Find the appointment
+    const appointment = await Appointment.findOne({ _id: appointmentId });
+
     if (!appointment) {
-      return res.status(404).json({ message: "Appointment not found" });
+      return res
+        .status(404)
+        .json({ message: "Appointment not found or already canceled" });
     }
-
-    // Find the event associated with this appointment
-    const event = await Event.findById(appointment.eventId);
-    if (!event) {
-      return res.status(404).json({ message: "Event not found" });
-    }
-
-    // Re-add the slot back to the event's available times
-    event.availableSlots.push(appointment.time); // Add the canceled slot back to the event
-    await event.save(); // Save the updated event
-
-    // Now delete the appointment
-    await appointment.deleteOne();
+    
+    console.log("apptmnt:", appointment)
+    // Clear the reservedBy field to mark the appointment as available
+    appointment.reservedBy = null;
+    await appointment.save();
 
     res.status(200).json({
-      message: "Public appointment successfully canceled and slot re-added",
+      message: "Public appointment successfully canceled and marked as available",
     });
   } catch (error) {
     console.error("Error canceling public appointment:", error);
@@ -408,42 +403,37 @@ const cancelPublicAppointment = async (req, res) => {
   }
 };
 
+
 const cancelPrivateAppointment = async (req, res) => {
   try {
     const appointmentId = req.params.id;
+    const { email } = req.user;
 
     // Find the appointment to ensure it belongs to the authenticated user
     const appointment = await Appointment.findOne({
       _id: appointmentId,
-      "reservedBy.userId": userId,
+      "reservedBy.email": email,
     });
+
     if (!appointment) {
       return res
         .status(404)
         .json({ message: "Appointment not found or unauthorized to cancel" });
     }
 
-    // Find the event associated with this appointment
-    const event = await Event.findById(appointment.eventId);
-    if (!event) {
-      return res.status(404).json({ message: "Event not found" });
-    }
-
-    // Re-add the slot back to the event's available times
-    event.availableSlots.push(appointment.time); // Add the canceled slot back to the event
-    await event.save(); // Save the updated event
-
-    // Delete the appointment
-    await appointment.deleteOne();
+    // Clear the reservedBy field
+    appointment.reservedBy = null;
+    await appointment.save();
 
     res.status(200).json({
-      message: "Private appointment successfully canceled and slot re-added",
+      message: "Private appointment successfully canceled and marked as available",
     });
   } catch (error) {
     console.error("Error canceling private appointment:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 // For members to create a booking
 // const createAppointment = async (req, res) => {

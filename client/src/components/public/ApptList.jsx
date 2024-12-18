@@ -41,18 +41,20 @@ function ApptList() {
     if (!selectedAppointment) return;
   
     try {
-      const token = localStorage.getItem("token");
+      console.log("im here");
       const API_URL = import.meta.env.VITE_API_URL;
   
-      const response = await axios.delete(`${API_URL}/api/appointments/cancelpublic-${selectedAppointment}`);
-       
-  
+      const response = await axios.delete(`${API_URL}/api/appointments/cancelpublic/${selectedAppointment}`);
+      
       // Remove the canceled event from the state
       setAppointments((prev) => ({
         ...prev,
-        active: prev.active.filter((appointment) => appointment._id !== selectedAppointment),
+        active: prev.active.filter(
+          (appointment) => appointment._id !== selectedAppointment),
       }));
-  
+      
+      console.log(response.data);
+
       setSuccessMessage("Event successfully canceled!"); // Add success message
     } catch (error) {
       console.error("Error canceling appointment:", error);
@@ -119,7 +121,7 @@ function ApptList() {
                           boxShadow: "-5px -5px 1px #1234"
                         }}
                       >
-                        Cancel Meeting;
+                        Cancel
                       </button>
                     </div>
                   </li>

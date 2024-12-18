@@ -73,7 +73,7 @@ export default function ManageBooking() {
       const API_URL = import.meta.env.VITE_API_URL;
 
       const response = await axios.delete(
-        `${API_URL}/api/appointments/cancelprivate-${selectedAppointment}`,
+        `${API_URL}/api/appointments/cancelprivate/${selectedAppointment}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -119,6 +119,20 @@ export default function ManageBooking() {
           <div className="col" data-label="Location">
             {appointment.eventId?.location || "N/A"}
           </div>
+          <button
+              className="double-btn"
+              onClick={() => openModal(appointment._id)}
+              style={{
+                fontSize: "12px",
+                width: "80px",
+                height:"24px",
+                lineHeight:"24px",
+                background:"grey",
+                boxShadow: "-5px -5px 1px #1234"
+              }}
+            >
+              Cancel
+            </button>
         </li>
       ))}
     </>

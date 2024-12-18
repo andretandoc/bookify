@@ -34,9 +34,9 @@ router.get("/allevents", authenticateToken, getAllEvents);
 
 router.get("/closest", authenticateToken, getClosestAppointments);
 
-router.delete("/cancelpublic-:id", cancelPublicAppointment);
+router.delete("/cancelpublic/:id", cancelPublicAppointment);
 
-router.delete("/cancelprivate-:id", authenticateToken, cancelPrivateAppointment)
+router.delete("/cancelprivate/:id", authenticateToken, cancelPrivateAppointment)
 
 //Fetch public events
 router.get("/public", getPublicEvents);
