@@ -87,7 +87,7 @@ const CustomMeeting = () => {
 
   return (
     <main className="layout">
-      <aside className="sidebar">
+      <aside className="sidebar" style={{height:"130vh"}}>
         <ul className="menu">
           <li>
             <Link to="/MemberPage" className="link">
@@ -220,7 +220,7 @@ const CustomMeeting = () => {
           </div>
 
           {/* Submit Button */}
-          <button type = "double-btn" className = "double-btn" >
+          <button type = "double-btn" className = "double-btn" style={{marginLeft: "500px"}}>
             Send Request
           </button>
 

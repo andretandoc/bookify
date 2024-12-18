@@ -82,7 +82,7 @@ export default function FullEvents() {
       <div className="container"style={{marginLeft: "100px"}}>
         <h2>All Events at McGill:</h2>
         {events.active.length > 0 ? (
-          <div className="table-wrapper">
+          <div className="table-wrapper" style={{minHeight:"500px"}}>
             <ul className="responsive-table">
               <li className="table-header">
                 <div className="col">Event</div>

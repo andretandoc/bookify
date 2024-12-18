@@ -326,7 +326,7 @@ Footer::before { /*useless but will keep incase */
   width: 140px; 
   height: 40px; 
   position: relative;
-  left: 40px;
+  left: 10px;
   margin: 20px;
   background-color: #c61627;
   border: transparent;
@@ -1094,7 +1094,7 @@ body.private-page{
   justify-content: space-between;
   padding: 20px;
   z-index: 1;
-  height: 85vh;
+  height: 100vh;
 }
 
 .menu {
