@@ -139,10 +139,18 @@ export default function ManageBooking() {
                     </div>
                     <div className="col">
                       <button
-                        className="reject-btn"
+                        className="double-btn"
                         onClick={() => openModal(appointment._id)}
+                        style={{
+                          fontSize: "12px",
+                          width: "80px",
+                          height:"24px",
+                          lineHeight:"24px",
+                          background:"grey",
+                          boxShadow: "-5px -5px 1px #1234"
+                        }}
                       >
-                        Cancel Meeting &#10060;
+                        Cancel Meeting;
                       </button>
                     </div>
                   </li>
