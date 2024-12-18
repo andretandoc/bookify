@@ -113,7 +113,7 @@ export default function FullEvents() {
                       className="double-btn"
                       onClick={() => {
                         if (event.publicURL) {
-                          window.location.href = `https://bookify-ten-beige.vercel.app/booking/${event.publicURL}`;
+                          window.location.href = `${event.publicURL}`;
                         } else {
                           alert("No URL available");
                         }

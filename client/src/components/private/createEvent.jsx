@@ -271,7 +271,7 @@ const CreateEvent = () => {
               {successMessage}
               <br />
               <a
-                href={`/booking/${publicURL}`}
+                href={`${publicURL}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
