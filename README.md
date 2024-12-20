@@ -2,8 +2,6 @@ Bookify
 
 Link to website: https://bookify-ten-beige.vercel.app
 
-Website Design & CSS : Teema Ismail & Leen Assaf
-
 Here is a table where each row represents a person and the tasks they worked on:
 
 | **Name**           |  Frontend Tasks                                                                                    |     Backend & Database Tasks                                                                                    |
