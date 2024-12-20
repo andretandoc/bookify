@@ -1,8 +1,8 @@
-Bookify
+Bookify Project : 
 
 Link to website: https://bookify-ten-beige.vercel.app
 
-Here is a table where each row represents a person and the tasks they worked on:
+
 
 Notes:
 
@@ -16,7 +16,10 @@ Notes:
     Saif, Andre, and Karl collaborated on controllers and database models, ensuring secure and scalable backend operations.
 
 - Shared Responsibilities:
-    Several backend tasks (e.g., AuthenticationController and routing) involved teamwork with each person implementing a specific part of the code.
+    Several backend tasks (example: AuthenticationController, routing, ...) involved teamwork with each person implementing a specific part of the code.
+
+
+Here is a table where each row represents a person and the tasks they worked on:
   
 
 | **Name**           |  Frontend Tasks                                                                                    |     Backend & Database Tasks                                                                                    |
