@@ -4,6 +4,19 @@ Link to website: https://bookify-ten-beige.vercel.app
 
 Here is a table where each row represents a person and the tasks they worked on:
 
+Notes:
+
+    - Frontend Contributions:
+        Teema and Leen focused on public and private page designs with a strong emphasis on styling and responsiveness.
+        Saif, Andre, and Karl worked on user interactions, meeting/event functionalities, and booking workflows.
+
+    - Backend Contributions:
+        Teema and Leen handled API endpoints for their specific pages.
+        Saif, Andre, and Karl collaborated on controllers, routing, authentication, and database models, ensuring secure and scalable backend operations.
+        Shared Responsibilities:
+
+    - Several backend tasks (e.g., AuthenticationController and routing) involved teamwork, which highlights effective collaboration among the group
+
 | **Name**           |  Frontend Tasks                                                                                    |     Backend & Database Tasks                                                                                    |
 |--------------------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
 | **Teema Ismail**   | Design & CSS, Home Page (Public page), Public History (Public page), Public Appointment List (Public page)       | - API endpoint for designated webpages                                                                          |
