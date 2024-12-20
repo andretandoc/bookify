@@ -38,13 +38,10 @@ router.delete("/cancelpublic/:id", cancelPublicAppointment);
 
 router.delete("/cancelprivate/:id", authenticateToken, cancelPrivateAppointment)
 
-//Fetch public events
 router.get("/public", getPublicEvents);
 
-// Get event details by public URL (public access)
 router.get("/:publicURL", getEventByPublicURL);
 
-// Reserve an appointment time slot (public access)
 router.post("/:publicURL/reserve", reserveAppointment);
 
 module.exports = router;

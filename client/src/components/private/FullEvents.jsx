@@ -10,14 +10,12 @@ export default function FullEvents() {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      setEvents({ active: [] }); // Ensure proper default structure
+      setEvents({ active: [] }); 
       setMessage("");
 
       const token = localStorage.getItem("token");
-      console.log("Token in Frontend:", token); // Debugging
 
       try {
-        // Assuming `API_URL` holds the URL to the backend server
         const API_URL = import.meta.env.VITE_API_URL;
 
         // Update this to fetch all events

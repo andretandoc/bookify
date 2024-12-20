@@ -7,21 +7,17 @@ const createCustomMeeting = async (req, res) => {
     const { recipientEmail, proposedTimes, message, date, location } = req.body;
     const createdBy = req.user.email;
 
-    // Validate required fields
     if (!recipientEmail || !proposedTimes || !date || !location) {
       return res.status(400).json({ message: "All required fields must be provided." });
     }
 
-    // Validate and parse the date (base date for proposed times)
     const parsedDate = new Date(date);
     if (isNaN(parsedDate)) {
       return res.status(400).json({ message: "Invalid date format." });
     }
     
-    
-    // Store the proposed times as strings (HH:mm)
+
     const proposedTimeStrings = proposedTimes.map((time) => {
-      // Make sure the time format is correct (e.g., "19:34")
       const [hours, minutes] = time.split(":");
       if (isNaN(hours) || isNaN(minutes)) {
         throw new Error(`Invalid time format: ${time}`);
@@ -32,7 +28,7 @@ const createCustomMeeting = async (req, res) => {
     // Create and save the meeting
     const newMeeting = new CustomMeeting({
       recipientEmail,
-      proposedTimes: proposedTimeStrings,  // Store times as strings
+      proposedTimes: proposedTimeStrings,  
       message,
       date: parsedDate,
       location,

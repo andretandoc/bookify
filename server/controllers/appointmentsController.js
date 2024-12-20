@@ -5,39 +5,31 @@ const crypto = require("crypto");
 
 const getEvents = async (req, res) => {
   try {
-    // Log the user from the token
     console.log("Request user:", req.user);
 
     const { type, privacy, startDate, endDate } = req.query;
 
-    // Fetch the logged-in user's email or ID
-    const createdBy = req.user.email; // Assuming `email` is in req.user
+    const createdBy = req.user.email; 
 
-    // Build the query filter object
-    let filter = { createdBy }; // Include only events created by the logged-in user
+    let filter = { createdBy }; 
 
-    if (type) filter.type = type; // Filter by event type
-    if (privacy) filter.privacy = privacy; // Filter by event privacy
-    // if (createdBy) filter.createdBy = createdBy; // Filter by creator email
+    if (type) filter.type = type; 
+    if (privacy) filter.privacy = privacy; 
     if (startDate && endDate) {
-      filter.startDate = { $gte: new Date(startDate), $lte: new Date(endDate) }; // Date range filter
+      filter.startDate = { $gte: new Date(startDate), $lte: new Date(endDate) }; 
     } else if (startDate) {
-      filter.startDate = { $gte: new Date(startDate) }; // Events starting after the date
+      filter.startDate = { $gte: new Date(startDate) }; 
     }
 
-    // Debug the filter being passed to the database query
-    console.log("Query filter:", filter);
 
     const currentDate = new Date();
 
-    // Fetch events based on filters
-    const events = await Event.find(filter).sort({ startDate: 1 }); // Sort by startDate ascending
+    const events = await Event.find(filter).sort({ startDate: 1 }); 
 
     if (!events || events.length === 0) {
       return res.status(404).json({ message: "No events found." });
     }
 
-    // Separate active and past events
     const activeEvents = events.filter(
       (event) => event.endDate && new Date(event.endDate) >= currentDate
     );
@@ -45,7 +37,6 @@ const getEvents = async (req, res) => {
       (event) => event.endDate && new Date(event.endDate) < currentDate
     );
 
-    // Respond with active and past events
     res.status(200).json({ activeEvents, pastEvents });
   } catch (error) {
     console.error("Error fetching events:", error);
@@ -66,7 +57,6 @@ const createEvent = async (req, res) => {
       timeslots,
     } = req.body;
 
-    // Validate required fields
     if (
       !title ||
       !location ||
@@ -77,7 +67,6 @@ const createEvent = async (req, res) => {
       return res.status(400).json({ message: "Missing required fields." });
     }
 
-    // Validate timeslots (HH:MM format)
     const isValidTimeslots = timeslots.every((slot) =>
       /^\d{2}:\d{2}$/.test(slot)
     );
@@ -87,14 +76,10 @@ const createEvent = async (req, res) => {
         .json({ message: "Invalid time slot format. Use HH:MM." });
     }
 
-    // Extract user email from token (middleware injects req.user)
     const createdBy = req.user.email;
 
-    // Generate a public URL
-    //const publicURL = crypto.randomBytes(16).toString("hex");
     const publicURL = crypto.randomBytes(16).toString("hex");
 
-    // Create the Event
     const newEvent = new Event({
       title,
       type,
@@ -107,13 +92,11 @@ const createEvent = async (req, res) => {
     });
     await newEvent.save();
 
-    // Generate Appointments
     let appointments = [];
     const baseDate = new Date(startDate);
     const finalDate = new Date(endDate);
 
     if (type === "Recurring") {
-      // Recurring logic: Weekly or Monthly
       let currentDate = new Date(baseDate);
 
       while (currentDate <= finalDate) {
@@ -130,7 +113,6 @@ const createEvent = async (req, res) => {
           }
         });
 
-        // Increment the date for next recurrence
         if (recurrence === "Weekly") {
           currentDate.setDate(currentDate.getDate() + 7);
         } else if (recurrence === "Monthly") {
@@ -138,7 +120,6 @@ const createEvent = async (req, res) => {
         }
       }
     } else {
-      // One-Time Event Logic
       timeslots.forEach((slot) => {
         const [hours, minutes] = slot.split(":");
         const appointmentTime = new Date(startDate);
@@ -151,7 +132,6 @@ const createEvent = async (req, res) => {
       });
     }
 
-    // Insert Appointments into the Database
     if (appointments.length === 0) {
       return res
         .status(400)
@@ -172,19 +152,15 @@ const createEvent = async (req, res) => {
 
 const deleteEvent = async (req, res) => {
   try {
-    const { id } = req.params; // Extract event ID from params
+    const { id } = req.params; 
 
-    // Check if the event exists
     const event = await Event.findById(id);
     if (!event) {
       return res.status(404).json({ message: "Event not found." });
     }
 
-    console.log(event);
-    // Delete the event
     await Event.findByIdAndDelete(id);
 
-    // Delete all associated appointments
     await Appointment.deleteMany({ eventId: id });
 
     res.status(200).json({
@@ -199,18 +175,15 @@ const deleteEvent = async (req, res) => {
 const getPublicEvents = async (req, res) => {
   try {
     const { privacy } = req.query;
-    if (privacy) filter.privacy = privacy; // Filter by event privacy
-    // Query to fetch events where privacy is 'Public'
+    if (privacy) filter.privacy = privacy; 
     const publicEvents = await Event.find({ privacy: "Public" });
 
-    // Check if no public events were found
     if (publicEvents.length === 0) {
       return res.status(404).json({ message: "No public events found." });
     }
 
     console.log("Public events = ", publicEvents);
 
-    // Return the list of public events
     res.status(200).json({ publicEvents });
   } catch (error) {
     console.error("Error fetching public events:", error);
@@ -220,21 +193,16 @@ const getPublicEvents = async (req, res) => {
 
 const getAllEvents = async (req, res) => {
   try {
-    // Get today's date at midnight (to ignore time part)
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set to the beginning of the day
+    today.setHours(0, 0, 0, 0); 
 
-    // Fetch all events starting from today or in the future
     const allEvents = await Event.find({ startDate: { $gte: today } });
 
-    // Check if no events were found
     if (allEvents.length === 0) {
       return res.status(404).json({ message: "No events found." });
     }
 
-    console.log("All future events = ", allEvents);
 
-    // Return the list of all events
     res.status(200).json({ allEvents });
   } catch (error) {
     console.error("Error fetching all events:", error);
@@ -247,9 +215,8 @@ const getAppointmentsPublic = async (req, res) => {
   try {
     const { email, startDate, endDate } = req.query;
 
-    const currentDate = new Date(); // Current date for comparison
+    const currentDate = new Date(); 
 
-    // Build the dynamic filter object based on the query parameters
     let filter = {};
 
     if (email) {
@@ -268,11 +235,8 @@ const getAppointmentsPublic = async (req, res) => {
 
     console.log("Filter used for query:", filter);
 
-    // Fetch all appointments matching the filter and populate eventId with relevant fields
     const appointments = await Appointment.find(filter).populate("eventId", "title createdBy startDate location");
-    console.log("Appointments:", appointments);
 
-    // Split appointments into active and past categories
     const activeAppointments = appointments.filter(
       (appointment) => new Date(appointment.time) >= currentDate
     );
@@ -280,16 +244,10 @@ const getAppointmentsPublic = async (req, res) => {
       (appointment) => new Date(appointment.time) < currentDate
     );
 
-    // Debugging logs
-    console.log("Active Appointments:", activeAppointments);
-    console.log("Past Appointments:", pastAppointments);
-
-    // Handle the case where no appointments were found
     if (appointments.length === 0) {
       return res.status(404).json({ message: "No appointments found" });
     }
 
-    // Return the categorized appointments with event details
     res.status(200).json({
       activeAppointments,
       pastAppointments,
@@ -303,28 +261,25 @@ const getAppointmentsPublic = async (req, res) => {
 
 const getClosestAppointments = async (req, res) => {
   try {
-    const { email } = req.user; // Email extracted from the authenticated user
-    console.log("Fetching appointments for email:", email); // Debugging
+    const { email } = req.user; 
+    console.log("Fetching appointments for email:", email); 
 
     const user = await User.findOne({ email: email });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const name = user.fname || "NA"; // Get user's first name or fallback to "NA"
+    const name = user.fname || "NA"; 
 
-    // Get the current date and time
     const currentDate = new Date();
 
-    // Query to find the closest appointments
     const closestAppointments = await Appointment.find({
-      email: email, // Make sure to filter by the user's email
-      startDate: { $gte: currentDate }, // Ensure the appointment's start date is >= current date
+      email: email, 
+      startDate: { $gte: currentDate }, 
     })
-      .sort({ startDate: 1 }) // Sort appointments by the closest upcoming date
-      .limit(4); // Limit the number of appointments to 4
+      .sort({ startDate: 1 }) 
+      .limit(4);
 
-    // Check if no appointments were found
     if (closestAppointments.length === 0) {
       return res
         .status(404)
@@ -333,7 +288,6 @@ const getClosestAppointments = async (req, res) => {
 
     console.log("Closest appointments:", closestAppointments);
 
-    // Return the closest appointments
     res.status(200).json({
       name,
       closestAppointments,
@@ -346,18 +300,18 @@ const getClosestAppointments = async (req, res) => {
 
 const getAppointmentsPrivate = async (req, res) => {
   try {
-    const { email } = req.user; // Assuming email is extracted from the token
-    console.log("Fetching appointments for email:", email); // Debugging
+    const { email } = req.user; 
+    console.log("Fetching appointments for email:", email); 
     const currentDate = new Date();
 
     const activeAppointments = await Appointment.find({
       "reservedBy.email": email,
-      time: { $gte: currentDate }, // Future appointments
+      time: { $gte: currentDate }, 
     }).populate("eventId", "title createdBy startDate location");
 
     const pastAppointments = await Appointment.find({
       "reservedBy.email": email,
-      time: { $lt: currentDate }, // Past appointments
+      time: { $lt: currentDate },
     }).populate("eventId", "title createdBy startDate location");
 
     const user = await User.findOne({ email: email });
@@ -365,8 +319,8 @@ const getAppointmentsPrivate = async (req, res) => {
 
     console.log("Member :", user);
     console.log("Name:", name);
-    console.log("Active private Appointments:", activeAppointments); // Debugging
-    console.log("Past private Appointments:", pastAppointments); // Debugging
+    console.log("Active private Appointments:", activeAppointments); 
+    console.log("Past private Appointments:", pastAppointments); 
 
     res.status(200).json({
       name,
@@ -383,7 +337,6 @@ const cancelPublicAppointment = async (req, res) => {
   try {
     const appointmentId = req.params.id;
 
-    // Find the appointment
     const appointment = await Appointment.findOne({ _id: appointmentId });
 
     if (!appointment) {
@@ -394,7 +347,6 @@ const cancelPublicAppointment = async (req, res) => {
 
     console.log("Found appointment:", appointment);
 
-    // Clear the reservedBy field to mark the appointment as available
     appointment.reservedBy = null;
     await appointment.save();
 
@@ -412,7 +364,6 @@ const cancelPrivateAppointment = async (req, res) => {
     const appointmentId = req.params.id;
     const { email } = req.user;
 
-    // Find the appointment to ensure it belongs to the authenticated user
     const appointment = await Appointment.findOne({
       _id: appointmentId,
       "reservedBy.email": email,
@@ -424,7 +375,6 @@ const cancelPrivateAppointment = async (req, res) => {
         .json({ message: "Appointment not found or unauthorized to cancel" });
     }
 
-    // Clear the reservedBy field
     appointment.reservedBy = null;
     await appointment.save();
 
@@ -438,59 +388,25 @@ const cancelPrivateAppointment = async (req, res) => {
 };
 
 
-// For members to create a booking
-// const createAppointment = async (req, res) => {
-//   try {
-//     const { event, host, location, proposedTimes } = req.body;
-
-//     // Validate proposedTimes
-//     if (!proposedTimes || proposedTimes.length === 0) {
-//       return res.status(400).json({ message: "Proposed times are required." });
-//     }
-
-//     // Generate a unique public URL
-//     const publicURL = crypto.randomBytes(16).toString("hex");
-
-//     const newAppointment = new Appointment({
-//       event,
-//       host,
-//       location,
-//       startDate: new Date(proposedTimes[0]), // Start date is the first proposed time
-//       endDate: new Date(proposedTimes[proposedTimes.length - 1]), // End date is the last proposed time
-//       publicURL,
-//       email: req.user.email, // Member email (from the token)
-//       proposedTimes,
-//     });
-
-//     await newAppointment.save();
-//     res.status(201).json({ message: "Appointment created", publicURL });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Failed to create appointment" });
-//   }
-// };
-
 // For public users to view available bookings
 const getEventByPublicURL = async (req, res) => {
   try {
     const { publicURL } = req.params;
 
-    // Find the Event using publicURL
     const event = await Event.findOne({ publicURL });
     if (!event) {
       return res.status(404).json({ message: "Event not found." });
     }
 
-    // Fetch available appointments for the Event
     const availableAppointments = await Appointment.find({
       eventId: event._id,
-      reservedBy: null, // Only fetch unreserved slots
+      reservedBy: null, 
     });
 
     res.status(200).json({
       eventDetails: event,
       availableAppointments,
-      privacy: event.privacy, // Add the privacy field
+      privacy: event.privacy, 
     });
   } catch (error) {
     console.error(error);
@@ -503,24 +419,21 @@ const reserveAppointment = async (req, res) => {
     const { publicURL } = req.params;
     const { firstName, lastName, email, timeSlotId } = req.body;
 
-    // Find the Event using publicURL
     const event = await Event.findOne({ publicURL });
     if (!event) {
       return res.status(404).json({ message: "Event not found." });
     }
 
-    // Find the specific Appointment
     const appointment = await Appointment.findOne({
       _id: timeSlotId,
       eventId: event._id,
-      reservedBy: null, // Ensure the slot is not already reserved
+      reservedBy: null, 
     });
 
     if (!appointment) {
       return res.status(400).json({ message: "Time slot unavailable." });
     }
 
-    // Update the Appointment with attendee details
     appointment.reservedBy = { firstName, lastName, email };
     await appointment.save();
 

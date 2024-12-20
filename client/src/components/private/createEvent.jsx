@@ -4,41 +4,36 @@ import { Link } from "react-router-dom";
 
 const CreateEvent = () => {
   const [title, setTitle] = useState("");
-  const [type, setType] = useState("One-Time"); // Event Type: One-Time or Recurring
-  const [recurrenceFrequency, setRecurrenceFrequency] = useState("Weekly"); // Weekly or Monthly
-  const [startDate, setStartDate] = useState(""); // Start Date
-  const [endDate, setEndDate] = useState(""); // End Date (for Recurring)
-  const [location, setLocation] = useState(""); // Event Location
-  const [privacy, setPrivacy] = useState(""); // Public or Members-Only
-  const [baseTimeslots, setBaseTimeslots] = useState([]); // Array of base time slots
-  const [error, setError] = useState(""); // Error Message
-  const [successMessage, setSuccessMessage] = useState(""); // Success Message
-  const [publicURL, setPublicURL] = useState(""); // Generated Public URL
+  const [type, setType] = useState("One-Time"); 
+  const [recurrenceFrequency, setRecurrenceFrequency] = useState("Weekly"); 
+  const [startDate, setStartDate] = useState(""); 
+  const [endDate, setEndDate] = useState(""); 
+  const [location, setLocation] = useState(""); 
+  const [privacy, setPrivacy] = useState(""); 
+  const [baseTimeslots, setBaseTimeslots] = useState([]); 
+  const [error, setError] = useState(""); 
+  const [successMessage, setSuccessMessage] = useState(""); 
+  const [publicURL, setPublicURL] = useState(""); 
 
-  // Add new base time slot
   const addBaseTimeSlot = () => {
     setBaseTimeslots([...baseTimeslots, ""]);
   };
 
-  // Handle base time slot change
   const handleBaseTimeChange = (index, value) => {
     const updatedTimes = [...baseTimeslots];
     updatedTimes[index] = value;
     setBaseTimeslots(updatedTimes);
   };
 
-  // Remove a specific base time slot
   const handleRemoveBaseTime = (index) => {
     setBaseTimeslots(baseTimeslots.filter((_, i) => i !== index));
   };
 
-  // Submit the form
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
 
-    // Validate all required fields
     if (
       !title ||
       !location ||
@@ -50,7 +45,7 @@ const CreateEvent = () => {
       return;
     }
 
-    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split("T")[0]; 
     if (startDate < today) {
       setError("The event start date cannot be before today.");
       return;
@@ -68,7 +63,7 @@ const CreateEvent = () => {
         startDate,
         endDate: type === "Recurring" ? endDate : startDate,
         recurrence: type === "Recurring" ? recurrenceFrequency : null,
-        timeslots: baseTimeslots, // Send plain times ["06:40"]
+        timeslots: baseTimeslots,
       };
 
       console.log("Sending payload:", payload);
@@ -80,11 +75,9 @@ const CreateEvent = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Success response
       setSuccessMessage("Event created successfully! Share this URL:");
       setPublicURL(response.data.publicURL);
 
-      // Reset form fields
       setTitle("");
       setType("One-Time");
       setLocation("");

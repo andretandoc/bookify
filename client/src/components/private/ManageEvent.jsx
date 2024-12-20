@@ -26,8 +26,6 @@ export default function ManageEvent() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log(response.data.activeEvents)
-
         if (
           response.data.activeEvents.length === 0 &&
           response.data.pastEvents.length === 0
@@ -46,7 +44,7 @@ export default function ManageEvent() {
       }
     };
     fetchEvents();
-  }, []); // Empty dependency array ensures it runs once on component mount
+  }, []); 
 
   
   const openModal = (eventId) => {
@@ -70,13 +68,12 @@ export default function ManageEvent() {
         headers: { Authorization: `Bearer ${token}` },
       });
   
-      // Remove the canceled event from the state
       setEvents((prev) => ({
         ...prev,
         active: prev.active.filter((event) => event._id !== selectedEventId),
       }));
   
-      setSuccessMessage("Event successfully canceled!"); // Add success message
+      setSuccessMessage("Event successfully canceled!");
     } catch (error) {
       console.error("Error canceling event:", error);
       setMessage(

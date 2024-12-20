@@ -3,9 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function ManageBooking() {
-  //   const [email, setEmail] = useState("");
-  //   const [startDate, setStartDate] = useState("");
-  //   const [endDate, setEndDate] = useState("");
   const [message, setMessage] = useState("");
   const [appointments, setAppointments] = useState({
     active: [],
@@ -16,11 +13,10 @@ export default function ManageBooking() {
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      setAppointments({ active: [], past: [] }); // Ensure proper default structure
+      setAppointments({ active: [], past: [] }); 
       setMessage("");
 
       const token = localStorage.getItem("token");
-      console.log("Token in Frontend:", token); // Debugging
 
       try {
         const token = localStorage.getItem("token");
@@ -87,7 +83,7 @@ export default function ManageBooking() {
         ),
       }));
 
-      setSuccessMessage("Event successfully canceled!"); // Add success message
+      setSuccessMessage("Event successfully canceled!"); 
     } catch (error) {
       console.error("Error canceling appointment:", error);
       setMessage(
@@ -108,9 +104,6 @@ export default function ManageBooking() {
           <div className="col" data-label="Host">
             {appointment.eventId?.createdBy || "N/A"}
           </div>
-          {/* <div className="col" data-label="Email">
-            {appointment.reservedBy?.email || "N/A"}
-          </div> */}
           <div className="col" data-label="Date & Time">
             {appointment.eventId?.startDate
               ? new Date(appointment.eventId.startDate).toLocaleString()
@@ -188,7 +181,6 @@ export default function ManageBooking() {
                 <li className="table-header">
                   <div className="col">Event</div>
                   <div className="col">Host</div>
-                  {/* <div className="col">Email</div> */}
                   <div className="col">Date & Time</div>
                   <div className="col">Location</div>
                   <div className="col"></div>
@@ -222,7 +214,6 @@ export default function ManageBooking() {
                 <li className="table-header">
                   <div className="col">Event</div>
                   <div className="col">Host</div>
-                  {/* <div className="col">Email</div> */}
                   <div className="col">Date & Time</div>
                   <div className="col">Location</div>
                 </li>

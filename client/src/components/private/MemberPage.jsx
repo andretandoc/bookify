@@ -9,11 +9,10 @@ const MemberPage = () => {
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      setAppointments([]); // Reset state before fetching
+      setAppointments([]); 
       setMessage("");
 
       const token = localStorage.getItem("token");
-      console.log("Token in Frontend:", token); // Debugging
 
       try {
         const API_URL = import.meta.env.VITE_API_URL;
@@ -26,7 +25,7 @@ const MemberPage = () => {
 
         console.log(response.data);
 
-        setName(response.data.name || "NA"); // Set user's name
+        setName(response.data.name || "NA"); 
 
         if (response.data.activeAppointments.length === 0) {
           setMessage("No upcoming appointments found");
@@ -98,7 +97,6 @@ const MemberPage = () => {
           {appointments.length === 0 ? (
             <p>{message || "No active appointments."}</p>
           ) : (
-            // Render only the first 4 active appointments
             appointments.slice(0, 4).map((appointment, index) => (
               <div key={index} className="event-card">
                 <div>

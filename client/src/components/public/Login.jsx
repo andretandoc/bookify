@@ -27,7 +27,6 @@ function Login({ setIsLoggedIn }) {
       const token = response.data.token;
       localStorage.setItem("token", token);
       setIsLoggedIn(true);
-      //localStorage.setItem("loggedIn", true);
 
       setMessage(`Login successful!`);
       navigate("/MemberPage");

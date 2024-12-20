@@ -5,7 +5,7 @@ const AppointmentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event",
     required: true,
-  }, // Links to the Event
+  }, 
   time: { type: Date, required: true }, // Specific time slot
   reservedBy: {
     firstName: { type: String },

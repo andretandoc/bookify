@@ -16,7 +16,6 @@ function ApptForm() {
   const handleAppt = async (event) => {
     event.preventDefault();
 
-    // Reset results
     setAppointments([]);
     setMessage("");
 
@@ -62,7 +61,6 @@ function ApptForm() {
     }
   };
 
-  //   console.log("Appointments State:", appointments);
   return (
     <main className="layout">
       <div className="form-box">

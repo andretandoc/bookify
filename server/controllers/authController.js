@@ -41,10 +41,8 @@ const registerMember = async (req, res) => {
     });
     await newMember.save(); // Save member to db
 
-    // console.log("JWT_SECRET:", process.env.JWT_SECRET);
-
     const token = jwt.sign(
-      { id: newMember._id, email: newMember.email }, // Include email in token
+      { id: newMember._id, email: newMember.email },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -77,7 +75,7 @@ const loginMember = async (req, res) => {
     console.log("JWT_SECRET:", process.env.JWT_SECRET);
     const tokenExpiry = rememberMe ? "7d" : "1h";
     const token = jwt.sign(
-      { id: member._id, email: member.email }, // Include email in token
+      { id: member._id, email: member.email }, 
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );

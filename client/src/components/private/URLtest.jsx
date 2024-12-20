@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import useParams
+import { useParams, useNavigate } from "react-router-dom"; 
 import axios from "axios";
-import { jwtDecode } from "jwt-decode"; // To decode the token
+import { jwtDecode } from "jwt-decode"; 
 
 function URLTest() {
   const [currentStep, setCurrentStep] = useState("ssaCheck");
@@ -12,23 +12,20 @@ function URLTest() {
   const [error, setError] = useState("");
   const [reservationSuccess, setReservationSuccess] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [accessDenied, setAccessDenied] = useState(false); // State to handle access denied
+  const [accessDenied, setAccessDenied] = useState(false); 
   const navigate = useNavigate();
 
-  // User form data
   const [fname, setFirstName] = useState("");
   const [lname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [ssaStatus, setSsaStatus] = useState("");
   const [accommodation, setAccommodation] = useState("");
 
-  // Replace this with actual logic to fetch logged-in status
-  const token = localStorage.getItem("token"); // Replace this with actual token retrieval
-  console.log("Token in Frontend:", token); // Debugging
+  const token = localStorage.getItem("token"); 
+  console.log("Token in Frontend:", token); 
 
-  const { publicURL } = useParams(); // Extract the publicURL from route params
+  const { publicURL } = useParams(); 
 
-  // Decode user information from the token
   const getUserInfoFromToken = (token) => {
     try {
       const decoded = jwtDecode(token);
@@ -43,7 +40,6 @@ function URLTest() {
     }
   };
 
-  // Prefill form fields for logged-in users
   useEffect(() => {
     if (token) {
       const userInfo = getUserInfoFromToken(token);
@@ -56,7 +52,6 @@ function URLTest() {
   }, [token]);
 
   useEffect(() => {
-    // Fetch event details and available time slots
     const fetchEventData = async () => {
       try {
         const API_URL = import.meta.env.VITE_API_URL;
@@ -68,9 +63,8 @@ function URLTest() {
 
         console.log(response.data);
 
-        // Check if the event is private and if the user has a token
         if (response.data.eventDetails.privacy === "Members-Only" && !token) {
-          setAccessDenied(true); // Show access denied if no token
+          setAccessDenied(true); 
         }
 
         setLoading(false);
@@ -81,7 +75,7 @@ function URLTest() {
     };
 
     fetchEventData();
-  }, [publicURL, token]); // Add authToken as a dependency
+  }, [publicURL, token]); 
 
   const handleReserve = async (e) => {
     e.preventDefault();
@@ -101,7 +95,7 @@ function URLTest() {
         email: email,
         timeSlotId: selectedTimeSlotId,
       });
-      setShowModal(true); // Show the modal on success
+      setShowModal(true); 
     } catch (err) {
       setError(err.response?.data?.message || "Failed to reserve appointment.");
     }
@@ -110,7 +104,7 @@ function URLTest() {
   const handleSSACheck = () => {
     if (ssaStatus === "no") {
       setReservationSuccess("Appointment booked successfully!");
-      setShowModal(true); // Trigger the modal
+      setShowModal(true); 
     } else {
       setCurrentStep("accommodation");
     }
@@ -152,7 +146,7 @@ function URLTest() {
         {/* Go Back Button */}
         <button
           className="double-btn"
-          onClick={() => navigate(-1)} // This will navigate to the previous page
+          onClick={() => navigate(-1)} 
         >
           Go Back
         </button>
@@ -339,4 +333,3 @@ function URLTest() {
 
 export default URLTest;
 
-//http://localhost:5173/booking/2885feabec5a2c4633dbf193c6a39369

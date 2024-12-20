@@ -33,15 +33,10 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Clear the token
-    setIsLoggedIn(false); // Set logged in state to false
+    setIsLoggedIn(false);
     window.location.href = "/"; // Redirect to the landing page
   };
 
-  // // Clear token on app initialization
-  // useEffect(() => {
-  //   localStorage.removeItem("token");
-  //   console.log("Token cleared on app initialization");
-  // }, []); // might have to remove this later
   const privateRoutes = [
     "/MemberPage",
     "/ManageBooking",

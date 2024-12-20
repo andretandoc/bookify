@@ -12,7 +12,6 @@ function ApptList() {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
 
-  // Initialize appointments from location.state
   useEffect(() => {
     const data = location.state?.appointments || { active: [], past: [] };
     setAppointments(data);
@@ -22,9 +21,8 @@ function ApptList() {
     }
   }, [location.state]);
 
-  // Handle "Go Back" button
   const handleGoBack = () => {
-    navigate(-1); // Navigate back
+    navigate(-1); 
   };
 
 
@@ -42,9 +40,7 @@ function ApptList() {
     if (!selectedAppointment) return;
   
     try {
-      console.log("im here");
       const API_URL = import.meta.env.VITE_API_URL;
-  
       const response = await axios.delete(`${API_URL}/api/appointments/cancelpublic/${selectedAppointment}`);
       
       // Remove the canceled event from the state
@@ -54,9 +50,8 @@ function ApptList() {
           (appointment) => appointment._id !== selectedAppointment),
       }));
       
-      console.log(response.data);
 
-      setSuccessMessage("Event successfully canceled!"); // Add success message
+      setSuccessMessage("Event successfully canceled!"); 
     } catch (error) {
       console.error("Error canceling appointment:", error);
       setMessage(

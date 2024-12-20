@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 export default function HomeBody() {
   return (
-    /* Left Section of the body */
     <main className="layout">
     <div className = "content-wrapper">
       <div className = "left-section">
@@ -14,7 +13,6 @@ export default function HomeBody() {
         </p>
       </div>
 
-      {/* right Section of the body */}
       <div className = "right-section">
         <button className = "double-red-btn">
           <Link to = "/PublicEvents" style = {style.doubleBtn}>

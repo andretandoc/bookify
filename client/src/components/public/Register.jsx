@@ -14,13 +14,11 @@ function Register({ setIsLoggedIn }) {
   const handleRegister = async (event) => {
     event.preventDefault();
 
-    // Check if all fields are filled
     if (!email || !password || !confirmation || !fname || !lname) {
       setMessage("All fields are required. Please fill them out.");
       return;
     }
 
-    // Check if passwords match
     if (password != confirmation) {
       setMessage("Password inputs don't match");
       return;

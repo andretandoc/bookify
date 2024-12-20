@@ -8,18 +8,17 @@ export default function PublicEvents() {
   useEffect(() => {
     const fetchPublicEvents = async () => {
       try {
-        const API_URL = import.meta.env.VITE_API_URL; // Ensure your environment variable is set
+        const API_URL = import.meta.env.VITE_API_URL; 
         const response = await axios.get(`${API_URL}/api/appointments/public`);
 
-        // Set the fetched public events into state
         setEvents(response.data.publicEvents);
-        setMessage(""); // Clear any previous error messages
+        setMessage(""); 
       } catch (error) {
         console.error("Error fetching public events:", error);
         setMessage(
           error.response?.data?.message || "Failed to retrieve public events."
         );
-        setEvents([]); // Clear appointments on error
+        setEvents([]); 
       }
     };
 
