@@ -1,3 +1,5 @@
+// Karl Wehbe & Andre Tandoc
+
 const mongoose = require("mongoose");
 
 // Define User schema

@@ -1,3 +1,5 @@
+// Karl Wehbe
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
 import axios from "axios";
@@ -22,7 +24,6 @@ function URLTest() {
   const [accommodation, setAccommodation] = useState("");
 
   const token = localStorage.getItem("token"); 
-  console.log("Token in Frontend:", token); 
 
   const { publicURL } = useParams(); 
 

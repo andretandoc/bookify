@@ -1,3 +1,5 @@
+// Karl Wehbe & Andre Tandoc
+
 import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {

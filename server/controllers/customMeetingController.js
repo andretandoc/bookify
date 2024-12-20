@@ -1,3 +1,5 @@
+// Saif Al-Alami and Karl Wehbe
+
 const nodemailer = require("nodemailer");
 const CustomMeeting = require("../models/CustomMeeting");
 

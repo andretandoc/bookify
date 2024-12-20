@@ -1,3 +1,6 @@
+// Karl Wehbe, Andre Tandoc and Saif Al-Alami
+
+
 const Event = require("../models/Event");
 const Appointment = require("../models/Appointment");
 const User = require("../models/Member");

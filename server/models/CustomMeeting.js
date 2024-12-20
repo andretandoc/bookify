@@ -1,3 +1,5 @@
+// Saif Al-Alami
+
 const mongoose = require("mongoose");
 
 const CustomMeetingSchema = new mongoose.Schema({

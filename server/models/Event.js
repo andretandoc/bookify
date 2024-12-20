@@ -1,3 +1,5 @@
+// Karl Wehbe & Andre Tandoc
+
 const mongoose = require("mongoose");
 
 const EventSchema = new mongoose.Schema({

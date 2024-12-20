@@ -1,3 +1,5 @@
+// Leen Assaf
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -22,8 +24,6 @@ const MemberPage = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-
-        console.log(response.data);
 
         setName(response.data.name || "NA"); 
 

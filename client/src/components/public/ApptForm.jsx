@@ -1,3 +1,5 @@
+// Teema Ismail
+
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -51,7 +53,6 @@ function ApptForm() {
           past: response.data.pastAppointments || [],
         };
         setAppointments(newAppointments);
-        console.log(newAppointments);
         navigate("/ApptList", { state: { appointments: newAppointments } });
       }
     } catch (error) {

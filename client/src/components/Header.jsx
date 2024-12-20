@@ -1,4 +1,5 @@
-// export default Header;
+// Karl Wehbe & Leen Assaf
+
 import image from "../icons/Bookify.jpeg";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
