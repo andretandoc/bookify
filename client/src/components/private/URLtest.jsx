@@ -180,7 +180,7 @@ function URLTest() {
                 <>
                   {currentStep === "ssaCheck" && (
                     <div className="ssa-check">
-                      <h4>Are you registered with SSA?</h4>
+                      <h4>Are you registered with SAA?</h4>
                       <select
                         value={ssaStatus}
                         onChange={(e) => setSsaStatus(e.target.value)}
